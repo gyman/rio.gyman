@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Timesheet - Rio Grappling Club{% endblock %}</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Headings -->
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Text -->
+        <!--[if lt IE 9]>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css" />
+        <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
+        <link href="http://fonts.googleapis.com/css?family=Droid+Sans:700" rel="stylesheet" type="text/css" />
+        <![endif]-->
+        {% spaceless %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/supr.css') }}">
+        {% block stylesheets %}
+        {% stylesheets '@DefaultBundle/Resources/public/less/main.less' filter='less,cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% endblock %}
+        {% endspaceless %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+        <div id="header">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a href="{{ path("_members_list") }}" class="brand">R.G.C.</a>
+
+                    </div>
+                </div><!-- /navbar-inner -->
+            </div>
+        </div><!-- end header -->
+        <div id="wrapper">
+            <!--Sidebar background-->
+            <div id="sidebarbg"></div>
+            <!--Sidebar content-->
+            <div id="sidebar">
+                <div class="sidenav">
+
+                    <div style="margin: -1px 0 0 0;" class="sidebar-widget">
+                        <h5 style="margin-bottom:0" class="title">Navigation</h5>
+                    </div><!-- End .sidenav-widget -->
+
+                    <div class="mainnav">
+                        <ul>
+                            <li><a href="charts.html"><span class="icon16 icomoon-icon-stats-up"></span>Charts</a></li>
+                            <li>
+                                <a href="#" class="hasUl"><span class="icon16 icomoon-icon-list"></span>Forms<span class="notification red">sub2</span><span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+                                <ul class="sub">
+                                    <li><a href="forms.html"><span class="icon16 icomoon-icon-file"></span>Forms Stuff</a></li>
+                                    <li><a href="forms-validation.html"><span class="icon16 icomoon-icon-file"></span>Validation</a></li>
+                                    <li>
+                                        <a href="#" class="hasUl"><span class="icon16 icomoon-icon-file"></span>Sub Level 2<span class="notification red">new</span><span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+                                        <ul class="sub">
+                                            <li><a href="#"><span class="icon16 icomoon-icon-arrow-right-3"></span>Item</a></li>
+                                            <li><a href="#"><span class="icon16 icomoon-icon-arrow-right-3"></span>Item</a></li>
+                                            <li><a href="#"><span class="icon16 icomoon-icon-arrow-right-3"></span>Item</a></li>
+                                            <li><a href="#"><span class="icon16 icomoon-icon-arrow-right-3"></span>Item</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="hasUl"><span class="icon16 icomoon-icon-table-2"></span>Tables<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+                                <ul class="sub">
+                                    <li><a href="tables.html"><span class="icon16 icomoon-icon-arrow-right-3"></span>Static</a></li>
+                                    <li><a href="data-table.html"><span class="icon16 icomoon-icon-arrow-right-3"></span>Data table</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="hasUl"><span class="icon16 icomoon-icon-equalizer-2"></span>UI Elements<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+                                <ul class="sub">
+                                    <li><a href="icons.html"><span class="icon16 icomoon-icon-rocket"></span>Icons</a></li>
+                                    <li><a href="buttons.html"><span class="icon16 icomoon-icon-file"></span>Buttons</a></li>
+                                    <li><a href="elements.html"><span class="icon16 icomoon-icon-cogs"></span>Elements</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="typo.html"><span class="icon16 icomoon-icon-font"></span>Typography</a></li>
+                            <li><a href="grid.html"><span class="icon16 icomoon-icon-grid"></span>Grid</a></li>
+                            <li><a href="calendar.html"><span class="icon16 icomoon-icon-calendar"></span>Calendar</a></li>
+                            <li>
+                                <a href="widgets.html"><span class="icon16 icomoon-icon-cube"></span>Widgets<span class="notification green">35</span></a>
+                            </li>
+                            <li><a href="file.html"><span class="icon16 icomoon-icon-upload"></span>File Manager</a></li>
+                            <li>
+                                <a href="#" class="hasUl"><span class="icon16 icomoon-icon-file"></span>Error pages<span class="notification">6</span><span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+                                <ul class="sub">
+                                    <li><a href="403.html"><span class="icon16 icomoon-icon-file"></span>Error 403</a></li>
+                                    <li><a href="404.html"><span class="icon16 icomoon-icon-file"></span>Error 404</a></li>
+                                    <li><a href="405.html"><span class="icon16 icomoon-icon-file"></span>Error 405</a></li>
+                                    <li><a href="500.html"><span class="icon16 icomoon-icon-file"></span>Error 500</a></li>
+                                    <li><a href="503.html"><span class="icon16 icomoon-icon-file"></span>Error 503</a></li>
+                                    <li><a href="offline.html"><span class="icon16 icomoon-icon-file"></span>Offline page</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="hasUl"><span class="icon16 icomoon-icon-folder"></span>Other pages<span class="notification blue">11</span><span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+                                <ul class="sub">
+                                    <li><a href="invoice.html"><span class="icon16 icomoon-icon-file"></span>Invoice page</a></li>
+                                    <li><a href="profile.html"><span class="icon16 icomoon-icon-file"></span>User profile</a></li>
+                                    <li><a href="search.html"><span class="icon16 icomoon-icon-search-3"></span>Search page</a></li>
+                                    <li><a href="email.html"><span class="icon16 icomoon-icon-envelop"></span>Email page</a></li>
+                                    <li><a href="support.html"><span class="icon16  icomoon-icon-support"></span>Support page</a></li>
+                                    <li><a href="faq.html"><span class="icon16 icomoon-icon-attachment"></span>FAQ page</a></li>
+                                    <li><a href="structure.html"><span class="icon16 icomoon-icon-file"></span>Blank page</a></li>
+                                    <li><a href="fixed-topbar.html"><span class="icon16 icomoon-icon-file"></span>Fixed topbar</a></li>
+                                    <li><a href="right-sidebar.html"><span class="icon16 icomoon-icon-file"></span>Right sidebar</a></li>
+                                    <li><a href="two-sidebars.html"><span class="icon16 icomoon-icon-file"></span>Two sidebars</a></li>
+                                    <li><a href="drag.html"><span class="icon16 icomoon-icon-move"></span>Drag &amp; Drop <span class="notification red">new</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- End sidebar content-->
+            <!--Body content-->
+            <div id="content" class="clearfix">
+                <div class="contentwrapper"><!--Content wrapper-->
+                    {% block body %}{% endblock %}
+                </div><!-- End contentwrapper -->
+            </div><!-- End #content -->
+        </div><!-- end wrapper -->
+        {% spaceless %}
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
+        <script src="{{ asset('js/supr.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+        {% endspaceless %}
+
+    </body>
+</html>

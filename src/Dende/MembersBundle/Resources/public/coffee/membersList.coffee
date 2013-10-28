@@ -1,0 +1,2 @@
+$ ->
+  $("#membersList").dataTable()

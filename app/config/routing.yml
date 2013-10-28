@@ -1,0 +1,15 @@
+layout:
+    resource: "@LayoutBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+default:
+    resource: "@DefaultBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+members:
+    resource: "@MembersBundle/Controller/"
+    type:     annotation
+    prefix:   /member
+
