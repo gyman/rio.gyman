@@ -12,6 +12,10 @@
 
 <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
 
+<div class="icon">
+    <span class="icon32 icomoon-icon-new green"></span>
+</div>
+
 <div class="row-fluid">
 
     <div class="span12">
@@ -39,7 +43,7 @@
         {% for member in members %}
                         <tr>
                             <td>{{ member.name }}</td>
-                            <td>{{ member.birthdate|date("d.m.Y") }}</td>
+                            <td>{{ member.birthdate|date("d.m.Y") }} ({{ member.birthdate|age }})</td>
                             <td>{{ member.phone }}</td>
                             <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td>
                             <td class="voucherColumn">
@@ -47,9 +51,8 @@
                                     <div style="width: 87%;" class="bar"></div>
                                 </div>
                                 <span class="percent">3 dni</span>
-                                <div class="stat">20.V - 21.VI</div>
                             </td>
-                            <td>edycja kasuj sprzedaj karnet</td>
+                            <td><a href="{{ path("_member_edit", {"id" : member.id}) }}" class="editMember">edycja</a></td>
                         </tr>
         {% endfor %}
                     </tbody>
@@ -61,6 +64,19 @@
     </div><!-- End .span12 -->
 
 </div><!-- End .row-fluid -->
+
+<div id="editMemberModal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Edycja użytkownika</h3>
+    </div>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
@@ -76,8 +92,8 @@
 {% block stylesheets %}
 {{ parent() }}
 {% stylesheets filter='cssrewrite'
-    '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.css'
-    
+    'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
+    filter="cssrewrite"
 %}
 <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}

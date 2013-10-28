@@ -2,7 +2,30 @@
 (function() {
 
   $(function() {
-    return $("#membersList").dataTable();
+    $("#membersList").dataTable();
+    $(document).on("click", "a.editMember", function(e) {
+      var container, href, modal;
+      e.preventDefault();
+      modal = $("#editMemberModal");
+      container = $(".modal-body", modal);
+      href = $(this).attr("href");
+      return $.get(href, function(response) {
+        container.html(response);
+        return modal.modal({
+          "show": true
+        });
+      });
+    });
+    return $(document).on("click", "#saveFormInModal", function(e) {
+      console.log("save form");
+      return $(".modal-footer").block({
+        message: '<img src="/bundles/layout/images/loaders/circular/001.gif" alt="loading"/>',
+        css: {
+          border: 'none',
+          backgroundColor: 'transparent'
+        }
+      });
+    });
   });
 
 }).call(this);

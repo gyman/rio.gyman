@@ -13,3 +13,7 @@ services:
         class:     "%member_manager.class%"
         calls:
             - [setRepository, ["@member_repository"]]
+    dende.twig.age_extension:
+        class: Dende\MembersBundle\Twig\AgeExtension
+        tags:
+            - { name: twig.extension }

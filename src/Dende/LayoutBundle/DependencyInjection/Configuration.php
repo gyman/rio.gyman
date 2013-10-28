@@ -19,11 +19,11 @@ class Configuration implements ConfigurationInterface {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('layout');
 
-        $rootNode
-                ->children()
-                ->scalarNode('output_dir')->defaultValue('')->end()
-                ->scalarNode('assets_dir')->defaultValue('%kernel.root_dir%/../src/Dende/LayoutBundle/Resources/public')->end()
-                ->end();
+//        $rootNode
+//                ->children()
+//                ->scalarNode('output_dir')->defaultValue('')->end()
+//                ->scalarNode('assets_dir')->defaultValue('%kernel.root_dir%/../src/Dende/LayoutBundle/Resources123/public')->end()
+//                ->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

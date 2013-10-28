@@ -30,9 +30,23 @@ class MemberManager {
 
     // </editor-fold>
 
+    /**
+     * Returns array of all members
+     * @return array
+     */
     public function getMembers() {
-        $query = $this->repository->getMembersQuery();
-        return $query->execute();
+        return $this->repository->getMembersQuery()
+                ->execute();
     }
 
+    /**
+     * Returns member by id
+     * @param int $id
+     * @return Member
+     */
+    public function getById($id)
+    {
+        return $this->repository->find($id);
+    }
+    
 }

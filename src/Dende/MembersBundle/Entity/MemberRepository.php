@@ -19,8 +19,7 @@ class MemberRepository extends EntityRepository
      */
     public function getMembersQuery()
     {
-        $builder = $this->createQueryBuilder("membersBuilder");
-        return $builder->select()->getQuery();
+        return $this->createQueryBuilder("m")
+                ->select()->getQuery();
     }
-    
 }
