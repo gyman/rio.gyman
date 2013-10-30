@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Dende\MembersBundle\MembersBundle(),
             new Dende\DefaultBundle\DefaultBundle(),
             new Dende\LayoutBundle\LayoutBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

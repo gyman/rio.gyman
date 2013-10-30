@@ -1,19 +1,26 @@
 parameters:
+    base_manager.class: Dende\MembersBundle\Services\Manager\BaseManager
     member_entity.class: Dende\MembersBundle\Entity\Member
     member_manager.class: Dende\MembersBundle\Services\Manager\MemberManager
-    member_repository.class: Dende\MembersBundle\Entity\MemberRepository
 
 services:
-    member_repository:
-        class:     "%member_repository.class%"
-        factory_service: doctrine
-        factory_method: getRepository
-        arguments: [ %member_entity.class% ]
-    member_manager:
-        class:     "%member_manager.class%"
+    base_manager:
+        class:     "%base_manager.class%"
         calls:
-            - [setRepository, ["@member_repository"]]
+             - [ setContainer, ["@service_container"] ]
+    member_manager:
+        class:          "%member_manager.class%"
+        parent:         base_manager
+        calls:
+             - [ setClass, [%member_entity.class%] ]
+
     dende.twig.age_extension:
         class: Dende\MembersBundle\Twig\AgeExtension
         tags:
             - { name: twig.extension }
+
+    dende.upload_listener:
+        class: Dende\MembersBundle\Services\Listener\UploadListener
+        arguments: [@doctrine]
+        tags:
+            - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}

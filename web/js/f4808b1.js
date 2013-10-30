@@ -12277,13 +12277,23 @@ $(document).ready(function() {
       });
     });
     return $(document).on("click", "#saveFormInModal", function(e) {
-      console.log("save form");
-      return $(".modal-footer").block({
-        message: '<img src="/bundles/layout/images/loaders/circular/001.gif" alt="loading"/>',
+      var action, data, form;
+      $(".modal-footer").block({
+        message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>',
         css: {
           border: 'none',
           backgroundColor: 'transparent'
+        },
+        overlayCSS: {
+          backgroundColor: '#E8EAEB'
         }
+      });
+      form = $(this).parents(".modal").find("form");
+      action = form.attr("action");
+      data = form.serialize();
+      return $.post(action, data, function(result) {
+        console.log(result);
+        return $(".modal-footer").unblock();
       });
     });
   });

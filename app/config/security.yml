@@ -33,6 +33,9 @@ security:
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
+        main:
+            pattern: ^/
+            anonymous: true
 
     access_control:
         - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }

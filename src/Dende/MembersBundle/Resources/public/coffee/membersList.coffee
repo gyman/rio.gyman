@@ -14,11 +14,19 @@ $ ->
                 "show" : true
         
     $(document).on "click","#saveFormInModal", (e) ->
-        console.log "save form"
-        $(".modal-footer").block
-            message: '<img src="/bundles/layout/images/loaders/circular/001.gif" alt="loading"/>'
+        modal = $("#editMemberModal")
+        $(".modal-footer",modal).block
+            message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
             css : 
                 border: 'none', 
                 backgroundColor:'transparent' 
+            overlayCSS:
+                backgroundColor: '#E8EAEB'
         
-        
+        form = $("form",modal)
+        action = form.attr "action"
+        data = form.serialize()
+
+        $.post action, data, (result) ->
+            $(".modal-footer",modal).unblock()
+            modal.modal("hide")

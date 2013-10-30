@@ -13,3 +13,6 @@ members:
     type:     annotation
     prefix:   /member
 
+oneup_uploader:
+    resource: .
+    type: uploader
