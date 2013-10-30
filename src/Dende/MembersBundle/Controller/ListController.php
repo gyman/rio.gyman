@@ -13,9 +13,20 @@ class ListController extends Controller {
 
     /**
      * @Route("/list", name="_members_list")
-     * @Template()
+     * @Template("MembersBundle:List:list.html.twig")
      */
-    public function indexAction() {
+    public function listAction() {
+        $memberManager = $this->get("member_manager");
+        $members = $memberManager->getMembers();
+
+        return array("members" => $members);
+    }
+
+    /**
+     * @Route("/gallery", name="_members_gallery")
+     * @Template("MembersBundle:List:gallery.html.twig")
+     */
+    public function galleryAction() {
         $memberManager = $this->get("member_manager");
         $members = $memberManager->getMembers();
 

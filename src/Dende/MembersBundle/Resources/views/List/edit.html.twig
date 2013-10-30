@@ -1,0 +1,43 @@
+<form class="form-horizontal row-fluid" action="{{ path('_member_edit', {"id" : member.id}) }}" method="post" {{ form_enctype(form) }}>
+    <div class="span6">    
+        {{ form_row(form.name) }}
+        {{ form_row(form.birthdate) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.notes) }}
+    </div>
+    <div class="span6">  
+        <div class="control-group">
+            <label class="control-label">Zdjęcie</label>
+            <div class="controls">
+                <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class="thumbnail" id="memberFoto"/>
+            </div>
+        </div>
+
+        {{ form_row(form.fotoUploader) }}
+    </div>
+    <div class="hidden">
+    {{ form_rest(form) }}
+    </div>
+</form>
+
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $('#dende_membersbundle_member_fotoUploader').fileupload({
+            limitMultiFileUploads: 1,
+            done: function(e, data) {
+                var response = data.response().result;
+                var responseJSON = $.parseJSON(response);
+
+                var pathname = responseJSON.pathname;
+                var filename = responseJSON.filename;
+
+                $("img#memberFoto").attr("src", pathname);
+                $("input#dende_membersbundle_member_foto").val(filename);
+            }
+        });
+    });
+</script>
+{% endblock javascripts %}
