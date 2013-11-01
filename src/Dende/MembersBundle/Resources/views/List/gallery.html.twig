@@ -1,89 +1,20 @@
-{% extends "base.html.twig" %}
+{% extends "MembersBundle:List:list.html.twig" %}
 
-{% block body_class %}membersList{% endblock %}
+{% block body_class %}membersGallery{% endblock %}
 
-{% block body %}
+{% block membersTitle %}
+Galeria osób
+{% endblock membersTitle %}
 
-<div class="heading">
-
-    <h3>Członkowie klubu</h3>                    
-
-</div><!-- End .heading-->
-
-<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
-
-<div class="icon pull-right">
-    <span class="icon32 icomoon-icon-new green"></span>
+{% block membersBody %}
+<div class="container-fluid">
+    {% for member in members %}
+        {% if loop.index0%6 == 0 %}<div class="row-fluid">{% endif %}
+        <a href="{{ path("_member_edit",{id : member.id}) }}" class="thumbnail span2 editMember">
+            <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class=""/>
+                {{ member.name }}
+        </a>
+        {% if loop.index0%6 == 5 %}</div>{% endif %}
+    {% endfor %}
 </div>
-
-<a href="{{ path("_members_list") }}">lista</a>
-<a href="{{ path("_members_gallery") }}">galeria</a>
-
-<div class="row-fluid">
-
-    <div class="span12">
-
-        <div class="box gradient">
-
-            <div class="title">
-                <h4>
-                    <span>Galeria osób</span>
-                </h4>
-            </div>
-            <div class="content noPad clearfix">
-                <div class="container-fluid">
-                {% for member in members %}
-                    {% if loop.index0%6 == 0 %}<div class="row-fluid">{% endif %}
-                        <a href="{{ path("_member_edit",{id : member.id}) }}" class="thumbnail span2 editMember">
-                            <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class=""/>
-                            {{ member.name }}
-                        </a>
-                    {% if loop.index0%6 == 5 %}</div>{% endif %}
-                {% endfor %}
-                </div>
-            </div>
-
-        </div><!-- End .box -->
-
-    </div><!-- End .span12 -->
-
-</div><!-- End .row-fluid -->
-
-<div id="editMemberModal" class="modal hide fade">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Edycja użytkownika</h3>
-    </div>
-    <div class="modal-body">
-
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
-    </div>
-</div>
-{% endblock %}
-
-{% block javascripts %}
-{{ parent() }}
-{% javascripts
-    '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
-    '@MembersBundle/Resources/public/coffee/membersList.coffee'
-    '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
-    '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
-    '@DefaultBundle/Resources/public/js/jquery.fileupload.js'
- %}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{% endblock %}
-
-{% block stylesheets %}
-{{ parent() }}
-{% stylesheets filter='cssrewrite'
-    'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
-    filter="cssrewrite"
-%}
-<link rel="stylesheet" href="{{ asset_url }}" />
-{% endstylesheets %}
-{% endblock %}
-
-
+{% endblock membersBody %}

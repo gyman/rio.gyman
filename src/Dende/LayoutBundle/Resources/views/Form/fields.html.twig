@@ -2,10 +2,14 @@
 
 {% block form_row %}
 {% spaceless %}
-<div class="control-group">
-        {{ form_label(form) }}
+<div class="control-group {% if not form.vars.valid %}error{% endif %}">
+    {{ form_label(form) }}
+    <div class="controls">
         {{ form_widget(form) }}
-        {{ form_errors(form) }}
+        <div class="help-block">
+            {{ form_errors(form) }}
+        </div>
+    </div>
 </div>
 {% endspaceless %}
 {% endblock form_row %}
@@ -13,11 +17,9 @@
 {% block form_errors %}
 {% spaceless %}
     {% if errors|length > 0 %}
-<ul>
-        {% for error in errors %}
-    <li>{{ error.message }}</li>
-        {% endfor %}
-</ul>
+    {% for error in errors %}
+        {{ error.message }}<br />
+    {% endfor %}
     {% endif %}
 {% endspaceless %}
 {% endblock form_errors %}
@@ -25,9 +27,7 @@
 {% block form_widget_simple %}
 {% spaceless %}
     {% set type = type|default('text') %}
-<div class="controls">
-    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-</div>
+<input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {% endspaceless %}
 {% endblock form_widget_simple %}
 
@@ -48,10 +48,8 @@
 {% endspaceless %}
 {% endblock form_label %}
 
-        {% block textarea_widget %}
+{% block textarea_widget %}
 {% spaceless %}
-<div class="controls">
     <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
-</div>
 {% endspaceless %}
 {% endblock textarea_widget %}

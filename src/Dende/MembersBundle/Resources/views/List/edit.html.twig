@@ -1,4 +1,4 @@
-<form class="form-horizontal row-fluid" action="{{ path('_member_edit', {"id" : member.id}) }}" method="post" {{ form_enctype(form) }}>
+<form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}{% endif %}">
     <div class="span6">    
         {{ form_row(form.name) }}
         {{ form_row(form.birthdate) }}
@@ -36,6 +36,9 @@
 
                 $("img#memberFoto").attr("src", pathname);
                 $("input#dende_membersbundle_member_foto").val(filename);
+            },
+            fail: function(e,data) {
+                alert("Błąd po stronie serwera! Spróbuj z innym plikiem graficznym");
             }
         });
     });

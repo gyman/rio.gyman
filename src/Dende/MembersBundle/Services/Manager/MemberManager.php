@@ -3,15 +3,13 @@
 namespace Dende\MembersBundle\Services\Manager;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Dende\MembersBundle\Entity\Member;
 use Dende\MembersBundle\Entity\MemberRepository;
 use Dende\MembersBundle\Services\Manager\BaseManager;
 
 class MemberManager extends BaseManager {
-
     // <editor-fold defaultstate="collapsed" desc="fields">
-
     // </editor-fold>
 
     /**
@@ -19,8 +17,9 @@ class MemberManager extends BaseManager {
      * @return array
      */
     public function getMembers() {
-        return $this->getRepo()->getMembersQuery()
-                        ->execute();
+        $query = $this->getRepo()->getMembersQuery();
+        $this->setActiveCriteria($query);
+        return $query->getQuery()->execute();
     }
 
     /**
@@ -32,25 +31,25 @@ class MemberManager extends BaseManager {
         return $this->getRepo()->find($id);
     }
 
-    public function handleFotoUpload($form, $member, $uploadDir) {
-        $foto = $form['foto']->getData();
+    public function setAsDeleted($id) {
+        $member = $this->getById($id);
 
-        if ($foto !== null)
+        if (!$member)
         {
-            $extension = $foto->guessExtension();
-            if (!$extension)
-            {
-                // extension cannot be guessed
-                $extension = 'bin';
-            }
-
-            $filename = md5(microtime()) . '.' . $extension;
-            $foto->move($uploadDir, $filename);
-
-            $member->setFoto($filename);
-            
-            return true;
+            throw new Exception("Member not found");
         }
+
+        $member->setDeletedAt(new \DateTime());
+        $this->persist($member);
+        $this->flush($member);
     }
 
+    /**
+     * @param QueryBuilder $query
+     */
+    public function setActiveCriteria(QueryBuilder $query)
+    {
+        $query->andWhere("m.deletedAt is null");
+    }
+    
 }

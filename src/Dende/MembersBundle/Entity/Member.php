@@ -3,6 +3,7 @@
 namespace Dende\MembersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Member
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table("members")
  * @ORM\Entity(repositoryClass="Dende\MembersBundle\Entity\MemberRepository")
  */
-class Member
-{
+class Member {
+
     /**
      * @var integer
      *
@@ -23,21 +24,23 @@ class Member
 
     /**
      * @var string
-     *
+     * 
+     * @Assert\NotBlank(message = "Pole nie może być puste!")
+     * 
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var \DateTime
-     *
+     * 
      * @ORM\Column(name="birthdate", type="date")
      */
     private $birthdate;
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="phone", type="string", length=255)
      */
     private $phone;
@@ -45,6 +48,12 @@ class Member
     /**
      * @var string
      *
+     * @Assert\NotBlank(message = "Pole nie może być puste!")
+     * @Assert\Email(
+     *     message = "Adres '{{ value }}' nie jest poprawny.",
+     *     checkMX = true
+     * )
+     * 
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -63,14 +72,19 @@ class Member
      */
     private $foto;
 
+    /**
+     * @var datetime $deletedAt
+     *
+     * @ORM\Column(name="deletedAt", type="datetime")
+     */
+    private $deletedAt;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -80,10 +94,9 @@ class Member
      * @param string $name
      * @return Member
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -92,8 +105,7 @@ class Member
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -103,10 +115,9 @@ class Member
      * @param \DateTime $birthdate
      * @return Member
      */
-    public function setBirthdate($birthdate)
-    {
+    public function setBirthdate($birthdate) {
         $this->birthdate = $birthdate;
-    
+
         return $this;
     }
 
@@ -115,8 +126,7 @@ class Member
      *
      * @return \DateTime 
      */
-    public function getBirthdate()
-    {
+    public function getBirthdate() {
         return $this->birthdate;
     }
 
@@ -126,10 +136,9 @@ class Member
      * @param string $phone
      * @return Member
      */
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
-    
+
         return $this;
     }
 
@@ -138,8 +147,7 @@ class Member
      *
      * @return string 
      */
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
 
@@ -149,20 +157,17 @@ class Member
      * @param string $email
      * @return Member
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
-     *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -172,10 +177,9 @@ class Member
      * @param string $notes
      * @return Member
      */
-    public function setNotes($notes)
-    {
+    public function setNotes($notes) {
         $this->notes = $notes;
-    
+
         return $this;
     }
 
@@ -184,8 +188,7 @@ class Member
      *
      * @return string 
      */
-    public function getNotes()
-    {
+    public function getNotes() {
         return $this->notes;
     }
 
@@ -195,10 +198,9 @@ class Member
      * @param string $foto
      * @return Member
      */
-    public function setFoto($foto)
-    {
+    public function setFoto($foto) {
         $this->foto = $foto;
-    
+
         return $this;
     }
 
@@ -207,8 +209,17 @@ class Member
      *
      * @return string 
      */
-    public function getFoto()
-    {
+    public function getFoto() {
         return $this->foto;
     }
+
+    public function getDeletedAt() {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt($deletedAt) {
+        $this->deletedAt = $deletedAt;
+        return $this;
+    }
+
 }

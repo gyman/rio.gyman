@@ -24,3 +24,9 @@ services:
         arguments: [@doctrine]
         tags:
             - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}
+
+    dende.image_rescale_listener:
+        class: Dende\MembersBundle\Services\Listener\ImageRescaleListener
+        arguments: [@doctrine]
+        tags:
+            - { name: kernel.event_listener, event : oneup_uploader.post_persist, method: onUpload}

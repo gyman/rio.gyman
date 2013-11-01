@@ -15,11 +15,11 @@ class MemberRepository extends EntityRepository
     
     /**
      * Get all Members query
-     * @return Doctrine\ORM\Query
+     * @return Doctrine\ORM\QueryBuilder
      */
     public function getMembersQuery()
     {
-        return $this->createQueryBuilder("m")
-                ->select()->getQuery();
+        $query = $this->createQueryBuilder("m")->select();
+        return $query;
     }
 }

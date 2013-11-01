@@ -12,12 +12,15 @@
 
 <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
 
-<div class="icon pull-right">
-    <span class="icon32 icomoon-icon-new green"></span>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="icon  span12">
+            <a class="icon32 icomoon-icon-new green pull-right" id="createNewMember" href="{{path("_member_new")}}"></a>
+            <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
+            <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
+        </div>
+    </div>
 </div>
-
-<a href="{{ path("_members_list") }}">lista</a>
-<a href="{{ path("_members_gallery") }}">galeria</a>
 
 <div class="row-fluid">
 
@@ -27,10 +30,11 @@
 
             <div class="title">
                 <h4>
-                    <span>Lista osób</span>
+                    <span>{% block membersTitle %}Lista osób{% endblock membersTitle %}</span>
                 </h4>
             </div>
             <div class="content noPad clearfix">
+                {% block membersBody %}
                 <table cellpadding="0" cellspacing="0" border="0" class="dynamicTable display table table-bordered" width="100%" id="membersList">
                     <thead>
                         <tr>
@@ -60,6 +64,7 @@
         {% endfor %}
                     </tbody>
                 </table>
+                {% endblock membersBody %}
             </div>
 
         </div><!-- End .box -->
@@ -77,6 +82,12 @@
 
     </div>
     <div class="modal-footer">
+        <form id="deleteUserForm" class="pull-left"> 
+        <label>
+            <input type="checkbox" id="deleteUserCheckbox" />
+            Usuń użytkownika
+        </label>
+        </form>
         <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
     </div>
 </div>
