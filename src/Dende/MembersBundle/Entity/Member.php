@@ -4,12 +4,17 @@ namespace Dende\MembersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Member
  *
  * @ORM\Table("members")
  * @ORM\Entity(repositoryClass="Dende\MembersBundle\Entity\MemberRepository")
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Ten email jest już zarejestrowany"
+ * )
  */
 class Member {
 
@@ -27,7 +32,7 @@ class Member {
      * 
      * @Assert\NotBlank(message = "Pole nie może być puste!")
      * 
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
@@ -53,8 +58,7 @@ class Member {
      *     message = "Adres '{{ value }}' nie jest poprawny.",
      *     checkMX = true
      * )
-     * 
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
@@ -75,7 +79,7 @@ class Member {
     /**
      * @var datetime $deletedAt
      *
-     * @ORM\Column(name="deletedAt", type="datetime")
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
      */
     private $deletedAt;
 

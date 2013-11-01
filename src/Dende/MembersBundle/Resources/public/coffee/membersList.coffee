@@ -1,6 +1,8 @@
 $ ->      
     BUTTON_SAVE_STATE = "Zapisz"
+    BUTTON_SAVE_CLASS = "btn-primary"
     BUTTON_DELETE_STATE = "Usuń"
+    BUTTON_DELETE_CLASS = "btn-danger"
          
     $("#membersList").dataTable()
     
@@ -16,7 +18,7 @@ $ ->
             container.html response
             $modal.modal
                 "show" : true
-
+            
     $(document).on "click","a.editMember", (e) ->
         e.preventDefault()
         $container = $(".modal-body",$modal)
@@ -31,13 +33,36 @@ $ ->
         $deleteCheckbox.attr "checked",false
         $.uniform.update()
         $("#saveFormInModal").text BUTTON_SAVE_STATE
-        
+        $("#saveFormInModal").removeClass BUTTON_DELETE_CLASS
+        $("#saveFormInModal").addClass BUTTON_SAVE_CLASS
+
+    $modal.on "shown", () ->
+        $("#dende_membersbundle_member_fotoUploader").fileupload
+          limitMultiFileUploads: 1
+          done: (e, data) ->
+            response = data.response().result
+            responseJSON = $.parseJSON(response)
+            pathname = responseJSON.pathname
+            filename = responseJSON.filename
+            $("img#memberFoto").attr "src", pathname
+            $("input#dende_membersbundle_member_foto").val filename
+
+          fail: (e, data) ->
+            alert "Błąd po stronie serwera! Spróbuj z innym plikiem graficznym"
+
+        $("#dende_membersbundle_member_birthdate").datepicker
+            dateFormat: "dd.mm.yy"
+
     $(document).on "change", $deleteCheckbox, (e) ->
         e.preventDefault()
         if $deleteCheckbox.is ":checked"
             $("#saveFormInModal").text BUTTON_DELETE_STATE
+            $("#saveFormInModal").removeClass BUTTON_SAVE_CLASS
+            $("#saveFormInModal").addClass BUTTON_DELETE_CLASS
         else
             $("#saveFormInModal").text BUTTON_SAVE_STATE
+            $("#saveFormInModal").removeClass BUTTON_DELETE_CLASS
+            $("#saveFormInModal").addClass BUTTON_SAVE_CLASS
         
     $(document).on "click","#saveFormInModal", (e) ->
         e.preventDefault()

@@ -6,6 +6,9 @@
   margin-top: 2px;
   width: 120px;
 }
+.icon a {
+  text-decoration: none;
+}
 div#editMemberModal.modal {
   width: 1000px;
   margin-left: -500px;
@@ -35,4 +38,7 @@ a.editMember.thumbnail {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+}
+#membersList_length {
+  margin-left: 15px;
 }

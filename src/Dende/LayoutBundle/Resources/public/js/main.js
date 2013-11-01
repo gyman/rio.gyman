@@ -6,7 +6,7 @@ var supr_Options = {
 	fixedWidth: false, //activate fixed version with true
 	rtl:false, //activate rtl version with true
 	showSwitcher: false //show switcher with true
-}
+};
 
 //------------- Modernizr -------------//
 //load some plugins only if is needed

@@ -20,27 +20,3 @@
     {{ form_rest(form) }}
     </div>
 </form>
-
-{% block javascripts %}
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-        $('#dende_membersbundle_member_fotoUploader').fileupload({
-            limitMultiFileUploads: 1,
-            done: function(e, data) {
-                var response = data.response().result;
-                var responseJSON = $.parseJSON(response);
-
-                var pathname = responseJSON.pathname;
-                var filename = responseJSON.filename;
-
-                $("img#memberFoto").attr("src", pathname);
-                $("input#dende_membersbundle_member_foto").val(filename);
-            },
-            fail: function(e,data) {
-                alert("Błąd po stronie serwera! Spróbuj z innym plikiem graficznym");
-            }
-        });
-    });
-</script>
-{% endblock javascripts %}

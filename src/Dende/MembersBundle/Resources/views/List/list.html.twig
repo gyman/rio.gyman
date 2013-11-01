@@ -14,7 +14,7 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="icon  span12">
+        <div class="icon span12">
             <a class="icon32 icomoon-icon-new green pull-right" id="createNewMember" href="{{path("_member_new")}}"></a>
             <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
             <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
@@ -59,7 +59,12 @@
                                 </div>
                                 <span class="percent">3 dni</span>
                             </td>
-                            <td><a href="{{ path("_member_edit", {"id" : member.id}) }}" class="editMember">edycja</a></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn editMember" id="createNewMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a>
+                                    <a href="#" class="btn"><span class="icon-align-left"></span> Sprzedaż</a>
+                                </div>
+                            </td>
                         </tr>
         {% endfor %}
                     </tbody>
@@ -83,10 +88,10 @@
     </div>
     <div class="modal-footer">
         <form id="deleteUserForm" class="pull-left"> 
-        <label>
-            <input type="checkbox" id="deleteUserCheckbox" />
-            Usuń użytkownika
-        </label>
+            <label>
+                <input type="checkbox" id="deleteUserCheckbox" />
+                Usuń użytkownika
+            </label>
         </form>
         <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
     </div>
