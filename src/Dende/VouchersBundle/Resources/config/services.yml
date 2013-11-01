@@ -1,0 +1,15 @@
+parameters:
+    base_manager.class: Dende\VouchersBundle\Services\Manager\BaseManager
+    voucher_entity.class: Dende\VouchersBundle\Entity\Voucher
+    voucher_manager.class: Dende\VouchersBundle\Services\Manager\VoucherManager
+
+services:
+    base_manager:
+        class:     "%base_manager.class%"
+        calls:
+             - [ setContainer, ["@service_container"] ]
+    voucher_manager:
+        class:          "%voucher_manager.class%"
+        parent:         base_manager
+        calls:
+             - [ setClass, [%voucher_entity.class%] ]

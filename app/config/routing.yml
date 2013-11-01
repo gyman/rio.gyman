@@ -13,6 +13,11 @@ members:
     type:     annotation
     prefix:   /member
 
+vouchers:
+    resource: "@VouchersBundle/Controller/"
+    type:     annotation
+    prefix:   /voucher
+
 oneup_uploader:
     resource: .
     type: uploader

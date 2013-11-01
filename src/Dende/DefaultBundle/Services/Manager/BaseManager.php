@@ -1,5 +1,5 @@
 <?php
-namespace Dende\MembersBundle\Services\Manager;
+namespace Dende\DefaultBundle\Services\Manager;
 
 use Symfony\Component\DependencyInjection\Container;
 use Doctrine\ORM\EntityManager as DocumentManager;

@@ -1,16 +1,14 @@
 <?php
 
-namespace Dende\MembersBundle\Services\Manager;
+namespace Dende\DefaultBundle\Services\Manager;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
-use Dende\MembersBundle\Entity\Member;
-use Dende\MembersBundle\Entity\MemberRepository;
-use Dende\DefaultBundle\Services\Manager\BaseManager;
+use Dende\VouchersBundle\Entity\Member;
+use Dende\VouchersBundle\Entity\MemberRepository;
+use Dende\MembersBundle\Services\Manager\BaseManager;
 
-class MemberManager extends BaseManager {
-    // <editor-fold defaultstate="collapsed" desc="fields">
-    // </editor-fold>
+class VoucherManager extends BaseManager {
 
     /**
      * Returns array of all members
