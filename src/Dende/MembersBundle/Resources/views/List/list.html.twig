@@ -39,9 +39,7 @@
                     <thead>
                         <tr>
                             <th>Imię i nazwisko</th>
-                            <th>Data urodzenia</th>
-                            <th>Telefon</th>
-                            <th>Email</th>
+                            <th>Ost. wizyta</th>
                             <th>Karnet</th>
                             <th>Akcje</th>
                         </tr>
@@ -50,9 +48,11 @@
         {% for member in members %}
                         <tr>
                             <td>{{ member.name }}</td>
-                            <td>{{ member.birthdate|date("d.m.Y") }} ({{ member.birthdate|age }})</td>
-                            <td>{{ member.phone }}</td>
-                            <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td>
+                            <td>{{ member.birthdate|date("d.m.Y") }} <span class="label">BJJ dorośli</span></td>
+                            
+                            {# <td>{{ member.birthdate|date("d.m.Y") }} ({{ member.birthdate|age }})</td> #}
+                            {# <td>{{ member.phone }}</td> #}
+                            {# <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td> #}
                             <td class="voucherColumn">
                                 <div class="progress progress-mini progress-danger left tip" oldtitle="87%" title="" data-hasqtip="true" aria-describedby="qtip-4">
                                     <div style="width: 87%;" class="bar"></div>
@@ -61,8 +61,13 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn editMember" id="createNewMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a>
-                                    <a href="#" class="btn"><span class="icon-align-left"></span> Sprzedaż</a>
+                                    <a class="btn editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a>
+                                    <a class="btn" href="#"><span class="icomoon-icon-signup "></span> Wejście</a>
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-align-left"></span> Sprzedaż<span class="caret"></span></a>
+                                    <ul class="dropdown-menu pull-right">
+                                      <li><a href="#"><span class="icomoon-icon-clock"></span> Karnet</a></li>
+                                      <li><a href="#"><span class="icomoon-icon-cart-3"></span> Towar</a></li>
+                                    </ul>
                                 </div>
                             </td>
                         </tr>
