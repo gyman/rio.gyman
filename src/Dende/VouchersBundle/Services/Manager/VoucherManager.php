@@ -1,12 +1,12 @@
 <?php
 
-namespace Dende\DefaultBundle\Services\Manager;
+namespace Dende\VouchersBundle\Services\Manager;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
-use Dende\VouchersBundle\Entity\Member;
-use Dende\VouchersBundle\Entity\MemberRepository;
-use Dende\MembersBundle\Services\Manager\BaseManager;
+use Dende\VouchersBundle\Entity\Voucher;
+use Dende\VouchersBundle\Entity\VoucherRepository;
+use Dende\DefaultBundle\Services\Manager\BaseManager;
 
 class VoucherManager extends BaseManager {
 
@@ -34,7 +34,7 @@ class VoucherManager extends BaseManager {
 
         if (!$member)
         {
-            throw new Exception("Member not found");
+            throw new Exception("Voucher not found");
         }
 
         $member->setDeletedAt(new \DateTime());
@@ -47,7 +47,7 @@ class VoucherManager extends BaseManager {
      */
     public function setActiveCriteria(QueryBuilder $query)
     {
-        $query->andWhere("m.deletedAt is null");
+        $query->andWhere("v.deletedAt is null");
     }
     
 }

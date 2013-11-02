@@ -2,9 +2,11 @@
 
 namespace Dende\MembersBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Member
@@ -224,6 +226,24 @@ class Member {
     public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
         return $this;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher", mappedBy="member")
+     */
+    protected $vouchers;
+
+    public function getVouchers() {
+        return $this->vouchers;
+    }
+
+    public function setVouchers($vouchers) {
+        $this->vouchers = $vouchers;
+        return $this;
+    }
+
+    public function __construct() {
+        $this->vouchers = new ArrayCollection();
     }
 
 }

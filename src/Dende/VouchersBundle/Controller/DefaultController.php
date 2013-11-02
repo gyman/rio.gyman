@@ -10,7 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class ListController extends Controller {
+class DefaultController extends Controller {
+
     /**
      * @Route("/list", name="_voucher_list")
      * @Template("VouchersBundle:List:list.html.twig")
@@ -55,7 +56,7 @@ class ListController extends Controller {
 
         return $response->setContent(
                         $this->renderView("VouchersBundle:List:edit.html.twig", array(
-                            'form'   => $form->createView(),
+                            'form'    => $form->createView(),
                             'voucher' => $voucher
                                 )
                         )
@@ -63,25 +64,30 @@ class ListController extends Controller {
     }
 
     /**
-     * @Route("/new", name="_voucher_new")
+     * @Route("/new/{id}", name="_voucher_new")
      * @Template()
      */
-    public function newAction() {
+    public function newAction($id) {
         $request = $this->get('request');
+
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
+        
+        $memberManager = $this->get("member_manager");
+        $member = $memberManager->getById($id);
 
         $voucher = new Voucher();
         $form = $this->createForm(new VoucherType(), $voucher);
         $voucherManager = $this->get("voucher_manager");
-
+        
         if ($request->getMethod() == 'POST')
         {
             $form->handleRequest($request);
 
             if ($form->isValid())
             {
+                
                 $voucherManager->persist($voucher);
                 $voucherManager->flush();
             }
@@ -92,9 +98,10 @@ class ListController extends Controller {
         }
 
         return $response->setContent(
-                        $this->renderView("VouchersBundle:List:new.html.twig", array(
-                            'form'   => $form->createView(),
-                            'voucher' => $voucher
+                        $this->renderView("VouchersBundle:Default:new.html.twig", array(
+                            'form'    => $form->createView(),
+                            'voucher' => $voucher,
+                            "member"  => $member
                                 )
                         )
         );

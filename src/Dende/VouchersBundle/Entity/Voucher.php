@@ -23,5 +23,94 @@ class Voucher {
      */
     private $id;
 
+    /**
+     * @var integer
+     * 
+     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="vouchers")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     */
+    private $member;
+
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="startDate", type="date", nullable = true)
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="endDate", type="date", nullable = true)
+     */
+    private $endDate;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="price", type="string", nullable = true)
+     */
+    private $price;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="amount", type="integer", nullable = true)
+     */
+    private $amount;
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getMember() {
+        return $this->member;
+    }
+
+    public function getStartDate() {
+        return $this->startDate;
+    }
+
+    public function getEndDate() {
+        return $this->endDate;
+    }
+
+    public function getPrice() {
+        return $this->price;
+    }
+
+    public function getAmount() {
+        return $this->amount;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setMember($member) {
+        $this->member = $member;
+        return $this;
+    }
+
+    public function setStartDate(\DateTime $startDate) {
+        $this->startDate = $startDate;
+        return $this;
+    }
+
+    public function setEndDate(\DateTime $endDate) {
+        $this->endDate = $endDate;
+        return $this;
+    }
+
+    public function setPrice($price) {
+        $this->price = $price;
+        return $this;
+    }
+
+    public function setAmount($amount) {
+        $this->amount = $amount;
+        return $this;
+    }
 
 }
