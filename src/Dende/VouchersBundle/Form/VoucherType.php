@@ -8,6 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class VoucherType extends AbstractType {
 
+    private $activity_manager;
+
+    public function __construct($activityManager) {
+        $this->activity_manager = $activityManager;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -26,14 +32,14 @@ class VoucherType extends AbstractType {
                 ))
                 ->add('price')
                 ->add('amount')
-                ->add('groups', "choice", array(
-                    "mapped"   => false,
-                    'choices'  => array(
-                        35  => 'Morning',
-                        47 => 'Afternoon',
-                        85   => 'Evening',
-                    ),
-                    'multiple' => true,
+                ->add('activities', "entity", array(
+                    'class'         => 'ScheduleBundle:Activity',
+//                    'expanded'      => true,
+                    'property' => 'name',
+                    'multiple'      => true,
+                    'query_builder' => function($er) {
+                return $er->createQueryBuilder('a');
+            },
                 ))
         ;
     }

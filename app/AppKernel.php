@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Dende\DefaultBundle\DefaultBundle(),
             new Dende\LayoutBundle\LayoutBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Dende\ScheduleBundle\ScheduleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

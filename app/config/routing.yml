@@ -1,3 +1,8 @@
+schedule:
+    resource: "@ScheduleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 layout:
     resource: "@LayoutBundle/Controller/"
     type:     annotation

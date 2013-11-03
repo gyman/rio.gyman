@@ -77,8 +77,9 @@ class DefaultController extends Controller {
         $memberManager = $this->get("member_manager");
         $member = $memberManager->getById($id);
 
+        $activityManager = $this->get("activity_manager");
         $voucher = new Voucher();
-        $form = $this->createForm(new VoucherType(), $voucher);
+        $form = $this->createForm(new VoucherType($activityManager), $voucher);
         $voucherManager = $this->get("voucher_manager");
         
         if ($request->getMethod() == 'POST')
@@ -87,7 +88,7 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
-                
+                $voucher->setMember($member);
                 $voucherManager->persist($voucher);
                 $voucherManager->flush();
             }

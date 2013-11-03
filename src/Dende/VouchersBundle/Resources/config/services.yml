@@ -1,5 +1,5 @@
 parameters:
-    base_manager.class: Dende\VouchersBundle\Services\Manager\BaseManager
+    base_manager.class: Dende\DefaultBundle\Services\Manager\BaseManager
     voucher_entity.class: Dende\VouchersBundle\Entity\Voucher
     voucher_manager.class: Dende\VouchersBundle\Services\Manager\VoucherManager
 

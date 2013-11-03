@@ -15,6 +15,20 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Voucher {
 
     /**
+     * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", mappedBy="vouchers")
+     */
+    private $activities;
+
+    public function getActivities() {
+        return $this->activities;
+    }
+
+    public function setActivities($activities) {
+        $this->activities = $activities;
+        return $this;
+    }
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")

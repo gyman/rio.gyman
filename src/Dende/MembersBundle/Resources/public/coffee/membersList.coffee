@@ -64,7 +64,12 @@ $ ->
   $voucherModal.on "shown", () ->
     $("#dende_vouchersbundle_voucher_startDate, #dende_vouchersbundle_voucher_endDate").datepicker
       dateFormat: "dd.mm.yy"
-    $("#dende_vouchersbundle_voucher_groups").val([35,47,85]).select2
+      
+    activities = []
+    $.each $("#dende_vouchersbundle_voucher_activities option"), (i,item) ->
+      activities.push $(item).val()  
+      
+    $("#dende_vouchersbundle_voucher_activities").val(activities).select2
       dropdownAutoWidth : true
       containerCss : 
         width : "200px"
