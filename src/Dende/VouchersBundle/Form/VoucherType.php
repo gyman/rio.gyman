@@ -22,19 +22,16 @@ class VoucherType extends AbstractType {
         $builder
                 ->add('startDate', "date", array(
                     "widget"      => "single_text",
-                    "empty_value" => date("d.m.Y"),
                     "format"      => "dd.MM.yyyy",
                 ))
                 ->add('endDate', "date", array(
                     "widget"      => "single_text",
-                    "empty_value" => date("d.m.Y"),
                     "format"      => "dd.MM.yyyy"
                 ))
                 ->add('price')
                 ->add('amount')
                 ->add('activities', "entity", array(
                     'class'         => 'ScheduleBundle:Activity',
-//                    'expanded'      => true,
                     'property' => 'name',
                     'multiple'      => true,
                     'query_builder' => function($er) {

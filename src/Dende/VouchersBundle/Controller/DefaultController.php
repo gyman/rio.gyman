@@ -76,9 +76,15 @@ class DefaultController extends Controller {
         
         $memberManager = $this->get("member_manager");
         $member = $memberManager->getById($id);
-
+        
         $activityManager = $this->get("activity_manager");
         $voucher = new Voucher();
+        
+        $voucher->setStartDate(new \DateTime());
+        $voucher->setEndDate(new \DateTime(date("d.m.Y",strtotime("+30 days"))));
+        $voucher->setPrice(100);
+        $voucher->setAmount(10);
+        
         $form = $this->createForm(new VoucherType($activityManager), $voucher);
         $voucherManager = $this->get("voucher_manager");
         
