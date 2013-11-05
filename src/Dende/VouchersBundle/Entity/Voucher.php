@@ -15,7 +15,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Voucher {
 
     /**
-     * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", mappedBy="vouchers")
+     * ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", mappedBy="vouchers")
+     * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="activities")
+     * @ORM\JoinTable(name="vouchers_activities")
      */
     private $activities;
 

@@ -13,8 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Activity {
 
     /**
-     * @ORM\ManyToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher" , inversedBy="vouchers")
-     * @ORM\JoinTable(name="vouchers_activities")
+     * ORM\ManyToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher" , inversedBy="vouchers")
+     * @ORM\ManyToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher" , mappedBy="activities")
+     * ORM\JoinTable(name="vouchers_activities")
+     
      */
     private $vouchers;
 

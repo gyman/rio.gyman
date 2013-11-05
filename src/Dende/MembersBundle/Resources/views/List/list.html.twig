@@ -48,16 +48,13 @@
         {% for member in members %}
                         <tr>
                             <td>{{ member.name }}</td>
-                            <td>{{ member.birthdate|date("d.m.Y") }} <span class="label">BJJ dorośli</span></td>
+                            <td> <span class="label">BJJ dorośli</span></td>
                             
                             {# <td>{{ member.birthdate|date("d.m.Y") }} ({{ member.birthdate|age }})</td> #}
                             {# <td>{{ member.phone }}</td> #}
                             {# <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td> #}
                             <td class="voucherColumn">
-                                <div class="progress progress-mini progress-danger left tip" oldtitle="87%" title="" data-hasqtip="true" aria-describedby="qtip-4">
-                                    <div style="width: 87%;" class="bar"></div>
-                                </div>
-                                <span class="percent">3 dni</span>
+                                {{ member|progressbar|raw }}
                             </td>
                             <td>
                                 <div class="btn-group">

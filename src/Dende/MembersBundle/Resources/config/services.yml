@@ -19,6 +19,11 @@ services:
         tags:
             - { name: twig.extension }
 
+    dende.twig.current_voucher_progressbar_extension:
+        class: Dende\MembersBundle\Twig\CurrentVoucherProgressbarExtension
+        tags:
+            - { name: twig.extension }
+
     dende.upload_listener:
         class: Dende\MembersBundle\Services\Listener\UploadListener
         arguments: [@doctrine]

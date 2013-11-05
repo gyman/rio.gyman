@@ -52,4 +52,23 @@ class MemberManager extends BaseManager {
         $query->andWhere("m.deletedAt is null");
     }
     
+    /**
+     * 
+     * @param \Dende\MembersBundle\Entity\Member $member
+     * @return Voucher|null
+     */
+    public function getCurrentVoucher(Member $member)
+    {
+        $now = date("Y-m-d H:i:s");
+        $repository = $this->getRepo();
+        
+        $query = $repository->createQueryBuilder();
+        $repository->setStartDateLessOrEqual($query,$now);
+        $repository->setEndDateGreaterOrEqual($query,$now);
+        $voucher = $query->getQuery()->execute();
+        
+        return $voucher;
+        
+    }
+    
 }

@@ -246,4 +246,12 @@ class Member {
         $this->vouchers = new ArrayCollection();
     }
 
+    /**
+     * 
+     * @return Voucher
+     */
+    public function getCurrentVoucher()
+    {
+        return $this->vouchers[0];
+    }
 }

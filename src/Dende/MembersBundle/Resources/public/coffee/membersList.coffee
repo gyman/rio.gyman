@@ -29,6 +29,34 @@ $ ->
       container.html response
       $memberModal.modal
         "show" : true
+        
+  $(document).on "click","a#createNevVoucher", (e) ->
+    e.preventDefault()
+    $form = $("form#voucherForm",$voucherModal)
+    container = $(".modal-body",$voucherModal)
+    action = $form.attr "action"
+    data = $form.serialize()
+    $(".modal-footer",$voucherModal).block
+      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
+      css : 
+        border: 'none', 
+        backgroundColor:'transparent' 
+      overlayCSS:
+        backgroundColor: '#E8EAEB'  
+    $.ajax
+      url: action
+      data: data
+      success: (response) ->
+        container.html response
+        $memberModal.modal "hide"
+        window.location.reload()
+      error: (xhr, textStatus, errorThrown) ->
+        if xhr.status == 400
+          container.html xhr.responseText
+      complete: (msg) ->
+        $(".modal-footer",$memberModal).unblock()
+      type: $form.attr "method"
+
 
   $(document).on "click","a.editMember", (e) ->
     e.preventDefault()
@@ -36,6 +64,7 @@ $ ->
     href = $(this).attr "href"
     $.get href, (response) ->
       $container.html response
+      $(".hideForNewMember").removeClass("hidden").show()
       $memberModal.modal
         "show" : true
 
