@@ -54,7 +54,7 @@
                             {# <td>{{ member.phone }}</td> #}
                             {# <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td> #}
                             <td class="voucherColumn">
-                                {{ member|progressbar|raw }}
+                                {{ member|progressbar("dzień","dni")|raw }}
                             </td>
                             <td>
                                 <div class="btn-group">

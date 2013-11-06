@@ -247,11 +247,18 @@ class Member {
     }
 
     /**
-     * 
-     * @return Voucher
+     * Gets current member voucher
+     * @return Voucher|null
      */
     public function getCurrentVoucher()
     {
-        return $this->vouchers[0];
-    }
+        foreach($this->vouchers as $voucher)
+        {
+            if($voucher->getStartDate()->getTimestamp() > time() || $voucher->getEndDate()->getTimestamp() < time()) {
+                continue;
+            }
+     
+            return $voucher;
+        }
+    }        
 }
