@@ -73,28 +73,28 @@ class DefaultController extends Controller {
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
-        
+
         $memberManager = $this->get("member_manager");
         $member = $memberManager->getById($id);
-        
+
         $activityManager = $this->get("activity_manager");
         $voucher = new Voucher();
         
+        $voucher->setMember($member);
         $voucher->setStartDate(new \DateTime());
-        $voucher->setEndDate(new \DateTime(date("d.m.Y",strtotime("+30 days"))));
+        $voucher->setEndDate(new \DateTime(date("d.m.Y", strtotime("+30 days"))));
         $voucher->setPrice(100);
         $voucher->setAmount(10);
-        
+
         $form = $this->createForm(new VoucherType($activityManager), $voucher);
         $voucherManager = $this->get("voucher_manager");
-        
+
         if ($request->getMethod() == 'POST')
         {
             $form->handleRequest($request);
 
             if ($form->isValid())
             {
-                $voucher->setMember($member);
                 $voucherManager->persist($voucher);
                 $voucherManager->flush();
             }

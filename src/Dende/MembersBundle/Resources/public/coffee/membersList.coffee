@@ -48,13 +48,14 @@ $ ->
       data: data
       success: (response) ->
         container.html response
-        $memberModal.modal "hide"
+        $voucherModal.modal "hide"
         window.location.reload()
       error: (xhr, textStatus, errorThrown) ->
         if xhr.status == 400
           container.html xhr.responseText
       complete: (msg) ->
-        $(".modal-footer",$memberModal).unblock()
+        $(".modal-footer",$voucherModal).unblock()
+        $voucherModal.trigger "shown"
       type: $form.attr "method"
 
 

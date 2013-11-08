@@ -5,15 +5,15 @@ namespace Dende\VouchersBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
+use Dende\VouchersBundle\Validator\VoucherDateConstraint;
 /**
  * Voucher
  *
  * @ORM\Table("vouchers")
  * @ORM\Entity(repositoryClass="Dende\VouchersBundle\Entity\VoucherRepository")
+ * @VoucherDateConstraint
  */
 class Voucher {
-
     /**
      * ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", mappedBy="vouchers")
      * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="activities")

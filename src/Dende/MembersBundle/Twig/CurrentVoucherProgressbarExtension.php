@@ -21,6 +21,7 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
     }
 
     public function getProgressBar(Member $member) {
+        return "poprawić!";
         $voucher = $member->getCurrentVoucher();
         $params = func_get_args();
         $daysWord = $params[2];

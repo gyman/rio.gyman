@@ -244,21 +244,5 @@ class Member {
 
     public function __construct() {
         $this->vouchers = new ArrayCollection();
-    }
-
-    /**
-     * Gets current member voucher
-     * @return Voucher|null
-     */
-    public function getCurrentVoucher()
-    {
-        foreach($this->vouchers as $voucher)
-        {
-            if($voucher->getStartDate()->getTimestamp() > time() || $voucher->getEndDate()->getTimestamp() < time()) {
-                continue;
-            }
-     
-            return $voucher;
-        }
-    }        
+    }     
 }

@@ -7,7 +7,12 @@ use Doctrine\ORM\QueryBuilder;
 use Dende\VouchersBundle\Entity\Voucher;
 use Dende\VouchersBundle\Entity\VoucherRepository;
 use Dende\DefaultBundle\Services\Manager\BaseManager;
+use Dende\MembersBundle\Entity\Member;
 
+/**
+ * Manages Vouchers
+ * @method VouchersRepository getRepo() getRepo() Returns entity repository
+ */
 class VoucherManager extends BaseManager {
 
     /**
@@ -45,9 +50,16 @@ class VoucherManager extends BaseManager {
     /**
      * @param QueryBuilder $query
      */
-    public function setActiveCriteria(QueryBuilder $query)
-    {
+    public function setActiveCriteria(QueryBuilder $query) {
         $query->andWhere("v.deletedAt is null");
     }
-    
+
+    public function findOverlappingWithRange(Member $member, \DateTime $startDate, \DateTime $endDate) {
+        $repository = $this->getRepo();
+        $query = $repository->getVouchersOverlappingQuery($member, $startDate, $endDate);
+        $result = $query->getQuery()->execute();
+
+        return $result;
+    }
+
 }
