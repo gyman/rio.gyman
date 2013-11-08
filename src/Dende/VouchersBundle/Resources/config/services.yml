@@ -1,19 +1,21 @@
 parameters:
-    base_manager.class: Dende\DefaultBundle\Services\Manager\BaseManager
     voucher_entity.class: Dende\VouchersBundle\Entity\Voucher
+    voucher_repository.class: Dende\VouchersBundle\Entity\VoucherRepository
     voucher_manager.class: Dende\VouchersBundle\Services\Manager\VoucherManager
     date_validator.class: Dende\VouchersBundle\Validator\VoucherDateValidator
 services:
-    base_manager:
-        class:     "%base_manager.class%"
-        calls:
-             - [ setContainer, ["@service_container"] ]
-
+    voucher_repository:
+        class:          "%voucher_repository.class%"
+        factory_service: doctrine
+        factory_method:  getRepository
+        arguments: [ "%voucher_entity.class%" ]
+        
     voucher_manager:
         class:          "%voucher_manager.class%"
         parent:         base_manager
         calls:
              - [ setClass, [%voucher_entity.class%] ]
+             - [ setRepository, ["@voucher_repository"] ]
 
     validator.voucher_date:
         class:          "%date_validator.class%"

@@ -4,6 +4,7 @@ namespace Dende\VouchersBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Dende\MembersBundle\Entity\Member;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @inherit
@@ -28,9 +29,28 @@ class VoucherRepository extends EntityRepository {
             "end"    => $endDate,
             "member" => $member
         ));
-        $query->orderBy("v.endDate","DESC");
+        $query->orderBy("v.endDate", "DESC");
 
         return $query;
+    }
+
+    /**
+     * 
+     * @param \DateTime $date
+     * @param \Dende\MembersBundle\Entity\Member $member
+     * @return type
+     */
+    public function getVoucherActiveForDate(\DateTime $date, Member $member) {
+        $query = $this->getVouchersQuery();
+        $query->where("v.member = :member");
+        $query->andWhere("v.startDate <= :moment");
+        $query->andWhere("v.endDate >= :moment");
+        $query->setParameters(array(
+            "moment" => $date,
+            "member" => $member
+        ));
+
+        return $query->getQuery()->getOneOrNullResult();
     }
 
 }

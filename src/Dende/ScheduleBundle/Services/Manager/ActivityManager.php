@@ -16,7 +16,7 @@ class ActivityManager extends BaseManager {
      */
     public function getActivitiesAssoc()
     {
-        $repository = $this->getRepo();
+        $repository = $this->getRepository();
         
         $query = $repository->getActivitiesQuery();
         

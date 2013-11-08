@@ -11,7 +11,7 @@ use Dende\MembersBundle\Entity\Member;
 
 /**
  * Manages Vouchers
- * @method VouchersRepository getRepo() getRepo() Returns entity repository
+ * @method VouchersRepository getRepository() getRepo() Returns entity repository
  */
 class VoucherManager extends BaseManager {
 
@@ -20,7 +20,7 @@ class VoucherManager extends BaseManager {
      * @return array
      */
     public function getMembers() {
-        $query = $this->getRepo()->getMembersQuery();
+        $query = $this->getRepository()->getMembersQuery();
         $this->setActiveCriteria($query);
         return $query->getQuery()->execute();
     }
@@ -31,7 +31,7 @@ class VoucherManager extends BaseManager {
      * @return Member
      */
     public function getById($id) {
-        return $this->getRepo()->find($id);
+        return $this->getRepository()->find($id);
     }
 
     public function setAsDeleted($id) {
@@ -55,7 +55,7 @@ class VoucherManager extends BaseManager {
     }
 
     public function findOverlappingWithRange(Member $member, \DateTime $startDate, \DateTime $endDate) {
-        $repository = $this->getRepo();
+        $repository = $this->getRepository();
         $query = $repository->getVouchersOverlappingQuery($member, $startDate, $endDate);
         $result = $query->getQuery()->execute();
 

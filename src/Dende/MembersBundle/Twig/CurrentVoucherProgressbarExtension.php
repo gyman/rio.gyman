@@ -3,8 +3,33 @@
 namespace Dende\MembersBundle\Twig;
 
 use Dende\MembersBundle\Entity\Member;
+use Dende\MembersBundle\Services\Manager\MemberManager;
 
 class CurrentVoucherProgressBarExtension extends \Twig_Extension {
+
+    /**
+     *
+     * @var Dende\MembersBundle\Services\Manager\MemberManager
+     */
+    private $memberManager;
+
+    /**
+     * 
+     * @return Dende\MembersBundle\Services\Manager\MemberManager
+     */
+    public function getMemberManager() {
+        return $this->memberManager;
+    }
+
+    /**
+     * 
+     * @param \Dende\MembersBundle\Services\Manager\MemberManager $memberManager
+     * @return \Dende\MembersBundle\Twig\CurrentVoucherProgressBarExtension
+     */
+    public function setMemberManager(MemberManager $memberManager) {
+        $this->memberManager = $memberManager;
+        return $this;
+    }
 
     private $markup = '<div class="progress progress-mini progress-danger left tip" oldtitle="%%percentage%%" title="" data-hasqtip="true" aria-describedby="qtip-4">
                 <div style="width: %%percentage%%%;" class="bar"></div>
@@ -21,15 +46,15 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
     }
 
     public function getProgressBar(Member $member) {
-        return "poprawić!";
-        $voucher = $member->getCurrentVoucher();
-        $params = func_get_args();
-        $daysWord = $params[2];
+        $voucher = $this->memberManager->getCurrentVoucher($member);
 
         if (!$voucher)
         {
             return null;
         }
+        
+        $params = func_get_args();
+        $daysWord = $params[2];
 
         $startDate = $voucher->getStartDate();
         $endDate = $voucher->getEndDate();
