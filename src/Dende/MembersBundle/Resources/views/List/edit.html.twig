@@ -1,10 +1,11 @@
 <form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}{% endif %}">
     <div class="span6">    
-        {{ form_row(form.name) }}
-        {{ form_row(form.birthdate) }}
-        {{ form_row(form.phone) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.notes) }}
+        {{ form_row(form.name,{"label" : "Imię i nazwisko"}) }}
+        {{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}
+        {{ form_row(form.zipcode,{"label" : "Kod pocztowy"}) }}
+        {{ form_row(form.phone,{"label" : "Numer telefonu"}) }}
+        {{ form_row(form.email,{"label" : "Adres email"}) }}
+        {{ form_row(form.notes,{"label" : "Notatki"}) }}
     </div>
     <div class="span6">  
         <div class="control-group">
@@ -15,6 +16,14 @@
         </div>
 
         {{ form_row(form.fotoUploader) }}
+
+        <div class="control-group hidden hideForNewMember">
+            <div class="btn-group">
+                <a href="#" class="btn"><span class="icomoon-icon-signup "></span> Wejście</a>
+                <a id="newVoucher" class="btn" href="/app_dev.php/voucher/new/13"><span class="icomoon-icon-clock"></span> Nowy karnet</a>
+                <a href="#" class="btn"><span class="icomoon-icon-cart-3"></span> Sprzedaż towaru</a>
+            </div>
+        </div>
     </div>
     <div class="hidden">
     {{ form_rest(form) }}

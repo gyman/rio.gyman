@@ -5,6 +5,7 @@ namespace Dende\MembersBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Member
@@ -39,6 +40,7 @@ class Member {
     /**
      * @var \DateTime
      * 
+     * @Assert\Date(message="Data musi być w formacie DD.MM.RR")
      * @ORM\Column(name="birthdate", type="date")
      */
     private $birthdate;
@@ -82,6 +84,29 @@ class Member {
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
      */
     private $deletedAt;
+
+    /**
+     * @var string $zipcode
+     *
+     * @ORM\Column(name="zipcode", type="string")
+     * @Assert\Length(max=6, min=6, minMessage="Kod pocztowy musi zawierać 6 znaków",maxMessage="Kod pocztowy musi zawierać 6 znaków")
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *           pattern= "/\d{2}\-\d{3}/",
+     *           match=   true,
+     *           message= "Kod pocztowy musi być w formacie XX-XXX" 
+     * ) 
+     */
+    private $zipcode;
+
+    public function getZipcode() {
+        return $this->zipcode;
+    }
+
+    public function setZipcode($zipcode) {
+        $this->zipcode = $zipcode;
+        return $this;
+    }
 
     /**
      * Get id
@@ -226,4 +251,21 @@ class Member {
         return $this;
     }
 
+    /**
+     * @ORM\OneToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher", mappedBy="member")
+     */
+    protected $vouchers;
+
+    public function getVouchers() {
+        return $this->vouchers;
+    }
+
+    public function setVouchers($vouchers) {
+        $this->vouchers = $vouchers;
+        return $this;
+    }
+
+    public function __construct() {
+        $this->vouchers = new ArrayCollection();
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Dende\MembersBundle\Services\Manager;
+namespace Dende\DefaultBundle\Services\Manager;
 
 use Symfony\Component\DependencyInjection\Container;
 use Doctrine\ORM\EntityManager as DocumentManager;
@@ -15,7 +15,7 @@ class BaseManager {
      * Document-specific repo, useful for finding and managing document
      * @var DocumentRepository
      */
-    protected $repo;
+    protected $repository;
 
     /**
      * The Fully-Qualified Class Name for document
@@ -111,7 +111,7 @@ class BaseManager {
      * @return bool|object
      */
     public function find( $id ) {
-        $obj = $this->repo->find($id);
+        $obj = $this->repository->find($id);
         if ( !is_object($obj) ) {
             return false;
         }
@@ -142,7 +142,7 @@ class BaseManager {
     public function setClass( $class ) {
         $this->dm = $this->container->get('doctrine.orm.default_entity_manager');
         $this->class = $class;
-        $this->repo = $this->dm->getRepository($class);
+        $this->repository = $this->dm->getRepository($class);
     }
 
     /**
@@ -174,10 +174,10 @@ class BaseManager {
     /**
      * Sets the doctrine document repository
      *
-     * @param \Doctrine\ODM\MongoDB\DocumentRepository $repo
+     * @param \Doctrine\ODM\MongoDB\DocumentRepository $repository
      */
-    public function setRepo( $repo ) {
-        $this->repo = $repo;
+    public function setRepository( $repository ) {
+        $this->repository = $repository;
     }
 
     /**
@@ -185,8 +185,8 @@ class BaseManager {
      *
      * @return \Doctrine\ODM\MongoDB\DocumentRepository
      */
-    public function getRepo() {
-        return $this->repo;
+    public function getRepository() {
+        return $this->repository;
     }
 
     /**

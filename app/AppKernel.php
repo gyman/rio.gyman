@@ -18,9 +18,11 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new Dende\MembersBundle\MembersBundle(),
+            new Dende\VouchersBundle\VouchersBundle(),
             new Dende\DefaultBundle\DefaultBundle(),
             new Dende\LayoutBundle\LayoutBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Dende\ScheduleBundle\ScheduleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

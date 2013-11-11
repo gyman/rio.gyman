@@ -42,3 +42,9 @@ a.editMember.thumbnail {
 #membersList_length {
   margin-left: 15px;
 }
+#membersList .btn-group .btn.dropdown-toggle {
+  padding-bottom: 4px;
+}
+#membersList .btn-group .btn.dropdown-toggle span.caret {
+  margin-left: 5px;
+}
