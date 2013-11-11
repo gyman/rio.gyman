@@ -6,9 +6,6 @@ use Doctrine\ORM\EntityRepository;
 use Dende\MembersBundle\Entity\Member;
 use Doctrine\ORM\QueryBuilder;
 
-/**
- * @inherit
- */
 class VoucherRepository extends EntityRepository {
 
     /**

@@ -36,6 +36,11 @@ class VoucherDateValidator extends ConstraintValidator {
             $properDate = $lastEndDate->format("d.m.Y");
             $this->context->addViolationAt('startDate', 'Istnieją już karnety wykupione na ten okres! Ustaw datę początkową conajmniej na '.$properDate);
         }
+        
+        if($voucher->getStartDate() > $voucher->getEndDate() )
+        {
+            $this->context->addViolationAt('endDate', 'Data końcowa musi być po dacie początkowej!');
+        }
     }
 
 }

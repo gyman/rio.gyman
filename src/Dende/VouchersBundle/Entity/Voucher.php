@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Dende\VouchersBundle\Validator\VoucherDateConstraint;
+
 /**
  * Voucher
  *
@@ -14,6 +15,7 @@ use Dende\VouchersBundle\Validator\VoucherDateConstraint;
  * @VoucherDateConstraint
  */
 class Voucher {
+
     /**
      * ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", mappedBy="vouchers")
      * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="activities")
@@ -74,6 +76,22 @@ class Voucher {
      * @ORM\Column(name="amount", type="integer", nullable = true)
      */
     private $amount;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="barcode", type="integer", nullable = true)
+     */
+    private $barcode;
+
+    public function getBarcode() {
+        return $this->barcode;
+    }
+
+    public function setBarcode($barcode) {
+        $this->barcode = $barcode;
+        return $this;
+    }
 
     public function getId() {
         return $this->id;

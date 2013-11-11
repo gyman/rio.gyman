@@ -31,7 +31,7 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
         return $this;
     }
 
-    private $markup = '<div class="progress progress-mini progress-danger left tip" oldtitle="%%percentage%%" title="" data-hasqtip="true" aria-describedby="qtip-4">
+    private $markup = '<div class="progress progress-mini progress-danger left tip" oldtitle="%%percentage%%" title="%%start%% - %%end%%" data-hasqtip="true" aria-describedby="qtip-4">
                 <div style="width: %%percentage%%%;" class="bar"></div>
                 </div>
                 <span class="percent">%%days_left%% %%days_word%%</span>';
@@ -52,7 +52,7 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
         {
             return null;
         }
-        
+
         $params = func_get_args();
         $daysWord = $params[2];
 
@@ -69,8 +69,19 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
             $daysWord = $params[1];
         }
 
-        return str_replace(array("%%percentage%%", "%%days_left%%", "%%days_word%%"), array(
-            $percentage, $leftDays, $daysWord), $this->markup);
+        return str_replace(array(
+            "%%percentage%%",
+            "%%days_left%%",
+            "%%days_word%%",
+            "%%start%%",
+            "%%end%%"
+                ), array(
+            $percentage,
+            $leftDays,
+            $daysWord,
+            $startDate->format("d.m"),
+            $endDate->format("d.m")
+                ), $this->markup);
     }
 
     public function getName() {

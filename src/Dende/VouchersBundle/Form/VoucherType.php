@@ -30,6 +30,7 @@ class VoucherType extends AbstractType {
                 ))
                 ->add('price')
                 ->add('amount')
+                ->add('barcode')
                 ->add('activities', "entity", array(
                     'class'         => 'ScheduleBundle:Activity',
                     'property' => 'name',
