@@ -86,6 +86,12 @@ class Member {
     private $deletedAt;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     */
+    private $entries;
+
+    /**
      * @var string $zipcode
      *
      * @ORM\Column(name="zipcode", type="string")
@@ -98,6 +104,15 @@ class Member {
      * ) 
      */
     private $zipcode;
+
+    public function getEntries() {
+        return $this->entries;
+    }
+
+    public function setEntries($entries) {
+        $this->entries = $entries;
+        return $this;
+    }
 
     public function getZipcode() {
         return $this->zipcode;
@@ -268,4 +283,5 @@ class Member {
     public function __construct() {
         $this->vouchers = new ArrayCollection();
     }
+
 }

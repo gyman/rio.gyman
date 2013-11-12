@@ -59,10 +59,10 @@
                             <td>
                                 <div class="btn-group">
                                     <a class="btn editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a>
-                                    <a class="btn" href="#"><span class="icomoon-icon-signup "></span> Wejście</a>
+                                    <a class="btn addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
                                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-align-left"></span> Sprzedaż<span class="caret"></span></a>
                                     <ul class="dropdown-menu pull-right">
-                                      <li><a href="{{ path("_voucher_new", {"id" : member.id})}}" id="newVoucher"><span class="icomoon-icon-clock"></span> Karnet</a></li>
+                                      <li><a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher"><span class="icomoon-icon-clock"></span> Karnet</a></li>
                                       <li><a href="#"><span class="icomoon-icon-cart-3"></span> Towar</a></li>
                                     </ul>
                                 </div>
@@ -82,6 +82,7 @@
 
 {% include 'MembersBundle::_memberModal.html.twig' %}
 {% include 'MembersBundle::_voucherModal.html.twig' %}
+{% include 'MembersBundle::_entranceModal.html.twig' %}
 
 {% endblock %}
 

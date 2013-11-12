@@ -23,6 +23,21 @@ class Voucher {
      */
     private $activities;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
+     * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id")
+     */
+    private $entries;
+
+    public function getEntries() {
+        return $this->entries;
+    }
+
+    public function setEntries($entries) {
+        $this->entries = $entries;
+        return $this;
+    }
+
     public function getActivities() {
         return $this->activities;
     }

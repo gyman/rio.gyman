@@ -9,10 +9,11 @@ $ ->
     
   $memberModal = $("#editMemberModal")
   $voucherModal = $("#newVoucherModal")
+  $entranceModal = $("#editEntranceModal")
     
   $deleteCheckbox = $("input#deleteUserCheckbox")
   
-  $(document).on "click","a#newVoucher", (e) ->
+  $(document).on "click","a.newVoucher", (e) ->
     e.preventDefault()
     $container = $(".modal-body",$voucherModal)
     href = $(this).attr "href"
@@ -28,6 +29,15 @@ $ ->
     $.get href, (response) ->
       container.html response
       $memberModal.modal
+        "show" : true
+    
+  $(document).on "click","a.addEntrance", (e) ->
+    e.preventDefault()
+    container = $(".modal-body",$entranceModal)
+    href = $(this).attr "href"
+    $.get href, (response) ->
+      container.html response
+      $entranceModal.modal
         "show" : true
         
   $(document).on "click","a#createNevVoucher", (e) ->
@@ -113,6 +123,10 @@ $ ->
       step: 1
       start: 1000
       numberFormat: "C"
+
+  $entranceModal.on "shown", () ->
+    $("input#dende_entriesbundle_entry_entryDate").datetimepicker
+      dateFormat: "dd.mm.yy"
       
   $(document).on "change", $deleteCheckbox, (e) ->
     e.preventDefault()
@@ -125,6 +139,34 @@ $ ->
       $("#saveFormInModal").removeClass BUTTON_DELETE_CLASS
       $("#saveFormInModal").addClass BUTTON_SAVE_CLASS
         
+  $(document).on "click","a#addEntrance", (e) ->
+    e.preventDefault()
+    $form = $("form#entranceForm",$entranceModal)
+    container = $(".modal-body",$entranceModal)
+    action = $form.attr "action"
+    data = $form.serialize()
+    $(".modal-footer",$entranceModal).block
+      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
+      css : 
+        border: 'none', 
+        backgroundColor:'transparent' 
+      overlayCSS:
+        backgroundColor: '#E8EAEB'  
+    $.ajax
+      url: action
+      data: data
+      success: (response) ->
+        container.html response
+        $entranceModal.modal "hide"
+        window.location.reload()
+      error: (xhr, textStatus, errorThrown) ->
+        if xhr.status == 400
+          container.html xhr.responseText
+      complete: (msg) ->
+        $(".modal-footer",$entranceModal).unblock()
+      type: $form.attr "method"
+    
+    
   $(document).on "click","#saveFormInModal", (e) ->
     e.preventDefault()
     $form = $("form#memberForm",$memberModal)
