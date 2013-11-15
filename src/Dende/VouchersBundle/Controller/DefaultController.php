@@ -114,12 +114,6 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
-//                if ($lastVoucher)
-//                {
-//                    $lastVoucher->setNextVoucher($voucher);
-//                    $voucherManager->persist($lastVoucher);
-//                }
-
                 $voucherManager->persist($voucher);
                 $voucherManager->flush();
             }

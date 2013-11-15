@@ -17,7 +17,12 @@
 
         {{ form_row(form.fotoUploader) }}
 
+
+
         <div class="control-group hidden hideForNewMember">
+            <ul>
+                <li><strong>Obecny karnet: </strong>{% if voucher is not null %} {{ voucher.getStartDate()|date("d.m.Y") }} - {{ voucher.getEndDate()|date("d.m.Y") }}{% else %}brak{% endif %}</li>
+            </ul>
             <div class="btn-group">
                 <a href="#" class="btn"><span class="icomoon-icon-signup "></span> Wejście</a>
                 <a id="newVoucher" class="btn" href="/app_dev.php/voucher/new/13"><span class="icomoon-icon-clock"></span> Nowy karnet</a>

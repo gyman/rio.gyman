@@ -13,21 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Entry {
 
     /**
-     * @ORM\OneToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
-     * @ORM\JoinColumn(name="activityId", referencedColumnName="id")
-     */
-    private $activity;
-
-    public function getActivity() {
-        return $this->activity;
-    }
-
-    public function setActivity($activity) {
-        $this->activity = $activity;
-        return $this;
-    }
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -46,30 +31,47 @@ class Entry {
     /**
      * @var integer
      *
-     * @ORM\Column(name="member_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
-    private $memberId;
+    private $member;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="activity_id", type="integer")
+     * @ORM\OneToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
+     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id")
      */
-    private $activityId;
+    private $activity;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="voucher_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
+     * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id")
      */
-    private $voucherId;
+    private $voucher;
 
-    public function getVoucherId() {
-        return $this->voucherId;
+    public function getVoucher() {
+        return $this->voucher;
     }
 
-    public function setVoucherId($voucherId) {
-        $this->voucherId = $voucherId;
+    public function setVoucher($voucher) {
+        $this->voucher = $voucher;
+        return $this;
+    }
+
+    public function getActivity() {
+        return $this->activity;
+    }
+
+    public function setActivity($activity) {
+        $this->activity = $activity;
+        return $this;
+    }
+
+    public function getMember() {
+        return $this->member;
+    }
+
+    public function setMember($member) {
+        $this->member = $member;
         return $this;
     }
 
@@ -101,48 +103,6 @@ class Entry {
      */
     public function getEntryDate() {
         return $this->entryDate;
-    }
-
-    /**
-     * Set memberId
-     *
-     * @param integer $memberId
-     * @return Entry
-     */
-    public function setMemberId($memberId) {
-        $this->memberId = $memberId;
-
-        return $this;
-    }
-
-    /**
-     * Get memberId
-     *
-     * @return integer 
-     */
-    public function getMemberId() {
-        return $this->memberId;
-    }
-
-    /**
-     * Set activityId
-     *
-     * @param integer $activityId
-     * @return Entry
-     */
-    public function setActivityId($activityId) {
-        $this->activityId = $activityId;
-
-        return $this;
-    }
-
-    /**
-     * Get activityId
-     *
-     * @return integer 
-     */
-    public function getActivityId() {
-        return $this->activityId;
     }
 
 }

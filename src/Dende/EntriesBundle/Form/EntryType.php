@@ -27,6 +27,12 @@ class EntryType extends AbstractType {
                 return $er->createQueryBuilder('a');
             },
                 ))
+                ->add('entry_type', 'choice', array(
+                    'choices' => array('free' => 'darmowe', 'voucher' => 'na karnet'),
+                    'data' => "voucher",
+                    "mapped" => false,
+                    "expanded" => true
+                ))
         ;
     }
 

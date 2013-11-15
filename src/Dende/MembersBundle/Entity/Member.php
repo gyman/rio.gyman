@@ -86,8 +86,7 @@ class Member {
     private $deletedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="entries")
      */
     private $entries;
 

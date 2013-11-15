@@ -79,7 +79,8 @@ class ListController extends Controller {
         return $response->setContent(
                         $this->renderView("MembersBundle:List:edit.html.twig", array(
                             'form'   => $form->createView(),
-                            'member' => $member
+                            'member' => $member,
+                            'voucher' => $memberManager->getCurrentVoucher($member)
                                 )
                         )
         );

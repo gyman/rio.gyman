@@ -23,8 +23,8 @@ class Voucher {
     private $activities;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
-     * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="entries")
+     * @ORM\JoinTable(name="entries")
      */
     private $entries;
 
@@ -34,29 +34,14 @@ class Voucher {
      */
     private $previousVoucher;
 
-//    /**
-//     * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
-//     * @ORM\JoinColumn(name="next_voucher_id", referencedColumnName="id", onDelete="SET NULL")
-//     */
-//    private $nextVoucher;
-
     public function getPreviousVoucher() {
         return $this->previousVoucher;
     }
-
-//    public function getNextVoucher() {
-//        return $this->nextVoucher;
-//    }
 
     public function setPreviousVoucher($previousVoucher) {
         $this->previousVoucher = $previousVoucher;
         return $this;
     }
-
-//    public function setNextVoucher($nextVoucher) {
-//        $this->nextVoucher = $nextVoucher;
-//        return $this;
-//    }
 
     public function getEntries() {
         return $this->entries;
@@ -120,6 +105,22 @@ class Voucher {
      * @ORM\Column(name="amount", type="integer", nullable = true)
      */
     private $amount;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="amount_left", type="integer", nullable = true)
+     */
+    private $amountLeft;
+
+    public function getAmountLeft() {
+        return $this->amountLeft;
+    }
+
+    public function setAmountLeft($amountLeft) {
+        $this->amountLeft = $amountLeft;
+        return $this;
+    }
 
     /**
      * @var integer
