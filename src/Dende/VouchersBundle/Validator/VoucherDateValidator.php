@@ -21,20 +21,15 @@ class VoucherDateValidator extends ConstraintValidator {
     }
 
     public function validate($voucher, Constraint $constraint) {
-        $existingVouchers = $this->voucherManager
-                ->findOverlappingWithRange($voucher->getMember(), $voucher->getStartDate(), $voucher->getEndDate())
-        ;
-
-        if (count($existingVouchers) > 0)
+        $previousVoucher = $voucher->getPreviousVoucher();
+        
+        if ($previousVoucher && $previousVoucher->getEndDate() >= $voucher->getStartDate())
         {
-            /**
-             * @var \DateTime Description
-             */
-            
-            $lastEndDate = $existingVouchers[0]->getEndDate();
+            $lastEndDate = $previousVoucher->getEndDate();
             $lastEndDate->add(new \DateInterval('P1D'));
             $properDate = $lastEndDate->format("d.m.Y");
             $this->context->addViolationAt('startDate', 'Istnieją już karnety wykupione na ten okres! Ustaw datę początkową conajmniej na '.$properDate);
+
         }
         
         if($voucher->getStartDate() > $voucher->getEndDate() )

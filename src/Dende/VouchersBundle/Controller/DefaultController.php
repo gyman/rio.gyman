@@ -2,6 +2,7 @@
 
 namespace Dende\VouchersBundle\Controller;
 
+use Dende\MembersBundle\Entity\Member;
 use Dende\VouchersBundle\Entity\Voucher;
 use Dende\VouchersBundle\Form\VoucherType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class DefaultController extends Controller {
 
@@ -64,30 +66,47 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/new/{id}", name="_voucher_new")
+     * @Route("/new/member/{id}", name="_voucher_new")
+     * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function newAction($id) {
+    public function newAction(Member $member) {
         $request = $this->get('request');
 
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
 
-        $memberManager = $this->get("member_manager");
-        $member = $memberManager->getById($id);
-
         $activityManager = $this->get("activity_manager");
+        $voucherManager = $this->get("voucher_manager");
+
+        $previousVouchersCollection = $member->getVouchers();
+
         $voucher = new Voucher();
-        
+
+        if ($previousVouchersCollection->count() > 0)
+        {
+            $lastVoucher = $previousVouchersCollection->last();
+            $voucher->setPreviousVoucher($lastVoucher);
+            $startDate = clone($lastVoucher->getEndDate());
+            $startDate->add(new \DateInterval("P1D"));
+        }
+        else
+        {
+            $lastVoucher = null;
+            $startDate = new \DateTime();
+        }
+
+        $endDate = clone($startDate);
+        $endDate->add(new \DateInterval("P1M"));
+
         $voucher->setMember($member);
-        $voucher->setStartDate(new \DateTime());
-        $voucher->setEndDate(new \DateTime(date("d.m.Y", strtotime("+30 days"))));
+        $voucher->setStartDate($startDate);
+        $voucher->setEndDate($endDate);
         $voucher->setPrice(100);
         $voucher->setAmount(10);
 
         $form = $this->createForm(new VoucherType($activityManager), $voucher);
-        $voucherManager = $this->get("voucher_manager");
 
         if ($request->getMethod() == 'POST')
         {
@@ -95,6 +114,12 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
+//                if ($lastVoucher)
+//                {
+//                    $lastVoucher->setNextVoucher($voucher);
+//                    $voucherManager->persist($lastVoucher);
+//                }
+
                 $voucherManager->persist($voucher);
                 $voucherManager->flush();
             }

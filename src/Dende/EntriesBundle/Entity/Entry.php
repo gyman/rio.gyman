@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Entry
  *
- * @ORM\Table()
+ * @ORM\Table("entries")
  * @ORM\Entity(repositoryClass="Dende\EntriesBundle\Entity\EntryRepository")
  */
 class Entry {

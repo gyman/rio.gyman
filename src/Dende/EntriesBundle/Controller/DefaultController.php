@@ -11,15 +11,6 @@ use Dende\EntriesBundle\Form\EntryType;
 use Dende\EntriesBundle\Entity\Entry;
 
 class DefaultController extends Controller {
-
-    /**
-     * @Route("/hello/{name}")
-     * @Template()
-     */
-    public function indexAction($name) {
-        return array('name' => $name);
-    }
-
     /**
      * @Route("/entrance/{id}/new", name="_entrance_add")
      * @ParamConverter("member", class="MembersBundle:Member")

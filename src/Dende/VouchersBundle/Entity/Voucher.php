@@ -17,7 +17,6 @@ use Dende\VouchersBundle\Validator\VoucherDateConstraint;
 class Voucher {
 
     /**
-     * ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", mappedBy="vouchers")
      * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="activities")
      * @ORM\JoinTable(name="vouchers_activities")
      */
@@ -28,6 +27,36 @@ class Voucher {
      * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id")
      */
     private $entries;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
+     * @ORM\JoinColumn(name="previous_voucher_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $previousVoucher;
+
+//    /**
+//     * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
+//     * @ORM\JoinColumn(name="next_voucher_id", referencedColumnName="id", onDelete="SET NULL")
+//     */
+//    private $nextVoucher;
+
+    public function getPreviousVoucher() {
+        return $this->previousVoucher;
+    }
+
+//    public function getNextVoucher() {
+//        return $this->nextVoucher;
+//    }
+
+    public function setPreviousVoucher($previousVoucher) {
+        $this->previousVoucher = $previousVoucher;
+        return $this;
+    }
+
+//    public function setNextVoucher($nextVoucher) {
+//        $this->nextVoucher = $nextVoucher;
+//        return $this;
+//    }
 
     public function getEntries() {
         return $this->entries;
