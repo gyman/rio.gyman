@@ -86,11 +86,6 @@ class Member {
     private $deletedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="entries")
-     */
-    private $entries;
-
-    /**
      * @var string $zipcode
      *
      * @ORM\Column(name="zipcode", type="string")
@@ -103,6 +98,46 @@ class Member {
      * ) 
      */
     private $zipcode;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="entries")
+     */
+    private $entries;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher", mappedBy="member")
+     */
+    protected $vouchers;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
+     * @ORM\JoinColumn(name="last_voucher_id", referencedColumnName="id")
+     */
+    protected $lastVoucher;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
+     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id")
+     */
+    protected $lastEntry;
+
+    public function getLastVoucher() {
+        return $this->lastVoucher;
+    }
+
+    public function getLastEntry() {
+        return $this->lastEntry;
+    }
+
+    public function setLastVoucher($lastVoucher) {
+        $this->lastVoucher = $lastVoucher;
+        return $this;
+    }
+
+    public function setLastEntry($lastEntry) {
+        $this->lastEntry = $lastEntry;
+        return $this;
+    }
 
     public function getEntries() {
         return $this->entries;
@@ -264,11 +299,6 @@ class Member {
         $this->deletedAt = $deletedAt;
         return $this;
     }
-
-    /**
-     * @ORM\OneToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher", mappedBy="member")
-     */
-    protected $vouchers;
 
     public function getVouchers() {
         return $this->vouchers;

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ListController extends Controller {
 
@@ -37,17 +38,15 @@ class ListController extends Controller {
      * @Template("MembersBundle:List:gallery.html.twig")
      */
     public function galleryAction() {
-        $memberManager = $this->get("member_manager");
-        $members = $memberManager->getMembers();
-
-        return array("members" => $members);
+        return $this->listAction();
     }
 
     /**
      * @Route("/{id}/edit", name="_member_edit")
+     * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function editAction($id) {
+    public function editAction(Member $member) {
         $request = $this->get('request');
 
         $response = new Response(
@@ -55,7 +54,6 @@ class ListController extends Controller {
         );
 
         $memberManager = $this->get("member_manager");
-        $member = $memberManager->getById($id);
 
         $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
 
@@ -78,8 +76,8 @@ class ListController extends Controller {
 
         return $response->setContent(
                         $this->renderView("MembersBundle:List:edit.html.twig", array(
-                            'form'   => $form->createView(),
-                            'member' => $member,
+                            'form'    => $form->createView(),
+                            'member'  => $member,
                             'voucher' => $memberManager->getCurrentVoucher($member)
                                 )
                         )
@@ -107,8 +105,7 @@ class ListController extends Controller {
 
             if ($form->isValid())
             {
-                $memberManager->persist($member);
-                $memberManager->flush();
+                $memberManager->save($member);
             }
             else
             {
@@ -119,7 +116,8 @@ class ListController extends Controller {
         return $response->setContent(
                         $this->renderView("MembersBundle:List:new.html.twig", array(
                             'form'   => $form->createView(),
-                            'member' => $member
+                            'member' => $member,
+                            'isNew'  => true
                                 )
                         )
         );
@@ -127,11 +125,12 @@ class ListController extends Controller {
 
     /**
      * @Route("/{id}/delete", name="_member_delete")
+     * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function deleteAction($id) {
+    public function deleteAction(Member $member) {
         $memberManager = $this->get("member_manager");
-        $memberManager->setAsDeleted($id);
+        $memberManager->delete($member);
         return array();
     }
 

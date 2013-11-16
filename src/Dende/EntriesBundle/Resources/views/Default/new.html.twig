@@ -10,6 +10,8 @@
         {{ form_row(form.activity,{"label" : "Zajęcia"}) }}
         {% if form.entry_type is defined %}
         {{ form_row(form.entry_type,{"label" : "Rodzaj wejścia"}) }}
+        {% else %}
+        <strong class="error">Uwaga! Osoba nie posiada karnetu, wejście będzie gratis!</strong>
         {% endif %}
     </div>
     <div class="hidden">

@@ -22,7 +22,7 @@ $ ->
       $voucherModal.modal
         "show" : true
     
-  $(document).on "click","a#createNewMember", (e) ->
+  $(document).on "click","a.createNewMember", (e) ->
     e.preventDefault()
     container = $(".modal-body",$memberModal)
     href = $(this).attr "href"

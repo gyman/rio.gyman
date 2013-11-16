@@ -48,8 +48,10 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
-                $this->get('entry_manager')->persist($entry);
-                $this->get('entry_manager')->flush();
+                $member->setLastEntry($entry);
+                
+                $this->get('entry_manager')->save($entry);
+                $this->get('member_manager')->save($member);
             }
             else
             {

@@ -34,33 +34,6 @@ class Voucher {
      */
     private $previousVoucher;
 
-    public function getPreviousVoucher() {
-        return $this->previousVoucher;
-    }
-
-    public function setPreviousVoucher($previousVoucher) {
-        $this->previousVoucher = $previousVoucher;
-        return $this;
-    }
-
-    public function getEntries() {
-        return $this->entries;
-    }
-
-    public function setEntries($entries) {
-        $this->entries = $entries;
-        return $this;
-    }
-
-    public function getActivities() {
-        return $this->activities;
-    }
-
-    public function setActivities($activities) {
-        $this->activities = $activities;
-        return $this;
-    }
-
     /**
      * @var integer
      *
@@ -189,6 +162,33 @@ class Voucher {
 
     public function setAmount($amount) {
         $this->amount = $amount;
+        return $this;
+    }
+
+    public function getPreviousVoucher() {
+        return $this->previousVoucher;
+    }
+
+    public function setPreviousVoucher($previousVoucher) {
+        $this->previousVoucher = $previousVoucher;
+        return $this;
+    }
+
+    public function getEntries() {
+        return $this->entries;
+    }
+
+    public function setEntries($entries) {
+        $this->entries = $entries;
+        return $this;
+    }
+
+    public function getActivities() {
+        return $this->activities;
+    }
+
+    public function setActivities($activities) {
+        $this->activities = $activities;
         return $this;
     }
 

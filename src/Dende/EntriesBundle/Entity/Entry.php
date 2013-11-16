@@ -37,7 +37,7 @@ class Entry {
     private $member;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id")
      */
     private $activity;

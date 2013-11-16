@@ -17,17 +17,48 @@
 
         {{ form_row(form.fotoUploader) }}
 
-
-
         <div class="control-group hidden hideForNewMember">
-            <ul>
-                <li><strong>Obecny karnet: </strong>{% if voucher is not null %} {{ voucher.getStartDate()|date("d.m.Y") }} - {{ voucher.getEndDate()|date("d.m.Y") }}{% else %}brak{% endif %}</li>
-            </ul>
-            <div class="btn-group">
-                <a href="#" class="btn"><span class="icomoon-icon-signup "></span> Wejście</a>
-                <a id="newVoucher" class="btn" href="/app_dev.php/voucher/new/13"><span class="icomoon-icon-clock"></span> Nowy karnet</a>
-                <a href="#" class="btn"><span class="icomoon-icon-cart-3"></span> Sprzedaż towaru</a>
+            {% if isNew is not defined %}
+            <div class="box">
+
+                <div class="title">
+
+                    <h4>
+                        <span class="icon16 icomoon-icon-equalizer-2"></span>
+                        <span>Informacje</span>
+                    </h4>
+
+                </div>
+                <div class="content">
+                    <ul>
+                        <li>
+                            <strong>Obecny karnet: </strong>
+                        {% if voucher is defined and voucher is not null %}
+                            <div style="text-align: center">
+                            {{ member|progressbar("dzień","dni")|raw }}
+                            </div>
+                        {% else %}
+                            brak
+                        {% endif %}
+                        </li>
+                        {% if member.getLastEntry is not null %}
+                        <li><strong>Ostatnie wejście: </strong>
+                        {{ member.getLastEntry().getActivity().getName()}} ({{ member.getLastEntry().getEntryDate()|date("d.m.Y H:i") }})
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
             </div>
+            <div class="btn-group">
+                <a class="btn addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span> Dodaj wejście</a>
+
+                {% if voucher is defined and voucher is null %}
+                <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn newVoucher"><span class="icomoon-icon-clock"></span> Nowy karnet</a>
+                {% endif %}
+                {# <a href="#" class="btn"><span class="icomoon-icon-cart-3"></span> Sprzedaż towaru</a> #}
+            </div>
+            {% endif %}
         </div>
     </div>
     <div class="hidden">

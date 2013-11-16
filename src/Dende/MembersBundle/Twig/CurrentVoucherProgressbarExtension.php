@@ -31,10 +31,10 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
         return $this;
     }
 
-    private $markup = '<div class="progress progress-mini progress-danger left tip" oldtitle="%%percentage%%" title="%%start%% - %%end%%" data-hasqtip="true" aria-describedby="qtip-4">
-                <div style="width: %%percentage%%%;" class="bar"></div>
-                </div>
-                <span class="percent">%%days_left%% %%days_word%%</span>';
+    private $markup = '%%start%% - %%end%% (%%amount_left%%/%%amount_total%% %%amount_word%%)
+                                <div class="progress progress-striped">%%days_left%% %%days_word%%
+                                    <div style="width: %%percentage%%%;" class="bar"></div>
+                                </div>';
 
     public function getFilters() {
         return array(
@@ -68,19 +68,40 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
         {
             $daysWord = $params[1];
         }
+        $amountLeft = $voucher->getAmountLeft();
+
+        if ($amountLeft == null)
+        {
+            $amountLeft = 0;
+        }
+
+        $amountTotal = $voucher->getAmount();
+
+        if ($amountTotal == null)
+        {
+            $amountTotal = 0;
+        }
+
+        $amountWord = "wejść";
 
         return str_replace(array(
             "%%percentage%%",
             "%%days_left%%",
             "%%days_word%%",
             "%%start%%",
-            "%%end%%"
+            "%%end%%",
+            "%%amount_left%%",
+            "%%amount_total%%",
+            "%%amount_word%%"
                 ), array(
             $percentage,
             $leftDays,
             $daysWord,
             $startDate->format("d.m"),
-            $endDate->format("d.m")
+            $endDate->format("d.m"),
+            $amountLeft,
+            $amountTotal,
+            $amountWord
                 ), $this->markup);
     }
 

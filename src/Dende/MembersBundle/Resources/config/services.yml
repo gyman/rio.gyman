@@ -21,7 +21,6 @@ services:
         calls:
              - [ setClass, [%member_entity.class%] ]
              - [ setRepository, ["@member_repository"] ]
-             - [ setVoucherRepository, ["@voucher_repository"] ]
 
     dende.twig.age_extension:
         class: Dende\MembersBundle\Twig\AgeExtension

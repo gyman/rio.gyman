@@ -15,7 +15,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="icon span12">
-            <a class="icon32 icomoon-icon-new green pull-right" id="createNewMember" href="{{path("_member_new")}}"></a>
+            <a class="icon32 icomoon-icon-new green pull-right createNewMember" href="{{path("_member_new")}}"></a>
             <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
             <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
         </div>
@@ -47,24 +47,40 @@
                     <tbody>
         {% for member in members %}
                         <tr>
-                            <td>{{ member.name }}</td>
-                            <td> <span class="label">BJJ dorośli</span></td>
-                            
-                            {# <td>{{ member.birthdate|date("d.m.Y") }} ({{ member.birthdate|age }})</td> #}
-                            {# <td>{{ member.phone }}</td> #}
-                            {# <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td> #}
+                            <td>
+                                <div class="clearfix">
+                                    <a class="avatar name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}">
+                                        <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class=""/>
+                                    </a>
+
+                                    <a class="name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><strong>{{ member.name }}</strong></a>
+                                    <div class="action">
+                                        <a class="btn btn-mini editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Profil</a>
+                                    </div>
+                                    <a class="email" href="mailto:{{ member.getEmail() }}">{{ member.getEmail() }}</a>
+                                </div>
+                            </td>
+                            <td>
+                                {% if member.getLastEntry is not null %}
+                                <div class="label">{{ member.getLastEntry().getActivity().getName()}} </div>
+                                <div class="badge badge-info">{{ member.getLastEntry().getEntryDate()|date("d.m.Y H:i") }}</div>
+                                {% endif %}
+                            </td>
                             <td class="voucherColumn">
                                 {{ member|progressbar("dzień","dni")|raw }}
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a>
-                                    <a class="btn addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
+                                    {# <a class="btn editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a> #}
+                                    <a class="btn addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span> Dodaj wejście</a>
+                                    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn newVoucher"><span class="icomoon-icon-clock"></span> Nowy karnet</a>
+
+                                    {#
                                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-align-left"></span> Sprzedaż<span class="caret"></span></a>
                                     <ul class="dropdown-menu pull-right">
                                       <li><a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher"><span class="icomoon-icon-clock"></span> Karnet</a></li>
                                       <li><a href="#"><span class="icomoon-icon-cart-3"></span> Towar</a></li>
-                                    </ul>
+                                    </ul> #}
                                 </div>
                             </td>
                         </tr>
