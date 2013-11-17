@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "03be0756205f3172f22034fb6d3d5e31",
+    "hash": "a832afd27187671be388c07a9aeff334",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -665,6 +665,52 @@
                 "orm"
             ],
             "time": "2013-05-11 07:51:12"
+        },
+        {
+            "name": "hackzilla/barcode-bundle",
+            "version": "v1.0.2",
+            "target-dir": "Hackzilla/BarcodeBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackzilla/BarcodeBundle.git",
+                "reference": "1c3fa793c2304ea1b4de9cb5002cd165f0f88f29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackzilla/BarcodeBundle/zipball/1c3fa793c2304ea1b4de9cb5002cd165f0f88f29",
+                "reference": "1c3fa793c2304ea1b4de9cb5002cd165f0f88f29",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "twig/twig": "to use outputHtml"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Hackzilla\\BarcodeBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Platt",
+                    "email": "github@ofdan.co.uk",
+                    "homepage": "http://www.hackzilla.org",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Folke Ashberg",
+                    "homepage": "http://www.ashberg.de/php-barcode/"
+                }
+            ],
+            "description": "Barcode Generator Bundle",
+            "time": "2013-07-29 20:56:09"
         },
         {
             "name": "incenteev/composer-parameter-handler",
