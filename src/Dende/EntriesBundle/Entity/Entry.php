@@ -38,13 +38,13 @@ class Entry {
 
     /**
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
-     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $activity;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
-     * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $voucher;
 

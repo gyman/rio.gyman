@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title>Karnet</title>
+        <style>
+            @page {
+                size: 400mm 230mm;
+                overflow: hidden;
+            }
+            #voucherTable {
+                border: 2px solid black;
+                border-collapse: collapse;
+                width: 180mm
+            }
+
+            #voucherTable tr {
+                border: 1px solid black;
+
+            }
+            #voucherTable th {
+                text-align: right;
+                vertical-align: top;
+                margin: 5px;
+                padding: 15px;
+            }
+            #voucherTable td {
+                border: 1px solid black;
+                margin: 5px;
+                padding: 15px;
+                text-align: left;
+                padding-left: 40px;
+            }
+
+            ul#entries {
+                list-style: none;
+            }
+            ul#entries li {
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                border: 2px solid black;
+            }
+
+            #barcode {
+                float: right;
+            }
+            body {
+                color : #000000;
+                background : #ffffff;
+                font-family : "Times New Roman", Times, serif;
+                font-size : 12pt;
+            } 
+        </style>
+    </head>
+
+    <body>
+        <table id="voucherTable">
+            <tbody>
+                <tr>
+                    <th><strong>Imię i nazwisko</strong></th>
+                    <td>{{ voucher.getMember().getName() }}</td>
+                    <td rowspan="3"><strong>Wejścia</strong>
+
+                        <ul id="entries">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <img src="{{ path("_voucher_barcode", {code: voucher.barcode})}}" id="barcode"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>Data ważności karnetu </strong></th>
+                    <td>{{ voucher.getStartDate()|date("d.m.Y") }} - {{ voucher.getEndDate()|date("d.m.Y") }}</td>
+                </tr>
+                <tr>
+                    <th><strong>Zajęcia </strong></th>
+                    <td>
+                {% for activity in voucher.getActivities() %}
+                    {{ activity.getName() }}<br />
+                {%endfor%}
+                    </td> 
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -18,7 +18,7 @@ class DefaultController extends Controller {
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function newAction(Member $member) {
+    public function newEntryAction(Member $member) {
         $request = $this->get('request');
 
         $response = new Response(
@@ -36,6 +36,13 @@ class DefaultController extends Controller {
         if ($currentVoucher)
         {
             $entry->setVoucher($currentVoucher);
+            $amount = $currentVoucher->getAmount();
+
+            if ($amount > 0)
+            {
+                $amountLeft = $currentVoucher->getAmountLeft();
+                $currentVoucher->setAmountLeft($amountLeft - 1);
+            }
         }
         else
         {
@@ -49,9 +56,14 @@ class DefaultController extends Controller {
             if ($form->isValid())
             {
                 $member->setLastEntry($entry);
-                
+
                 $this->get('entry_manager')->save($entry);
                 $this->get('member_manager')->save($member);
+                
+                if ($currentVoucher)
+                {
+                    $this->get('voucher_manager')->save($currentVoucher);
+                }
             }
             else
             {

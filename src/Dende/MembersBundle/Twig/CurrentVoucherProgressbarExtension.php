@@ -30,9 +30,11 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
         $this->memberManager = $memberManager;
         return $this;
     }
-
-    private $markup = '%%start%% - %%end%% (%%amount_left%%/%%amount_total%% %%amount_word%%)
-                                <div class="progress progress-striped">%%days_left%% %%days_word%%
+    
+    private $markup_date = '<div class="progress progress-striped">%%start%% - %%end%%
+                                    <div style="width: %%percentage%%%;" class="bar"></div>
+                                </div>';
+    private $markup_entries = '<div class="progress progress-striped">%%amount_used%%/%%amount_total%% %%amount_word%%
                                     <div style="width: %%percentage%%%;" class="bar"></div>
                                 </div>';
 
@@ -56,53 +58,69 @@ class CurrentVoucherProgressBarExtension extends \Twig_Extension {
         $params = func_get_args();
         $daysWord = $params[2];
 
+        $result = "Kod karnetu: <strong>".$voucher->getBarcode()."</strong>";
+
         $startDate = $voucher->getStartDate();
         $endDate = $voucher->getEndDate();
 
-        $totalDays = $startDate->diff($endDate)->days;
-        $leftDays = $endDate->diff(new \DateTime())->days;
-
-        $percentage = intval(100 - ($leftDays / $totalDays * 100));
-
-        if ($leftDays == 1)
+        if ($endDate != null)
         {
-            $daysWord = $params[1];
-        }
-        $amountLeft = $voucher->getAmountLeft();
+            $totalDays = $startDate->diff($endDate)->days;
+            $leftDays = $endDate->diff(new \DateTime())->days;
 
-        if ($amountLeft == null)
-        {
-            $amountLeft = 0;
-        }
+            $percentage = intval(100 - ($leftDays / $totalDays * 100));
 
+            if ($leftDays == 1)
+            {
+                $daysWord = $params[1];
+            }
+
+            $result.=str_replace(array(
+                "%%percentage%%",
+                "%%days_left%%",
+                "%%days_word%%",
+                "%%start%%",
+                "%%end%%",
+                    ), array(
+                $percentage,
+                $leftDays,
+                $daysWord,
+                $startDate->format("d.m"),
+                $endDate->format("d.m"),
+                    ), $this->markup_date);
+        }
         $amountTotal = $voucher->getAmount();
 
-        if ($amountTotal == null)
+        if ($amountTotal !== null)
         {
-            $amountTotal = 0;
+            $amountWord = "wejść";
+            $amountLeft = $voucher->getAmountLeft();
+
+            if ($amountLeft == null)
+            {
+                $amountLeft = 0;
+            }
+
+            $amountUsed = $amountTotal - $amountLeft;
+
+            $percentageAmount = intval(100 - ($amountLeft / $amountTotal * 100));
+
+            $result.=str_replace(array(
+                "%%amount_left%%",
+                "%%amount_total%%",
+                "%%amount_used%%",
+                "%%amount_word%%",
+                "%%percentage%%"
+                    ), array(
+                $amountLeft,
+                $amountTotal,
+                $amountUsed,
+                $amountWord,
+                $percentageAmount
+                    ), $this->markup_entries);
         }
 
-        $amountWord = "wejść";
-
-        return str_replace(array(
-            "%%percentage%%",
-            "%%days_left%%",
-            "%%days_word%%",
-            "%%start%%",
-            "%%end%%",
-            "%%amount_left%%",
-            "%%amount_total%%",
-            "%%amount_word%%"
-                ), array(
-            $percentage,
-            $leftDays,
-            $daysWord,
-            $startDate->format("d.m"),
-            $endDate->format("d.m"),
-            $amountLeft,
-            $amountTotal,
-            $amountWord
-                ), $this->markup);
+        return $result;
     }
 
     public function getName() {

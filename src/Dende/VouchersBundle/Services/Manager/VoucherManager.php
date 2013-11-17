@@ -62,4 +62,50 @@ class VoucherManager extends BaseManager {
         return $result;
     }
 
+    /**
+     * 
+     * @param \Dende\MembersBundle\Entity\Member $member
+     * @return \Dende\VouchersBundle\Entity\Voucher
+     */
+    public function createNewVoucher(Member $member) {
+        $previousVouchersCollection = $member->getVouchers();
+
+        $voucher = new Voucher();
+
+        if ($previousVouchersCollection->count() > 0)
+        {
+            $lastVoucher = $previousVouchersCollection->last();
+            $voucher->setPreviousVoucher($lastVoucher);
+
+            if ($lastVoucher->getEndDate())
+            {
+                $startDate = clone($lastVoucher->getEndDate());
+                $startDate->add(new \DateInterval("P1D"));
+            }
+            else
+            {
+                $startDate = new \DateTime();
+                $lastVoucher->setEndDate(new \DateTime());
+                $this->save($lastVoucher);
+            }
+        }
+        else
+        {
+            $lastVoucher = null;
+            $startDate = new \DateTime();
+        }
+
+        $endDate = clone($startDate);
+        $endDate->add(new \DateInterval("P1M"));
+
+        $voucher->setMember($member);
+        $voucher->setStartDate($startDate);
+        $voucher->setEndDate($endDate);
+        $voucher->setPrice(100);
+        $voucher->setAmount(10);
+        $voucher->setBarcode(uniqid());
+
+        return $voucher;
+    }
+
 }

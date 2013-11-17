@@ -111,13 +111,13 @@ class Member {
 
     /**
      * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
-     * @ORM\JoinColumn(name="last_voucher_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="last_voucher_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $lastVoucher;
 
     /**
      * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
-     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $lastEntry;
 

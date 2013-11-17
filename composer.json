@@ -22,7 +22,8 @@
         "braincrafted/bootstrap-bundle": "dev-master",
         "twbs/bootstrap": "2.3.*",
         "jquery/jquery": "1.9.*",
-        "oneup/uploader-bundle": "1.0.*@dev"
+        "oneup/uploader-bundle": "1.0.*@dev",
+        "hackzilla/barcode-bundle": "*"
     },
     "scripts": {
         "post-install-cmd": [

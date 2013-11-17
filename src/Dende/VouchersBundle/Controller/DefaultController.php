@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Hackzilla\BarcodeBundle\Utility\Barcode;
 
 class DefaultController extends Controller {
 
@@ -70,7 +71,7 @@ class DefaultController extends Controller {
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function newAction(Member $member) {
+    public function newVoucherAction(Member $member) {
         $request = $this->get('request');
 
         $response = new Response(
@@ -80,31 +81,7 @@ class DefaultController extends Controller {
         $activityManager = $this->get("activity_manager");
         $voucherManager = $this->get("voucher_manager");
 
-        $previousVouchersCollection = $member->getVouchers();
-
-        $voucher = new Voucher();
-
-        if ($previousVouchersCollection->count() > 0)
-        {
-            $lastVoucher = $previousVouchersCollection->last();
-            $voucher->setPreviousVoucher($lastVoucher);
-            $startDate = clone($lastVoucher->getEndDate());
-            $startDate->add(new \DateInterval("P1D"));
-        }
-        else
-        {
-            $lastVoucher = null;
-            $startDate = new \DateTime();
-        }
-
-        $endDate = clone($startDate);
-        $endDate->add(new \DateInterval("P1M"));
-
-        $voucher->setMember($member);
-        $voucher->setStartDate($startDate);
-        $voucher->setEndDate($endDate);
-        $voucher->setPrice(100);
-        $voucher->setAmount(10);
+        $voucher = $voucherManager->createNewVoucher($member);
 
         $form = $this->createForm(new VoucherType($activityManager), $voucher);
 
@@ -115,8 +92,13 @@ class DefaultController extends Controller {
             if ($form->isValid())
             {
                 $member->setLastVoucher($voucher);
-                $this->get("member_manager")->save($member);
+                $voucher->setAmountLeft($voucher->getAmount());
                 $voucherManager->save($voucher);
+
+                $this->get("member_manager")->save($member);
+
+                return $this->forward("VouchersBundle:Default:printVoucherButton", array(
+                            "id" => $voucher->getId()));
             }
             else
             {
@@ -125,7 +107,7 @@ class DefaultController extends Controller {
         }
 
         return $response->setContent(
-                        $this->renderView("VouchersBundle:Default:new.html.twig", array(
+                        $this->renderView("VouchersBundle:Default:newVoucher.html.twig", array(
                             'form'    => $form->createView(),
                             'voucher' => $voucher,
                             "member"  => $member
@@ -141,6 +123,39 @@ class DefaultController extends Controller {
     public function deleteAction($id) {
         $voucherManager = $this->get("voucher_manager");
         $voucherManager->setAsDeleted($id);
+        return array();
+    }
+
+    /**
+     * @Route("/{id}/printButton", name="_voucher_print_modal_content")
+     * @Template()
+     */
+    public function printVoucherButtonAction(Voucher $voucher) {
+        return array(
+            "voucher" => $voucher
+        );
+    }
+
+    /**
+     * @Route("/{id}/print", name="_voucher_print")
+     * @Template()
+     */
+    public function printVoucherAction(Voucher $voucher) {
+        return array(
+            "voucher" => $voucher
+        );
+    }
+
+    /**
+     * @Route("/barcode/{code}", name="_voucher_barcode")
+     */
+    public function getBarcodeAction($code) {
+        $barcode = new Barcode($this->container);
+        $barcode->setEncoding("128B");
+        $barcode->setScale(1);
+        $barcode->setHeight(50);
+        echo $barcode->outputImage($code);
+
         return array();
     }
 

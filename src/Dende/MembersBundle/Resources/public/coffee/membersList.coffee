@@ -13,6 +13,13 @@ $ ->
     
   $deleteCheckbox = $("input#deleteUserCheckbox")
   
+  $(document).on "click","a.printVoucherButton", (e) ->
+    e.preventDefault()
+    url = $(e.target).attr "href"
+    newWin = window.open(url, 'printVoucher', 'width=800,height=500')
+    newWin.print()
+    
+  
   $(document).on "click","a.newVoucher", (e) ->
     e.preventDefault()
     $container = $(".modal-body",$voucherModal)
@@ -40,7 +47,7 @@ $ ->
       $entranceModal.modal
         "show" : true
         
-  $(document).on "click","a#createNevVoucher", (e) ->
+  $(document).on "click","a#createNewVoucher", (e) ->
     e.preventDefault()
     $form = $("form#voucherForm",$voucherModal)
     container = $(".modal-body",$voucherModal)
@@ -58,8 +65,8 @@ $ ->
       data: data
       success: (response) ->
         container.html response
-        $voucherModal.modal "hide"
-        window.location.reload()
+#        $voucherModal.modal "hide"
+#        window.location.reload()
       error: (xhr, textStatus, errorThrown) ->
         if xhr.status == 400
           container.html xhr.responseText
@@ -197,6 +204,8 @@ $ ->
         error: (xhr, textStatus, errorThrown) ->
           if xhr.status == 400
             container.html xhr.responseText
+          else if xhr.status == 500
+            alert xhr.responseText
         complete: (msg) ->
           $(".modal-footer",$memberModal).unblock()
         type: $form.attr "method"

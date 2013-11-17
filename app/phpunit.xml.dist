@@ -37,5 +37,7 @@
             </exclude>
         </whitelist>
     </filter>
-
+    <logging>
+        <log type="coverage-clover" target="build/coverage.xml"/>
+    </logging>
 </phpunit>

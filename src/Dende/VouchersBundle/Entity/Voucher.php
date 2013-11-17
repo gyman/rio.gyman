@@ -30,7 +30,7 @@ class Voucher {
 
     /**
      * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
-     * @ORM\JoinColumn(name="previous_voucher_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="previous_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable = true, unique = true)
      */
     private $previousVoucher;
 
@@ -46,8 +46,8 @@ class Voucher {
     /**
      * @var integer
      * 
-     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="vouchers")
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="vouchers",cascade={"persist"})
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $member;
 
@@ -98,7 +98,7 @@ class Voucher {
     /**
      * @var integer
      * 
-     * @ORM\Column(name="barcode", type="integer", nullable = true)
+     * @ORM\Column(name="barcode", type="integer", nullable = true, unique = true)
      */
     private $barcode;
 
@@ -124,7 +124,7 @@ class Voucher {
     }
 
     public function getEndDate() {
-        return $this->endDate;
+        return $this->endDate ? $this->endDate : null;
     }
 
     public function getPrice() {
@@ -150,8 +150,8 @@ class Voucher {
         return $this;
     }
 
-    public function setEndDate(\DateTime $endDate) {
-        $this->endDate = $endDate;
+    public function setEndDate(\DateTime $endDate = null) {
+        $this->endDate = $endDate ? clone $endDate : null;
         return $this;
     }
 

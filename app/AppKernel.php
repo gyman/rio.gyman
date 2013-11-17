@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Dende\ScheduleBundle\ScheduleBundle(),
             new Dende\EntriesBundle\EntriesBundle(),
+            new Hackzilla\BarcodeBundle\HackzillaBarcodeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
