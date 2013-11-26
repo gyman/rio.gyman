@@ -4,7 +4,12 @@
 .voucherColumn .progress {
   margin-bottom: 2px;
   margin-top: 2px;
-  width: 120px;
+  height: 24px;
+  line-height: 24px;
+}
+.voucherColumn .progress .bar {
+  height: inherit;
+  line-height: inherit;
 }
 .icon a {
   text-decoration: none;
@@ -42,9 +47,32 @@ a.editMember.thumbnail {
 #membersList_length {
   margin-left: 15px;
 }
-#membersList .btn-group .btn.dropdown-toggle {
+table#membersList .btn-group .btn.dropdown-toggle {
   padding-bottom: 4px;
 }
-#membersList .btn-group .btn.dropdown-toggle span.caret {
+table#membersList .btn-group .btn.dropdown-toggle span.caret {
   margin-left: 5px;
+}
+table#membersList tbody tr td .avatar {
+  border: 1px solid #E3E2E2;
+  border-radius: 2px;
+  float: left;
+  height: 40px;
+  margin-left: 15px;
+  padding: 2px;
+  width: 40px;
+  overflow: hidden;
+}
+table#membersList tbody tr td .avatar img {
+  height: 60px;
+}
+table#membersList tbody tr td .name {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+table#membersList tbody tr td .email {
+  float: left;
+  margin-left: 10px;
+  margin-top: 2px;
 }
