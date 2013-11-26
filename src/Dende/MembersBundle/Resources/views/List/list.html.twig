@@ -39,7 +39,7 @@
                     <thead>
                         <tr>
                             <th>Imię i nazwisko</th>
-                            <th>Ost. wizyta</th>
+                            {# <th>Ost. wizyta</th> #}
                             <th>Karnet</th>
                             <th>Akcje</th>
                         </tr>
@@ -60,14 +60,16 @@
                                     <a class="email" href="mailto:{{ member.getEmail() }}">{{ member.getEmail() }}</a>
                                 </div>
                             </td>
+                            {#
                             <td>
                                 {% if member.getLastEntry is not null %}
                                 <div class="label">{{ member.getLastEntry().getActivity().getName()}} </div>
                                 <div class="badge badge-info">{{ member.getLastEntry().getEntryDate()|date("d.m.Y H:i") }}</div>
                                 {% endif %}
                             </td>
+                        #}
                             <td class="voucherColumn">
-                                {{ member|progressbar("dzień","dni")|raw }}
+                                {{ render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) }}
                             </td>
                             <td>
                                 <div class="btn-group">

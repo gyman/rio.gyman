@@ -18,7 +18,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * )
  */
 class Member {
-
+    
+// <editor-fold defaultstate="collapsed" desc="class fields">
     /**
      * @var integer
      *
@@ -119,8 +120,9 @@ class Member {
      * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
      * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $lastEntry;
+    protected $lastEntry;// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="setters and getters">
     public function getLastVoucher() {
         return $this->lastVoucher;
     }
@@ -307,7 +309,7 @@ class Member {
     public function setVouchers($vouchers) {
         $this->vouchers = $vouchers;
         return $this;
-    }
+    }// </editor-fold>
 
     public function __construct() {
         $this->vouchers = new ArrayCollection();

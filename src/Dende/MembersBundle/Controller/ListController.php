@@ -134,4 +134,18 @@ class ListController extends Controller {
         return array();
     }
 
+    /**
+     * @Route("/{id}/currentVoucher", name="_member_current_voucher")
+     * @ParamConverter("member", class="MembersBundle:Member")
+     * @Template()
+     */
+    public function currentVoucherAction(Member $member) {
+        
+        $voucher = $this->get("member_manager")->getCurrentVoucher($member);
+        
+        return array(
+            "voucher" => $voucher
+        );
+    }
+    
 }
