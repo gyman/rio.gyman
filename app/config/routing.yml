@@ -21,7 +21,7 @@ default:
 members:
     resource: "@MembersBundle/Controller/"
     type:     annotation
-    prefix:   /member
+    prefix:   /
 
 vouchers:
     resource: "@VouchersBundle/Controller/"

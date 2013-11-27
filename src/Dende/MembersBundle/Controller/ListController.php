@@ -23,7 +23,7 @@ class ListController extends Controller {
     }
 
     /**
-     * @Route("/list", name="_members_list")
+     * @Route("/", name="_members_list")
      * @Template("MembersBundle:List:list.html.twig")
      */
     public function listAction() {

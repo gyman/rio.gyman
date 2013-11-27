@@ -29,8 +29,11 @@
                     </h4>
 
                 </div>
+                
                 <div class="content">
-                    <ul>
+                    Karnet: <div>{{ render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) }}</div>
+                    
+                {#    <ul>
                         <li>
                             <strong>Obecny karnet: </strong>
                         {% if voucher is defined and voucher is not null %}
@@ -46,7 +49,7 @@
                         {{ member.getLastEntry().getActivity().getName()}} ({{ member.getLastEntry().getEntryDate()|date("d.m.Y H:i") }})
                         </li>
                         {% endif %}
-                    </ul>
+                    </ul> #}
                 </div>
 
             </div>

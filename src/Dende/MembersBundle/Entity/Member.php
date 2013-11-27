@@ -91,7 +91,7 @@ class Member {
      *
      * @ORM\Column(name="zipcode", type="string")
      * @Assert\Length(max=6, min=6, minMessage="Kod pocztowy musi zawierać 6 znaków",maxMessage="Kod pocztowy musi zawierać 6 znaków")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Pole nie może być puste!")
      * @Assert\Regex(
      *           pattern= "/\d{2}\-\d{3}/",
      *           match=   true,

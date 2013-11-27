@@ -87,7 +87,7 @@ $ ->
         "show" : true
 
   $memberModal.on "hidden", () ->
-    $deleteCheckbox.attr "checked",false
+    $deleteCheckbox.removeAttr "checked"
     $.uniform.update()
     $("#saveFormInModal").text BUTTON_SAVE_STATE
     $("#saveFormInModal").removeClass BUTTON_DELETE_CLASS
