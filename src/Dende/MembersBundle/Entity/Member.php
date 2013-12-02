@@ -101,7 +101,7 @@ class Member {
     private $zipcode;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="entries")
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member")
      */
     private $entries;
 

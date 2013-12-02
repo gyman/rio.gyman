@@ -31,7 +31,7 @@ class Entry {
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member")
+     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
     private $member;
@@ -43,7 +43,7 @@ class Entry {
     private $activity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
+     * @ORM\ManyToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher", inversedBy="entries")
      * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $voucher;

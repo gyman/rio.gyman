@@ -15,15 +15,16 @@ use Dende\VouchersBundle\Validator\VoucherDateConstraint;
  * @VoucherDateConstraint
  */
 class Voucher {
+// <editor-fold defaultstate="collapsed" desc="fields">
 
     /**
-     * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="activities")
+     * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="vouchers")
      * @ORM\JoinTable(name="vouchers_activities")
      */
     private $activities;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="entries")
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="voucher")
      * @ORM\JoinTable(name="entries")
      */
     private $entries;
@@ -82,9 +83,21 @@ class Voucher {
     /**
      * @var integer
      * 
+     * @ORM\Column(name="barcode", type="string", nullable = true, unique = true, length = 32)
+     */
+    private $barcode;
+
+    /**
+     * @var integer
+     * 
      * @ORM\Column(name="amount_left", type="integer", nullable = true)
      */
     private $amountLeft;
+
+    // </editor-fold>
+
+
+// <editor-fold defaultstate="collapsed" desc="setters and getters">
 
     public function getAmountLeft() {
         return $this->amountLeft;
@@ -94,13 +107,6 @@ class Voucher {
         $this->amountLeft = $amountLeft;
         return $this;
     }
-
-    /**
-     * @var integer
-     * 
-     * @ORM\Column(name="barcode", type="integer", nullable = true, unique = true)
-     */
-    private $barcode;
 
     public function getBarcode() {
         return $this->barcode;
@@ -190,6 +196,7 @@ class Voucher {
     public function setActivities($activities) {
         $this->activities = $activities;
         return $this;
-    }
+    }// </editor-fold>
+
 
 }
