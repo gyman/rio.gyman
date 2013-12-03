@@ -1,17 +1,21 @@
 <?php
 
+// <editor-fold defaultstate="collapsed" desc="namespace related">
+
 namespace Dende\VouchersBundle\Controller;
 
 use Dende\MembersBundle\Entity\Member;
 use Dende\VouchersBundle\Entity\Voucher;
 use Dende\VouchersBundle\Form\VoucherType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Hackzilla\BarcodeBundle\Utility\Barcode;
+use Dende\VouchersBundle\Exception\VoucherManagerException; // </editor-fold>
 
 class DefaultController extends Controller {
 
@@ -27,63 +31,42 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/{id}/edit", name="_voucher_edit")
-     * @Template()
-     */
-    public function editAction($id) {
-        $request = $this->get('request');
-
-        $response = new Response(
-                'Content', 200, array('content-type' => 'text/html')
-        );
-
-        $voucherManager = $this->get("voucher_manager");
-        $voucher = $voucherManager->getById($id);
-
-        $form = $this->createForm(new VoucherType(), $voucher);
-
-        if ($request->getMethod() == 'POST')
-        {
-            $form->handleRequest($request);
-
-            if ($form->isValid())
-            {
-                $voucherManager->persist($voucher);
-                $voucherManager->flush();
-            }
-            else
-            {
-                $response->setStatusCode(400);
-            }
-        }
-
-        return $response->setContent(
-                        $this->renderView("VouchersBundle:List:edit.html.twig", array(
-                            'form'    => $form->createView(),
-                            'voucher' => $voucher
-                                )
-                        )
-        );
-    }
-
-    /**
      * @Route("/new/member/{id}", name="_voucher_new")
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function newVoucherAction(Member $member) {
-        $request = $this->get('request');
-
+    public function newVoucherAction(Request $request, Member $member) {
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
 
-        $activityManager = $this->get("activity_manager");
         $voucherManager = $this->get("voucher_manager");
+        $currentVoucher = $this->get("member_manager")->getCurrentVoucher($member);
+        $decision = $request->get("decision");
 
-        $voucher = $voucherManager->createNewVoucher($member);
+        if ($decision == "confirm")
+        {
+            $voucherManager->closeVoucher($currentVoucher);
+            $currentVoucher = null;
+        }
 
-        $form = $this->createForm(new VoucherType($activityManager), $voucher);
+        if ($currentVoucher)
+        {
+            return $this->forward("VouchersBundle:Default:closeVoucher", array(
+                        "id" => $currentVoucher->getId(),
+            ));
+        }
+
+        if ($decision == "confirm")
+        {
+            $voucher = $voucherManager->createNewVoucherNow($member);
+        }
+        else
+        {
+            $voucher = $voucherManager->createNewVoucherAtEndDate($member);
+        }
+        
+        $form = $this->createForm(new VoucherType($this->get("activity_manager")), $voucher);
 
         if ($request->getMethod() == 'POST')
         {
@@ -113,6 +96,21 @@ class DefaultController extends Controller {
                             "member"  => $member
                                 )
                         )
+        );
+    }
+
+    /**
+     * @Route("/{id}/close", name="_voucher_close")
+     * @ParamConverter("voucher", class="VouchersBundle:Voucher")
+     * @Template()
+     */
+    public function closeVoucherAction(Request $request, Voucher $voucher) {
+
+        $diff = $voucher->getEndDate()->diff(new \DateTime());
+
+        return array(
+            "voucher"  => $voucher,
+            "leftDays" => $diff->days
         );
     }
 

@@ -94,10 +94,24 @@ class Voucher {
      */
     private $amountLeft;
 
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="is_active", type="boolean", nullable = true, options={"default" = 1})
+     */
+    private $isActive;
+
     // </editor-fold>
-
-
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getIsActive() {
+        return $this->isActive;
+    }
+
+    public function setIsActive($isActive) {
+        $this->isActive = $isActive;
+        return $this;
+    }
 
     public function getAmountLeft() {
         return $this->amountLeft;
@@ -196,7 +210,7 @@ class Voucher {
     public function setActivities($activities) {
         $this->activities = $activities;
         return $this;
-    }// </editor-fold>
+    }
 
-
+// </editor-fold>
 }

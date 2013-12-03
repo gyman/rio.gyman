@@ -4,7 +4,14 @@ $ ->
   BUTTON_DELETE_STATE = "Usuń"
   BUTTON_DELETE_CLASS = "btn-danger"
   FOTO_UPLOAD_ERROR = "Błąd po stronie serwera! Spróbuj z innym plikiem graficznym"
-         
+  BLOCK_CONFIG =
+    message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
+    css : 
+      border: 'none', 
+      backgroundColor:'transparent' 
+    overlayCSS:
+      backgroundColor: '#E8EAEB' 
+  
   $("#membersList").dataTable()
     
   $memberModal = $("#editMemberModal")
@@ -53,13 +60,7 @@ $ ->
     container = $(".modal-body",$voucherModal)
     action = $form.attr "action"
     data = $form.serialize()
-    $(".modal-footer",$voucherModal).block
-      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
-      css : 
-        border: 'none', 
-        backgroundColor:'transparent' 
-      overlayCSS:
-        backgroundColor: '#E8EAEB'  
+    $(".modal-footer",$voucherModal).block BLOCK_CONFIG
     $.ajax
       url: action
       data: data
@@ -152,13 +153,7 @@ $ ->
     container = $(".modal-body",$entranceModal)
     action = $form.attr "action"
     data = $form.serialize()
-    $(".modal-footer",$entranceModal).block
-      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
-      css : 
-        border: 'none', 
-        backgroundColor:'transparent' 
-      overlayCSS:
-        backgroundColor: '#E8EAEB'  
+    $(".modal-footer",$entranceModal).block BLOCK_CONFIG
     $.ajax
       url: action
       data: data
@@ -187,13 +182,7 @@ $ ->
       container = $(".modal-body",$memberModal)
       action = $form.attr "action"
       data = $form.serialize()
-      $(".modal-footer",$memberModal).block
-        message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
-        css : 
-          border: 'none', 
-          backgroundColor:'transparent' 
-        overlayCSS:
-          backgroundColor: '#E8EAEB'  
+      $(".modal-footer",$memberModal).block BLOCK_CONFIG
       $.ajax
         url: action
         data: data

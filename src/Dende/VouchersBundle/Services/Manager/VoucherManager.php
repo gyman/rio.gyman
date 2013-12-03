@@ -8,6 +8,7 @@ use Dende\VouchersBundle\Entity\Voucher;
 use Dende\VouchersBundle\Entity\VoucherRepository;
 use Dende\DefaultBundle\Services\Manager\BaseManager;
 use Dende\MembersBundle\Entity\Member;
+use Dende\VouchersBundle\Exception\VoucherManagerException;
 
 /**
  * Manages Vouchers
@@ -64,35 +65,64 @@ class VoucherManager extends BaseManager {
 
     /**
      * 
-     * @param \Dende\MembersBundle\Entity\Member $member
-     * @return \Dende\VouchersBundle\Entity\Voucher
+     * @param Member $member
+     * @return Voucher
      */
-    public function createNewVoucher(Member $member) {
+    public function getLastVoucher(Member $member) {
         $previousVouchersCollection = $member->getVouchers();
-
-        $voucher = new Voucher();
 
         if ($previousVouchersCollection->count() > 0)
         {
-            $lastVoucher = $previousVouchersCollection->last();
+            return $previousVouchersCollection->last();
+        }
+
+        return null;
+    }
+
+    public function closeVoucher(Voucher $voucher) {
+        $voucher->setEndDate(new \DateTime());
+        $voucher->setIsActive(false);
+        $this->save($voucher);
+    }
+
+    /**
+     * 
+     * @param Member $member
+     * @return Voucher
+     */
+    public function createNewVoucherNow(Member $member) {
+        return $this->createNewVoucher($member, false);
+    }
+
+    /**
+     * 
+     * @param Member $member
+     * @return Voucher
+     */
+    public function createNewVoucherAtEndDate(Member $member) {
+        return $this->createNewVoucher($member, true);
+    }
+
+    /**
+     * 
+     * @param \Dende\MembersBundle\Entity\Member $member
+     * @param bool $usePreviousEndDate
+     * @return \Dende\VouchersBundle\Entity\Voucher
+     */
+    public function createNewVoucher(Member $member, $usePreviousEndDate = false) {
+        $lastVoucher = $this->getLastVoucher($member);
+
+        $voucher = new Voucher();
+        $startDate = new \DateTime();
+
+        if ($lastVoucher)
+        {
             $voucher->setPreviousVoucher($lastVoucher);
 
-            if ($lastVoucher->getEndDate())
+            if ($usePreviousEndDate && $lastVoucher->getEndDate())
             {
                 $startDate = clone($lastVoucher->getEndDate());
-                $startDate->add(new \DateInterval("P1D"));
             }
-            else
-            {
-                $startDate = new \DateTime();
-                $lastVoucher->setEndDate(new \DateTime());
-                $this->save($lastVoucher);
-            }
-        }
-        else
-        {
-            $lastVoucher = null;
-            $startDate = new \DateTime();
         }
 
         $endDate = clone($startDate);
@@ -103,6 +133,7 @@ class VoucherManager extends BaseManager {
         $voucher->setEndDate($endDate);
         $voucher->setPrice(100);
         $voucher->setAmount(10);
+        $voucher->setIsActive(true);
         $voucher->setBarcode(uniqid());
 
         return $voucher;
