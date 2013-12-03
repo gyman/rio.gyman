@@ -1,8 +1,11 @@
 <p>{{ voucher.getMember().getName() }} aktualnie posiada już karnet. Oto jego szczegóły: </p>
 
-<span id="ui-closeVoucherData"
-      data-confirm-url="{{ path("_voucher_new", {id: voucher.getMember().getId(), decision: "confirm"}) }}"
-      data-deny-url="{{ path("_voucher_new", {id: voucher.getMember().getId(), decision: "deny" }) }}"></span>
+<span class="hidden" id="ui-closeVoucherData">
+    <div class="modal-footer">
+        <a id="dontCloseVoucher" class="btn pull-right" href="{{ path("_voucher_new", {id: voucher.getMember().getId(), decision: "deny" }) }}">Nie zamykaj</a>
+        <a id="confirmCloseVoucher" class="pull-left" href="{{ path("_voucher_new", {id: voucher.getMember().getId(), decision: "confirm" }) }}">Zamknij i stwórz nowy</a>
+    </div>
+</span>
 
 <div class="box">
     <div class="title">
@@ -23,6 +26,5 @@
 <script>
     $(function() {
         setupNewVoucherModalForClosingPrevious();
-        console.log("invoke method");
     });
 </script>

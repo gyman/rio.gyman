@@ -1,1 +1,13 @@
-<a href="{{ path("_voucher_print",{id : voucher.id}) }}" class="btn printVoucherButton">Wydrukuj karnet</a>
+<p>Karnet sprzedano. Możesz go teraz wydrukować</p>
+
+<span class="hidden" id="ui-printVoucherData">
+    <div class="modal-footer">
+        <a href="{{ path("_voucher_print",{id : voucher.id}) }}" class="btn pull-right" id="printVoucherButton" data-dismiss="modal" aria-hidden="true">Wydrukuj karnet</a>
+    </div>
+</span>
+
+<script>
+    $(function() {
+        setupNewVoucherModalForPrinting();
+    });
+</script>

@@ -20,13 +20,6 @@ $ ->
     
   $deleteCheckbox = $("input#deleteUserCheckbox")
   
-  $(document).on "click","a.printVoucherButton", (e) ->
-    e.preventDefault()
-    url = $(e.target).attr "href"
-    newWin = window.open(url, 'printVoucher', 'width=800,height=500')
-    newWin.print()
-    
-  
   $(document).on "click","a.newVoucher", (e) ->
     e.preventDefault()
     $container = $(".modal-body",$voucherModal)
@@ -35,6 +28,9 @@ $ ->
       $container.html response
       $voucherModal.modal
         "show" : true
+        
+      $voucherModal.on "hidden", () ->
+        window.location.reload()
     
   $(document).on "click","a.createNewMember", (e) ->
     e.preventDefault()
@@ -53,29 +49,6 @@ $ ->
       container.html response
       $entranceModal.modal
         "show" : true
-        
-  $(document).on "click","a#createNewVoucher", (e) ->
-    e.preventDefault()
-    $form = $("form#voucherForm",$voucherModal)
-    container = $(".modal-body",$voucherModal)
-    action = $form.attr "action"
-    data = $form.serialize()
-    $(".modal-footer",$voucherModal).block BLOCK_CONFIG
-    $.ajax
-      url: action
-      data: data
-      success: (response) ->
-        container.html response
-#        $voucherModal.modal "hide"
-#        window.location.reload()
-      error: (xhr, textStatus, errorThrown) ->
-        if xhr.status == 400
-          container.html xhr.responseText
-      complete: (msg) ->
-        $(".modal-footer",$voucherModal).unblock()
-        $voucherModal.trigger "shown"
-      type: $form.attr "method"
-
 
   $(document).on "click","a.editMember", (e) ->
     e.preventDefault()
@@ -108,30 +81,7 @@ $ ->
         alert FOTO_UPLOAD_ERROR
     $("#dende_membersbundle_member_birthdate").datepicker
       dateFormat: "dd.mm.yy"
-          
-  $voucherModal.on "shown", () ->
-    $("#dende_vouchersbundle_voucher_startDate, #dende_vouchersbundle_voucher_endDate").datepicker
-      dateFormat: "dd.mm.yy"
-      
-    activities = []
-    $.each $("#dende_vouchersbundle_voucher_activities option"), (i,item) ->
-      activities.push $(item).val()  
-      
-    $("#dende_vouchersbundle_voucher_activities").val(activities).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "200px"
-    $("#dende_vouchersbundle_voucher_price").spinner
-      min: 0
-      step: 10
-      start: 1000
-      numberFormat: "C"
-    $("#dende_vouchersbundle_voucher_amount").spinner
-      min: 0
-      step: 1
-      start: 1000
-      numberFormat: "C"
-
+        
   $entranceModal.on "shown", () ->
     $("input#dende_entriesbundle_entry_entryDate").datetimepicker
       dateFormat: "dd.mm.yy"

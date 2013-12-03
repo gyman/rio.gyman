@@ -31,11 +31,11 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/new/member/{id}", name="_voucher_new")
+     * @Route("/new/member/{id}/decision/{decision}", name="_voucher_new", defaults={"decision" = null})
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function newVoucherAction(Request $request, Member $member) {
+    public function newVoucherAction(Request $request, Member $member, $decision) {
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
@@ -44,24 +44,24 @@ class DefaultController extends Controller {
         $currentVoucher = $this->get("member_manager")->getCurrentVoucher($member);
         $decision = $request->get("decision");
 
-        if ($decision == "confirm")
+        if ($decision == "confirm" && $currentVoucher)
         {
             $voucherManager->closeVoucher($currentVoucher);
             $currentVoucher = null;
         }
 
-        if ($currentVoucher)
+        if ($currentVoucher && $decision != "deny")
         {
             return $this->forward("VouchersBundle:Default:closeVoucher", array(
                         "id" => $currentVoucher->getId(),
             ));
         }
 
-        if ($decision == "confirm")
+        if ($decision == "confirm" || $decision == null)
         {
             $voucher = $voucherManager->createNewVoucherNow($member);
         }
-        else
+        else if ($decision == "deny")
         {
             $voucher = $voucherManager->createNewVoucherAtEndDate($member);
         }
@@ -93,7 +93,8 @@ class DefaultController extends Controller {
                         $this->renderView("VouchersBundle:Default:newVoucher.html.twig", array(
                             'form'    => $form->createView(),
                             'voucher' => $voucher,
-                            "member"  => $member
+                            "member"  => $member,
+                            "decision" => $decision
                                 )
                         )
         );

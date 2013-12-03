@@ -1,4 +1,10 @@
-<form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_delete", {id : voucher.id})}}{% endif %}">
+<span class="hidden" id="ui-sellVoucherData">
+    <div class="modal-footer">
+        <a href="" class="btn btn-primary pull-right" id="createNewVoucher">Sprzedaj</a>
+    </div>
+</span>
+
+<form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id, "decision" : decision}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_delete", {id : voucher.id})}}{% endif %}">
     <div class="span12">    
         {{ form_row(form.startDate,{"label" : "Data rozpoczęcia", "attr" : {"placeholder" : "wybierz datę"}}) }}
         {{ form_row(form.endDate,{"label" : "Data zakończenia", "attr" : {"placeholder" : "wybierz datę"}}) }}
@@ -10,3 +16,9 @@
     {{ form_rest(form) }}
     </div>    
 </form>
+
+<script>
+    $(function() {
+        setupNewVoucherModalForSelling();
+    });
+</script>
