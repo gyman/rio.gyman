@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class MemberType extends AbstractType {
 
     protected $uploaderHelper;
-    
+
     public function __construct($uploaderHelper) {
         $this->uploaderHelper = $uploaderHelper;
     }
@@ -26,14 +26,20 @@ class MemberType extends AbstractType {
                     "empty_value" => date("d.m.Y"),
                     "format"      => "dd.MM.yyyy"
                 ))
+                ->add('gender', "choice", array(
+                    "choices" => array(
+                        "male"   => "Mężczyzna",
+                        "female" => "Kobieta"
+                    )
+                ))
                 ->add('phone')
                 ->add('email')
                 ->add('notes')
                 ->add('zipcode')
-                ->add('foto','hidden')
+                ->add('foto', 'hidden')
                 ->add('fotoUploader', "file", array(
                     "mapped" => false,
-                    "attr" => array(
+                    "attr"   => array(
                         "data-url" => $this->uploaderHelper->endpoint('gallery')
                     )
                 ))

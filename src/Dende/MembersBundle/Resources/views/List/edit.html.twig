@@ -2,6 +2,7 @@
     <div class="span6">    
         {{ form_row(form.name,{"label" : "Imię i nazwisko"}) }}
         {{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}
+        {{ form_row(form.gender,{"label" : "Płeć"}) }}
         {{ form_row(form.zipcode,{"label" : "Kod pocztowy"}) }}
         {{ form_row(form.phone,{"label" : "Numer telefonu"}) }}
         {{ form_row(form.email,{"label" : "Adres email"}) }}
@@ -29,10 +30,10 @@
                     </h4>
 
                 </div>
-                
+
                 <div class="content">
                     Karnet: <div>{{ render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) }}</div>
-                    
+
                 {#    <ul>
                         <li>
                             <strong>Obecny karnet: </strong>
@@ -68,3 +69,9 @@
     {{ form_rest(form) }}
     </div>
 </form>
+
+<script>
+    $(function(){
+        setupMemberModalForEdit();
+    });
+</script>

@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * )
  */
 class Member {
-    
+
 // <editor-fold defaultstate="collapsed" desc="class fields">
     /**
      * @var integer
@@ -101,6 +101,14 @@ class Member {
     private $zipcode;
 
     /**
+     * @var string $gender
+     *
+     * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'female')")
+     * @Assert\NotBlank(message = "Pole nie może być puste!")
+     */
+    private $gender;
+
+    /**
      * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member")
      */
     private $entries;
@@ -120,8 +128,9 @@ class Member {
      * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
      * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $lastEntry;// </editor-fold>
+    protected $lastEntry;
 
+// </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
     public function getLastVoucher() {
         return $this->lastVoucher;
@@ -302,6 +311,15 @@ class Member {
         return $this;
     }
 
+    public function getGender() {
+        return $this->gender;
+    }
+
+    public function setGender($gender) {
+        $this->gender = $gender;
+        return $this;
+    }
+
     public function getVouchers() {
         return $this->vouchers;
     }
@@ -309,7 +327,9 @@ class Member {
     public function setVouchers($vouchers) {
         $this->vouchers = $vouchers;
         return $this;
-    }// </editor-fold>
+    }
+
+// </editor-fold>
 
     public function __construct() {
         $this->vouchers = new ArrayCollection();

@@ -87,4 +87,3 @@ updateFooter = (modal, source) ->
   $footer.html $('.modal-footer',$dataSpan).html()
   $footer.data "old-content", $oldContent
   return $footer
-

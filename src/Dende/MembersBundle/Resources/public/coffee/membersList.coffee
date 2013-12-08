@@ -1,3 +1,4 @@
+
 $ ->      
   BUTTON_SAVE_STATE = "Zapisz"
   BUTTON_SAVE_CLASS = "btn-primary"
@@ -11,6 +12,21 @@ $ ->
       backgroundColor:'transparent' 
     overlayCSS:
       backgroundColor: '#E8EAEB' 
+
+  window.setupMemberModalForEdit = ->
+    $("#dende_membersbundle_member_fotoUploader").fileupload
+      limitMultiFileUploads: 1
+      done: (e, data) ->
+        response = data.response().result
+        responseJSON = $.parseJSON(response)
+        pathname = responseJSON.pathname
+        filename = responseJSON.filename
+        $("img#memberFoto").attr "src", pathname
+        $("input#dende_membersbundle_member_foto").val filename
+      fail: (e, data) ->
+        alert FOTO_UPLOAD_ERROR
+    $("#dende_membersbundle_member_birthdate").datepicker
+      dateFormat: "dd.mm.yy"
   
   $("#membersList").dataTable()
     
@@ -66,22 +82,7 @@ $ ->
     $("#saveFormInModal").text BUTTON_SAVE_STATE
     $("#saveFormInModal").removeClass BUTTON_DELETE_CLASS
     $("#saveFormInModal").addClass BUTTON_SAVE_CLASS
-
-  $memberModal.on "shown", () ->
-    $("#dende_membersbundle_member_fotoUploader").fileupload
-      limitMultiFileUploads: 1
-      done: (e, data) ->
-        response = data.response().result
-        responseJSON = $.parseJSON(response)
-        pathname = responseJSON.pathname
-        filename = responseJSON.filename
-        $("img#memberFoto").attr "src", pathname
-        $("input#dende_membersbundle_member_foto").val filename
-      fail: (e, data) ->
-        alert FOTO_UPLOAD_ERROR
-    $("#dende_membersbundle_member_birthdate").datepicker
-      dateFormat: "dd.mm.yy"
-        
+       
   $entranceModal.on "shown", () ->
     $("input#dende_entriesbundle_entry_entryDate").datetimepicker
       dateFormat: "dd.mm.yy"

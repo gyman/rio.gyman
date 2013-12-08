@@ -9,7 +9,7 @@
             #voucherTable {
                 border: 2px solid black;
                 border-collapse: collapse;
-                width: 180mm
+                width: 200mm
             }
 
             #voucherTable tr {
@@ -38,6 +38,7 @@
                 width: 50px;
                 height: 50px;
                 border: 2px solid black;
+                margin-bottom: 10px;
             }
 
             #barcode {
@@ -58,25 +59,18 @@
                 <tr>
                     <th><strong>Właściciel</strong></th>
                     <td>{{ voucher.getMember().getName() }}</td>
-                    <td rowspan="3"><strong>Wejścia</strong>
+                    <td rowspan="3" style="width: 55%"><strong>Wejścia</strong>
 
                         <ul id="entries">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
+                            {% for number in 1..10 %}
+                            <li>{{ number }}</li>
+                            {% endfor %}
                         </ul>
                         <img src="{{ path("_voucher_barcode", {code: voucher.barcode})}}" id="barcode"/>
                     </td>
                 </tr>
                 <tr>
-                    <th><strong>Data ważności karnetu </strong></th>
+                    <th><strong>Data ważności</strong></th>
                     <td>{{ voucher.getStartDate()|date("d.m.Y") }} - {{ voucher.getEndDate()|date("d.m.Y") }}</td>
                 </tr>
                 <tr>
