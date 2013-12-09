@@ -2,26 +2,26 @@
 
 namespace Dende\MembersBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Dende\MembersBundle\Entity\Member;
 use Symfony\Component\Yaml\Yaml;
 
-class MembersData implements FixtureInterface {
+class MembersData extends AbstractFixture implements OrderedFixtureInterface {
 
     private $manager;
 
     public function load(ObjectManager $manager) {
-        $value = Yaml::parse(file_get_contents(__DIR__.'/../Yaml/members.yml'));
         $this->manager = $manager;
         
-        foreach($value as $member)
+        $value = Yaml::parse(file_get_contents(__DIR__.'/../Yaml/members.yml'));
+        
+        foreach($value as $key => $params)
         {
-            $this->insertMember($member);
+            $memberObject = $this->insertMember($params);
+            $this->addReference($key, $memberObject);
         }
-
-        // store reference of admin-user for other Fixtures
-//        $this->addReference('admin-user', $user);
     }
 
     public function getOrder() {

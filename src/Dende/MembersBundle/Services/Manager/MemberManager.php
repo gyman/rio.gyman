@@ -9,13 +9,14 @@ use Dende\MembersBundle\Entity\MemberRepository;
 use Dende\DefaultBundle\Services\Manager\BaseManager;
 
 class MemberManager extends BaseManager {
+
     /**
      * Returns array of all members
      * @return array
      */
     public function getMembers() {
         $query = $this->getRepository()->getMembersQuery();
-        $this->setActiveCriteria($query);
+        $this->getRepository()->setActiveCriteria($query);
         return $query->getQuery()->execute();
     }
 
@@ -29,15 +30,8 @@ class MemberManager extends BaseManager {
     }
 
     /**
-     * @param QueryBuilder $query
-     */
-    public function setActiveCriteria(QueryBuilder $query) {
-        $query->andWhere("m.deletedAt is null");
-    }
-
-    /**
      * 
-     * @param \Dende\MembersBundle\Entity\Member $member
+     * @param Member $member
      * @return Voucher|null
      */
     public function getCurrentVoucher(Member $member) {

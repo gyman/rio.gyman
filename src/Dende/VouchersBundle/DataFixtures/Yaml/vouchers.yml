@@ -1,0 +1,48 @@
+Voucher00:
+    activities:			Activity01,Activity02
+    entries:			null
+    previousVoucher:            null
+    member:			Member01
+    startDate:			"2013-11-01"
+    endDate:			"2013-11-30"
+    price:			100
+    amount:			10
+    barcode:			1234567891
+    amountLeft:			10
+    isActive:			true
+Voucher01:
+    activities:			Activity01,Activity02
+    entries:			null
+    previousVoucher:            Voucher00
+    member:			Member01
+    startDate:			now
+    endDate:			+1 month
+    price:			100
+    amount:			10
+    barcode:			1234567892
+    amountLeft:			10
+    isActive:			true
+Voucher02:
+    activities:			Activity01,Activity02
+    entries:			null
+    previousVoucher:            null
+    member:			Member02
+    startDate:			"2013-12-01"
+    endDate:			"2013-12-31"
+    price:			100
+    amount:			10
+    barcode:			1234567893
+    amountLeft:			10
+    isActive:			true
+Voucher03:
+    activities:			Activity01,Activity02
+    entries:			null
+    previousVoucher:            null
+    member:			Member03
+    startDate:			"2013-12-01"
+    endDate:			"2013-12-31"
+    price:			100
+    amount:			10
+    barcode:			1234567894
+    amountLeft:			10
+    isActive:			true

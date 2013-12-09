@@ -3,6 +3,7 @@
 namespace Dende\MembersBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * MemberRepository
@@ -20,4 +21,12 @@ class MemberRepository extends EntityRepository {
         $query = $this->createQueryBuilder("m")->select();
         return $query;
     }
+
+    /**
+     * @param QueryBuilder $query
+     */
+    public function setActiveCriteria(QueryBuilder $query) {
+        $query->andWhere("m.deletedAt is null");
+    }
+
 }
