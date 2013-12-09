@@ -1,0 +1,100 @@
+Member01:
+    birthdate:          "1984-09-27 12:00:00"
+    deletedAt:          null
+    email:              test@test.pl
+    foto:               "nofoto.jpg"
+    gender:             male
+    name:               "Jan Kowalski"
+    notes:              notes
+    phone:              604411089
+    zipcode:            88-888
+Member02:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test2@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             male
+    name:               "Marcin Nowak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member03:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test3@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             female
+    name:               "Beata Kamińska"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member04:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test4@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             female
+    name:               "Joanna Grabiec"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member05:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test2@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             female
+    name:               "Sylwia Grzeszczak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member06:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test2@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             male
+    name:               "Marcin Molenda"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member07:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test2@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             male
+    name:               "Kryspin Kryszak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member08:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test2@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             female
+    name:               "Agata Nowak"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member09:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test2@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             female
+    name:               "Sylwia Majer"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
+Member10:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test2@test2.pl
+    foto:               "nofoto.jpg"
+    gender:             male
+    name:               "Tomasz Marek"
+    notes:              notes
+    phone:              500666666
+    zipcode:            88-888
