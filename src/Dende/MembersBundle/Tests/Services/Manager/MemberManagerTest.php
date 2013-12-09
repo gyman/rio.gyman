@@ -39,6 +39,7 @@ class MemberManagerTest extends WebTestCase {
         $this->loader = new Loader;
         $this->loader->loadFromDirectory(__DIR__.'/../../../DataFixtures/ORM');
         $this->loader->loadFromDirectory(__DIR__.'/../../../../VouchersBundle/DataFixtures/ORM');
+        $this->loader->loadFromDirectory(__DIR__.'/../../../../ScheduleBundle/DataFixtures/ORM');
 
         $purger = new ORMPurger($this->em);
         $executor = new ORMExecutor($this->em, $purger);

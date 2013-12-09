@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Dende\VouchersBundle\Entity\Voucher;
 use Symfony\Component\Yaml\Yaml;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class VouchersData extends AbstractFixture implements OrderedFixtureInterface {
 
@@ -38,6 +39,17 @@ class VouchersData extends AbstractFixture implements OrderedFixtureInterface {
         $voucher->setStartDate(new \DateTime($startDate));
         $voucher->setIsActive($isActive);
         $voucher->setPrice($price);
+        
+        if ($activities)
+        {
+            $activities = explode(",", $activities);
+            $collection = new ArrayCollection();
+            foreach($activities as $activity)
+            {
+                $collection->add($this->getReference($activity));
+            }
+            $voucher->setActivities($collection);
+        }
         
         if ($member)
         {

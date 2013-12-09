@@ -1,5 +1,5 @@
 Voucher00:
-    activities:			Activity01,Activity02
+    activities:			Activity01,Activity02,Activity03
     entries:			null
     previousVoucher:            null
     member:			Member01
@@ -11,7 +11,7 @@ Voucher00:
     amountLeft:			10
     isActive:			true
 Voucher01:
-    activities:			Activity01,Activity02
+    activities:			Activity01,Activity02,Activity03
     entries:			null
     previousVoucher:            Voucher00
     member:			Member01
@@ -35,7 +35,7 @@ Voucher02:
     amountLeft:			10
     isActive:			true
 Voucher03:
-    activities:			Activity01,Activity02
+    activities:			Activity05
     entries:			null
     previousVoucher:            null
     member:			Member03
