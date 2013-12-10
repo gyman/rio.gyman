@@ -42,14 +42,14 @@ class Member {
      * @var \DateTime
      * 
      * @Assert\Date(message="Data musi być w formacie DD.MM.RR")
-     * @ORM\Column(name="birthdate", type="date")
+     * @ORM\Column(name="birthdate", type="date", nullable=true)
      */
     private $birthdate;
 
     /**
      * @var string
      * 
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 
@@ -68,14 +68,14 @@ class Member {
     /**
      * @var string
      *
-     * @ORM\Column(name="notes", type="text")
+     * @ORM\Column(name="notes", type="text", nullable=true)
      */
     private $notes;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="foto", type="string", length=255)
+     * @ORM\Column(name="foto", type="string", length=255, nullable=true)
      */
     private $foto;
 
@@ -103,7 +103,7 @@ class Member {
     /**
      * @var string $gender
      *
-     * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'female')")
+     * @ORM\Column(name="gender", type="string", columnDefinition="enum('male', 'female')", nullable=true)
      * @Assert\NotBlank(message = "Pole nie może być puste!")
      */
     private $gender;
@@ -120,13 +120,13 @@ class Member {
 
     /**
      * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
-     * @ORM\JoinColumn(name="last_voucher_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="last_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected $lastVoucher;
 
     /**
      * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
-     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected $lastEntry;
 

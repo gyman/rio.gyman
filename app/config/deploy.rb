@@ -5,7 +5,7 @@ set :app_path,    "app"
 
 set :repository,  "https://github.com/uirapuru/bjjTimesheet.git"
 set :scm,         :git
-set :branch,      "release/alfa"
+set :branch,      "master"
 
 set :model_manager, "doctrine"
 
