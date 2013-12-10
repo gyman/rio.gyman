@@ -2,7 +2,6 @@
 
 namespace Dende\MembersBundle\Tests\Services\Manager;
 
-use Dende\MembersBundle\Services\Manager\MemberManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
