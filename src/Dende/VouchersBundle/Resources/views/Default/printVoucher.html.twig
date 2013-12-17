@@ -9,7 +9,7 @@
             #voucherTable {
                 border: 2px solid black;
                 border-collapse: collapse;
-                width: 200mm
+                width: 90mm
             }
 
             #voucherTable tr {
@@ -59,15 +59,6 @@
                 <tr>
                     <th><strong>Właściciel</strong></th>
                     <td>{{ voucher.getMember().getName() }}</td>
-                    <td rowspan="3" style="width: 55%"><strong>Wejścia</strong>
-
-                        <ul id="entries">
-                            {% for number in 1..10 %}
-                            <li>{{ number }}</li>
-                            {% endfor %}
-                        </ul>
-                        <img src="{{ path("_voucher_barcode", {code: voucher.barcode})}}" id="barcode"/>
-                    </td>
                 </tr>
                 <tr>
                     <th><strong>Data ważności</strong></th>
@@ -77,8 +68,14 @@
                     <th><strong>Zajęcia </strong></th>
                     <td>
                 {% for activity in voucher.getActivities() %}
-                    {{ activity.getName() }}<br />
+                    {{ activity.getName() }}{% if not loop.revIndex == 0%},&nbsp;{% endif %}
                 {%endfor%}
+
+                    </td> 
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <img src="{{ path("_voucher_barcode", {code: voucher.barcode})}}" id="barcode"/>    
                     </td> 
                 </tr>
             </tbody>

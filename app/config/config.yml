@@ -80,7 +80,15 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
 
+#oneup_uploader:
+#    mappings:
+#        gallery:
+#            frontend: blueimp
+            
 oneup_uploader:
     mappings:
         gallery:
-            frontend: blueimp
+            frontend: custom
+            custom_frontend:
+                class: Dende\MembersBundle\Controller\UploadController
+                name: MyFancyCustomUploader            

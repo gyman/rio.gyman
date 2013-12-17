@@ -1,0 +1,8 @@
+parameters:
+    base_manager.class: Dende\MembersBundle\Services\Manager\BaseManager
+       
+services:
+    base_manager:
+        class:     "%base_manager.class%"
+        calls:
+             - [ setContainer, ["@service_container"] ]

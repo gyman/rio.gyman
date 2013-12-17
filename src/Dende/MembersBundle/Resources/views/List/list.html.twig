@@ -3,11 +3,8 @@
 {% block body_class %}membersList{% endblock %}
 
 {% block body %}
-
 <div class="heading">
-
     <h3>Członkowie klubu</h3>                    
-
 </div><!-- End .heading-->
 
 <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
@@ -15,7 +12,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="icon span12">
-            <a class="icon32 icomoon-icon-new green pull-right createNewMember" href="{{path("_member_new")}}"></a>
+            <a href="{{path("_member_new")}}" class="btn pull-right createNewMember"><span class="icon32 icomoon-icon-new green"></span>Nowa osoba</a>
             <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
             <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
         </div>
@@ -102,33 +99,42 @@
 {% include 'MembersBundle::_voucherModal.html.twig' %}
 {% include 'MembersBundle::_entranceModal.html.twig' %}
 
-{% endblock %}
+{% endblock body %}
+
+{# javascripts #}
 
 {% block javascripts %}
-{{ parent() }}
-{% javascripts
-    '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
-    '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
-    '@MembersBundle/Resources/public/coffee/membersList.coffee'
-    '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
-    '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
-    '@DefaultBundle/Resources/public/js/jquery.fileupload.js'
-    '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
- %}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{% endblock %}
+    {{ parent() }}
 
+    {% javascripts
+        '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
+        '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
+        '@MembersBundle/Resources/public/coffee/members.list.coffee'
+        '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
+        '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
+        '@DefaultBundle/Resources/public/js/jquery.fileupload.js'
+        '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
+     %}
+
+    <script src="{{ asset_url }}"></script>
+    
+    {% endjavascripts %}
+{% endblock javascripts %}
+
+{# CSS #}
+    
 {% block stylesheets %}
-{{ parent() }}
-{% stylesheets filter='cssrewrite'
-    'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
-    'bundles/layout/plugins/forms/select2/select2.css'
-    'bundles/layout/plugins/forms/select2/select2-bootstrap.css'
-    filter="cssrewrite"
-%}
-<link rel="stylesheet" href="{{ asset_url }}" />
-{% endstylesheets %}
-{% endblock %}
-
-
+    {{ parent() }}
+    
+    {% stylesheets filter='cssrewrite'
+        'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
+        'bundles/layout/plugins/forms/select2/select2.css'
+        'bundles/layout/plugins/forms/select2/select2-bootstrap.css'
+        '@MembersBundle/Resources/public/less/members-list.less'
+        filter="cssrewrite"
+    %}
+    
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    
+    {% endstylesheets %}
+{% endblock stylesheets %}

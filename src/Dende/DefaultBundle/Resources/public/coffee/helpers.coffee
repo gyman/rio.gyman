@@ -80,10 +80,21 @@ window.setupNewVoucherModalForPrinting = ->
     
 # updates modal footer
     
-updateFooter = (modal, source) ->
+window.updateFooter = (modal, source) ->
   $footer = $(".modal-footer",$(modal))
   $dataSpan = $(source)
   $oldContent = $footer.html()
   $footer.html $('.modal-footer',$dataSpan).html()
   $footer.data "old-content", $oldContent
+  $dataSpan.html ""
   return $footer
+
+# updates modal header
+    
+window.updateHeader = (modal, source) ->
+  $header = $(".modal-header",$(modal))
+  $dataSpan = $(source)
+  $oldContent = $header.html()
+  $header.html $('.modal-header',$dataSpan).html()
+  $header.data "old-content", $oldContent
+  return $header

@@ -29,7 +29,7 @@ class VoucherType extends AbstractType {
                     "format"      => "dd.MM.yyyy"
                 ))
                 ->add('price')
-//                ->add('amount')
+                ->add('amount')
                 ->add('activities', "entity", array(
                     'class'         => 'ScheduleBundle:Activity',
                     'property' => 'name',

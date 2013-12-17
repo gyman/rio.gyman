@@ -76,9 +76,10 @@ class ListController extends Controller {
 
         return $response->setContent(
                         $this->renderView("MembersBundle:List:edit.html.twig", array(
-                            'form'    => $form->createView(),
-                            'member'  => $member,
-                            'voucher' => $memberManager->getCurrentVoucher($member)
+                            'form'     => $form->createView(),
+                            'member'   => $member,
+                            'voucher'  => $memberManager->getCurrentVoucher($member),
+                            "uploader" => $uploaderHelper,
                                 )
                         )
         );
@@ -115,9 +116,10 @@ class ListController extends Controller {
 
         return $response->setContent(
                         $this->renderView("MembersBundle:List:new.html.twig", array(
-                            'form'   => $form->createView(),
-                            'member' => $member,
-                            'isNew'  => true
+                            'form'     => $form->createView(),
+                            'member'   => $member,
+                            'isNew'    => true,
+                            "uploader" => $uploaderHelper
                                 )
                         )
         );
@@ -140,12 +142,12 @@ class ListController extends Controller {
      * @Template()
      */
     public function currentVoucherAction(Member $member) {
-        
+
         $voucher = $this->get("member_manager")->getCurrentVoucher($member);
-        
+
         return array(
             "voucher" => $voucher
         );
     }
-    
+
 }

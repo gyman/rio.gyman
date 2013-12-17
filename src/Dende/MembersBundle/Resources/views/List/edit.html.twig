@@ -1,5 +1,5 @@
-<form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}{% endif %}">
-    <div class="span6">    
+<form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
+    <div class="span5">    
         {{ form_row(form.name,{"label" : "Imię i nazwisko"}) }}
         {{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}
         {{ form_row(form.gender,{"label" : "Płeć"}) }}
@@ -8,15 +8,28 @@
         {{ form_row(form.email,{"label" : "Adres email"}) }}
         {{ form_row(form.notes,{"label" : "Notatki"}) }}
     </div>
-    <div class="span6">  
+    <div class="span7">  
+
+        <a href="#" id="openWebcam">Kamera</a>
+        
+        <div class="control-group hidden" id="webcamDiv">
+            <label class="control-label">Kamera</label>
+            <div class="controls">
+                <div id="camera" data-upload-url="{{ uploader.endpoint('gallery') }}"></div>
+
+                <a href="#" id="makeFoto" class="btn">Zrób zdjęcie</a>
+            </div>
+        </div>
+
         <div class="control-group">
             <label class="control-label">Zdjęcie</label>
             <div class="controls">
-                <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class="thumbnail" id="memberFoto"/>
+                <img src="/uploads/gallery/{{ member.foto }}" class="thumbnail" id="memberFoto"/>
             </div>
         </div>
 
         {{ form_row(form.fotoUploader) }}
+
 
         <div class="control-group hidden hideForNewMember">
             {% if isNew is not defined %}
@@ -70,8 +83,87 @@
     </div>
 </form>
 
+{% block modal %}
+<div class="hidden" id="ui-editMemberData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% block modalTitle %}Edycja użytkownika{%endblock modalTitle%}</h3>
+    </div>
+    <div class="modal-footer">
+        <form id="deleteUserForm" class="pull-left hidden hideForNewMember"> 
+            <label>
+                <input type="checkbox" id="deleteUserCheckbox" />
+                Usuń użytkownika
+            </label>
+        </form>
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+{% javascripts
+    '@MembersBundle/Resources/public/js/jQueryWebcam/jquery.webcam.js'
+    '@MembersBundle/Resources/public/coffee/members.editMember.class.coffee'
+    '@MembersBundle/Resources/public/coffee/members.modalBootstrap.coffee'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
 <script>
-    $(function(){
+    /*
+
+    $(function() {
         setupMemberModalForEdit();
+
+        var editModal = new EditMemberModal;
+        
+        console.log(editModal);
+        /*
+         $("#camera").webcam({
+         width: 320,
+         height: 240,
+         mode: "callback",
+         swffile: "/bundles/members/js/jQueryWebcam/jscam_canvas_only.swf",
+         onSave: function(data) {
+         var col = data.split(";");
+         var img = image;
+         
+         for (var i = 0; i < 320; i++) {
+         var tmp = parseInt(col[i]);
+         img.data[pos + 0] = (tmp >> 16) & 0xff;
+         img.data[pos + 1] = (tmp >> 8) & 0xff;
+         img.data[pos + 2] = tmp & 0xff;
+         img.data[pos + 3] = 0xff;
+         pos += 4;
+         }
+         
+         if (pos >= 4 * 320 * 240) {
+         ctx.putImageData(img, 0, 0);
+         
+         var formData = new FormData();
+         formData.append("UploadedFile",canvas.toDataURL("image/png"));
+         
+         $.ajax({
+         url: '{{ uploader.endpoint('gallery') }}',
+         type: 'POST',
+         success: function(e) {
+         console.log(e);
+         },
+         data: formData,
+         cache: false,
+         contentType: false,
+         processData: false
+         });
+         pos = 0;
+         }
+         },
+         onCapture: function() {
+         webcam.save();
+         }
+         })
     });
+*/
 </script>
+{% endblock javascript %}
+

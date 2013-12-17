@@ -42,26 +42,25 @@ class Member {
      * @var \DateTime
      * 
      * @Assert\Date(message="Data musi być w formacie DD.MM.RR")
-     * @ORM\Column(name="birthdate", type="date", nullable=true)
+     * @ORM\Column(name="birthdate", type="string", length=64, nullable=true)
      */
     private $birthdate;
 
     /**
      * @var string
      * 
-     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     * @ORM\Column(name="phone", type="string", length=64, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "Pole nie może być puste!")
      * @Assert\Email(
      *     message = "Adres '{{ value }}' nie jest poprawny.",
      *     checkMX = true
      * )
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
@@ -77,7 +76,7 @@ class Member {
      *
      * @ORM\Column(name="foto", type="string", length=255, nullable=true)
      */
-    private $foto;
+    private $foto = "no-profile.gif";
 
     /**
      * @var datetime $deletedAt
@@ -89,9 +88,8 @@ class Member {
     /**
      * @var string $zipcode
      *
-     * @ORM\Column(name="zipcode", type="string")
+     * @ORM\Column(name="zipcode", type="string", nullable=true)
      * @Assert\Length(max=6, min=6, minMessage="Kod pocztowy musi zawierać 6 znaków",maxMessage="Kod pocztowy musi zawierać 6 znaków")
-     * @Assert\NotBlank(message = "Pole nie może być puste!")
      * @Assert\Regex(
      *           pattern= "/\d{2}\-\d{3}/",
      *           match=   true,

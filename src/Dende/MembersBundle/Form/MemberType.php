@@ -5,6 +5,7 @@ namespace Dende\MembersBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Dende\MembersBundle\Form\DataTransformer\DateToStringTransformer;
 
 class MemberType extends AbstractType {
 
@@ -21,11 +22,15 @@ class MemberType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('name')
-                ->add('birthdate', "date", array(
-                    "widget"      => "single_text",
-                    "empty_value" => date("d.m.Y"),
-                    "format"      => "dd.MM.yyyy"
-                ))
+                ->add(
+                        $builder->create(
+                                'birthdate', "date", array(
+                            "widget"      => "single_text",
+                            "empty_value" => date("d.m.Y"),
+                            "format"      => "dd.MM.yyyy"
+                        ))
+                        ->addModelTransformer(new DateToStringTransformer())
+                )
                 ->add('gender', "choice", array(
                     "choices" => array(
                         "male"   => "Mężczyzna",
