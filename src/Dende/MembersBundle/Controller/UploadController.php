@@ -47,7 +47,7 @@ class UploadController extends AbstractController {
 
             $file = uniqid() . ".png";
             $tmp_dir = ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir();
-            $filepath = $tmp_dir . $file;
+            $filepath = rtrim($tmp_dir,DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
 
             file_put_contents($filepath, $webcamFile);
 
