@@ -8,7 +8,7 @@ class root.EditMember
     @initFooter()
     @initWebcam()
     @handleDeleteCheckbox()
-    @handleSaveButton()
+    @initSaveButton()
     
     $("#openWebcam").click (e)->
       $("#webcamDiv").toggleClass("hidden")
@@ -61,11 +61,11 @@ class root.EditMember
         @saveButton.removeClass @BUTTON_DELETE_CLASS
         @saveButton.addClass @BUTTON_SAVE_CLASS
   
-  handleSaveButton: =>
-    $(document).on "click",@saveButton, (e) ->
+  initSaveButton: =>
+    $(@saveButton).off("click.saveButton").on "click.saveButton", (e) ->
       e.preventDefault()
       $form = $("form#memberForm",@modalWindow)
-      if @deleteCheckbox.is ":checked"
+      if @deleteCheckbox? and @deleteCheckbox.is ":checked"
         if confirm "Czy na pewno skasować użytkownika?"
           deleteAction = $form.attr "data-delete-action";
           $.get deleteAction, (e) ->

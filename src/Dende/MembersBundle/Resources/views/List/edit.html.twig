@@ -6,6 +6,7 @@
         {{ form_row(form.zipcode,{"label" : "Kod pocztowy"}) }}
         {{ form_row(form.phone,{"label" : "Numer telefonu"}) }}
         {{ form_row(form.email,{"label" : "Adres email"}) }}
+        {{ form_row(form.belt,{"label" : "Kolor pasa"}) }}
         {{ form_row(form.notes,{"label" : "Notatki"}) }}
     </div>
     <div class="span7">  
@@ -24,7 +25,7 @@
         <div class="control-group">
             <label class="control-label">Zdjęcie</label>
             <div class="controls">
-                <img src="/uploads/gallery/{{ member.foto }}" class="thumbnail" id="memberFoto"/>
+                <img src="{{ member.getFoto() }}" class="thumbnail" id="memberFoto"/>
             </div>
         </div>
 

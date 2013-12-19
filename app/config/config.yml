@@ -92,3 +92,7 @@ oneup_uploader:
             custom_frontend:
                 class: Dende\MembersBundle\Controller\UploadController
                 name: MyFancyCustomUploader            
+                
+default:
+    noImage:                /bundles/members/images/no-profile.gif
+    galleryDir:             /uploads/gallery/

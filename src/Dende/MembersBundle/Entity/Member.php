@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Dende\DefaultBundle\Lib\Globals;
 /**
  * Member
  *
@@ -128,8 +128,25 @@ class Member {
      */
     protected $lastEntry;
 
+    /**
+     * @var string $gender
+     *
+     * @ORM\Column(name="belt", type="string", columnDefinition="enum('white','blue','purple','brown','black')", nullable=true)
+     * @Assert\NotBlank(message = "Pole nie może być puste!")
+     */
+    private $belt;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getBelt() {
+        return $this->belt;
+    }
+
+    public function setBelt($belt) {
+        $this->belt = $belt;
+        return $this;
+    }
+
     public function getLastVoucher() {
         return $this->lastVoucher;
     }
@@ -297,7 +314,7 @@ class Member {
      * @return string 
      */
     public function getFoto() {
-        return $this->foto;
+        return Globals::applyGalleryDir($this->foto);
     }
 
     public function getDeletedAt() {

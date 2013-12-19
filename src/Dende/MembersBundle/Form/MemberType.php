@@ -37,6 +37,15 @@ class MemberType extends AbstractType {
                         "female" => "Kobieta"
                     )
                 ))
+                ->add('belt',"choice",array(
+                    "choices" => array(
+                        "white" => "biały",
+                        "blue" => "niebieski",
+                        "purple" => "purpurowy",
+                        "brown" => "brązowy",
+                        "black" => "czarny"
+                    )
+                 ))
                 ->add('phone')
                 ->add('email')
                 ->add('notes')

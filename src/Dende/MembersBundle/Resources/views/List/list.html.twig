@@ -35,6 +35,7 @@
                 <table cellpadding="0" cellspacing="0" border="0" class="dynamicTable display table table-bordered" width="100%" id="membersList">
                     <thead>
                         <tr>
+                            <th class="beltColor"></th>
                             <th>Imię i nazwisko</th>
                             {# <th>Ost. wizyta</th> #}
                             <th>Karnet</th>
@@ -44,10 +45,11 @@
                     <tbody>
         {% for member in members %}
                         <tr>
+                            <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}"></td>
                             <td>
                                 <div class="clearfix">
                                     <a class="avatar name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}">
-                                        <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class=""/>
+                                        <img src="{{ member.getFoto() }}" class=""/>
                                     </a>
 
                                     <a class="name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><strong>{{ member.name }}</strong></a>
@@ -116,16 +118,16 @@
         '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
      %}
 
-    <script src="{{ asset_url }}"></script>
-    
+<script src="{{ asset_url }}"></script>
+
     {% endjavascripts %}
 {% endblock javascripts %}
 
 {# CSS #}
-    
+
 {% block stylesheets %}
     {{ parent() }}
-    
+
     {% stylesheets filter='cssrewrite'
         'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
         'bundles/layout/plugins/forms/select2/select2.css'
@@ -133,8 +135,8 @@
         '@MembersBundle/Resources/public/less/members-list.less'
         filter="cssrewrite"
     %}
-    
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    
+
+<link rel="stylesheet" href="{{ asset_url }}" />
+
     {% endstylesheets %}
 {% endblock stylesheets %}

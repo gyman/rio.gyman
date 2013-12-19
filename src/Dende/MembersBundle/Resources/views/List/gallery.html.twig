@@ -11,7 +11,7 @@ Galeria osób
     {% for member in members %}
         {% if loop.index0%6 == 0 %}<div class="row-fluid">{% endif %}
         <a href="{{ path("_member_edit",{id : member.id}) }}" class="thumbnail span2 editMember">
-            <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class=""/>
+            <img src="{{ member.getFoto() }}" class=""/>
                 {{ member.name }}
         </a>
         {% if loop.index0%6 == 5 %}</div>{% endif %}

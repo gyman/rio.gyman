@@ -1,36 +1,28 @@
 <?php
 
-namespace Dende\PolmediaBundle\Lib;
+namespace Dende\DefaultBundle\Lib;
 
 class Globals {
 
-    protected static $mainImageDir;
     protected static $galleryDir;
-    protected static $thumbnailDir;
+    protected static $noImage;
 
     // <editor-fold defaultstate="collapsed" desc="setters and getters">
-    public static function getMainImageDir() {
-        return self::$mainImageDir;
-    }
 
     public static function getGalleryDir() {
         return self::$galleryDir;
-    }
-
-    public static function getThumbnailDir() {
-        return self::$thumbnailDir;
-    }
-
-    public static function setMainImageDir($mainImageDir) {
-        self::$mainImageDir = $mainImageDir;
     }
 
     public static function setGalleryDir($galleryDir) {
         self::$galleryDir = $galleryDir;
     }
 
-    public static function setThumbnailDir($thumbnailDir) {
-        self::$thumbnailDir = $thumbnailDir;
+    public static function getNoImage() {
+        return self::$noImage;
+    }
+
+    public static function setNoImage($noImage) {
+        self::$noImage = $noImage;
     }
 
 // </editor-fold>
@@ -40,34 +32,20 @@ class Globals {
      * @param string $string
      * @return string
      */
-    public static function applyMainImageDir($string) {
-        return self::getMainImageDir() . $string;
-    }
-
-    /**
-     * 
-     * @param string $string
-     * @return string
-     */
     public static function applyGalleryDir($string) {
-        return self::getGalleryDir() . $string;
+        if (self::checkIfImageExists($string))
+        {
+            return self::getGalleryDir() . $string;
+        }
+
+        return self::getNoImage();
     }
 
-    /**
-     * 
-     * @param string $string
-     * @return string
-     */
-    public static function applyThumbnailDir($string) {
-        return self::getThumbnailDir() . $string;
+    public static function checkIfImageExists($string) {
+        $file = self::getGalleryDir() . $string;
+        $filepath = __DIR__."/../../../../web/".$file;
+        
+        return file_exists($filepath);
     }
 
-    /**
-     * 
-     * @param type $string
-     * @return type
-     */
-    public static function convertGalleryPathToThumbnailPath($string) {
-        return str_replace(self::getGalleryDir(), self::getThumbnailDir(), $string);
-    }
 }

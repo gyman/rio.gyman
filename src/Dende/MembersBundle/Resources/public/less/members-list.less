@@ -1,3 +1,35 @@
+@beltColumnWidth : 20px;
+
 a.createNewMember {
     margin-top: -10px;
+}
+
+th.beltColor {
+    width: @beltColumnWidth !important
+}
+
+table#membersList {
+    tbody {
+        td.beltColor {
+            width: @beltColumnWidth;
+            background-color: white;
+
+            &.belt-white {
+                background-color: white;
+            }
+
+            &.belt-blue {
+                background-color: blue;
+            }
+            &.belt-purple {
+                background-color: purple;
+            }
+            &.belt-brown {
+                background-color: brown;
+            }
+            &.belt-black {
+                background-color: black;
+            }
+        }
+    }
 }
