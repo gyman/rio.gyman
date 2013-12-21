@@ -46,7 +46,7 @@
         {% for member in members %}
                         <tr>
                             <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}"></td>
-                            <td>
+                            <td class="profileColumn">
                                 <div class="clearfix">
                                     <a class="avatar name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}">
                                         <img src="{{ member.getFoto() }}" class=""/>

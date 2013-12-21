@@ -83,4 +83,50 @@ class FeatureContext extends MinkContext implements KernelAwareInterface {
         throw new ResponseTextException($message, $this->getSession());
     }
 
+    /**
+     * @Then /^I will wait to see element "([^"]*)" with "(?P<text>(?:[^"]|\\")*)" text$/
+     */
+    public function iWillWaitToSeeElementWithText($selector, $text) {
+
+        /** @var Behat\Mink\Element\NodeElement $element */
+        $element = $this->getSession()
+                ->getPage()
+                ->find("css", $selector);
+
+        if ($element)
+        {
+
+            $tick = 250000;
+            $timeout = time() + 5;
+            $text = $this->fixStepArgument($text);
+            $regex = '/' . preg_quote($text, '/') . '/ui';
+
+            while (time() < $timeout) {
+                usleep($tick);
+
+                $actual = preg_replace('/\s+/u', ' ', $element->getText());
+
+                if (preg_match($regex, $actual))
+                {
+                    return;
+                }
+            }
+        }
+
+        $message = sprintf('The element "%s" with text "%s" was not found anywhere in the text of the current page.', $selector, $text);
+        throw new ResponseTextException($message, $this->getSession());
+    }
+
+    /**
+     * @Given /^I wait for (\d+) seconds$/
+     */
+    public function iWaitForSeconds($seconds) {
+
+        for ($a = 0; $a < $seconds; $a++) {
+            sleep(1);
+        }
+
+        return;
+    }
+
 }

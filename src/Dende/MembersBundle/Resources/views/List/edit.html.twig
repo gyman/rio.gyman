@@ -1,3 +1,12 @@
+<div class="row-fluid">
+    <div class="span12">
+        <ul id="fotoMenu" class="inline pull-right">
+            <li><a href="#" id="openWebcam">Kamera</a></li>
+            <li><a href="#" id="openUpload">Dysk</a></li>
+        </ul>
+    </div>
+</div>
+
 <form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
     <div class="span5">    
         {{ form_row(form.name,{"label" : "Imię i nazwisko"}) }}
@@ -11,8 +20,6 @@
     </div>
     <div class="span7">  
 
-        <a href="#" id="openWebcam">Kamera</a>
-        
         <div class="control-group hidden" id="webcamDiv">
             <label class="control-label">Kamera</label>
             <div class="controls">
@@ -22,15 +29,16 @@
             </div>
         </div>
 
-        <div class="control-group">
-            <label class="control-label">Zdjęcie</label>
-            <div class="controls">
-                <img src="{{ member.getFoto() }}" class="thumbnail" id="memberFoto"/>
+        <div id="uploadDiv">
+            <div class="control-group">
+                <label class="control-label">Zdjęcie</label>
+                <div class="controls">
+                    <img src="{{ member.getFoto() }}" class="thumbnail" id="memberFoto"/>
+                </div>
             </div>
-        </div>
 
         {{ form_row(form.fotoUploader) }}
-
+        </div>
 
         <div class="control-group hidden hideForNewMember">
             {% if isNew is not defined %}
@@ -113,58 +121,58 @@
 
 <script>
     /*
-
-    $(function() {
-        setupMemberModalForEdit();
-
-        var editModal = new EditMemberModal;
-        
-        console.log(editModal);
-        /*
-         $("#camera").webcam({
-         width: 320,
-         height: 240,
-         mode: "callback",
-         swffile: "/bundles/members/js/jQueryWebcam/jscam_canvas_only.swf",
-         onSave: function(data) {
-         var col = data.split(";");
-         var img = image;
-         
-         for (var i = 0; i < 320; i++) {
-         var tmp = parseInt(col[i]);
-         img.data[pos + 0] = (tmp >> 16) & 0xff;
-         img.data[pos + 1] = (tmp >> 8) & 0xff;
-         img.data[pos + 2] = tmp & 0xff;
-         img.data[pos + 3] = 0xff;
-         pos += 4;
-         }
-         
-         if (pos >= 4 * 320 * 240) {
-         ctx.putImageData(img, 0, 0);
-         
-         var formData = new FormData();
-         formData.append("UploadedFile",canvas.toDataURL("image/png"));
-         
-         $.ajax({
-         url: '{{ uploader.endpoint('gallery') }}',
-         type: 'POST',
-         success: function(e) {
-         console.log(e);
-         },
-         data: formData,
-         cache: false,
-         contentType: false,
-         processData: false
-         });
-         pos = 0;
-         }
-         },
-         onCapture: function() {
-         webcam.save();
-         }
-         })
-    });
-*/
+     
+     $(function() {
+     setupMemberModalForEdit();
+     
+     var editModal = new EditMemberModal;
+     
+     console.log(editModal);
+     /*
+     $("#camera").webcam({
+     width: 320,
+     height: 240,
+     mode: "callback",
+     swffile: "/bundles/members/js/jQueryWebcam/jscam_canvas_only.swf",
+     onSave: function(data) {
+     var col = data.split(";");
+     var img = image;
+     
+     for (var i = 0; i < 320; i++) {
+     var tmp = parseInt(col[i]);
+     img.data[pos + 0] = (tmp >> 16) & 0xff;
+     img.data[pos + 1] = (tmp >> 8) & 0xff;
+     img.data[pos + 2] = tmp & 0xff;
+     img.data[pos + 3] = 0xff;
+     pos += 4;
+     }
+     
+     if (pos >= 4 * 320 * 240) {
+     ctx.putImageData(img, 0, 0);
+     
+     var formData = new FormData();
+     formData.append("UploadedFile",canvas.toDataURL("image/png"));
+     
+     $.ajax({
+     url: '{{ uploader.endpoint('gallery') }}',
+     type: 'POST',
+     success: function(e) {
+     console.log(e);
+     },
+     data: formData,
+     cache: false,
+     contentType: false,
+     processData: false
+     });
+     pos = 0;
+     }
+     },
+     onCapture: function() {
+     webcam.save();
+     }
+     })
+     });
+     */
 </script>
 {% endblock javascript %}
 

@@ -9,9 +9,16 @@ Scenario: A list contain members
    Then I will wait to see "Edycja użytkownika"
 
 Scenario: Check delete button
-    When I click element "input#deleteUserCheckbox"
-    Then I will wait to see "Usuń"
+    When I click element "#deleteUserCheckbox"
+    Then I will wait to see element "a#saveFormInModal" with "Usuń" text
 
 Scenario: Uncheck delete button
-    When I click element "input#deleteUserCheckbox"
-    Then I will wait to see "Zapisz"
+    When I click element "#deleteUserCheckbox"
+    Then I will wait to see element "a#saveFormInModal" with "Zapisz" text
+
+Scenario: Save edited user
+    When I uncheck "deleteUserCheckbox"
+    And I click element "a#saveFormInModal"
+    And I wait for 5 seconds
+    Then I should be on the homepage
+    

@@ -9,6 +9,8 @@ use Dende\VouchersBundle\Entity\VoucherRepository;
 use Dende\DefaultBundle\Services\Manager\BaseManager;
 use Dende\MembersBundle\Entity\Member;
 use Dende\VouchersBundle\Exception\VoucherManagerException;
+use Exception;
+
 
 /**
  * Manages Vouchers

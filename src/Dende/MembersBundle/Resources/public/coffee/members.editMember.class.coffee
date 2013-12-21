@@ -6,6 +6,7 @@ class root.EditMember
     @initFileUpload()
     @initDatepickers()
     @initWebcam()
+    @initPictureMenu()
     
     @initHeader()
     @initFooter()
@@ -72,49 +73,58 @@ class root.EditMember
         
   handleSaveButton: (e) =>
     e.preventDefault()
-    $form = $("form#memberForm",@modalWindow)
+    @form = $("form#memberForm",@modalWindow)
     if @deleteCheckbox? and @deleteCheckbox.is ":checked" 
       if confirm "Czy na pewno skasować użytkownika?"
-        deleteAction = $form.attr "data-delete-action";
+        deleteAction = @form.attr "data-delete-action";
         $.get deleteAction, @handleDeleteAction
     else
       container = $(".modal-body",@modalWindow)
-      action = $form.attr "action"
-      data = $form.serialize()
+      action = @form.attr "action"
+      data = @form.serialize()
       @lockFooter()
+      @handleSubmitForm action, data, container
 
   handleDeleteAction: (e) =>
     $(@modalWindow).modal "hide"
     window.location.reload() 
         
-  handleSubmitForm: =>
+  handleSubmitForm: (action,data, container) =>
     $.ajax
       url: action
       data: data
       success: (response) ->
-        container.html response
-        $(@modalWindow).modal "hide"
+        # container.html response
+        # $(@modalWindow).modal "hide"
         window.location.reload()
       error: (xhr, textStatus, errorThrown) ->
         if xhr.status == 400
           container.html xhr.responseText
         else if xhr.status == 500
           alert xhr.responseText
-      complete: (msg) ->
-        @unlockFooter()
-      type: $form.attr "method"
+      complete: @unlockFooter
+      type: @form.attr "method"
   
   initMakeFotoButton: =>
     $(@modalWindow)
     .off("click.makeFoto")
     .on "click.makeFoto", @buttonMakeFotoId, (e) ->
       e.preventDefault();
-      webcam.capture()
+      if webcam.capture?
+        webcam.capture()
+      else
+        document.getElementById('XwebcamXobjectX').capture()
 
-  initWebcam: => 
-    $("#openWebcam").click (e)->
-      $("#webcamDiv").toggleClass("hidden")
-      
+  initPictureMenu: =>
+    $("#openWebcam").off("click.switchUpload").on "click.switchUpload", (e)->
+      $("#webcamDiv").removeClass("hidden")
+      $("#uploadDiv").hide()
+     
+    $("#openUpload").off("click.switchUpload").on "click.switchUpload", (e)->
+      $("#uploadDiv").show()
+      $("#webcamDiv").addClass("hidden")
+
+  initWebcam: =>      
     @canvas = document.createElement("canvas")
     @canvas.setAttribute "width", 320
     @canvas.setAttribute "height", 240
@@ -127,7 +137,10 @@ class root.EditMember
       mode: "callback"
       swffile: @swffile
       onCapture: ->
-        webcam.save()
+        if webcam.save?
+          webcam.save()
+        else
+          document.getElementById('XwebcamXobjectX').save()
       onSave: @handleImageSave
 
   handleImageSave: (data) =>
@@ -152,6 +165,8 @@ class root.EditMember
       formData.append "UploadedFile", @canvas.toDataURL()
 
       @sendFormData formData
+      
+      $("#uploadDiv").show()
       $("#webcamDiv").addClass("hidden")
           
   initFileUpload: () =>
@@ -200,8 +215,8 @@ class root.EditMember
     $header.data "old-content", $oldContent
     $header
 
-  lockFooter: ->
+  lockFooter: () =>
     $(".modal-footer",@modalWindow).block @BLOCK_CONFIG
 
-  unlockFooter: ->
+  unlockFooter: () =>
     $(".modal-footer",@modalWindow).unblock()
