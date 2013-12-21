@@ -5,20 +5,21 @@ class root.EditMember
     @initMakeFotoButton()
     @initFileUpload()
     @initDatepickers()
-    @initFooter()
     @initWebcam()
-    @handleDeleteCheckbox()
+    
+    @initHeader()
+    @initFooter()
+    @cleanupModalData()
+    
+    @initDeleteCheckbox()
     @initSaveButton()
     
-    $("#openWebcam").click (e)->
-      $("#webcamDiv").toggleClass("hidden")
-    
-  BUTTON_SAVE_STATE = "Zapisz"
-  BUTTON_SAVE_CLASS = "btn-primary"
-  BUTTON_DELETE_STATE = "Usuń"
-  BUTTON_DELETE_CLASS = "btn-danger"
+  BUTTON_SAVE_STATE: "Zapisz"
+  BUTTON_SAVE_CLASS: "btn-primary"
+  BUTTON_DELETE_STATE: "Usuń"
+  BUTTON_DELETE_CLASS: "btn-danger"
 
-  BLOCK_CONFIG =
+  BLOCK_CONFIG:
     message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
     css : 
       border: 'none', 
@@ -26,7 +27,7 @@ class root.EditMember
     overlayCSS:
       backgroundColor: '#E8EAEB' 
     
-  FOTO_UPLOAD_ERROR = "Błąd po stronie serwera! Spróbuj z innym plikiem graficznym"    
+  FOTO_UPLOAD_ERROR: "Błąd po stronie serwera! Spróbuj z innym plikiem graficznym"    
     
   swffile : "/bundles/members/js/jQueryWebcam/jscam_canvas_only.swf"
   cameraId : "#camera"
@@ -41,76 +42,84 @@ class root.EditMember
   deleteCheckbox: null
   saveButton: null
     
+  cleanupModalData: =>
+    $("#ui-editMemberData").remove()
+    
   initFooter: =>
     @footer = @updateFooter @modalWindow, "#ui-editMemberData"
     @saveButton = $("#saveFormInModal",@footer)
     
-  handleDeleteCheckbox: =>
-    console.log "init delete"
-    @deleteCheckbox = $("input#deleteUserCheckbox",@modalWindow)
-    console.log @deleteCheckbox
+  initHeader: =>
+    @header = @updateHeader @modalWindow, "#ui-editMemberData"
     
-    @deleteCheckbox.change (e) ->
-      e.preventDefault()
-      if @deleteCheckbox.is ":checked"
-        @saveButton.text @BUTTON_DELETE_STATE
-        @saveButton.removeClass @BUTTON_SAVE_CLASS
-        @saveButton.addClass @BUTTON_DELETE_CLASS
-      else
-        @saveButton.text @BUTTON_SAVE_STATE
-        @saveButton.removeClass @BUTTON_DELETE_CLASS
-        @saveButton.addClass @BUTTON_SAVE_CLASS
+  initDeleteCheckbox: =>
+    @deleteCheckbox = $("input#deleteUserCheckbox",@modalWindow)
+    @deleteCheckbox.change @handleDeleteCheckboxChange
+  
+  handleDeleteCheckboxChange: (e) =>
+    e.preventDefault()
+    if @deleteCheckbox.is ":checked"
+      @saveButton.text @BUTTON_DELETE_STATE
+      @saveButton.removeClass @BUTTON_SAVE_CLASS
+      @saveButton.addClass @BUTTON_DELETE_CLASS
+    else
+      @saveButton.text @BUTTON_SAVE_STATE
+      @saveButton.removeClass @BUTTON_DELETE_CLASS
+      @saveButton.addClass @BUTTON_SAVE_CLASS
   
   initSaveButton: =>
-    $(@saveButton).off("click.saveButton").on "click.saveButton", (e) ->
-      e.preventDefault()
-      $form = $("form#memberForm",@modalWindow)
-      if @deleteCheckbox? and @deleteCheckbox.is ":checked"
-        if confirm "Czy na pewno skasować użytkownika?"
-          deleteAction = $form.attr "data-delete-action";
-          $.get deleteAction, (e) ->
-            $(@modalWindow).modal "hide"
-            window.location.reload()
-      else
-        container = $(".modal-body",@modalWindow)
-        action = $form.attr "action"
-        data = $form.serialize()
-        $(".modal-footer",@modalWindow).block @BLOCK_CONFIG
-        $.ajax
-          url: action
-          data: data
-          success: (response) ->
-            container.html response
-            $(@modalWindow).modal "hide"
-            window.location.reload()
-          error: (xhr, textStatus, errorThrown) ->
-            if xhr.status == 400
-              container.html xhr.responseText
-            else if xhr.status == 500
-              alert xhr.responseText
-          complete: (msg) ->
-            $(".modal-footer",@modalWindow).unblock()
-          type: $form.attr "method"
+    $(@saveButton).off("click.saveButton").on "click.saveButton", @handleSaveButton
+        
+  handleSaveButton: (e) =>
+    e.preventDefault()
+    $form = $("form#memberForm",@modalWindow)
+    if @deleteCheckbox? and @deleteCheckbox.is ":checked" 
+      if confirm "Czy na pewno skasować użytkownika?"
+        deleteAction = $form.attr "data-delete-action";
+        $.get deleteAction, @handleDeleteAction
+    else
+      container = $(".modal-body",@modalWindow)
+      action = $form.attr "action"
+      data = $form.serialize()
+      @lockFooter()
+
+  handleDeleteAction: (e) =>
+    $(@modalWindow).modal "hide"
+    window.location.reload() 
+        
+  handleSubmitForm: =>
+    $.ajax
+      url: action
+      data: data
+      success: (response) ->
+        container.html response
+        $(@modalWindow).modal "hide"
+        window.location.reload()
+      error: (xhr, textStatus, errorThrown) ->
+        if xhr.status == 400
+          container.html xhr.responseText
+        else if xhr.status == 500
+          alert xhr.responseText
+      complete: (msg) ->
+        @unlockFooter()
+      type: $form.attr "method"
   
   initMakeFotoButton: =>
     $(@modalWindow)
     .off("click.makeFoto")
     .on "click.makeFoto", @buttonMakeFotoId, (e) ->
       e.preventDefault();
-      console.log "event"
       webcam.capture()
 
   initWebcam: => 
+    $("#openWebcam").click (e)->
+      $("#webcamDiv").toggleClass("hidden")
+      
     @canvas = document.createElement("canvas")
     @canvas.setAttribute "width", 320
     @canvas.setAttribute "height", 240
-    console.log @canvas
-    
     @ctx = @canvas.getContext("2d")
-    console.log @ctx
-    
     @image = @ctx.getImageData(0, 0, 320, 240)
-    console.log @image
     
     $(@cameraId).webcam
       width: 320
@@ -155,12 +164,10 @@ class root.EditMember
         alert @FOTO_UPLOAD_ERROR
 
   sendFormData: (formData) =>
-    console.log "sendformdata"
     $.ajax
       url: $(@cameraId).attr "data-upload-url"
       type: "POST"
-      success: (response,data) =>
-        @handleResponse response
+      success: @handleResponse
       data: formData
       cache: false
       contentType: false
@@ -183,7 +190,6 @@ class root.EditMember
     $oldContent = $footer.html()
     $footer.html $('.modal-footer',$dataSpan).html()
     $footer.data "old-content", $oldContent
-    $dataSpan.html ""
     $footer
 
   updateHeader: (modal, source) ->
@@ -193,3 +199,9 @@ class root.EditMember
     $header.html $('.modal-header',$dataSpan).html()
     $header.data "old-content", $oldContent
     $header
+
+  lockFooter: ->
+    $(".modal-footer",@modalWindow).block @BLOCK_CONFIG
+
+  unlockFooter: ->
+    $(".modal-footer",@modalWindow).unblock()

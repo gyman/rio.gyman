@@ -14,3 +14,6 @@
 /composer.phar
 /netbeans/
 /netbeans/private/
+phantomjsdriver.log
+app/config/behat_local.yml
+nbproject/private/
