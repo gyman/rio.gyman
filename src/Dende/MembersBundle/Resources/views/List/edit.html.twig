@@ -10,7 +10,7 @@
 <form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
     <div class="span5">    
         {{ form_row(form.name,{"label" : "Imię i nazwisko"}) }}
-        {{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}
+        {% block birthday %}{{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}{% endblock birthday %}
         {{ form_row(form.gender,{"label" : "Płeć"}) }}
         {{ form_row(form.zipcode,{"label" : "Kod pocztowy"}) }}
         {{ form_row(form.phone,{"label" : "Numer telefonu"}) }}
@@ -55,7 +55,9 @@
 
                 <div class="content">
                     Karnet: <div>{{ render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) }}</div>
-
+                    {% if member.getCreated().getTimestamp() > 0 %}
+                    Zarejestrowany: <div>{{ member.getCreated()|date("d.m.Y") }}</div>
+                    {% endif %}
                 {#    <ul>
                         <li>
                             <strong>Obecny karnet: </strong>

@@ -1,20 +1,22 @@
 <?php
+
 namespace Dende\MembersBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class DateToStringTransformer implements DataTransformerInterface
-{
+class DateToStringTransformer implements DataTransformerInterface {
 
     /**
      * 
      * @param string $string
-     * @return \DateTime
+     * @return \DateTime | null
      */
-    public function transform($string = "now")
-    {
-        return new \DateTime($string);
+    public function transform($string) {
+        if ($string)
+        {
+            return new \DateTime($string);
+        }
     }
 
     /**
@@ -22,9 +24,11 @@ class DateToStringTransformer implements DataTransformerInterface
      * @param \DateTime $date
      * @return string
      */
-    public function reverseTransform($date)
-    {
-        return $date->format("Y-m-d");
+    public function reverseTransform($date) {
+        if ($date)
+        {
+            return $date->format("Y-m-d");
+        }
     }
-    
+
 }

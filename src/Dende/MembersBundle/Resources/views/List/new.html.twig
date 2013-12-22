@@ -14,3 +14,7 @@
     </div>
 </div>
 {% endblock modal %}
+
+{% block birthday %}
+    {{ form_row(form.birthdate,{"label" : "Data urodzin", "attr": { "value" : null }}) }}
+{% endblock birthday %}

@@ -26,7 +26,7 @@ class MemberType extends AbstractType {
                         $builder->create(
                                 'birthdate', "date", array(
                             "widget"      => "single_text",
-                            "empty_value" => date("d.m.Y"),
+//                            "empty_value" => false,
                             "format"      => "dd.MM.yyyy"
                         ))
                         ->addModelTransformer(new DateToStringTransformer())
