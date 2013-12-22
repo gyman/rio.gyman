@@ -69,8 +69,19 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
-    
+#        auto_mapping: true
+#        mappings:
+#            StofDoctrineExtensionsBundle: ~
+        entity_managers:
+            default:
+                auto_mapping: true
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+                mappings:
+                    StofDoctrineExtensionsBundle: ~
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -96,3 +107,11 @@ oneup_uploader:
 default:
     noImage:                /bundles/members/images/no-profile.gif
     galleryDir:             /uploads/gallery/
+    
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
+            

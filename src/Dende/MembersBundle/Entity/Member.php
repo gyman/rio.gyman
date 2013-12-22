@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Dende\DefaultBundle\Lib\Globals;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * Member
  *
@@ -16,6 +18,7 @@ use Dende\DefaultBundle\Lib\Globals;
  *     fields={"email"},
  *     message="Ten email jest już zarejestrowany"
  * )
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Member {
 
@@ -79,13 +82,6 @@ class Member {
     private $foto = "no-profile.gif";
 
     /**
-     * @var datetime $deletedAt
-     *
-     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
-     */
-    private $deletedAt;
-
-    /**
      * @var string $zipcode
      *
      * @ORM\Column(name="zipcode", type="string", nullable=true)
@@ -136,8 +132,64 @@ class Member {
      */
     private $belt;
 
+    /**
+     * @var string
+     * @Gedmo\Slug(fields={"name"}, updatable=true, separator="-", unique=true)
+     * @ORM\Column(name="name_slug", type="string", nullable=false)
+     */
+    private $nameSlug;
+
+    /**
+     * @var DateTime $created
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var DateTime $modified
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="modified", type="datetime", nullable=false)
+     */
+    private $modified;
+
+    /**
+     * @var Datetime $deletedAt
+     *
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getModified() {
+        return $this->modified;
+    }
+
+    public function setModified(DateTime $modified) {
+        $this->modified = $modified;
+        return $this;
+    }
+
+    public function getNameSlug() {
+        return $this->nameSlug;
+    }
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function setNameSlug($nameSlug) {
+        $this->nameSlug = $nameSlug;
+        return $this;
+    }
+
+    public function setCreated(DateTime $created) {
+        $this->created = $created;
+        return $this;
+    }
+
     public function getBelt() {
         return $this->belt;
     }
