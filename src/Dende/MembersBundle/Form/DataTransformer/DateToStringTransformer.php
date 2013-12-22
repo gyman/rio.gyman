@@ -3,7 +3,6 @@
 namespace Dende\MembersBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use DateTime;
 
 class DateToStringTransformer implements DataTransformerInterface {
