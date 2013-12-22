@@ -4,24 +4,25 @@ namespace Dende\MembersBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use DateTime;
 
 class DateToStringTransformer implements DataTransformerInterface {
 
     /**
      * 
      * @param string $string
-     * @return \DateTime | null
+     * @return DateTime | null
      */
     public function transform($string) {
         if ($string)
         {
-            return new \DateTime($string);
+            return new DateTime($string);
         }
     }
 
     /**
      * 
-     * @param \DateTime $date
+     * @param DateTime $date
      * @return string
      */
     public function reverseTransform($date) {

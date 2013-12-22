@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Dende\DefaultBundle\Lib\Globals;
 use Gedmo\Mapping\Annotation as Gedmo;
+use DateTime;
 
 /**
  * Member
