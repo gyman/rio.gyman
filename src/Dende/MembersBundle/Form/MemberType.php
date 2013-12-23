@@ -25,9 +25,9 @@ class MemberType extends AbstractType {
                 ->add(
                         $builder->create(
                                 'birthdate', "date", array(
-                            "widget"      => "single_text",
+                            "widget" => "single_text",
 //                            "empty_value" => false,
-                            "format"      => "dd.MM.yyyy"
+                            "format" => "dd.MM.yyyy"
                         ))
                         ->addModelTransformer(new DateToStringTransformer())
                 )
@@ -37,15 +37,23 @@ class MemberType extends AbstractType {
                         "female" => "Kobieta"
                     )
                 ))
-                ->add('belt',"choice",array(
+                ->add('belt', "choice", array(
                     "choices" => array(
-                        "white" => "biały",
-                        "blue" => "niebieski",
+                        "white"  => "biały",
+                        "blue"   => "niebieski",
                         "purple" => "purpurowy",
-                        "brown" => "brązowy",
-                        "black" => "czarny"
+                        "brown"  => "brązowy",
+                        "black"  => "czarny"
                     )
-                 ))
+                ))
+                ->add('activities', "entity", array(
+                    'class'         => 'ScheduleBundle:Activity',
+                    'property'      => 'name',
+                    'multiple'      => true,
+                    'query_builder' => function($er) {
+                return $er->createQueryBuilder('a');
+            },
+                ))
                 ->add('phone')
                 ->add('email')
                 ->add('notes')

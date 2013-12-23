@@ -65,7 +65,7 @@ class DefaultController extends Controller {
         {
             $voucher = $voucherManager->createNewVoucherAtEndDate($member);
         }
-        
+
         $form = $this->createForm(new VoucherType($this->get("activity_manager")), $voucher);
 
         if ($request->getMethod() == 'POST')
@@ -91,9 +91,9 @@ class DefaultController extends Controller {
 
         return $response->setContent(
                         $this->renderView("VouchersBundle:Default:newVoucher.html.twig", array(
-                            'form'    => $form->createView(),
-                            'voucher' => $voucher,
-                            "member"  => $member,
+                            'form'     => $form->createView(),
+                            'voucher'  => $voucher,
+                            "member"   => $member,
                             "decision" => $decision
                                 )
                         )
@@ -156,6 +156,26 @@ class DefaultController extends Controller {
         echo $barcode->outputImage($code);
 
         return array();
+    }
+
+    /**
+     * @Template("MembersBundle::_member_voucher.html.twig")
+     */
+    public function voucherInfoInMemberModalAction(Voucher $voucher) {
+        
+        $totalDays = $voucher->getEndDate()->diff($voucher->getStartDate())->days;
+        $leftDays = $voucher->getEndDate()->diff(new \DateTime())->days;
+        $leftEntries = $voucher->getAmountLeft();
+        $usedEntries = $voucher->getAmount() - $voucher->getAmountLeft();
+        
+        return array(
+            "voucher"     => $voucher,
+            "member"     => $voucher->getMember(),
+            "leftDays"    => $leftDays,
+            "totalDays"    => $totalDays,
+            "leftEntries" => $leftEntries,
+            "usedEntries" => $usedEntries
+        );
     }
 
 }

@@ -3,6 +3,9 @@
 namespace Dende\EntriesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Entry
@@ -11,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Dende\EntriesBundle\Entity\EntryRepository")
  */
 class Entry {
+// <editor-fold defaultstate="collapsed" desc="fields">
 
     /**
      * @var integer
@@ -20,13 +24,6 @@ class Entry {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="entry_date", type="datetime")
-     */
-    private $entryDate;
 
     /**
      * @var integer
@@ -47,6 +44,47 @@ class Entry {
      * @ORM\JoinColumn(name="voucher_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $voucher;
+
+    /**
+     * @var string $gender
+     *
+     * @ORM\Column(name="entry_type", type="string", columnDefinition="enum('free', 'voucher', 'paid')", nullable=true)
+     * @Assert\NotBlank(message = "Pole nie może być puste!")
+     */
+    private $entryType;
+
+    /**
+     * @var DateTime $created
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var DateTime $modified
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="modified", type="datetime", nullable=false)
+     */
+    private $modified;
+
+    /**
+     * @var Datetime $deletedAt
+     *
+     * @ORM\Column(name="deleted", type="datetime", nullable=true)
+     */
+    private $deleted;
+
+// </editor-fold>
+// <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getEntryType() {
+        return $this->entryType;
+    }
+
+    public function setEntryType($entryType) {
+        $this->entryType = $entryType;
+        return $this;
+    }
 
     public function getVoucher() {
         return $this->voucher;
@@ -105,4 +143,5 @@ class Entry {
         return $this->entryDate;
     }
 
+// </editor-fold>
 }

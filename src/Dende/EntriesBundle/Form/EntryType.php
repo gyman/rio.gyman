@@ -14,11 +14,6 @@ class EntryType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('entryDate', "datetime", array(
-                    "widget"      => "single_text",
-                    "empty_value" => date("d.m.Y H:i"),
-                    "format"      => "dd.MM.yyyy HH:mm"
-                ))
                 ->add('activity', "entity", array(
                     'class'         => 'ScheduleBundle:Activity',
                     'property'      => 'name',
@@ -27,10 +22,13 @@ class EntryType extends AbstractType {
                 return $er->createQueryBuilder('a');
             },
                 ))
-                ->add('entry_type', 'choice', array(
-                    'choices' => array('free' => 'darmowe', 'voucher' => 'na karnet'),
-                    'data' => "voucher",
-                    "mapped" => false,
+                ->add('entryType', 'choice', array(
+                    'choices'  => array(
+                        'free'    => 'darmowe',
+                        'voucher' => 'na karnet',
+                        'paid'    => "płatne"
+                    ),
+                    'data'     => "voucher",
                     "expanded" => true
                 ))
         ;

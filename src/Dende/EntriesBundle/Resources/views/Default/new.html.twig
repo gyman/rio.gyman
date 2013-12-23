@@ -6,13 +6,10 @@
     {{ form_enctype(form) }}>
 
     <div class="span12">    
-        {{ form_row(form.entryDate,{"label" : "Data i godzina wejścia", "value" : "now"|date("d.m.Y H:i")}) }}
         {{ form_row(form.activity,{"label" : "Zajęcia"}) }}
-        {% if form.entry_type is defined %}
-        {{ form_row(form.entry_type,{"label" : "Rodzaj wejścia"}) }}
-        {% else %}
-        <strong class="error">Uwaga! Osoba nie posiada karnetu, wejście będzie gratis!</strong>
-        {% endif %}
+        
+        {{ form_row(form.entryType,{"label" : "Rodzaj wejścia"}) }}
+        
     </div>
     <div class="hidden">
     {{ form_rest(form) }}

@@ -5,15 +5,16 @@ class root.EditMember
     @initMakeFotoButton()
     @initFileUpload()
     @initDatepickers()
+    @initSelects()
     @initWebcam()
     @initPictureMenu()
-    
     @initHeader()
     @initFooter()
     @cleanupModalData()
-    
+    @initActivities()
     @initDeleteCheckbox()
     @initSaveButton()
+    @initVoucherTab()
     
   BUTTON_SAVE_STATE: "Zapisz"
   BUTTON_SAVE_CLASS: "btn-primary"
@@ -46,6 +47,10 @@ class root.EditMember
   cleanupModalData: =>
     $("#ui-editMemberData").remove()
     
+  initVoucherTab: =>
+    $(".dial").knob 
+      'min':0
+    
   initFooter: =>
     @footer = @updateFooter @modalWindow, "#ui-editMemberData"
     @saveButton = $("#saveFormInModal",@footer)
@@ -56,6 +61,20 @@ class root.EditMember
   initDeleteCheckbox: =>
     @deleteCheckbox = $("input#deleteUserCheckbox",@modalWindow)
     @deleteCheckbox.change @handleDeleteCheckboxChange
+  
+  initSelects: =>
+    $("#dende_membersbundle_member_belt").uniform()
+    $("#dende_membersbundle_member_gender").uniform()
+  
+  initActivities: =>
+    activities = []
+    $.each $("#dende_membersbundle_member_activities option"), (i,item) ->
+      activities.push $(item).val()  
+
+    $("#dende_membersbundle_member_activities").val(activities).select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "200px"
   
   handleDeleteCheckboxChange: (e) =>
     e.preventDefault()
@@ -166,10 +185,11 @@ class root.EditMember
 
       @sendFormData formData
       
-      $("#uploadDiv").show()
-      $("#webcamDiv").addClass("hidden")
+      $("a[href='#filePane']").trigger "click"
           
   initFileUpload: () =>
+    $("#dende_membersbundle_member_fotoUploader").uniform()
+    
     $("#dende_membersbundle_member_fotoUploader",$(@modalWindow)).fileupload
       limitMultiFileUploads: 1
       done: (e, data) =>

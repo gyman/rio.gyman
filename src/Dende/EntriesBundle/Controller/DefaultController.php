@@ -18,7 +18,7 @@ class DefaultController extends Controller {
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function newEntryAction(Member $member) {
+    public function newAction(Member $member) {
         $request = $this->get('request');
 
         $response = new Response(
@@ -26,28 +26,21 @@ class DefaultController extends Controller {
         );
 
         $entry = new Entry();
+        $entry->setMember($member);
 
         $form = $this->createForm(new EntryType(), $entry);
 
-        $currentVoucher = $this->get('member_manager')->getCurrentVoucher($member);
+//        $currentVoucher = $this->get('member_manager')->getCurrentVoucher($member);
 
-        $entry->setMember($member);
 
-        if ($currentVoucher)
-        {
-            $entry->setVoucher($currentVoucher);
-            $amount = $currentVoucher->getAmount();
-
-            if ($amount > 0)
-            {
-                $amountLeft = $currentVoucher->getAmountLeft();
-                $currentVoucher->setAmountLeft($amountLeft - 1);
-            }
-        }
-        else
-        {
-            $form->remove("entry_type");
-        }
+//        if ($currentVoucher)
+//        {
+//            $entry->setVoucher($currentVoucher);
+//       }
+//        else
+//        {
+//            $form->remove("entry_type");
+//        }
 
         if ($request->getMethod() == 'POST')
         {
@@ -55,15 +48,15 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
-                $member->setLastEntry($entry);
+//                $member->setLastEntry($entry);
 
                 $this->get('entry_manager')->save($entry);
-                $this->get('member_manager')->save($member);
+//                $this->get('member_manager')->save($member);
                 
-                if ($currentVoucher)
-                {
-                    $this->get('voucher_manager')->save($currentVoucher);
-                }
+//                if ($currentVoucher)
+//                {
+//                    $this->get('voucher_manager')->save($currentVoucher);
+//                }
             }
             else
             {
@@ -74,7 +67,7 @@ class DefaultController extends Controller {
         return array(
             "form"    => $form->createView(),
             "member"  => $member,
-            "voucher" => $currentVoucher
+//            "voucher" => $currentVoucher
         );
     }
 

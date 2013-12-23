@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Dende\MembersBundle\Services\Manager\MemberManager;
 
 class ListController extends Controller {
 
@@ -53,6 +54,8 @@ class ListController extends Controller {
                 'Content', 200, array('content-type' => 'text/html')
         );
 
+        /** @var MemberManager Description*/
+        
         $memberManager = $this->get("member_manager");
 
         $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
@@ -73,12 +76,14 @@ class ListController extends Controller {
                 $response->setStatusCode(400);
             }
         }
+        
+        $voucher = $memberManager->getCurrentVoucher($member);
 
         return $response->setContent(
                         $this->renderView("MembersBundle:List:edit.html.twig", array(
                             'form'     => $form->createView(),
                             'member'   => $member,
-                            'voucher'  => $memberManager->getCurrentVoucher($member),
+                            'voucher'  => $voucher,
                             "uploader" => $uploaderHelper,
                                 )
                         )

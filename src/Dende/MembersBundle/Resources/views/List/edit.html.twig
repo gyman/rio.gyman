@@ -1,92 +1,57 @@
-<div class="row-fluid">
-    <div class="span12">
-        <ul id="fotoMenu" class="inline pull-right">
-            <li><a href="#" id="openWebcam">Kamera</a></li>
-            <li><a href="#" id="openUpload">Dysk</a></li>
-        </ul>
-    </div>
-</div>
-
 <form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
-    <div class="span5">    
-        {{ form_row(form.name,{"label" : "Imię i nazwisko"}) }}
-        {% block birthday %}{{ form_row(form.birthdate,{"label" : "Data urodzin"}) }}{% endblock birthday %}
-        {{ form_row(form.gender,{"label" : "Płeć"}) }}
-        {{ form_row(form.zipcode,{"label" : "Kod pocztowy"}) }}
-        {{ form_row(form.phone,{"label" : "Numer telefonu"}) }}
-        {{ form_row(form.email,{"label" : "Adres email"}) }}
-        {{ form_row(form.belt,{"label" : "Kolor pasa"}) }}
-        {{ form_row(form.notes,{"label" : "Notatki"}) }}
+
+    <div class="span5">
+        {% include 'MembersBundle::_member_picture.html.twig' with {'form' : form, 'member' : member} %}
     </div>
-    <div class="span7">  
 
-        <div class="control-group hidden" id="webcamDiv">
-            <label class="control-label">Kamera</label>
-            <div class="controls">
-                <div id="camera" data-upload-url="{{ uploader.endpoint('gallery') }}"></div>
+    <div class="span7">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#detailsPane">
+                    <span class="icon16 icomoon-icon-home-6 "></span>
+                    Szczegóły
+                </a>
+            </li>
+            {% if voucher is defined and voucher is not null %}
+            <li>
+                <a data-toggle="tab" href="#voucherPane">
+                    <span class="icon16 icomoon-icon-equalizer-2"></span>
+                    Karnet
+                </a>
+            </li>
+            {% endif %}
+        {#
+            <li>
+                <a data-toggle="tab" href="#entriesPane">
+                    <span class="icon16 icomoon-icon-calendar-2"></span>
+                    Obecności
+                </a>
+            </li>
+            #}
+            <li>
+                <a data-toggle="tab" href="#additionalsPane">
+                    <span class="icon16 icomoon-icon-fire"></span>
+                    Dodatkowe
+                </a>
+            </li>
+        </ul>
 
-                <a href="#" id="makeFoto" class="btn">Zrób zdjęcie</a>
+        <div class="tab-content">
+            <div id="detailsPane" class="tab-pane fade in active">
+                {% include 'MembersBundle::_member_details.html.twig' with {'form' : form} %}
             </div>
-        </div>
-
-        <div id="uploadDiv">
-            <div class="control-group">
-                <label class="control-label">Zdjęcie</label>
-                <div class="controls">
-                    <img src="{{ member.getFoto() }}" class="thumbnail" id="memberFoto"/>
-                </div>
-            </div>
-
-        {{ form_row(form.fotoUploader) }}
-        </div>
-
-        <div class="control-group hidden hideForNewMember">
-            {% if isNew is not defined %}
-            <div class="box">
-
-                <div class="title">
-
-                    <h4>
-                        <span class="icon16 icomoon-icon-equalizer-2"></span>
-                        <span>Informacje</span>
-                    </h4>
-
-                </div>
-
-                <div class="content">
-                    Karnet: <div>{{ render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) }}</div>
-                    {% if member.getCreated().getTimestamp() > 0 %}
-                    Zarejestrowany: <div>{{ member.getCreated()|date("d.m.Y") }}</div>
-                    {% endif %}
-                {#    <ul>
-                        <li>
-                            <strong>Obecny karnet: </strong>
-                        {% if voucher is defined and voucher is not null %}
-                            <div style="text-align: center">
-                            {{ member|progressbar("dzień","dni")|raw }}
-                            </div>
-                        {% else %}
-                            brak
-                        {% endif %}
-                        </li>
-                        {% if member.getLastEntry is not null %}
-                        <li><strong>Ostatnie wejście: </strong>
-                        {{ member.getLastEntry().getActivity().getName()}} ({{ member.getLastEntry().getEntryDate()|date("d.m.Y H:i") }})
-                        </li>
-                        {% endif %}
-                    </ul> #}
-                </div>
-
-            </div>
-            <div class="btn-group">
-                {# <a class="btn addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span> Dodaj wejście</a> #}
-
-                {% if voucher is defined and voucher is null %}
-                <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn newVoucher"><span class="icomoon-icon-clock"></span> Nowy karnet</a>
-                {% endif %}
-                {# <a href="#" class="btn"><span class="icomoon-icon-cart-3"></span> Sprzedaż towaru</a> #}
+            {% if voucher is defined and voucher is not null %}
+            <div class="tab-pane fade in" id="voucherPane">
+                 {{ render(controller('VouchersBundle:Default:voucherInfoInMemberModal', { 'voucher': voucher })) }}
+                {# % include 'MembersBundle::_member_voucher.html.twig' % #}
             </div>
             {% endif %}
+            <div class="tab-pane fade in" id="entriesPane">
+                {% include 'MembersBundle::_member_entries.html.twig' %}
+            </div>
+            <div class="tab-pane fade in" id="additionalsPane">
+                {% include 'MembersBundle::_member_additional.html.twig' with {'form' : form} %}
+            </div>
         </div>
     </div>
     <div class="hidden">
@@ -114,67 +79,12 @@
 
 {% block javascript %}
 {% javascripts
+    '@LayoutBundle/Resources/public/js/libs/jquery.knob.js'
     '@MembersBundle/Resources/public/js/jQueryWebcam/jquery.webcam.js'
     '@MembersBundle/Resources/public/coffee/members.editMember.class.coffee'
     '@MembersBundle/Resources/public/coffee/members.modalBootstrap.coffee'
 %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
-
-<script>
-    /*
-     
-     $(function() {
-     setupMemberModalForEdit();
-     
-     var editModal = new EditMemberModal;
-     
-     console.log(editModal);
-     /*
-     $("#camera").webcam({
-     width: 320,
-     height: 240,
-     mode: "callback",
-     swffile: "/bundles/members/js/jQueryWebcam/jscam_canvas_only.swf",
-     onSave: function(data) {
-     var col = data.split(";");
-     var img = image;
-     
-     for (var i = 0; i < 320; i++) {
-     var tmp = parseInt(col[i]);
-     img.data[pos + 0] = (tmp >> 16) & 0xff;
-     img.data[pos + 1] = (tmp >> 8) & 0xff;
-     img.data[pos + 2] = tmp & 0xff;
-     img.data[pos + 3] = 0xff;
-     pos += 4;
-     }
-     
-     if (pos >= 4 * 320 * 240) {
-     ctx.putImageData(img, 0, 0);
-     
-     var formData = new FormData();
-     formData.append("UploadedFile",canvas.toDataURL("image/png"));
-     
-     $.ajax({
-     url: '{{ uploader.endpoint('gallery') }}',
-     type: 'POST',
-     success: function(e) {
-     console.log(e);
-     },
-     data: formData,
-     cache: false,
-     contentType: false,
-     processData: false
-     });
-     pos = 0;
-     }
-     },
-     onCapture: function() {
-     webcam.save();
-     }
-     })
-     });
-     */
-</script>
 {% endblock javascript %}
 
