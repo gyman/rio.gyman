@@ -19,7 +19,7 @@ div#editMemberModal.modal {
   margin-left: -500px;
 }
 div#editMemberModal.modal img#memberFoto {
-  max-width: 200px;
+  max-width: 320px;
   max-height: 240px;
 }
 div#editMemberModal.modal .modal-body {
