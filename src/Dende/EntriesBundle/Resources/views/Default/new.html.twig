@@ -1,3 +1,11 @@
+{% if voucher is null %}
+<div class="alert alert-error">
+    <strong>Uwaga!</strong>
+    Uczestnik nie posiada wykupionego karnetu!
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+</div>
+{% endif %}
+
 <form
     id="entranceForm"
     class="form-horizontal row-fluid"
@@ -5,11 +13,48 @@
     method="{% block method %}post{% endblock method %}"
     {{ form_enctype(form) }}>
 
+    <ul class="nav nav-tabs" id="uploadAvatar">
+        {% if voucher is not null %}
+        <li class="active">
+            <a data-toggle="tab" href="#voucherPane">
+                <span class="icon16 icomoon-icon-database"></span>
+                Karnet
+            </a>
+        </li>
+        {% endif %}
+        <li{% if voucher is null %} class="active"{% endif %}>
+            <a data-toggle="tab" href="#paidPane">
+                <span class="icon16 brocco-icon-cart"></span>
+                Płatne
+            </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#multisportPane">
+                    <span class="icon16 brocco-icon-credit-card"></span>
+                    Multisport
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#freePane">
+                    <span class="icon16 brocco-icon-gift"></span>
+                    Darmowe
+                </a>
+            </li>
+    </ul>
+
+    <div class="tab-content">
+        {% if voucher is not null %}
+        <div id="voucherPane" class="tab-pane fade in active"></div>
+        {% endif %}
+        <div id="freePane" class="tab-pane fade in"></div>
+        <div id="paidPane" class="tab-pane fade in"></div>
+        <div id="multisportPane" class="tab-pane fade in"></div>
+    </div>
+
+    {{ form_row(form.activity,{"label" : "Zajęcia"}) }}
+
     <div class="span12">    
-        {{ form_row(form.activity,{"label" : "Zajęcia"}) }}
-        
-        {{ form_row(form.entryType,{"label" : "Rodzaj wejścia"}) }}
-        
+
     </div>
     <div class="hidden">
     {{ form_rest(form) }}

@@ -30,7 +30,7 @@ class DefaultController extends Controller {
 
         $form = $this->createForm(new EntryType(), $entry);
 
-//        $currentVoucher = $this->get('member_manager')->getCurrentVoucher($member);
+        $currentVoucher = $this->get('member_manager')->getCurrentVoucher($member);
 
 
 //        if ($currentVoucher)
@@ -67,7 +67,7 @@ class DefaultController extends Controller {
         return array(
             "form"    => $form->createView(),
             "member"  => $member,
-//            "voucher" => $currentVoucher
+            "voucher" => $currentVoucher
         );
     }
 

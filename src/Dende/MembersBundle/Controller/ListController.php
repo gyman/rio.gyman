@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Dende\MembersBundle\Services\Manager\MemberManager;
+use Dende\MembersBundle\Form\MemberListFilterType;
 
 class ListController extends Controller {
 
@@ -35,6 +36,40 @@ class ListController extends Controller {
     }
 
     /**
+     * 
+     * TODO: action for filter
+     * 
+    public function filterListAction() {
+        $form = $this->createForm(new MemberFilterListType($uploaderHelper), $member);
+
+        if ($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+//                $memberManager->persist($member);
+//                $memberManager->flush();
+            }
+            else
+            {
+                $response->setStatusCode(400);
+            }
+        }
+
+        return $response->setContent(
+            $this->renderView("MembersBundle:List:edit.html.twig", array(
+                'form'     => $form->createView(),
+                'member'   => $member,
+                'voucher'  => $voucher,
+                "uploader" => $uploaderHelper,
+                    )
+            )
+        );
+    }
+     **/
+
+    /**
      * @Route("/gallery", name="_members_gallery")
      * @Template("MembersBundle:List:gallery.html.twig")
      */
@@ -54,8 +89,7 @@ class ListController extends Controller {
                 'Content', 200, array('content-type' => 'text/html')
         );
 
-        /** @var MemberManager Description*/
-        
+        /** @var MemberManager Description */
         $memberManager = $this->get("member_manager");
 
         $uploaderHelper = $this->container->get('oneup_uploader.templating.uploader_helper');
@@ -76,7 +110,7 @@ class ListController extends Controller {
                 $response->setStatusCode(400);
             }
         }
-        
+
         $voucher = $memberManager->getCurrentVoucher($member);
 
         return $response->setContent(

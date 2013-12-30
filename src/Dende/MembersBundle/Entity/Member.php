@@ -161,23 +161,8 @@ class Member {
      */
     private $deletedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="members")
-     * @ORM\JoinTable(name="members_activities")
-     */
-    private $activities;
-
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
-
-    public function getActivities() {
-        return $this->activities;
-    }
-
-    public function setActivities($activities) {
-        $this->activities = $activities;
-        return $this;
-    }
 
     public function getModified() {
         return $this->modified;

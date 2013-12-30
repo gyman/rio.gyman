@@ -5,9 +5,7 @@ set :app_path,    "app"
 
 set :repository,  "https://github.com/uirapuru/bjjTimesheet.git"
 set :scm,         :git
-set :branch, fetch(:branch, "master")
-
-set :env, fetch(:env, "dev")
+set :branch,      "master"
 
 set :model_manager, "doctrine"
 
@@ -32,3 +30,12 @@ set :symfony_env_prod,    "dev"
 
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
+
+namespace :deploy do
+  desc "building assetic"
+  task :assetic_dump, :roles => :app do
+    run "cd #{latest_release} && #{php_bin} app/console assetic:dump"
+  end
+end
+
+after 'deploy:update_code', 'deploy:assetic_dump'

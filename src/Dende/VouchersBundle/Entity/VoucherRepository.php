@@ -5,6 +5,7 @@ namespace Dende\VouchersBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Dende\MembersBundle\Entity\Member;
 use Doctrine\ORM\QueryBuilder;
+use DateTime;
 
 class VoucherRepository extends EntityRepository {
 
@@ -44,6 +45,20 @@ class VoucherRepository extends EntityRepository {
         $query->andWhere("v.endDate >= :moment");
         $query->setParameters(array(
             "moment" => $date,
+            "member" => $member
+        ));
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
+
+    public function getCurrentVouchers(Member $member) {
+        $query = $this->getVouchersQuery();
+        $query->where("v.member = :member");
+        $query->andWhere("v.startDate is null OR v.startDate < :moment");
+        $query->andWhere("v.endDate is null OR v.endDate > :moment");      
+        $query->andWhere("v.amountLeft > 0 OR v.amountLeft is null");
+        $query->setParameters(array(
+            "moment" => new DateTime(),
             "member" => $member
         ));
 

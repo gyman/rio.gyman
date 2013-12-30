@@ -19,11 +19,6 @@ class Activity {
     private $vouchers;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Dende\MembersBundle\Entity\Member" , mappedBy="activities")
-     */
-    private $members;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")

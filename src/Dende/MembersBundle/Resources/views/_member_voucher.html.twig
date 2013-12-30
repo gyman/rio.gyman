@@ -2,10 +2,10 @@
     <div class="row-fluid">
         <div class="span6">
             <div class="page-header">
-                <h4>Wykorzystane dni <span class="badge badge-important">z {{ totalDays }}</span></h4>
+                <h4>Wykorzystane dni <span class="badge badge-important header-badge">z {{ totalDays }}</span></h4>
             </div>
             <input type="text" class="dial"
-                   value="{{ leftDays }}"
+                   value="{{ pastDays }}"
                    data-width="200"
                    data-angleOffset="-125"
                    data-angleArc="250"
@@ -17,7 +17,7 @@
         </div>
         <div class="span6">
             <div class="page-header">
-                <h4>Wykorzystane wejścia <span class="badge badge-important">z {{ voucher.getAmount() }}</span></h4>
+                <h4>Wykorzystane wejścia <span class="badge badge-important header-badge">z {{ voucher.getAmount() }}</span></h4>
             </div>
             <input type="text" value="{{ usedEntries }}" class="dial"
                    data-linecap="round"

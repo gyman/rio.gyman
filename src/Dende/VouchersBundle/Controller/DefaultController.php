@@ -162,17 +162,19 @@ class DefaultController extends Controller {
      * @Template("MembersBundle::_member_voucher.html.twig")
      */
     public function voucherInfoInMemberModalAction(Voucher $voucher) {
-        
+
         $totalDays = $voucher->getEndDate()->diff($voucher->getStartDate())->days;
         $leftDays = $voucher->getEndDate()->diff(new \DateTime())->days;
+        $pastDays = $voucher->getStartDate()->diff(new \DateTime())->days;
         $leftEntries = $voucher->getAmountLeft();
         $usedEntries = $voucher->getAmount() - $voucher->getAmountLeft();
-        
+
         return array(
             "voucher"     => $voucher,
-            "member"     => $voucher->getMember(),
+            "member"      => $voucher->getMember(),
             "leftDays"    => $leftDays,
-            "totalDays"    => $totalDays,
+            "totalDays"   => $totalDays,
+            "pastDays"    => $pastDays,
             "leftEntries" => $leftEntries,
             "usedEntries" => $usedEntries
         );

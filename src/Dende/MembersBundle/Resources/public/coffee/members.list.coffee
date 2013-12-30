@@ -42,5 +42,5 @@ $ ->
       $voucherModal.modal
         "show" : true
         
-      $voucherModal.on "hidden", () ->
-        window.location.reload()        
+#      $voucherModal.on "hidden", () ->
+#        window.location.reload()        

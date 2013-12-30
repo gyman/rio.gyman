@@ -22,6 +22,12 @@
                     <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
                     <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
                 </div>
+                
+                {# TODO unlock for filter
+                <button id="filterModalButton" data-target="#filterModal" role="button" data-toggle="modal" class="btn btn-link pull-left">
+                    <span class="icon16 icomoon-icon-cog-2"></span><span class="caret"></span>
+                </button>
+                #}
                 <h4>
                     <span>{% block membersTitle %}Lista osób{% endblock membersTitle %}</span>
                 </h4>
@@ -41,7 +47,23 @@
                     <tbody>
         {% for member in members %}
                         <tr>
-                            <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}"></td>
+                            <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}">
+                            {# TODO: funny and ugly, gtfo with this :D #}
+                                <span class="hidden">
+                                {% if member.getBelt() == 'blue' %}
+                                2
+                                {% elseif member.getBelt() == 'purple' %}
+                                3
+                                {% elseif member.getBelt() == 'brown' %}
+                                4
+                                {% elseif member.getBelt() == 'black' %}
+                                5
+                                {% else %}
+                                1
+                                {% endif %}
+                                </span>
+                                
+                            </td>
                             <td class="profileColumn">
                                 <div class="clearfix">
                                     <a class="avatar name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}">
@@ -93,6 +115,7 @@
 
 </div><!-- End .row-fluid -->
 
+{% include 'MembersBundle::_filterModal.html.twig' %}
 {% include 'MembersBundle::_memberModal.html.twig' %}
 {% include 'MembersBundle::_voucherModal.html.twig' %}
 {% include 'MembersBundle::_entranceModal.html.twig' %}

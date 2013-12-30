@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Dende\MembersBundle\Form\DataTransformer\DateToStringTransformer;
+use Dende\MembersBundle\Entity\Member;
+use Dende\VouchersBundle\Entity\Voucher;
 
 class MemberType extends AbstractType {
 
@@ -46,13 +48,11 @@ class MemberType extends AbstractType {
                         "black"  => "czarny"
                     )
                 ))
-                ->add('activities', "entity", array(
-                    'class'         => 'ScheduleBundle:Activity',
-                    'property'      => 'name',
-                    'multiple'      => true,
-                    'query_builder' => function($er) {
-                return $er->createQueryBuilder('a');
-            },
+                ->add('activities', "choice", array(
+                    'multiple' => true,
+                    'choices'  => $this->getActivitiesFromOptions($options),
+                    "mapped"   => false,
+                    "disabled" => true
                 ))
                 ->add('phone')
                 ->add('email')
@@ -82,6 +82,40 @@ class MemberType extends AbstractType {
      */
     public function getName() {
         return 'dende_membersbundle_member';
+    }
+
+    private function getActivitiesFromOptions($options) {
+        $activities = array();
+
+        if ($options["data"] instanceof Member)
+        {
+            /** @var Member */
+            $member = $options["data"];
+            
+            /** @var Doctrine\ORM\PersistentCollection $vouchers */
+            $vouchersCollection = $member->getVouchers();
+
+            if ($vouchersCollection->count() > 0)
+            {
+                /** @var Dende\VouchersBundle\Entity\Voucher $lastVoucher */
+                $voucher = $vouchersCollection->last();
+
+                if ($voucher instanceof Voucher)
+                {
+                    /** @var Doctrine\ORM\PersistentCollection $activitiesCollection */
+                    $activitiesCollection = $voucher->getActivities();
+
+                    if ($activitiesCollection->count() > 0)
+                    {
+                        foreach ($activitiesCollection as $activity) {
+                            $activities[$activity->getId()] = $activity->getName();
+                        }
+                    }
+                }
+            }
+        }
+
+        return $activities;
     }
 
 }
