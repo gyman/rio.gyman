@@ -80,6 +80,8 @@ class DefaultController extends Controller {
 
                 $this->get("member_manager")->save($member);
 
+                $request->getSession()->getFlashBag()->add('notice', 'Dodano nowy karnet!');
+                
                 return $this->forward("VouchersBundle:Default:printVoucherButton", array(
                             "id" => $voucher->getId()));
             }

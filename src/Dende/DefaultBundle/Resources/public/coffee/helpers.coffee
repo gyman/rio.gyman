@@ -76,6 +76,7 @@ window.setupNewVoucherModalForPrinting = ->
       e.preventDefault()
       url = $(e.target).attr "href"
       newWin = window.open(url, 'printVoucher', 'width=800,height=500')
+      window.location.reload()
       newWin.print()
     
 # updates modal footer

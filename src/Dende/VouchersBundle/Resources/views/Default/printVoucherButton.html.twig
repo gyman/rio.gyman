@@ -9,5 +9,14 @@
 <script>
     $(function() {
         setupNewVoucherModalForPrinting();
+
+        $.pnotify({
+            title: 'Uwaga',
+            text: 'Nowy karnet został sprzedany!',
+            icon: false,
+            opacity: 0.95,
+            sticker: false,
+            history: false
+        });
     });
 </script>

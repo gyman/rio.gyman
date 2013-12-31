@@ -40,6 +40,7 @@
             'bundles/layout/css/supr-theme/jquery.ui.spinner.css'
             'bundles/layout/css/supr-theme/jquery.ui.theme.css'
             'bundles/layout/css/supr-theme/jquery.ui.tooltip.css'
+            'bundles/layout/css/supr-theme/jquery.pnotify.default.css'
             'bundles/layout/css/main.css'
             'bundles/layout/css/custom.css'
             'bundles/layout/css/ie8.css'
@@ -101,8 +102,6 @@
                 '@LayoutBundle/Resources/public/js/libs/modernizr.js'
                 '@LayoutBundle/Resources/public/js/jquery.blockUI.js'
                 '@LayoutBundle/Resources/public/js/libs/jquery.knob.js'
-                '@LayoutBundle/Resources/public/plugins/charts/sparkline/jquery.sparkline.min.js'
-                '@LayoutBundle/Resources/public/plugins/charts/knob/jquery.knob.js'
                 '@LayoutBundle/Resources/public/plugins/misc/fullcalendar/fullcalendar.min.js'
                 '@LayoutBundle/Resources/public/plugins/misc/qtip/jquery.qtip.min.js'
                 '@LayoutBundle/Resources/public/plugins/misc/totop/jquery.ui.totop.min.js'
@@ -110,13 +109,28 @@
                 '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-1.8.22.custom.min.js'
                 '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-sliderAccess.js'
                 '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-timepicker-addon.js'
+                '@LayoutBundle/Resources/public/js/libs/jquery.pnotify.min.js'
                 '@LayoutBundle/Resources/public/js/main.js'
-                '@LayoutBundle/Resources/public/js/dashboard.js'
                 '@DefaultBundle/Resources/public/coffee/helpers.coffee'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
-
         {% endjavascripts %}
+
+        {% if app.session.flashbag.has('notice') %}
+        <script>
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+        $.pnotify({
+		    title: 'Uwaga!',
+		    text: '{{ flashMessage|e('js') }}',
+		    icon: false,
+		    opacity: 0.95,
+		    sticker: false,
+		    history: false
+        });
+        {% endfor %}
+        </script>
+        {% endif %}
+        
         {% endblock javascripts %}
 
     </body>

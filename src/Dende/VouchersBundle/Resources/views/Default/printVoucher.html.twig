@@ -61,14 +61,14 @@
                     <td>{{ voucher.getMember().getName() }}</td>
                 </tr>
                 <tr>
-                    <th><strong>Data ważności</strong></th>
+                    <th><strong>Okres</strong></th>
                     <td>{{ voucher.getStartDate()|date("d.m.Y") }} - {{ voucher.getEndDate()|date("d.m.Y") }}</td>
                 </tr>
                 <tr>
                     <th><strong>Zajęcia </strong></th>
                     <td>
                 {% for activity in voucher.getActivities() %}
-                    {{ activity.getName() }}{% if not loop.revIndex == 0%},&nbsp;{% endif %}
+                    {{ activity.getName() }},&nbsp;
                 {%endfor%}
 
                     </td> 
