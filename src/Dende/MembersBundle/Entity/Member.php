@@ -104,26 +104,15 @@ class Member {
     private $gender;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member")
-     */
-    private $entries;
-
-    /**
      * @ORM\OneToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher", mappedBy="member")
      */
     protected $vouchers;
 
     /**
      * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
-     * @ORM\JoinColumn(name="last_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\JoinColumn(name="current_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
-    protected $lastVoucher;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
-     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     */
-    protected $lastEntry;
+    protected $currentVoucher;
 
     /**
      * @var string $gender
@@ -197,33 +186,6 @@ class Member {
 
     public function setBelt($belt) {
         $this->belt = $belt;
-        return $this;
-    }
-
-    public function getLastVoucher() {
-        return $this->lastVoucher;
-    }
-
-    public function getLastEntry() {
-        return $this->lastEntry;
-    }
-
-    public function setLastVoucher($lastVoucher) {
-        $this->lastVoucher = $lastVoucher;
-        return $this;
-    }
-
-    public function setLastEntry($lastEntry) {
-        $this->lastEntry = $lastEntry;
-        return $this;
-    }
-
-    public function getEntries() {
-        return $this->entries;
-    }
-
-    public function setEntries($entries) {
-        $this->entries = $entries;
         return $this;
     }
 
@@ -394,6 +356,15 @@ class Member {
 
     public function setVouchers($vouchers) {
         $this->vouchers = $vouchers;
+        return $this;
+    }
+
+    public function getCurrentVoucher() {
+        return $this->currentVoucher;
+    }
+
+    public function setCurrentVoucher($currentVoucher) {
+        $this->currentVoucher = $currentVoucher;
         return $this;
     }
 

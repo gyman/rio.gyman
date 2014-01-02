@@ -1,5 +1,5 @@
 Voucher00:
-    activities:			Activity01,Activity02,Activity03
+    activities:			bjjAdvanced,bjjIntermediate,bjjBegginers
     entries:			null
     previousVoucher:            null
     member:			Member01
@@ -11,7 +11,7 @@ Voucher00:
     amountLeft:			10
     isActive:			true
 Voucher01:
-    activities:			Activity01,Activity02,Activity03
+    activities:			bjjAdvanced,bjjIntermediate,bjjBegginers
     entries:			null
     previousVoucher:            Voucher00
     member:			Member01
@@ -23,7 +23,7 @@ Voucher01:
     amountLeft:			10
     isActive:			true
 Voucher02:
-    activities:			Activity01,Activity02
+    activities:			bjjAdvanced,bjjIntermediate
     entries:			null
     previousVoucher:            null
     member:			Member02
@@ -35,7 +35,7 @@ Voucher02:
     amountLeft:			10
     isActive:			true
 Voucher03:
-    activities:			Activity05
+    activities:			nogiAdvanced
     entries:			null
     previousVoucher:            null
     member:			Member03
@@ -44,5 +44,17 @@ Voucher03:
     price:			100
     amount:			10
     barcode:			1234567894
+    amountLeft:			10
+    isActive:			true
+Voucher04:
+    activities:			nogiAdvanced,bjjMorning
+    entries:			null
+    previousVoucher:            null
+    member:			Member01
+    startDate:			"2014-01-01"
+    endDate:			"2014-12-31"
+    price:			100
+    amount:			10
+    barcode:			1234567895
     amountLeft:			10
     isActive:			true

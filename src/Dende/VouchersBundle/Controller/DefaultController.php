@@ -74,11 +74,8 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
-                $member->setLastVoucher($voucher);
                 $voucher->setAmountLeft($voucher->getAmount());
                 $voucherManager->save($voucher);
-
-                $this->get("member_manager")->save($member);
 
                 $request->getSession()->getFlashBag()->add('notice', 'Dodano nowy karnet!');
                 

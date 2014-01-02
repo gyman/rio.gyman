@@ -1,9 +1,11 @@
 parameters:
     base_manager.class: Dende\DefaultBundle\Services\Manager\BaseManager
     activity_entity.class: Dende\ScheduleBundle\Entity\Activity
+    activity_repository.class: Dende\ScheduleBundle\Entity\ActivityRepository
     activity_manager.class: Dende\ScheduleBundle\Services\Manager\ActivityManager
     event_entity.class: Dende\ScheduleBundle\Entity\Event
     event_manager.class: Dende\ScheduleBundle\Services\Manager\EventManager
+    event_repository.class: Dende\ScheduleBundle\Entity\EventRepository
 
 services:
     base_manager:
@@ -20,3 +22,15 @@ services:
         parent:         base_manager
         calls:
              - [ setClass, [%event_entity.class%] ]
+             
+    event_repository:
+        class:              %event_repository.class%
+        factory_service:    doctrine
+        factory_method:     getRepository
+        arguments:          [ %event_entity.class% ]
+             
+    activity_repository:
+        class:              %activity_repository.class%
+        factory_service:    doctrine
+        factory_method:     getRepository
+        arguments:          [ %activity_entity.class% ]

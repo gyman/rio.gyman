@@ -2,19 +2,19 @@
 
 namespace Dende\EntriesBundle\Controller;
 
+use Dende\MembersBundle\Entity\Member;
+use Dende\EntriesBundle\Form\EntryType;
+use Dende\EntriesBundle\Entity\Entry;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
-use Dende\MembersBundle\Entity\Member;
-use Dende\EntriesBundle\Form\EntryType;
-use Dende\EntriesBundle\Entity\Entry;
 
 class DefaultController extends Controller {
 
     /**
-     * @Route("/entrance/{id}/new", name="_entrance_add")
+     * @Route("/entrance/new/member/{id}", name="_entrance_add")
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
@@ -26,21 +26,16 @@ class DefaultController extends Controller {
         );
 
         $entry = new Entry();
-        $entry->setMember($member);
+//        $currentVoucher = $this->get('member_manager')->getCurrentVoucher($member);
+        $currentVoucher = $member->getCurrentVoucher();
 
-        $form = $this->createForm(new EntryType(), $entry);
-
-        $currentVoucher = $this->get('member_manager')->getCurrentVoucher($member);
-
-
-//        if ($currentVoucher)
-//        {
-//            $entry->setVoucher($currentVoucher);
-//       }
-//        else
-//        {
-//            $form->remove("entry_type");
-//        }
+        if ($currentVoucher)
+        {
+            $entry->setVoucher($currentVoucher);
+        }
+        
+        $entryType = new EntryType($this->get("event_repository"), $this->get("activity_repository"));
+        $form = $this->createForm($entryType, $entry);
 
         if ($request->getMethod() == 'POST')
         {
@@ -48,15 +43,12 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
-//                $member->setLastEntry($entry);
-
-                $this->get('entry_manager')->save($entry);
-//                $this->get('member_manager')->save($member);
+                if($form["entryType"]->getData() != "voucher")
+                {
+                    $entry->setVoucher(null);
+                }
                 
-//                if ($currentVoucher)
-//                {
-//                    $this->get('voucher_manager')->save($currentVoucher);
-//                }
+                $this->get('entry_manager')->save($entry);
             }
             else
             {
@@ -65,9 +57,10 @@ class DefaultController extends Controller {
         }
 
         return array(
-            "form"    => $form->createView(),
-            "member"  => $member,
-            "voucher" => $currentVoucher
+            "form"          => $form->createView(),
+            "member"        => $member,
+            "voucher"       => $currentVoucher,
+            "currentEvents" => $this->getDoctrine()->getRepository("ScheduleBundle:Event")->getCurrentEvents()
         );
     }
 

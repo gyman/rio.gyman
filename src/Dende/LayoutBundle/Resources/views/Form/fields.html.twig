@@ -50,6 +50,27 @@
 
 {% block textarea_widget %}
 {% spaceless %}
-    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+<textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
 {% endspaceless %}
 {% endblock textarea_widget %}
+
+{% block choice_widget %}
+{% spaceless %}
+    {% if expanded %}
+        {{ block('choice_widget_expanded') }}
+    {% else %}
+        {{ block('choice_widget_collapsed') }}
+    {% endif %}
+{% endspaceless %}
+{% endblock choice_widget %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    {% for i,child in form %}
+    <div>
+        {{ form_widget(child) }}
+        {{ choices[i].label }}
+    </div>
+    {% endfor %}
+{% endspaceless %}
+{% endblock choice_widget_expanded %}

@@ -3,6 +3,8 @@
 namespace Dende\ScheduleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Dende\ScheduleBundle\Entity\Activity;
 
 /**
  * Event
@@ -22,29 +24,28 @@ class Event
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="activity_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
+     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $activityId;
+    private $activity;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="day_of_week", type="integer")
+     * @ORM\Column(name="day_of_week", type="string", columnDefinition="enum('monday','tuesday','wednesday','thursday','friday','saturday','sunday')", nullable=true)
      */
     private $dayOfWeek;
 
     /**
      * @var string
-     *
+     * @Assert\Regex("/\d\d:\d\d/")
      * @ORM\Column(name="start_hour", type="string", length=255)
      */
     private $startHour;
 
     /**
      * @var string
-     *
+     * @Assert\Regex("/\d\d:\d\d/")
      * @ORM\Column(name="end_hour", type="string", length=255)
      */
     private $endHour;
@@ -61,32 +62,32 @@ class Event
     }
 
     /**
-     * Set activityId
+     * Set activity
      *
-     * @param integer $activityId
+     * @param Activity $activity
      * @return Event
      */
-    public function setActivityId($activityId)
+    public function setActivity(Activity $activity)
     {
-        $this->activityId = $activityId;
+        $this->activity = $activity;
     
         return $this;
     }
 
     /**
-     * Get activityId
+     * Get activity
      *
      * @return integer 
      */
-    public function getActivityId()
+    public function getActivity()
     {
-        return $this->activityId;
+        return $this->activity;
     }
 
     /**
      * Set dayOfWeek
      *
-     * @param integer $dayOfWeek
+     * @param string $dayOfWeek
      * @return Event
      */
     public function setDayOfWeek($dayOfWeek)
@@ -99,7 +100,7 @@ class Event
     /**
      * Get dayOfWeek
      *
-     * @return integer 
+     * @return string
      */
     public function getDayOfWeek()
     {

@@ -184,7 +184,8 @@ class ListController extends Controller {
      */
     public function currentVoucherAction(Member $member) {
 
-        $voucher = $this->get("member_manager")->getCurrentVoucher($member);
+//        $voucher = $this->get("member_manager")->getCurrentVoucher($member);
+        $voucher = $member->getCurrentVoucher();
 
         return array(
             "voucher" => $voucher

@@ -32,8 +32,7 @@ class MembersData extends AbstractFixture implements OrderedFixtureInterface {
         extract($params);
 
         $member = new Member();
-        $member->setBirthdate(new \DateTime($birthdate));
-        $member->setDeletedAt($deletedAt);
+        $member->setBirthdate($birthdate);
         $member->setEmail($email);
         $member->setFoto($foto);
         $member->setGender($gender);

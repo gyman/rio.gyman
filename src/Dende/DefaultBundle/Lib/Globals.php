@@ -45,7 +45,7 @@ class Globals {
         $file = self::getGalleryDir() . $string;
         $filepath = __DIR__."/../../../../web/".$file;
         
-        return file_exists($filepath);
+        return is_file($filepath) && file_exists($filepath);
     }
 
 }

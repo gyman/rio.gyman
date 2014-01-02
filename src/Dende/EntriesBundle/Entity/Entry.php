@@ -6,10 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Dende\EntriesBundle\Validator as Validate;
 
 /**
  * Entry
- *
+ * @Assert\Callback(methods={
+ *     { "Dende\EntriesBundle\Validator\LeftAmountValidator", "isAmountLeft"}
+ * })
  * @ORM\Table("entries")
  * @ORM\Entity(repositoryClass="Dende\EntriesBundle\Entity\EntryRepository")
  */
@@ -24,14 +27,6 @@ class Entry {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
-     */
-    private $member;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
@@ -104,15 +99,6 @@ class Entry {
         return $this;
     }
 
-    public function getMember() {
-        return $this->member;
-    }
-
-    public function setMember($member) {
-        $this->member = $member;
-        return $this;
-    }
-
     /**
      * Get id
      *
@@ -144,4 +130,5 @@ class Entry {
     }
 
 // </editor-fold>
+
 }
