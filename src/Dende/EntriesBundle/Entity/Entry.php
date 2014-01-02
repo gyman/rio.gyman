@@ -28,6 +28,14 @@ class Entry {
      */
     private $id;
 
+   /**
+   * @var integer
+   *
+   * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
+   * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+   */
+    private $member;
+
     /**
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
@@ -96,6 +104,14 @@ class Entry {
 
     public function setActivity($activity) {
         $this->activity = $activity;
+        return $this;
+    }
+   public function getMember() {
+        return $this->member;
+    }
+
+    public function setMember($member) {
+        $this->member = $member;
         return $this;
     }
 

@@ -47,6 +47,8 @@ class DefaultController extends Controller {
                 {
                     $entry->setVoucher(null);
                 }
+
+		$entry->setMember($member);
                 
                 $this->get('entry_manager')->save($entry);
             }

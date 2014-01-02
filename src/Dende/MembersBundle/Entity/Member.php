@@ -130,6 +130,11 @@ class Member {
     private $nameSlug;
 
     /**
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member")
+     */
+    private $entries;
+
+    /**
      * @var DateTime $created
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime", nullable=false)
@@ -152,6 +157,16 @@ class Member {
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+
+    public function getEntries() {
+        return $this->entries;
+    }
+
+    public function setEntries($entries) {
+        $this->entries = $entries;
+        return $this;
+    }
 
     public function getModified() {
         return $this->modified;
