@@ -18,15 +18,21 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new Dende\MembersBundle\MembersBundle(),
+            new Dende\VouchersBundle\VouchersBundle(),
             new Dende\DefaultBundle\DefaultBundle(),
             new Dende\LayoutBundle\LayoutBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Dende\ScheduleBundle\ScheduleBundle(),
+            new Dende\EntriesBundle\EntriesBundle(),
+            new Hackzilla\BarcodeBundle\HackzillaBarcodeBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
         }
 
         return $bundles;

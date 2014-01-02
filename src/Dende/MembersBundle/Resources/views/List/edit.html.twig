@@ -1,22 +1,89 @@
-<form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}{% endif %}">
-    <div class="span6">    
-        {{ form_row(form.name) }}
-        {{ form_row(form.birthdate) }}
-        {{ form_row(form.phone) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.notes) }}
+<form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
+
+    <div class="span5">
+        {% include 'MembersBundle::_member_picture.html.twig' with {'form' : form, 'member' : member} %}
     </div>
-    <div class="span6">  
-        <div class="control-group">
-            <label class="control-label">Zdjęcie</label>
-            <div class="controls">
-                <img src="{% if member.foto is null or member.foto is not defined or member.foto == '' %}http://placehold.it/200x240{% else %}/uploads/gallery/{{ member.foto }}{% endif %}" class="thumbnail" id="memberFoto"/>
+
+    <div class="span7">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#detailsPane">
+                    <span class="icon16 icomoon-icon-home-6 "></span>
+                    Szczegóły
+                </a>
+            </li>
+            {% if voucher is defined and voucher is not null %}
+            <li>
+                <a data-toggle="tab" href="#voucherPane">
+                    <span class="icon16 icomoon-icon-equalizer-2"></span>
+                    Karnet
+                </a>
+            </li>
+            {% endif %}
+        {#
+            <li>
+                <a data-toggle="tab" href="#entriesPane">
+                    <span class="icon16 icomoon-icon-calendar-2"></span>
+                    Obecności
+                </a>
+            </li>
+            #}
+            <li>
+                <a data-toggle="tab" href="#additionalsPane">
+                    <span class="icon16 icomoon-icon-fire"></span>
+                    Dodatkowe
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="detailsPane" class="tab-pane fade in active">
+                {% include 'MembersBundle::_member_details.html.twig' with {'form' : form} %}
+            </div>
+            {% if voucher is defined and voucher is not null %}
+            <div class="tab-pane fade in" id="voucherPane">
+                 {{ render(controller('VouchersBundle:Default:voucherInfoInMemberModal', { 'voucher': voucher })) }}
+                {# % include 'MembersBundle::_member_voucher.html.twig' % #}
+            </div>
+            {% endif %}
+            <div class="tab-pane fade in" id="entriesPane">
+                {% include 'MembersBundle::_member_entries.html.twig' %}
+            </div>
+            <div class="tab-pane fade in" id="additionalsPane">
+                {% include 'MembersBundle::_member_additional.html.twig' with {'form' : form} %}
             </div>
         </div>
-
-        {{ form_row(form.fotoUploader) }}
     </div>
     <div class="hidden">
     {{ form_rest(form) }}
     </div>
 </form>
+
+{% block modal %}
+<div class="hidden" id="ui-editMemberData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% block modalTitle %}Edycja użytkownika{%endblock modalTitle%}</h3>
+    </div>
+    <div class="modal-footer">
+        <form id="deleteUserForm" class="pull-left hidden hideForNewMember"> 
+            <label>
+                <input type="checkbox" id="deleteUserCheckbox" />
+                Usuń użytkownika
+            </label>
+        </form>
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Zapisz</a>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+{% javascripts
+    '@MembersBundle/Resources/public/js/jQueryWebcam/jquery.webcam.js'
+    '@MembersBundle/Resources/public/coffee/members.editMember.class.coffee'
+    '@MembersBundle/Resources/public/coffee/members.modalBootstrap.coffee'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock javascript %}
+

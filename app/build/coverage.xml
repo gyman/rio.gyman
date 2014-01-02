@@ -1,0 +1,1339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1386622654">
+  <project timestamp="1386622654">
+    <package name="Dende\DefaultBundle\Controller">
+      <file name="/var/www/bjjTimesheet/src/Dende/DefaultBundle/Controller/DefaultController.php">
+        <class name="DefaultController" namespace="Dende\DefaultBundle\Controller">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="indexAction" crap="2" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="1"/>
+        <metrics loc="19" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\DefaultBundle">
+      <file name="/var/www/bjjTimesheet/src/Dende/DefaultBundle/DefaultBundle.php">
+        <class name="DefaultBundle" namespace="Dende\DefaultBundle">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="9" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\DefaultBundle\DependencyInjection">
+      <file name="/var/www/bjjTimesheet/src/Dende/DefaultBundle/DependencyInjection/Configuration.php">
+        <class name="Configuration" namespace="Dende\DefaultBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="18" type="method" name="getConfigTreeBuilder" crap="1" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <metrics loc="29" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/DefaultBundle/DependencyInjection/DefaultExtension.php">
+        <class name="DefaultExtension" namespace="Dende\DefaultBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+        </class>
+        <line num="20" type="method" name="load" crap="1" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <metrics loc="28" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </file>
+    </package>
+    <package name="Dende\DefaultBundle\Services\Manager">
+      <file name="/var/www/bjjTimesheet/src/Dende/DefaultBundle/Services/Manager/BaseManager.php">
+        <class name="BaseManager" namespace="Dende\DefaultBundle\Services\Manager">
+          <metrics methods="20" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="8" elements="75" coveredelements="11"/>
+        </class>
+        <line num="0" type="stmt" count="1"/>
+        <line num="35" type="method" name="create" crap="2" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="46" type="method" name="save" crap="12" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="63" type="method" name="delete" crap="12" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="75" type="method" name="remove" crap="2" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="83" type="method" name="refresh" crap="2" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="92" type="method" name="persist" crap="2" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="99" type="method" name="flush" crap="6" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="101" type="stmt" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="103" type="stmt" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="113" type="method" name="find" crap="6" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="130" type="method" name="serialize" crap="2" count="0"/>
+        <line num="131" type="stmt" count="0"/>
+        <line num="132" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="142" type="method" name="setClass" crap="1" count="6"/>
+        <line num="143" type="stmt" count="6"/>
+        <line num="144" type="stmt" count="6"/>
+        <line num="145" type="stmt" count="6"/>
+        <line num="146" type="stmt" count="6"/>
+        <line num="153" type="method" name="getClass" crap="2" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="161" type="method" name="setDm" crap="2" count="0"/>
+        <line num="162" type="stmt" count="0"/>
+        <line num="163" type="stmt" count="0"/>
+        <line num="170" type="method" name="getDm" crap="2" count="0"/>
+        <line num="171" type="stmt" count="0"/>
+        <line num="179" type="method" name="setRepository" crap="1" count="6"/>
+        <line num="180" type="stmt" count="6"/>
+        <line num="181" type="stmt" count="6"/>
+        <line num="188" type="method" name="getRepository" crap="2" count="0"/>
+        <line num="189" type="stmt" count="0"/>
+        <line num="197" type="method" name="setSerializer" crap="2" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="199" type="stmt" count="0"/>
+        <line num="206" type="method" name="getSerializer" crap="2" count="0"/>
+        <line num="207" type="stmt" count="0"/>
+        <line num="215" type="method" name="setContainer" crap="1" count="6"/>
+        <line num="216" type="stmt" count="6"/>
+        <line num="217" type="stmt" count="6"/>
+        <line num="224" type="method" name="getContainer" crap="2" count="0"/>
+        <line num="225" type="stmt" count="0"/>
+        <line num="234" type="method" name="get" crap="2" count="0"/>
+        <line num="235" type="stmt" count="0"/>
+        <line num="689" type="stmt" count="1"/>
+        <metrics loc="238" ncloc="128" classes="1" methods="20" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="8" elements="75" coveredelements="11"/>
+      </file>
+    </package>
+    <package name="Dende\EntriesBundle\Controller">
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/Controller/DefaultController.php">
+        <class name="DefaultController" namespace="Dende\EntriesBundle\Controller">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="0" elements="36" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="newEntryAction" crap="42" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="1"/>
+        <metrics loc="81" ncloc="76" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="0" elements="36" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\EntriesBundle\DependencyInjection">
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/DependencyInjection/Configuration.php">
+        <class name="Configuration" namespace="Dende\EntriesBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="18" type="method" name="getConfigTreeBuilder" crap="1" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <metrics loc="29" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/DependencyInjection/EntriesExtension.php">
+        <class name="EntriesExtension" namespace="Dende\EntriesBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+        </class>
+        <line num="20" type="method" name="load" crap="1" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <metrics loc="28" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </file>
+    </package>
+    <package name="Dende\EntriesBundle\Entity">
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/Entity/Entry.php">
+        <class name="Entry" namespace="Dende\EntriesBundle\Entity">
+          <metrics methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="22" coveredelements="0"/>
+        </class>
+        <line num="51" type="method" name="getVoucher" crap="2" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="55" type="method" name="setVoucher" crap="2" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="60" type="method" name="getActivity" crap="2" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="64" type="method" name="setActivity" crap="2" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="69" type="method" name="getMember" crap="2" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="73" type="method" name="setMember" crap="2" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="83" type="method" name="getId" crap="2" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="93" type="method" name="setEntryDate" crap="2" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="104" type="method" name="getEntryDate" crap="2" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="109" type="stmt" count="1"/>
+        <metrics loc="108" ncloc="60" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="22" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/Entity/EntryRepository.php">
+        <class name="EntryRepository" namespace="Dende\EntriesBundle\Entity">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="15" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\EntriesBundle">
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/EntriesBundle.php">
+        <class name="EntriesBundle" namespace="Dende\EntriesBundle">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="9" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\EntriesBundle\Form">
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/Form/EntryType.php">
+        <class name="EntryType" namespace="Dende\EntriesBundle\Form">
+          <metrics methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="0" elements="38" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="buildForm" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="method" name="anonymous function" crap="2" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="42" type="method" name="setDefaultOptions" crap="2" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="51" type="method" name="getName" crap="2" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <metrics loc="55" ncloc="45" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="35" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\EntriesBundle\Services\Manager">
+      <file name="/var/www/bjjTimesheet/src/Dende/EntriesBundle/Services/Manager/EntryManager.php">
+        <class name="EntryManager" namespace="Dende\EntriesBundle\Services\Manager">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="13" ncloc="13" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\LayoutBundle\Controller">
+      <file name="/var/www/bjjTimesheet/src/Dende/LayoutBundle/Controller/DefaultController.php">
+        <class name="DefaultController" namespace="Dende\LayoutBundle\Controller">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="indexAction" crap="2" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="1"/>
+        <metrics loc="19" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\LayoutBundle\DependencyInjection">
+      <file name="/var/www/bjjTimesheet/src/Dende/LayoutBundle/DependencyInjection/Configuration.php">
+        <class name="Configuration" namespace="Dende\LayoutBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="18" type="method" name="getConfigTreeBuilder" crap="1" count="1"/>
+        <line num="19" type="stmt" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <metrics loc="35" ncloc="11" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/LayoutBundle/DependencyInjection/LayoutExtension.php">
+        <class name="LayoutExtension" namespace="Dende\LayoutBundle\DependencyInjection">
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
+        </class>
+        <line num="21" type="method" name="load" crap="1" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="32" type="method" name="prepend" crap="1" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="147" type="stmt" count="1"/>
+        <metrics loc="146" ncloc="-90" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
+      </file>
+    </package>
+    <package name="Dende\LayoutBundle">
+      <file name="/var/www/bjjTimesheet/src/Dende/LayoutBundle/LayoutBundle.php">
+        <class name="LayoutBundle" namespace="Dende\LayoutBundle">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="9" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\Controller">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Controller/ListController.php">
+        <class name="ListController" namespace="Dende\MembersBundle\Controller">
+          <metrics methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="59" coveredstatements="0" elements="66" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="dashboardAction" crap="2" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="29" type="method" name="listAction" crap="2" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="40" type="method" name="galleryAction" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="49" type="method" name="editAction" crap="12" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="91" type="method" name="newAction" crap="12" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="103" type="stmt" count="0"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="121" type="stmt" count="0"/>
+        <line num="122" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="131" type="method" name="deleteAction" crap="2" count="0"/>
+        <line num="132" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="142" type="method" name="currentVoucherAction" crap="2" count="0"/>
+        <line num="144" type="stmt" count="0"/>
+        <line num="148" type="stmt" count="0"/>
+        <line num="152" type="stmt" count="1"/>
+        <metrics loc="151" ncloc="119" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="59" coveredstatements="0" elements="66" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\DataFixtures\ORM">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/DataFixtures/ORM/MembersData.php">
+        <class name="MembersData" namespace="Dende\MembersBundle\DataFixtures\ORM">
+          <metrics methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="27" coveredelements="0"/>
+        </class>
+        <line num="14" type="method" name="load" crap="2" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="method" name="getOrder" crap="2" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="29" type="method" name="insertMember" crap="2" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <metrics loc="49" ncloc="45" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="27" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\DependencyInjection">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/DependencyInjection/Configuration.php">
+        <class name="Configuration" namespace="Dende\MembersBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="18" type="method" name="getConfigTreeBuilder" crap="1" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <metrics loc="29" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/DependencyInjection/MembersExtension.php">
+        <class name="MembersExtension" namespace="Dende\MembersBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+        </class>
+        <line num="20" type="method" name="load" crap="1" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <metrics loc="28" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\Entity">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Entity/Member.php">
+        <class name="Member" namespace="Dende\MembersBundle\Entity">
+          <metrics methods="28" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="70" coveredelements="0"/>
+        </class>
+        <line num="135" type="method" name="getLastVoucher" crap="2" count="0"/>
+        <line num="136" type="stmt" count="0"/>
+        <line num="139" type="method" name="getLastEntry" crap="2" count="0"/>
+        <line num="140" type="stmt" count="0"/>
+        <line num="143" type="method" name="setLastVoucher" crap="2" count="0"/>
+        <line num="144" type="stmt" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <line num="148" type="method" name="setLastEntry" crap="2" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="150" type="stmt" count="0"/>
+        <line num="153" type="method" name="getEntries" crap="2" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="157" type="method" name="setEntries" crap="2" count="0"/>
+        <line num="158" type="stmt" count="0"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="162" type="method" name="getZipcode" crap="2" count="0"/>
+        <line num="163" type="stmt" count="0"/>
+        <line num="166" type="method" name="setZipcode" crap="2" count="0"/>
+        <line num="167" type="stmt" count="0"/>
+        <line num="168" type="stmt" count="0"/>
+        <line num="176" type="method" name="getId" crap="2" count="0"/>
+        <line num="177" type="stmt" count="0"/>
+        <line num="186" type="method" name="setName" crap="2" count="0"/>
+        <line num="187" type="stmt" count="0"/>
+        <line num="189" type="stmt" count="0"/>
+        <line num="197" type="method" name="getName" crap="2" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="207" type="method" name="setBirthdate" crap="2" count="0"/>
+        <line num="208" type="stmt" count="0"/>
+        <line num="210" type="stmt" count="0"/>
+        <line num="218" type="method" name="getBirthdate" crap="2" count="0"/>
+        <line num="219" type="stmt" count="0"/>
+        <line num="228" type="method" name="setPhone" crap="2" count="0"/>
+        <line num="229" type="stmt" count="0"/>
+        <line num="231" type="stmt" count="0"/>
+        <line num="239" type="method" name="getPhone" crap="2" count="0"/>
+        <line num="240" type="stmt" count="0"/>
+        <line num="249" type="method" name="setEmail" crap="2" count="0"/>
+        <line num="250" type="stmt" count="0"/>
+        <line num="252" type="stmt" count="0"/>
+        <line num="259" type="method" name="getEmail" crap="2" count="0"/>
+        <line num="260" type="stmt" count="0"/>
+        <line num="269" type="method" name="setNotes" crap="2" count="0"/>
+        <line num="270" type="stmt" count="0"/>
+        <line num="272" type="stmt" count="0"/>
+        <line num="280" type="method" name="getNotes" crap="2" count="0"/>
+        <line num="281" type="stmt" count="0"/>
+        <line num="290" type="method" name="setFoto" crap="2" count="0"/>
+        <line num="291" type="stmt" count="0"/>
+        <line num="293" type="stmt" count="0"/>
+        <line num="301" type="method" name="getFoto" crap="2" count="0"/>
+        <line num="302" type="stmt" count="0"/>
+        <line num="305" type="method" name="getDeletedAt" crap="2" count="0"/>
+        <line num="306" type="stmt" count="0"/>
+        <line num="309" type="method" name="setDeletedAt" crap="2" count="0"/>
+        <line num="310" type="stmt" count="0"/>
+        <line num="311" type="stmt" count="0"/>
+        <line num="314" type="method" name="getGender" crap="2" count="0"/>
+        <line num="315" type="stmt" count="0"/>
+        <line num="318" type="method" name="setGender" crap="2" count="0"/>
+        <line num="319" type="stmt" count="0"/>
+        <line num="320" type="stmt" count="0"/>
+        <line num="323" type="method" name="getVouchers" crap="2" count="0"/>
+        <line num="324" type="stmt" count="0"/>
+        <line num="327" type="method" name="setVouchers" crap="2" count="0"/>
+        <line num="328" type="stmt" count="0"/>
+        <line num="329" type="stmt" count="0"/>
+        <line num="334" type="method" name="__construct" crap="2" count="0"/>
+        <line num="335" type="stmt" count="0"/>
+        <line num="336" type="stmt" count="0"/>
+        <line num="339" type="stmt" count="1"/>
+        <metrics loc="338" ncloc="168" classes="1" methods="28" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="70" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Entity/MemberRepository.php">
+        <class name="MemberRepository" namespace="Dende\MembersBundle\Entity">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="getMembersQuery" crap="2" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="1"/>
+        <metrics loc="23" ncloc="13" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\Form">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Form/MemberType.php">
+        <class name="MemberType" namespace="Dende\MembersBundle\Form">
+          <metrics methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="42" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="__construct" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="21" type="method" name="buildForm" crap="2" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="52" type="method" name="setDefaultOptions" crap="2" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="61" type="method" name="getName" crap="2" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <metrics loc="65" ncloc="55" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="42" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/MembersBundle.php">
+        <class name="MembersBundle" namespace="Dende\MembersBundle">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="9" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\Services\Listener">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Services/Listener/ImageRescaleListener.php">
+        <class name="ImageRescaleListener" namespace="Dende\MembersBundle\Services\Listener">
+          <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
+        </class>
+        <line num="9" type="method" name="__construct" crap="2" count="0"/>
+        <line num="10" type="stmt" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="13" type="method" name="onUpload" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="11" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Services/Listener/UploadListener.php">
+        <class name="UploadListener" namespace="Dende\MembersBundle\Services\Listener">
+          <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
+        </class>
+        <line num="8" type="method" name="__construct" crap="2" count="0"/>
+        <line num="9" type="stmt" count="0"/>
+        <line num="10" type="stmt" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="13" type="method" name="onUpload" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <metrics loc="19" ncloc="19" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\Services\Manager">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Services/Manager/MemberManager.php">
+        <class name="MemberManager" namespace="Dende\MembersBundle\Services\Manager">
+          <metrics methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="12" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="getMembers" crap="2" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="27" type="method" name="getById" crap="2" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="34" type="method" name="setActiveCriteria" crap="2" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="43" type="method" name="getCurrentVoucher" crap="2" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="1"/>
+        <metrics loc="48" ncloc="31" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="12" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\MembersBundle\Twig">
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Twig/AgeExtension.php">
+        <class name="AgeExtension" namespace="Dende\MembersBundle\Twig">
+          <metrics methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="3" elements="8" coveredelements="5"/>
+        </class>
+        <line num="7" type="method" name="getFilters" crap="1" count="1"/>
+        <line num="9" type="stmt" count="1"/>
+        <line num="10" type="stmt" count="1"/>
+        <line num="13" type="method" name="ageFilter" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="18" type="method" name="getName" crap="1" count="6"/>
+        <line num="19" type="stmt" count="6"/>
+        <line num="23" type="stmt" count="1"/>
+        <metrics loc="22" ncloc="22" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="3" elements="8" coveredelements="5"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/MembersBundle/Twig/CurrentVoucherProgressbarExtension.php">
+        <class name="CurrentVoucherProgressBarExtension" namespace="Dende\MembersBundle\Twig">
+          <metrics methods="5" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="7" elements="69" coveredelements="10"/>
+        </class>
+        <line num="20" type="method" name="getMemberManager" crap="2" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="29" type="method" name="setMemberManager" crap="1" count="6"/>
+        <line num="30" type="stmt" count="6"/>
+        <line num="31" type="stmt" count="6"/>
+        <line num="41" type="method" name="getFilters" crap="1" count="1"/>
+        <line num="43" type="stmt" count="1"/>
+        <line num="45" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="50" type="method" name="getProgressBar" crap="42" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="89" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="91" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="101" type="stmt" count="0"/>
+        <line num="102" type="stmt" count="0"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="111" type="stmt" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="121" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="126" type="method" name="getName" crap="1" count="6"/>
+        <line num="127" type="stmt" count="6"/>
+        <line num="131" type="stmt" count="1"/>
+        <metrics loc="130" ncloc="117" classes="1" methods="5" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="7" elements="69" coveredelements="10"/>
+      </file>
+    </package>
+    <package name="Dende\ScheduleBundle\Controller">
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/Controller/DefaultController.php">
+        <class name="DefaultController" namespace="Dende\ScheduleBundle\Controller">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+        </class>
+        <line num="15" type="method" name="indexAction" crap="1" count="6"/>
+        <line num="17" type="stmt" count="6"/>
+        <line num="20" type="stmt" count="1"/>
+        <metrics loc="19" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </file>
+    </package>
+    <package name="Dende\ScheduleBundle\DependencyInjection">
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/DependencyInjection/Configuration.php">
+        <class name="Configuration" namespace="Dende\ScheduleBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="18" type="method" name="getConfigTreeBuilder" crap="1" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <metrics loc="29" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/DependencyInjection/ScheduleExtension.php">
+        <class name="ScheduleExtension" namespace="Dende\ScheduleBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+        </class>
+        <line num="20" type="method" name="load" crap="1" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <metrics loc="28" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </file>
+    </package>
+    <package name="Dende\ScheduleBundle\Entity">
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/Entity/Activity.php">
+        <class name="Activity" namespace="Dende\ScheduleBundle\Entity">
+          <metrics methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
+        </class>
+        <line num="44" type="method" name="getId" crap="2" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="54" type="method" name="setName" crap="2" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="65" type="method" name="getName" crap="2" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <metrics loc="69" ncloc="29" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="13" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/Entity/ActivityRepository.php">
+        <class name="ActivityRepository" namespace="Dende\ScheduleBundle\Entity">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="getActivitiesQuery" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <metrics loc="21" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/Entity/Event.php">
+        <class name="Event" namespace="Dende\ScheduleBundle\Entity">
+          <metrics methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="40" coveredstatements="0" elements="49" coveredelements="0"/>
+        </class>
+        <line num="58" type="method" name="getId" crap="2" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="69" type="method" name="setActivityId" crap="2" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="81" type="method" name="getActivityId" crap="2" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="92" type="method" name="setDayOfWeek" crap="2" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="97" type="stmt" count="0"/>
+        <line num="104" type="method" name="getDayOfWeek" crap="2" count="0"/>
+        <line num="105" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="115" type="method" name="setStartHour" crap="2" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="127" type="method" name="getStartHour" crap="2" count="0"/>
+        <line num="128" type="stmt" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="138" type="method" name="setEndHour" crap="2" count="0"/>
+        <line num="139" type="stmt" count="0"/>
+        <line num="140" type="stmt" count="0"/>
+        <line num="142" type="stmt" count="0"/>
+        <line num="143" type="stmt" count="0"/>
+        <line num="150" type="method" name="getEndHour" crap="2" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <metrics loc="154" ncloc="72" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="40" coveredstatements="0" elements="49" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/Entity/EventRepository.php">
+        <class name="EventRepository" namespace="Dende\ScheduleBundle\Entity">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="15" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\ScheduleBundle">
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/ScheduleBundle.php">
+        <class name="ScheduleBundle" namespace="Dende\ScheduleBundle">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="9" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\ScheduleBundle\Services\Manager">
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/Services/Manager/ActivityManager.php">
+        <class name="ActivityManager" namespace="Dende\ScheduleBundle\Services\Manager">
+          <metrics methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="13" coveredelements="0"/>
+        </class>
+        <line num="17" type="method" name="getActivitiesAssoc" crap="6" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <metrics loc="35" ncloc="31" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="13" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/ScheduleBundle/Services/Manager/EventManager.php">
+        <class name="EventManager" namespace="Dende\ScheduleBundle\Services\Manager">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="13" ncloc="13" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\Controller">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Controller/DefaultController.php">
+        <class name="DefaultController" namespace="Dende\VouchersBundle\Controller">
+          <metrics methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="0" elements="71" coveredelements="0"/>
+        </class>
+        <line num="26" type="method" name="listAction" crap="2" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="38" type="method" name="newVoucherAction" crap="110" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="65" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="73" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="78" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="92" type="stmt" count="0"/>
+        <line num="93" type="stmt" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="96" type="stmt" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="108" type="method" name="closeVoucherAction" crap="2" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="122" type="method" name="deleteAction" crap="2" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="132" type="method" name="printVoucherButtonAction" crap="2" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="142" type="method" name="printVoucherAction" crap="2" count="0"/>
+        <line num="145" type="stmt" count="0"/>
+        <line num="151" type="method" name="getBarcodeAction" crap="2" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="155" type="stmt" count="0"/>
+        <line num="156" type="stmt" count="0"/>
+        <line num="158" type="stmt" count="0"/>
+        <line num="162" type="stmt" count="1"/>
+        <metrics loc="161" ncloc="128" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="0" elements="71" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\DependencyInjection">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/DependencyInjection/Configuration.php">
+        <class name="Configuration" namespace="Dende\VouchersBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        </class>
+        <line num="18" type="method" name="getConfigTreeBuilder" crap="1" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <metrics loc="29" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/DependencyInjection/VouchersExtension.php">
+        <class name="VouchersExtension" namespace="Dende\VouchersBundle\DependencyInjection">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+        </class>
+        <line num="20" type="method" name="load" crap="1" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <metrics loc="28" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\Entity">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Entity/Voucher.php">
+        <class name="Voucher" namespace="Dende\VouchersBundle\Entity">
+          <metrics methods="24" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="0" elements="60" coveredelements="0"/>
+        </class>
+        <line num="107" type="method" name="getIsActive" crap="2" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="111" type="method" name="setIsActive" crap="2" count="0"/>
+        <line num="112" type="stmt" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="116" type="method" name="getAmountLeft" crap="2" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="120" type="method" name="setAmountLeft" crap="2" count="0"/>
+        <line num="121" type="stmt" count="0"/>
+        <line num="122" type="stmt" count="0"/>
+        <line num="125" type="method" name="getBarcode" crap="2" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="129" type="method" name="setBarcode" crap="2" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="131" type="stmt" count="0"/>
+        <line num="134" type="method" name="getId" crap="2" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="138" type="method" name="getMember" crap="2" count="0"/>
+        <line num="139" type="stmt" count="0"/>
+        <line num="142" type="method" name="getStartDate" crap="2" count="0"/>
+        <line num="143" type="stmt" count="0"/>
+        <line num="146" type="method" name="getEndDate" crap="6" count="0"/>
+        <line num="147" type="stmt" count="0"/>
+        <line num="150" type="method" name="getPrice" crap="2" count="0"/>
+        <line num="151" type="stmt" count="0"/>
+        <line num="154" type="method" name="getAmount" crap="2" count="0"/>
+        <line num="155" type="stmt" count="0"/>
+        <line num="158" type="method" name="setId" crap="2" count="0"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="163" type="method" name="setMember" crap="2" count="0"/>
+        <line num="164" type="stmt" count="0"/>
+        <line num="165" type="stmt" count="0"/>
+        <line num="168" type="method" name="setStartDate" crap="2" count="0"/>
+        <line num="169" type="stmt" count="0"/>
+        <line num="170" type="stmt" count="0"/>
+        <line num="173" type="method" name="setEndDate" crap="6" count="0"/>
+        <line num="174" type="stmt" count="0"/>
+        <line num="175" type="stmt" count="0"/>
+        <line num="178" type="method" name="setPrice" crap="2" count="0"/>
+        <line num="179" type="stmt" count="0"/>
+        <line num="180" type="stmt" count="0"/>
+        <line num="183" type="method" name="setAmount" crap="2" count="0"/>
+        <line num="184" type="stmt" count="0"/>
+        <line num="185" type="stmt" count="0"/>
+        <line num="188" type="method" name="getPreviousVoucher" crap="2" count="0"/>
+        <line num="189" type="stmt" count="0"/>
+        <line num="192" type="method" name="setPreviousVoucher" crap="2" count="0"/>
+        <line num="193" type="stmt" count="0"/>
+        <line num="194" type="stmt" count="0"/>
+        <line num="197" type="method" name="getEntries" crap="2" count="0"/>
+        <line num="198" type="stmt" count="0"/>
+        <line num="201" type="method" name="setEntries" crap="2" count="0"/>
+        <line num="202" type="stmt" count="0"/>
+        <line num="203" type="stmt" count="0"/>
+        <line num="206" type="method" name="getActivities" crap="2" count="0"/>
+        <line num="207" type="stmt" count="0"/>
+        <line num="210" type="method" name="setActivities" crap="2" count="0"/>
+        <line num="211" type="stmt" count="0"/>
+        <line num="212" type="stmt" count="0"/>
+        <line num="217" type="stmt" count="1"/>
+        <metrics loc="216" ncloc="141" classes="1" methods="24" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="0" elements="60" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Entity/VoucherRepository.php">
+        <class name="VoucherRepository" namespace="Dende\VouchersBundle\Entity">
+          <metrics methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="30" coveredelements="0"/>
+        </class>
+        <line num="15" type="method" name="getVouchersQuery" crap="2" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="20" type="method" name="getVouchersOverlappingQuery" crap="2" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="40" type="method" name="getVoucherActiveForDate" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <metrics loc="53" ncloc="43" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="30" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\Exception">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Exception/VoucherManagerException.php">
+        <class name="VoucherManagerException" namespace="Dende\VouchersBundle\Exception">
+          <metrics methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
+        </class>
+        <line num="17" type="method" name="__construct" crap="2" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="26" type="method" name="getVoucher" crap="2" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="35" type="method" name="setVoucher" crap="2" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <metrics loc="40" ncloc="27" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="14" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\Form">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Form/VoucherType.php">
+        <class name="VoucherType" namespace="Dende\VouchersBundle\Form">
+          <metrics methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="0" elements="40" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="__construct" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="21" type="method" name="buildForm" crap="2" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="37" type="method" name="anonymous function" crap="2" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="47" type="method" name="setDefaultOptions" crap="2" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="56" type="method" name="getName" crap="2" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <metrics loc="60" ncloc="48" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="0" elements="37" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\Services\Manager">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Services/Manager/VoucherManager.php">
+        <class name="VoucherManager" namespace="Dende\VouchersBundle\Services\Manager">
+          <metrics methods="10" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="0" elements="79" coveredelements="0"/>
+        </class>
+        <line num="23" type="method" name="getMembers" crap="2" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="34" type="method" name="getById" crap="2" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="38" type="method" name="setAsDeleted" crap="6" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="54" type="method" name="setActiveCriteria" crap="2" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="58" type="method" name="findOverlappingWithRange" crap="2" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="61" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="71" type="method" name="getLastVoucher" crap="6" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="77" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="82" type="method" name="closeVoucher" crap="2" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="84" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="93" type="method" name="createNewVoucherNow" crap="2" count="0"/>
+        <line num="94" type="stmt" count="0"/>
+        <line num="95" type="stmt" count="0"/>
+        <line num="102" type="method" name="createNewVoucherAtEndDate" crap="2" count="0"/>
+        <line num="103" type="stmt" count="0"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="112" type="method" name="createNewVoucher" crap="20" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="116" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="119" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="122" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="0"/>
+        <line num="125" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="128" type="stmt" count="0"/>
+        <line num="129" type="stmt" count="0"/>
+        <line num="131" type="stmt" count="0"/>
+        <line num="132" type="stmt" count="0"/>
+        <line num="133" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="136" type="stmt" count="0"/>
+        <line num="137" type="stmt" count="0"/>
+        <line num="139" type="stmt" count="0"/>
+        <line num="140" type="stmt" count="0"/>
+        <metrics loc="142" ncloc="105" classes="1" methods="10" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="0" elements="79" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\Twig">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Twig/AgeExtension.php">
+        <class name="AgeExtension" namespace="Dende\VouchersBundle\Twig">
+          <metrics methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
+        </class>
+        <line num="7" type="method" name="getFilters" crap="2" count="0"/>
+        <line num="8" type="stmt" count="0"/>
+        <line num="9" type="stmt" count="0"/>
+        <line num="10" type="stmt" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="13" type="method" name="ageFilter" crap="2" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="18" type="method" name="getName" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <metrics loc="22" ncloc="22" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle\Validator">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Validator/VoucherDateConstraint.php">
+        <class name="VoucherDateConstraint" namespace="Dende\VouchersBundle\Validator">
+          <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+        </class>
+        <line num="14" type="method" name="validatedBy" crap="2" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="18" type="method" name="getTargets" crap="2" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <metrics loc="22" ncloc="19" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+      </file>
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/Validator/VoucherDateValidator.php">
+        <class name="VoucherDateValidator" namespace="Dende\VouchersBundle\Validator">
+          <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="21" coveredelements="0"/>
+        </class>
+        <line num="19" type="method" name="__construct" crap="2" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="method" name="validate" crap="56" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <metrics loc="43" ncloc="39" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="21" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Dende\VouchersBundle">
+      <file name="/var/www/bjjTimesheet/src/Dende/VouchersBundle/VouchersBundle.php">
+        <class name="VouchersBundle" namespace="Dende\VouchersBundle">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="9" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <metrics files="52" loc="3018" ncloc="1876" classes="52" methods="182" coveredmethods="22" conditionals="0" coveredconditionals="0" statements="791" coveredstatements="68" elements="973" coveredelements="90"/>
+  </project>
+</coverage>

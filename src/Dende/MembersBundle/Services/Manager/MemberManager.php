@@ -6,19 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use Dende\MembersBundle\Entity\Member;
 use Dende\MembersBundle\Entity\MemberRepository;
-use Dende\MembersBundle\Services\Manager\BaseManager;
+use Dende\DefaultBundle\Services\Manager\BaseManager;
 
 class MemberManager extends BaseManager {
-    // <editor-fold defaultstate="collapsed" desc="fields">
-    // </editor-fold>
 
     /**
      * Returns array of all members
      * @return array
      */
     public function getMembers() {
-        $query = $this->getRepo()->getMembersQuery();
-        $this->setActiveCriteria($query);
+        $query = $this->getRepository()->getMembersQuery();
+        $this->getRepository()->setActiveCriteria($query);
         return $query->getQuery()->execute();
     }
 
@@ -28,28 +26,17 @@ class MemberManager extends BaseManager {
      * @return Member
      */
     public function getById($id) {
-        return $this->getRepo()->find($id);
-    }
-
-    public function setAsDeleted($id) {
-        $member = $this->getById($id);
-
-        if (!$member)
-        {
-            throw new Exception("Member not found");
-        }
-
-        $member->setDeletedAt(new \DateTime());
-        $this->persist($member);
-        $this->flush($member);
+        return $this->getRepository()->find($id);
     }
 
     /**
-     * @param QueryBuilder $query
+     * 
+     * @param Member $member
+     * @return Voucher|null
      */
-    public function setActiveCriteria(QueryBuilder $query)
-    {
-        $query->andWhere("m.deletedAt is null");
+    public function getCurrentVoucher(Member $member) {
+//        $voucher = $this->get("voucher_repository")->getCurrentVouchers($member);        
+        return $member->getCurrentVoucher();
     }
-    
+
 }

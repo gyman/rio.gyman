@@ -1,0 +1,30 @@
+<div class="alert alert-error">{{ voucher.getMember().getName() }} aktualnie posiada już karnet. Oto jego szczegóły: </div>
+
+<span class="hidden" id="ui-closeVoucherData">
+    <div class="modal-footer">
+        <a id="dontCloseVoucher" class="btn pull-right" href="{{ path("_voucher_new", {id: voucher.getMember().getId(), decision: "deny" }) }}">Nie zamykaj</a>
+        <a id="confirmCloseVoucher" class="pull-left" href="{{ path("_voucher_new", {id: voucher.getMember().getId(), decision: "confirm" }) }}">Zamknij i stwórz nowy</a>
+    </div>
+</span>
+
+<div class="box">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-equalizer-2"></span>
+            <span>Informacje</span>
+        </h4>
+    </div>
+    <div class="content">
+        <div><strong>Data ważności</strong>: od <strong>{{ voucher.getStartDate()|date("d.m.Y") }}</strong> do <strong>{{ voucher.getEndDate()|date("d.m.Y") }}</strong></div>
+        <div><strong>Cena zakupu</strong>: {{ voucher.getPrice() }} PLN</div>
+        <div><strong>Dni do końca</strong>: <strong style="color: #ff0000">{{ leftDays }}</strong></div>
+    </div>
+</div>
+
+<p>Możesz zamknąć aktualny karnet lub nie zamykać i utworzyć nowy, który zacznie działać, gdy stary się skończy.</p>
+
+<script>
+    $(function() {
+        setupNewVoucherModalForClosingPrevious();
+    });
+</script>

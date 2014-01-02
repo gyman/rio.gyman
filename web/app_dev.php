@@ -20,10 +20,15 @@ use Symfony\Component\Debug\Debug;
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 Debug::enable();
 
+$loader = new ApcClassLoader('sf2', $loader);
+$loader->register(true);
+
 require_once __DIR__.'/../app/AppKernel.php';
+require_once __DIR__.'/../app/AppCache.php';
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
+$kernel = new AppCache($kernel);
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();

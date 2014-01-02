@@ -1,0 +1,60 @@
+@beltColumnWidth : 20px;
+
+a.createNewMember {
+    margin-top: 10px;
+}
+
+#chooseMembersListForm {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+th.beltColor {
+    width: @beltColumnWidth !important
+}
+
+table#membersList {
+    tbody {
+        td.beltColor {
+            width: @beltColumnWidth;
+            background-color: white;
+
+            &.belt-white {
+                background-color: white;
+            }
+
+            &.belt-blue {
+                background-color: blue;
+            }
+            &.belt-purple {
+                background-color: purple;
+            }
+            &.belt-brown {
+                background-color: #800000;
+            }
+            &.belt-black {
+                background-color: black;
+            }
+        }
+        
+        td.profileColumn {
+            text-align: left;
+            
+            a.btn.editMember {
+                opacity: 0.3;
+            }
+            
+            &:hover a.btn.editMember {
+                opacity: 1
+            }
+        }
+    }
+}
+
+h4 span.badge.header-badge {
+    margin-right: 0
+}
+
+button#filterModalButton {
+    margin: 3px 6px 3px 3px;
+}

@@ -13,7 +13,7 @@ class ImageRescaleListener {
     public function onUpload(PostPersistEvent $event) {
         $filename = $event->getFile()->getPathname();
         $image = new \Imagick($filename);
-        $image->scaleImage(200, 240, true);
+        $image->scaleImage(320, 240, true);
         $image->writeImage($filename);
     }
 

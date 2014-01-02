@@ -61,13 +61,27 @@ doctrine:
         user:     %database_user%
         password: %database_password%
         charset:  UTF8
+        mapping_types:
+            enum: string
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: %kernel.root_dir%/data/data.db3
         # path:     %database_path%
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
+#        auto_mapping: true
+#        mappings:
+#            StofDoctrineExtensionsBundle: ~
+        entity_managers:
+            default:
+                auto_mapping: true
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+                mappings:
+                    StofDoctrineExtensionsBundle: ~
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -77,7 +91,27 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
 
+#oneup_uploader:
+#    mappings:
+#        gallery:
+#            frontend: blueimp
+            
 oneup_uploader:
     mappings:
         gallery:
-            frontend: blueimp
+            frontend: custom
+            custom_frontend:
+                class: Dende\MembersBundle\Controller\UploadController
+                name: MyFancyCustomUploader            
+                
+default:
+    noImage:                /bundles/members/images/no-profile.gif
+    galleryDir:             /uploads/gallery/
+    
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
+            
