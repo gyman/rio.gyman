@@ -16,9 +16,9 @@ set  :use_sudo,      false
 set  :keep_releases,  3
 
 set :shared_files,      ["app/config/parameters.yml"]
-set :shared_children,     [app_path + "/logs", web_path + "/uploads", "vendor"]
+set :shared_children,     [app_path + "/logs", app_path + "/cache", web_path + "/uploads", "vendor"]
 set :use_composer, true
-# set :update_vendors, true
+set :update_vendors, true
 
 set :writable_dirs,       ["app/cache", "app/logs"]
 set :user,                "uirapuru"
@@ -31,11 +31,11 @@ set :symfony_env_prod,    "dev"
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
 
-namespace :deploy do
-  desc "building assetic"
-  task :assetic_dump, :roles => :app do
-    run "cd #{latest_release} && #{php_bin} app/console assetic:dump"
-  end
-end
+# namespace :deploy do
+#  desc "building assetic"
+#  task :assetic_dump, :roles => :app do
+#    run "cd #{latest_release} && #{php_bin} app/console assetic:dump"
+#  end
+#end
 
-after 'deploy:update_code', 'deploy:assetic_dump'
+#after 'deploy:update_code', 'deploy:assetic_dump'
