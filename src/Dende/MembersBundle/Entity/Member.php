@@ -155,9 +155,24 @@ class Member {
      */
     private $deletedAt;
 
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="barcode", type="string", nullable = true, unique = true, length = 64)
+     */
+    private $barcode;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
 
+    public function getBarcode() {
+        return $this->barcode;
+    }
+
+    public function setBarcode($barcode) {
+        $this->barcode = $barcode;
+        return $this;
+    }
 
     public function getEntries() {
         return $this->entries;

@@ -54,6 +54,7 @@
         $("#addEntrance").off("click.sendForm").on("click.sendForm", function() {
             var $form = $("form#entranceForm");
             var $modal = $("div#editEntranceModal");
+
             $.post($form.attr("action"), $form.serialize(), function(data) {
                 $modal.modal("hide");
                 $.pnotify({
@@ -67,7 +68,15 @@
             }).fail(function(xhr, textStatus, errorThrown) {
                 $(".modal-body", $modal).html(xhr.responseText);
             });
+        });
 
+        $("input[name='dende_entriesbundle_entry\\\[entryType\\\]']").uniform();
+
+        $("#dende_entriesbundle_entry_activity").select2({
+            dropdownAutoWidth: true,
+            containerCss: {
+                width: "200px"
+            }
         });
 
     });

@@ -28,12 +28,12 @@ class Entry {
      */
     private $id;
 
-   /**
-   * @var integer
-   *
-   * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
-   * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
-   */
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     */
     private $member;
 
     /**
@@ -106,7 +106,8 @@ class Entry {
         $this->activity = $activity;
         return $this;
     }
-   public function getMember() {
+
+    public function getMember() {
         return $this->member;
     }
 
@@ -145,6 +146,32 @@ class Entry {
         return $this->entryDate;
     }
 
-// </editor-fold>
+    public function getCreated() {
+        return $this->created;
+    }
 
+    public function getModified() {
+        return $this->modified;
+    }
+
+    public function getDeleted() {
+        return $this->deleted;
+    }
+
+    public function setCreated(DateTime $created) {
+        $this->created = $created;
+        return $this;
+    }
+
+    public function setModified(DateTime $modified) {
+        $this->modified = $modified;
+        return $this;
+    }
+
+    public function setDeleted(Datetime $deleted) {
+        $this->deleted = $deleted;
+        return $this;
+    }
+
+// </editor-fold>
 }

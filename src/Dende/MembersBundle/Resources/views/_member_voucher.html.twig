@@ -1,12 +1,13 @@
 <div class="container-fluid">
     <div class="row-fluid">
+        {% if voucher.getEndDate() is not null %}
         <div class="span6">
             <div class="page-header">
-                <h4>Wykorzystane dni <span class="badge badge-important header-badge">z {{ totalDays }}</span></h4>
+                <h4>Wykorzystane dni <small class="pull-right">z {{ totalDays }}</small></h4>
             </div>
             <input type="text" class="dial"
                    value="{{ pastDays }}"
-                   data-width="200"
+                   data-width="120"
                    data-angleOffset="-125"
                    data-angleArc="250"
                    data-fgColor="#3399CC"
@@ -15,26 +16,30 @@
                    data-linecap="round"
                    data-readOnly="true" disabled="DISABLED" />
         </div>
+        {% endif %}
+
+        {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
         <div class="span6">
             <div class="page-header">
-                <h4>Wykorzystane wejścia <span class="badge badge-important header-badge">z {{ voucher.getAmount() }}</span></h4>
+                <h4>Wykorzystane wejścia <small class="pull-right">z {{ voucher.getAmount() }}</small></h4>
             </div>
             <input type="text" value="{{ usedEntries }}" class="dial"
                    data-linecap="round"
                    data-angleOffset="-125"
                    data-angleArc="250"
-                   data-width="200"
+                   data-width="120"
                    data-fgColor="#CC3333"
                    data-min="0"
                    data-max="{{ voucher.getAmount() }}"
                    data-readOnly="true" disabled="DISABLED" />
         </div>
+        {% endif %}
     </div>
 
     <div class="row-fluid">
         <div class="span12">
             <div class="page-header">
-                <h4>Data ważności</h4>
+                <h4>Data ważności{% if member.getCreated().getTimestamp() > 0 %}<small class="pull-right">sprzedano: {{ member.getCreated()|date("d.m.Y") }}</small>{% endif %}</h4>
             </div>
 
             <ul class="bigBtnIcon">
@@ -51,28 +56,6 @@
                     </a>
                 </li>
             </ul>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="page-header">
-                <h4>Kod karnetu</h4>
-            </div>
-
-            {{ voucher.getBarcode() }}
-
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="page-header">
-                <h4>Data sprzedaży</h4>
-            </div>
-            {% if member.getCreated().getTimestamp() > 0 %}
-            {{ member.getCreated()|date("d.m.Y") }}
-            {% else %}
-            brak informacji            
-            {% endif %}
         </div>
     </div>
 </div>

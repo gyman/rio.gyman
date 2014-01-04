@@ -24,7 +24,7 @@ class Event
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
+     * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity", inversedBy="events")
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $activity;

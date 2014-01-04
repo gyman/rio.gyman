@@ -14,10 +14,15 @@ class Activity {
 
     /**
      * @ORM\ManyToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher" , mappedBy="activities")
-     
+
      */
     private $vouchers;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="Dende\ScheduleBundle\Entity\Event", mappedBy="activity")
+     */
+    private $events;
+
     /**
      * @var integer
      *
@@ -62,6 +67,24 @@ class Activity {
      */
     public function getName() {
         return $this->name;
+    }
+
+    public function getVouchers() {
+        return $this->vouchers;
+    }
+
+    public function getEvents() {
+        return $this->events;
+    }
+
+    public function setVouchers($vouchers) {
+        $this->vouchers = $vouchers;
+        return $this;
+    }
+
+    public function setEvents($events) {
+        $this->events = $events;
+        return $this;
     }
 
 }

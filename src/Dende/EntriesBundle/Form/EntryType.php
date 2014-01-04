@@ -52,8 +52,32 @@ class EntryType extends AbstractType {
      */
     private $allActivities;
 
+    /**
+     *
+     * @var ArrayCollection 
+     */
+    private $todayActivities;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    /**
+     * 
+     * @return ArrayCollection
+     */
+    public function getTodayActivities() {
+        return $this->todayActivities;
+    }
+
+    /**
+     * 
+     * @param \Doctrine\Common\Collections\ArrayCollection $todayActivities
+     * @return \Dende\EntriesBundle\Form\EntryType
+     */
+    public function setTodayActivities(ArrayCollection $todayActivities) {
+        $this->todayActivities = $todayActivities;
+        return $this;
+    }
 
     /**
      * 
@@ -172,6 +196,7 @@ class EntryType extends AbstractType {
         $this->currentActivities = new ArrayCollection();
         $this->voucherActivities = new ArrayCollection();
         $this->allActivities = new ArrayCollection();
+        $this->todayActivities = new ArrayCollection();
     }
 
     /**
@@ -198,28 +223,6 @@ class EntryType extends AbstractType {
                     "expanded" => true
                 ))
         ;
-// <editor-fold defaultstate="collapsed" desc="event listener for pre set data">
-
-        /*
-          $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-          $form = $event->getForm();
-          $entry = $form->getConfig()->getData();
-          $voucher = $entry->getVoucher();
-
-          if ($voucher)
-          {
-          $form->add(
-          $builder->create(
-          'birthdate', "date", array(
-          "widget" => "single_text",
-          //                            "empty_value" => false,
-          "format" => "dd.MM.yyyy"
-          ))
-          ->addModelTransformer(new Transformer())
-          );
-          }
-          }); */
-        // </editor-fold>
     }
 
     /**
@@ -242,11 +245,13 @@ class EntryType extends AbstractType {
         $this->loadCurrentActivities();
         $this->loadVoucherActivities();
         $this->loadAllActivities();
+        $this->loadTodayActivities();
 
         return array(
-            "Trwające"  => $this->getCurrentActivities()->toArray(),
-            "Karnet"    => $this->getVoucherActivities()->toArray(),
-            "Wszystkie" => $this->getAllActivities()->toArray()
+            "Trwające"   => $this->getCurrentActivities()->toArray(),
+            "Dzisiejsze" => $this->getTodayActivities()->toArray(),
+            "Karnet"     => $this->getVoucherActivities()->toArray(),
+            "Wszystkie"  => $this->getAllActivities()->toArray()
         );
     }
 
@@ -254,6 +259,7 @@ class EntryType extends AbstractType {
      * 
      * @return array
      */
+
     protected function loadCurrentActivities() {
         $currentEventsCollection = $this->getEventRepository()->getCurrentEvents();
 
@@ -289,6 +295,17 @@ class EntryType extends AbstractType {
         {
             foreach ($activitiesCollection as $activity) {
                 $this->getAllActivities()->offsetSet($activity->getId(), $activity->getName());
+            }
+        }
+    }
+
+    protected function loadTodayActivities() {
+        $activitiesCollection = $this->getActivityRepository()->getTodayActivities();
+        
+        if (count($activitiesCollection) > 0)
+        {
+            foreach ($activitiesCollection as $activity) {
+                $this->getTodayActivities()->offsetSet($activity->getId(), $activity->getName());
             }
         }
     }

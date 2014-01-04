@@ -1,16 +1,3 @@
-.voucherColumn {
-  width: 200px;
-}
-.voucherColumn .progress {
-  margin-bottom: 2px;
-  margin-top: 2px;
-  height: 24px;
-  line-height: 24px;
-}
-.voucherColumn .progress .bar {
-  height: inherit;
-  line-height: inherit;
-}
 .icon a {
   text-decoration: none;
 }
@@ -19,8 +6,8 @@ div#editMemberModal.modal {
   margin-left: -500px;
 }
 div#editMemberModal.modal img#memberFoto {
-  max-width: 320px;
-  max-height: 240px;
+  max-width: 270px;
+  max-height: 200px;
 }
 div#editMemberModal.modal .modal-body {
   max-height: 1200px;

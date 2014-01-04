@@ -133,8 +133,8 @@ class VoucherManager extends BaseManager {
         $voucher->setMember($member);
         $voucher->setStartDate($startDate);
         $voucher->setEndDate($endDate);
-        $voucher->setPrice(100);
-        $voucher->setAmount(10);
+        $voucher->setPrice(150);
+        $voucher->setAmount(null);
         $voucher->setIsActive(true);
         $voucher->setBarcode(uniqid());
 

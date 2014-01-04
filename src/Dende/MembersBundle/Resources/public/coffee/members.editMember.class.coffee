@@ -151,8 +151,8 @@ class root.EditMember
     @image = @ctx.getImageData(0, 0, 320, 240)
     
     $(@cameraId).webcam
-      width: 320
-      height: 240
+      width: 270
+      height: 200
       mode: "callback"
       swffile: @swffile
       onCapture: ->

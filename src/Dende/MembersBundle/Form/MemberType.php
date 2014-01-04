@@ -58,6 +58,7 @@ class MemberType extends AbstractType {
                 ->add('email')
                 ->add('notes')
                 ->add('zipcode')
+                ->add('barcode')
                 ->add('foto', 'hidden')
                 ->add('fotoUploader', "file", array(
                     "mapped" => false,

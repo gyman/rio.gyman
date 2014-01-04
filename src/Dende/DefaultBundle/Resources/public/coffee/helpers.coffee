@@ -25,12 +25,8 @@ window.setupNewVoucherModalForSelling = ->
       
   $("#dende_vouchersbundle_voucher_startDate, #dende_vouchersbundle_voucher_endDate").datepicker
       dateFormat: "dd.mm.yy"
-      
-  activities = []
-  $.each $("#dende_vouchersbundle_voucher_activities option"), (i,item) ->
-    activities.push $(item).val()  
 
-  $("#dende_vouchersbundle_voucher_activities").val(activities).select2
+  $("#dende_vouchersbundle_voucher_activities").select2
     dropdownAutoWidth : true
     containerCss : 
       width : "200px"
@@ -46,7 +42,7 @@ window.setupNewVoucherModalForSelling = ->
     start: 1000
     numberFormat: "C"
     
-  $footer.off("click").on "click", "a#createNewVoucher", (e) ->
+  $footer.off("click.createNewVoucher").on "click.createNewVoucher", "a#createNewVoucher", (e) ->
     e.preventDefault()
     $form = $("form#voucherForm",$(modal))
     container = $(".modal-body",$(modal))
@@ -57,7 +53,8 @@ window.setupNewVoucherModalForSelling = ->
       url: action
       data: data
       success: (response) ->
-        container.html response
+        $(modal).modal "hide"
+        window.location.reload()
       error: (xhr, textStatus, errorThrown) ->
         if xhr.status == 400
           container.html xhr.responseText

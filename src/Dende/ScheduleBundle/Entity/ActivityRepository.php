@@ -21,4 +21,18 @@ class ActivityRepository extends EntityRepository {
         return $this->getActivitiesQuery()->getQuery()->execute();
     }
 
+    public function getTodayActivities($today = null) { {
+            if (!$today)
+            {
+                $today = strtolower(date('l'));
+            }
+
+            return $this->getActivitiesQuery()
+                            ->join("a.events", "e")
+                            ->where("e.dayOfWeek = :day")
+                            ->setParameter("day", $today)
+                            ->getQuery()->execute();
+        }
+    }
+
 }
