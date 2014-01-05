@@ -1,3 +1,53 @@
+td.profileColumn {
+    .avatar  {
+        border: 1px solid #E3E2E2;
+        border-radius: 2px;
+        float: left;
+        height: 40px;
+        margin-left: 15px;
+        padding: 2px;
+        width: 40px;
+        overflow: hidden;
+
+        img {
+            height: 60px;
+        }
+    }
+
+    .name {
+        float: left;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .email {
+        float: left;
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+
+    text-align: left;
+
+    div.status {
+        float: right;
+        margin-right: 15px;
+        margin-top: 2px;
+
+        small {
+            color: #999999;
+            font-size: 11px;
+        }
+    }
+
+    a.btn.editMember {
+        opacity: 0.3;
+    }
+
+    &:hover a.btn.editMember {
+        opacity: 1
+    }
+}
+
 .icon a {
     text-decoration: none;
 }
@@ -57,32 +107,7 @@ table#membersList {
 
         tr {
             td{
-                .avatar  {
-                    border: 1px solid #E3E2E2;
-                    border-radius: 2px;
-                    float: left;
-                    height: 40px;
-                    margin-left: 15px;
-                    padding: 2px;
-                    width: 40px;
-                    overflow: hidden;
 
-                    img {
-                        height: 60px;
-                    }
-                }
-
-                .name {
-                    float: left;
-                    margin-left: 10px;
-                    margin-right: 10px;
-                }
-
-                .email {
-                    float: left;
-                    margin-left: 10px;
-                    margin-top: 2px;
-                }
             }
         }
     }

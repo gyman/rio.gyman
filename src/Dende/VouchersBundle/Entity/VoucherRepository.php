@@ -9,6 +9,10 @@ use DateTime;
 
 class VoucherRepository extends EntityRepository {
 
+    public function getAllVouchers() {
+        return $this->getVouchersQuery()->getQuery()->execute();
+    }
+
     /**
      * Get all Vouchers query
      * @return Doctrine\ORM\QueryBuilder
@@ -55,7 +59,7 @@ class VoucherRepository extends EntityRepository {
         $query = $this->getVouchersQuery();
         $query->where("v.member = :member");
         $query->andWhere("v.startDate is null OR v.startDate < :moment");
-        $query->andWhere("v.endDate is null OR v.endDate > :moment");      
+        $query->andWhere("v.endDate is null OR v.endDate > :moment");
         $query->andWhere("v.amountLeft > 0 OR v.amountLeft is null");
         $query->setParameters(array(
             "moment" => new DateTime(),

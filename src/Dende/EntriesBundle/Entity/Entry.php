@@ -125,27 +125,6 @@ class Entry {
         return $this->id;
     }
 
-    /**
-     * Set entryDate
-     *
-     * @param \DateTime $entryDate
-     * @return Entry
-     */
-    public function setEntryDate($entryDate) {
-        $this->entryDate = $entryDate;
-
-        return $this;
-    }
-
-    /**
-     * Get entryDate
-     *
-     * @return \DateTime 
-     */
-    public function getEntryDate() {
-        return $this->entryDate;
-    }
-
     public function getCreated() {
         return $this->created;
     }

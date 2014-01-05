@@ -15,19 +15,27 @@ class EventRepository extends EntityRepository {
     public function getCurrentEvents() {
         $dayOfWeek = strtolower(date('l'));
         $hour = date('H:i');
-        
+
         $queryBuilder = $this->createQueryBuilder("e")
                 ->where("e.dayOfWeek = :day")
                 ->andWhere("e.startHour <= :hour")
                 ->andWhere("e.endHour >= :hour")
                 ->setParameters(array(
-                    "day" => $dayOfWeek,
-                    "hour" => $hour
-                ));
-        
+            "day"  => $dayOfWeek,
+            "hour" => $hour
+        ));
+
         $query = $queryBuilder->getQuery();
-        
-        return $query->execute();                
+
+        return $query->execute();
+    }
+
+    public function getAllEvents() {
+        $queryBuilder = $this->createQueryBuilder("e");
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->execute();
     }
 
 }

@@ -28,7 +28,7 @@ class ListController extends Controller {
      * @Route("/", name="_members_list")
      * @Template("MembersBundle:List:list.html.twig")
      */
-    public function listAction() {
+    public function indexAction() {
         $memberManager = $this->get("member_manager");
         $members = $memberManager->getMembers();
 

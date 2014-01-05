@@ -1,15 +1,18 @@
 <ul>
-    {# <li><a href="{{ path("_dashboard") }}"><span class="icon16 icomoon-icon-stats-up"></span>Pulpit nawigatora</a></li> #}
+    <li><a href="{{ path("_dashboard") }}"><span class="icon16 icomoon-icon-stats-up"></span>Pulpit nawigatora</a></li>
     <li>
         <a href="{{ path("_members_list") }}" class="hasUl drop"><span class="icon16 icomoon-icon-list"></span>Użytkownicy<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
         <ul class="sub" style="display: block;">
             <li><a href="{{ path("_members_list") }}"><span class="icon16 icomoon-icon-file"></span>Lista</a></li>
             <li><a href="{{ path("_members_gallery") }}"><span class="icon16 icomoon-icon-file"></span>Galeria</a></li>
-    {# <li><a href="{{path("_member_new")}}"><span class="icon16 icomoon-icon-file createNewMember"></span>Dodaj osobę</a></li> #}
         </ul>
     </li>
-    {#
-    <li><a href="{{ path("_members_list") }}"><span class="icon16 icomoon-icon-stats-up"></span>Karnety</a></li>
-    <li><a href="{{ path("_members_list") }}"><span class="icon16 icomoon-icon-stats-up"></span>Treningi</a></li>
-    #}
+    <li>
+        <a href="{{ path("_members_list") }}" class="hasUl drop"><span class="icon16 icomoon-icon-list"></span>Zajęcia<span class="hasDrop icon16 icomoon-icon-arrow-down-2"></span></a>
+        <ul class="sub" style="display: block;">
+            <li><a href="{{ path("_schedule_calendar") }}"><span class="icon16 icomoon-icon-file"></span>Harmonogram</a></li>
+            <li><a href="{{ path("_voucher_list") }}"><span class="icon16 icomoon-icon-file"></span>Karnety</a></li>
+            <li><a href="{{ path("_entries_list") }}"><span class="icon16 icomoon-icon-file"></span>Wejścia</a></li>
+        </ul>
+    </li>
 </ul>
