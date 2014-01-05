@@ -1,17 +1,17 @@
 entries:
     resource: "@EntriesBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /entries
 
 schedule:
     resource: "@ScheduleBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /schedule
 
 layout:
     resource: "@LayoutBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /layout
 
 default:
     resource: "@DefaultBundle/Controller/"
@@ -21,12 +21,12 @@ default:
 members:
     resource: "@MembersBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /members
 
 vouchers:
     resource: "@VouchersBundle/Controller/"
     type:     annotation
-    prefix:   /voucher
+    prefix:   /vouchers
 
 oneup_uploader:
     resource: .
