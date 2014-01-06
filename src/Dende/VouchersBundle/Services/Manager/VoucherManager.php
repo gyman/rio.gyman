@@ -98,7 +98,7 @@ class VoucherManager extends BaseManager {
         $currentVoucher = $member->getCurrentVoucher();
 
         $voucher = new Voucher();
-//        $startDate = new \DateTime();
+        $startDate = new \DateTime();
 //
         if ($currentVoucher)
         {

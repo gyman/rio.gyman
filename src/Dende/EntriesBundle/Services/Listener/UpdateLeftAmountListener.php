@@ -20,16 +20,20 @@ class UpdateLeftAmountListener {
         /** @var Voucher */
         $entry = $args->getEntity();
 
-        if ($entry instanceof Entry && $entry->getVoucher() && $entry->getEntryType() == "voucher")
+        if ($entry instanceof Entry && $entry->getVoucher() && $entry->getEntryType() ==
+                "voucher")
         {
             $voucher = $entry->getVoucher();
-            
-            $amountLeft = $voucher->getAmountLeft() - 1;
 
-            $voucher->setAmountLeft($amountLeft);
-            $this->container->get("voucher_manager")->save($voucher);
+            if ($voucher->getAmount() !== null && $voucher->getAmount() > 0)
+            {
+                $amountLeft = $voucher->getAmountLeft() - 1;
 
-            $this->container->get('logger')->info(sprintf("Voucher#%d leftAmount set to %d", $voucher->getId(), $voucher->getAmountLeft()));
+                $voucher->setAmountLeft($amountLeft);
+                $this->container->get("voucher_manager")->save($voucher);
+
+                $this->container->get('logger')->info(sprintf("Voucher#%d leftAmount set to %d", $voucher->getId(), $voucher->getAmountLeft()));
+            }
         }
     }
 
