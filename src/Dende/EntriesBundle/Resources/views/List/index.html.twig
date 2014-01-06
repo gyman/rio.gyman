@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="heading">
-    <h3>Wejścia</h3>                    
-    <a href="{{path("_member_new")}}" class="btn pull-right createNewEntry"><span class="icon32 icomoon-icon-new green"></span>Nowe wejście</a>
+    <h3>Wejścia <small>(tylko odczyt)</small></h3>                    
+    {# <a href="{{path("_member_new")}}" class="btn pull-right createNewEntry"><span class="icon32 icomoon-icon-new green"></span>Nowe wejście</a> #}
 </div><!-- End .heading-->
 
 
@@ -52,8 +52,10 @@
                             </td>
                             <td class="actionColumn">
                                 <div class="btn-group">
+                                    {#
                                     <a class="btn btn-mini addEntrance" href="{{ path("_entrance_add", {"id" : entry.getMember().getId() }) }}"><span class="icomoon-icon-signup "></span> Edytuj</a>
                                     <a class="btn btn-mini addEntrance" href=""><span class="icomoon-icon-signup "></span> Usuń</a>
+#}
                                 </div>
                             </td>
                         </tr>

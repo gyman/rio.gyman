@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="heading">
-    <h3>Karnety</h3>                    
-    <a href="{{path("_member_new")}}" class="btn pull-right createNewVoucher"><span class="icon32 icomoon-icon-new green"></span>Nowy karnet</a>
+    <h3>Karnety <small>(tylko odczyt)</small></h3>                    
+    {# <a href="{{path("_member_new")}}" class="btn pull-right createNewVoucher"><span class="icon32 icomoon-icon-new green"></span>Nowy karnet</a> #}
 </div><!-- End .heading-->
 
 <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
@@ -69,8 +69,8 @@
                             </td>
                             <td class="actionColumn">
                                 <div class="btn-group">
-                                    <a class="btn btn-mini addEntrance" href="{{ path("_entrance_add", {"id" : voucher.getMember().getId() }) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
-                                    <a class="btn btn-mini addEntrance" href=""><span class="icomoon-icon-signup "></span> Zamknij</a>
+                                    {#<a class="btn btn-mini addEntrance" href="{{ path("_entrance_add", {"id" : voucher.getMember().getId() }) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
+                                    <a class="btn btn-mini addEntrance" href=""><span class="icomoon-icon-signup "></span> Zamknij</a>#}
                                 </div>
                             </td>
                         </tr>
