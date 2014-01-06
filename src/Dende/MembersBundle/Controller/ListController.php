@@ -74,7 +74,7 @@ class ListController extends Controller {
      * @Template("MembersBundle:List:gallery.html.twig")
      */
     public function galleryAction() {
-        return $this->listAction();
+        return $this->indexAction();
     }
 
     /**
