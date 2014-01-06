@@ -39,7 +39,7 @@
                         <tr>
                             <th class="beltColor"></th>
                             <th>Imię i nazwisko</th>
-                            {# <th>Ost. wizyta</th> #}
+                            <th>Ost. wizyta</th>
                             <th>Karnet</th>
                             <th>Akcje</th>
                         </tr>
@@ -67,6 +67,12 @@
                             <td class="profileColumn">
                                 {% include "MembersBundle:List:_member_column.html.twig" with {"member" : member } %}
                             </td>
+                            <td class="lastEntryColumn">
+                                {% if member.getLastEntry() is not null %}
+                                <div class="badge badge-success">{{ member.getLastEntry().getCreated()|date("d.m.y H:i") }}</div>
+                                <div class="badge badge-info">{{ member.getLastEntry().getActivity().getName() }}</div>
+                                {% endif %}
+                            </td>
                             <td class="voucherColumn">
                                 {# { render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) } #}
                                 {% if member.getCurrentVoucher() is not null %}
@@ -74,9 +80,9 @@
                                     {% set endDate = voucher.getEndDate() %}
 
                                     {% if endDate is not null %}
-                                <div class="badge badge-success">{{ voucher.getStartDate()|date("m.d") }} - {{  endDate|date("d.m") }}</div>
+                                <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m") }} - {{  endDate|date("d.m") }}</div>
                                     {%else %}
-                                <div class="badge badge-success">{{ voucher.getStartDate()|date("m.d.y") }}</div> - <div class="badge">open</div>
+                                <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m.y") }}</div> - <div class="badge">open</div>
                                     {%endif%}
 
                                     {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
@@ -129,6 +135,7 @@
         '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
         '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
         '@MembersBundle/Resources/public/coffee/members.list.coffee'
+        '@EntriesBundle/Resources/public/coffee/entries.modal.class.coffee'
         '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
         '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
         '@DefaultBundle/Resources/public/js/jquery.fileupload.js'

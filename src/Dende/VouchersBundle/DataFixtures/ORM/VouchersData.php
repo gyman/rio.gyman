@@ -34,32 +34,21 @@ class VouchersData extends AbstractFixture implements OrderedFixtureInterface {
         $voucher = new Voucher();
         $voucher->setAmount($amount);
         $voucher->setAmountLeft($amountLeft);
-        $voucher->setBarcode($barcode);
         $voucher->setEndDate(new \DateTime($endDate));
         $voucher->setStartDate(new \DateTime($startDate));
-        $voucher->setIsActive($isActive);
         $voucher->setPrice($price);
-        
+
         if ($activities)
         {
             $activities = explode(",", $activities);
             $collection = new ArrayCollection();
-            foreach($activities as $activity)
-            {
+            foreach ($activities as $activity) {
                 $collection->add($this->getReference($activity));
             }
             $voucher->setActivities($collection);
         }
-        
-        if ($member)
-        {
-            $voucher->setMember($this->getReference($member));
-        }
 
-        if ($previousVoucher)
-        {
-            $voucher->setPreviousVoucher($this->getReference($previousVoucher));
-        }
+        $voucher->setMember($this->getReference($member));
 
         $this->manager->persist($voucher);
         $this->manager->flush();

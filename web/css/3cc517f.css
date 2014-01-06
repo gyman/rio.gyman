@@ -1,3 +1,47 @@
+table tbody td.profileColumn {
+  text-align: left;
+}
+table tbody td.profileColumn .avatar {
+  border: 1px solid #E3E2E2;
+  border-radius: 2px;
+  float: left;
+  height: 40px;
+  margin-left: 15px;
+  padding: 2px;
+  width: 40px;
+  overflow: hidden;
+}
+table tbody td.profileColumn .avatar img {
+  height: 60px;
+}
+table tbody td.profileColumn .name {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+table tbody td.profileColumn .email {
+  float: left;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+table tbody td.profileColumn div.status {
+  float: right;
+  margin-right: 15px;
+  margin-top: 2px;
+}
+table tbody td.profileColumn div.status small {
+  color: #999999;
+  font-size: 11px;
+}
+table tbody td.profileColumn a.btn.editMember {
+  opacity: 0.3;
+}
+table tbody td.profileColumn:hover a.btn.editMember {
+  opacity: 1;
+}
+table tbody td.profileColumn .action {
+  text-align: left;
+}
 .icon a {
   text-decoration: none;
 }
@@ -39,27 +83,4 @@ table#membersList .btn-group .btn.dropdown-toggle {
 }
 table#membersList .btn-group .btn.dropdown-toggle span.caret {
   margin-left: 5px;
-}
-table#membersList tbody tr td .avatar {
-  border: 1px solid #E3E2E2;
-  border-radius: 2px;
-  float: left;
-  height: 40px;
-  margin-left: 15px;
-  padding: 2px;
-  width: 40px;
-  overflow: hidden;
-}
-table#membersList tbody tr td .avatar img {
-  height: 60px;
-}
-table#membersList tbody tr td .name {
-  float: left;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-table#membersList tbody tr td .email {
-  float: left;
-  margin-left: 10px;
-  margin-top: 2px;
 }

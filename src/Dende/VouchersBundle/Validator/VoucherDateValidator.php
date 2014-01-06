@@ -21,15 +21,15 @@ class VoucherDateValidator extends ConstraintValidator {
     }
 
     public function validate($voucher, Constraint $constraint) {
-        $previousVoucher = $voucher->getPreviousVoucher();
-
-        if ($previousVoucher && $previousVoucher->getEndDate() > $voucher->getStartDate() && $previousVoucher->getIsActive())
+        $currentVoucher = $voucher->getMember()->getCurrentVoucher();
+       
+        if ($currentVoucher && $currentVoucher->getEndDate() > $voucher->getStartDate() && !$currentVoucher->getDeletedAt())
         {
-            $lastEndDate = $previousVoucher->getEndDate();
+            $currentEndDate = $currentVoucher->getEndDate();
 
-            if ($lastEndDate)
+            if ($currentEndDate)
             {
-                $properDate = $lastEndDate->format("d.m.Y");
+                $properDate = $currentEndDate->format("d.m.Y");
                 $this->context->addViolationAt('startDate', 'Istnieją już karnety wykupione na ten okres! Ustaw datę początkową conajmniej na ' . $properDate);
             }
         }

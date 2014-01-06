@@ -4,6 +4,12 @@
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     Uczestnik nie posiada wykupionego karnetu!
 </div>
+{% elseif voucher.getAmount() is null %}
+<div class="alert alert-info">
+    <strong>Informacja.</strong>
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    Uczestnik posiada karnet OPEN.
+</div>
 {% elseif voucher.getAmountLeft() == 0 %}
 <div class="alert alert-error">
     <strong>Uwaga!</strong>
@@ -51,6 +57,7 @@
 <script>
     $(function() {
 
+/*
         $("#addEntrance").off("click.sendForm").on("click.sendForm", function() {
             var $form = $("form#entranceForm");
             var $modal = $("div#editEntranceModal");
@@ -69,6 +76,7 @@
                 $(".modal-body", $modal).html(xhr.responseText);
             });
         });
+*/
 
         $("input[name='dende_entriesbundle_entry\\\[entryType\\\]']").uniform();
 

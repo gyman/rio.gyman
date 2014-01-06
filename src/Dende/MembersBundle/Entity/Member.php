@@ -104,7 +104,7 @@ class Member {
     private $gender;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher", mappedBy="member")
+     * @ORM\OneToMany(targetEntity="Dende\VouchersBundle\Entity\Voucher", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
      */
     protected $vouchers;
 
@@ -113,6 +113,12 @@ class Member {
      * @ORM\JoinColumn(name="current_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected $currentVoucher;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Dende\EntriesBundle\Entity\Entry")
+     * @ORM\JoinColumn(name="last_entry_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
+    protected $lastEntry;
 
     /**
      * @var string $gender
@@ -130,7 +136,7 @@ class Member {
     private $nameSlug;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member")
+     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
      */
     private $entries;
 
@@ -395,6 +401,15 @@ class Member {
 
     public function setCurrentVoucher($currentVoucher) {
         $this->currentVoucher = $currentVoucher;
+        return $this;
+    }
+
+    public function getLastEntry() {
+        return $this->lastEntry;
+    }
+
+    public function setLastEntry($lastEntry) {
+        $this->lastEntry = $lastEntry;
         return $this;
     }
 

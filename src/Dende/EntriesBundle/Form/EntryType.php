@@ -242,24 +242,34 @@ class EntryType extends AbstractType {
     }
 
     public function getActivities() {
-        $this->loadCurrentActivities();
-        $this->loadVoucherActivities();
-        $this->loadAllActivities();
-        $this->loadTodayActivities();
 
-        return array(
-            "Trwające"   => $this->getCurrentActivities()->toArray(),
-            "Dzisiejsze" => $this->getTodayActivities()->toArray(),
-            "Karnet"     => $this->getVoucherActivities()->toArray(),
-            "Wszystkie"  => $this->getAllActivities()->toArray()
-        );
+//        $voucher = $this->getEntry()->getVoucher();
+//
+//        if ($voucher && count($voucher->getActivities()) > 0)
+//        {
+//            $this->loadVoucherActivities();
+//            return $this->getVoucherActivities()->toArray();
+//        }
+//        else
+//        {
+            $this->loadCurrentActivities();
+            $this->loadVoucherActivities();
+            $this->loadAllActivities();
+            $this->loadTodayActivities();
+
+            return array(
+                "Trwające"   => $this->getCurrentActivities()->toArray(),
+                "Dzisiejsze" => $this->getTodayActivities()->toArray(),
+                "Karnet"     => $this->getVoucherActivities()->toArray(),
+                "Wszystkie"  => $this->getAllActivities()->toArray()
+            );
+//        }
     }
 
     /**
      * 
      * @return array
      */
-
     protected function loadCurrentActivities() {
         $currentEventsCollection = $this->getEventRepository()->getCurrentEvents();
 
@@ -301,7 +311,7 @@ class EntryType extends AbstractType {
 
     protected function loadTodayActivities() {
         $activitiesCollection = $this->getActivityRepository()->getTodayActivities();
-        
+
         if (count($activitiesCollection) > 0)
         {
             foreach ($activitiesCollection as $activity) {
@@ -319,7 +329,8 @@ class EntryType extends AbstractType {
 
         $voucher = $this->getEntry()->getVoucher();
 
-        if ($voucher && $voucher->getAmountLeft() > 0)
+        if ($voucher && ($voucher->getAmountLeft() > 0 OR $voucher->getAmount() ==
+                null))
         {
             $choices->offsetSet("voucher", "na karnet");
         }

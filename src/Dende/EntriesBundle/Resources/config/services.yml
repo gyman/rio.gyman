@@ -28,7 +28,13 @@ services:
         arguments: ["@service_container"]
         tags:
             - { name: doctrine.event_listener, event: postPersist }
-            
+    dende.update_last_entry_listener:
+        class: Dende\EntriesBundle\Services\Listener\UpdateLastEntryListener
+        # TODO: very bad, temporarily workaround of circular
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }            
+
 #    validator.left_amount_validator:
 #        class: Dende\EntriesBundle\Validator\LeftAmountValidator
 #        tags:

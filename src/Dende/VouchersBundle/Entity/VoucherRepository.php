@@ -10,7 +10,9 @@ use DateTime;
 class VoucherRepository extends EntityRepository {
 
     public function getAllVouchers() {
-        return $this->getVouchersQuery()->getQuery()->execute();
+        return $this->getVouchersQuery()
+                ->orderBy("v.created","DESC")
+                ->getQuery()->execute();
     }
 
     /**

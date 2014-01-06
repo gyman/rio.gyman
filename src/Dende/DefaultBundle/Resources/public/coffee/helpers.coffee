@@ -15,7 +15,7 @@ window.setupNewVoucherModalForClosingPrevious = ->
     e.preventDefault()
     url = $(e.target).attr "href"
     $(".modal-body", modal).load url, (data) ->
-      console.log data
+      return
      
 # setups modal to sell voucher
 

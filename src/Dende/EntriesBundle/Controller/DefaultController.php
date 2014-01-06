@@ -26,14 +26,13 @@ class DefaultController extends Controller {
         );
 
         $entry = new Entry();
-//        $currentVoucher = $this->get('member_manager')->getCurrentVoucher($member);
         $currentVoucher = $member->getCurrentVoucher();
 
         if ($currentVoucher)
         {
             $entry->setVoucher($currentVoucher);
         }
-        
+
         $entryType = new EntryType($this->get("event_repository"), $this->get("activity_repository"));
         $form = $this->createForm($entryType, $entry);
 
@@ -43,13 +42,13 @@ class DefaultController extends Controller {
 
             if ($form->isValid())
             {
-                if($form["entryType"]->getData() != "voucher")
+                if ($form["entryType"]->getData() != "voucher")
                 {
                     $entry->setVoucher(null);
                 }
 
-		$entry->setMember($member);
-                
+                $entry->setMember($member);
+
                 $this->get('entry_manager')->save($entry);
             }
             else
@@ -58,11 +57,14 @@ class DefaultController extends Controller {
             }
         }
 
-        return array(
-            "form"          => $form->createView(),
-            "member"        => $member,
-            "voucher"       => $currentVoucher,
-            "currentEvents" => $this->getDoctrine()->getRepository("ScheduleBundle:Event")->getCurrentEvents()
+        return $response->setContent(
+                        $this->renderView("EntriesBundle:Default:new.html.twig", array(
+                            "form"          => $form->createView(),
+                            "member"        => $member,
+                            "voucher"       => $currentVoucher,
+                            "currentEvents" => $this->getDoctrine()->getRepository("ScheduleBundle:Event")->getCurrentEvents()
+                                )
+                        )
         );
     }
 

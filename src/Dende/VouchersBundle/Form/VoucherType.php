@@ -5,6 +5,7 @@ namespace Dende\VouchersBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Dende\VouchersBundle\Form\DataTransformer\VoucherDateTransformer;
 
 class VoucherType extends AbstractType {
 
@@ -20,19 +21,27 @@ class VoucherType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('startDate', "date", array(
-                    "widget"      => "single_text",
-                    "format"      => "dd.MM.yyyy",
-                ))
-                ->add('endDate', "date", array(
-                    "widget"      => "single_text",
-                    "format"      => "dd.MM.yyyy"
-                ))
+                ->add(
+                        $builder->create(
+                                'startDate', "date", array(
+                            "widget" => "single_text",
+                            "format" => "dd.MM.yyyy",
+                        ))
+                        ->addModelTransformer(new VoucherDateTransformer("start"))
+                )
+                ->add(
+                        $builder->create(
+                                'endDate', "date", array(
+                            "widget" => "single_text",
+                            "format" => "dd.MM.yyyy"
+                        ))
+                        ->addModelTransformer(new VoucherDateTransformer("end"))
+                )
                 ->add('price')
                 ->add('amount')
                 ->add('activities', "entity", array(
                     'class'         => 'ScheduleBundle:Activity',
-                    'property' => 'name',
+                    'property'      => 'name',
                     'multiple'      => true,
                     'query_builder' => function($er) {
                 return $er->createQueryBuilder('a');

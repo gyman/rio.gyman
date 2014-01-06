@@ -19,17 +19,6 @@ use Dende\VouchersBundle\Exception\VoucherManagerException; // </editor-fold>
 
 class DefaultController extends Controller {
 
-//    /**
-//     * @Route("/list", name="_voucher_list")
-//     * @Template("VouchersBundle:List:list.html.twig")
-//     */
-//    public function listAction() {
-//        $memberManager = $this->get("voucher_manager");
-//        $members = $memberManager->getMembers();
-//
-//        return array("members" => $members);
-//    }
-
     /**
      * @Route("/new/member/{id}/decision/{decision}", name="_voucher_new", defaults={"decision" = null})
      * @ParamConverter("member", class="MembersBundle:Member")
@@ -41,7 +30,8 @@ class DefaultController extends Controller {
         );
 
         $voucherManager = $this->get("voucher_manager");
-        $currentVoucher = $this->get("member_manager")->getCurrentVoucher($member);
+        $currentVoucher = $member->getCurrentVoucher();
+        
         $decision = $request->get("decision");
 
         if ($decision == "confirm" && $currentVoucher)

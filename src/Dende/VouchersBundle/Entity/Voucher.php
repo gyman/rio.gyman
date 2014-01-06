@@ -34,12 +34,6 @@ class Voucher {
     private $entries;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dende\VouchersBundle\Entity\Voucher")
-     * @ORM\JoinColumn(name="previous_voucher_id", referencedColumnName="id", onDelete="SET NULL", nullable = true, unique = true)
-     */
-    private $previousVoucher;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -51,22 +45,22 @@ class Voucher {
     /**
      * @var integer
      * 
-     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="vouchers",cascade={"persist"})
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="vouchers")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $member;
 
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="startDate", type="date", nullable = true)
+     * @ORM\Column(name="startDate", type="datetime", nullable = true)
      */
     private $startDate;
 
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="endDate", type="date", nullable = true)
+     * @ORM\Column(name="endDate", type="datetime", nullable = true)
      */
     private $endDate;
 
@@ -79,7 +73,11 @@ class Voucher {
 
     /**
      * @var integer
-     * 
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 999,
+     *      minMessage = "Najmniejsza możliwa liczba wejść na karnet to 1",
+     *      maxMessage = "Maksymalna liczba wejść na karnet to 999")
      * @ORM\Column(name="amount", type="integer", nullable = true)
      */
     private $amount;
@@ -97,13 +95,6 @@ class Voucher {
      * @ORM\Column(name="amount_left", type="integer", nullable = true)
      */
     private $amountLeft;
-
-    /**
-     * @var integer
-     * 
-     * @ORM\Column(name="is_active", type="boolean", nullable = true, options={"default" = 1})
-     */
-    private $isActive;
 
     /**
      * @var DateTime $created
@@ -128,15 +119,6 @@ class Voucher {
 
     // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
-   
-    public function getIsActive() {
-        return $this->isActive;
-    }
-
-    public function setIsActive($isActive) {
-        $this->isActive = $isActive;
-        return $this;
-    }
 
     public function getAmountLeft() {
         return $this->amountLeft;
@@ -207,15 +189,6 @@ class Voucher {
 
     public function setAmount($amount) {
         $this->amount = $amount;
-        return $this;
-    }
-
-    public function getPreviousVoucher() {
-        return $this->previousVoucher;
-    }
-
-    public function setPreviousVoucher($previousVoucher) {
-        $this->previousVoucher = $previousVoucher;
         return $this;
     }
 

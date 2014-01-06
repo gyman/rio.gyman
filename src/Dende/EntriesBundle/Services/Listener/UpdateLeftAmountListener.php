@@ -4,8 +4,6 @@ namespace Dende\EntriesBundle\Services\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Dende\VouchersBundle\Entity\Voucher;
-use Dende\MembersBundle\Entity\Member;
-use DateTime;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Dende\EntriesBundle\Entity\Entry;
 

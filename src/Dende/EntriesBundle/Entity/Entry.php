@@ -15,6 +15,8 @@ use Dende\EntriesBundle\Validator as Validate;
  * })
  * @ORM\Table("entries")
  * @ORM\Entity(repositoryClass="Dende\EntriesBundle\Entity\EntryRepository")
+ *
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Entry {
 // <editor-fold defaultstate="collapsed" desc="fields">
@@ -32,11 +34,12 @@ class Entry {
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="Dende\MembersBundle\Entity\Member", inversedBy="entries")
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $member;
 
     /**
+     * @Validate\ActivityConstraint
      * @ORM\ManyToOne(targetEntity="Dende\ScheduleBundle\Entity\Activity")
      * @ORM\JoinColumn(name="activity_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -73,9 +76,9 @@ class Entry {
     /**
      * @var Datetime $deletedAt
      *
-     * @ORM\Column(name="deleted", type="datetime", nullable=true)
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
-    private $deleted;
+    private $deletedAt;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
@@ -133,8 +136,8 @@ class Entry {
         return $this->modified;
     }
 
-    public function getDeleted() {
-        return $this->deleted;
+    public function getDeletedAt() {
+        return $this->deletedAt;
     }
 
     public function setCreated(DateTime $created) {
@@ -147,8 +150,8 @@ class Entry {
         return $this;
     }
 
-    public function setDeleted(Datetime $deleted) {
-        $this->deleted = $deleted;
+    public function setDeletedAt(Datetime $deleted) {
+        $this->deletedAt = $deleted;
         return $this;
     }
 

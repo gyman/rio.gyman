@@ -1,15 +1,39 @@
-$ ->       
+$ ->     
+  $entranceModal = $("#editEntranceModal")
+  
+  # event na liście
+  
+  $(document).off("click.openAddEntranceModal").on "click.openAddEntranceModal",".addEntrance", (e) ->
+    e.preventDefault()
+    container = $(".modal-body",$entranceModal)
+    href = $(this).attr "href"
+    $.get href, (response) ->
+      container.html response
+      $entranceModal.modal
+        "show" : true
+  
   $entranceModal.on "shown", () ->
     $("input#dende_entriesbundle_entry_entryDate").datetimepicker
       dateFormat: "dd.mm.yy"
-   
-  $(document).on "click","a#addEntrance", (e) ->
+  
+  # event w modalu
+
+  $(document).off("click.addEntrance").on "click.addEntrance","a#addEntrance", (e) ->
     e.preventDefault()
+    
     $form = $("form#entranceForm",$entranceModal)
     container = $(".modal-body",$entranceModal)
     action = $form.attr "action"
     data = $form.serialize()
-    $(".modal-footer",$entranceModal).block BLOCK_CONFIG
+    
+    $(".modal-footer",$entranceModal).block
+      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
+    css : 
+      border: 'none', 
+      backgroundColor:'transparent' 
+    overlayCSS:
+      backgroundColor: '#E8EAEB' 
+      
     $.ajax
       url: action
       data: data
