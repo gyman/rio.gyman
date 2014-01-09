@@ -48,12 +48,6 @@ class MemberType extends AbstractType {
                         "black"  => "czarny"
                     )
                 ))
-                ->add('activities', "choice", array(
-                    'multiple' => true,
-                    'choices'  => $this->getActivitiesFromOptions($options),
-                    "mapped"   => false,
-                    "disabled" => true
-                ))
                 ->add('phone')
                 ->add('email')
                 ->add('notes')
@@ -92,7 +86,7 @@ class MemberType extends AbstractType {
         {
             /** @var Member */
             $member = $options["data"];
-            
+
             /** @var Doctrine\ORM\PersistentCollection $vouchers */
             $vouchersCollection = $member->getVouchers();
 

@@ -1,129 +1,113 @@
-{% extends "base.html.twig" %}
+{% extends "DefaultBundle:List:_abstract_list.html.twig" %}
 
 {% block body_class %}membersList{% endblock %}
 
-{% block body %}
-<div class="heading">
-    <h3>Członkowie klubu</h3>                    
-    <a href="{{path("_member_new")}}" class="btn pull-right createNewMember"><span class="icon32 icomoon-icon-new green"></span>Nowa osoba</a>
-</div><!-- End .heading-->
+{% block headingTitle %}Członkowie klubu{% endblock %}
+{% block buttonPath %}{{path("_member_new")}}{% endblock %}
+{% block buttonClasses %}createNewMember{% endblock %}
+{% block buttonLabel %}Nowa osoba{% endblock %}
 
-<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+{% block listHeaderRightToolbox %}
+<div class="pull-right" id="chooseMembersListForm">
+    <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
+    <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
+</div>
+{% endblock %}
 
-
-<div class="row-fluid">
-
-    <div class="span12">
-
-        <div class="box gradient">
-
-            <div class="title">
-                <div class="pull-right" id="chooseMembersListForm">
-                    <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
-                    <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
-                </div>
-
+{% block listHeaderFilter %}
                 {# TODO unlock for filter
                 <button id="filterModalButton" data-target="#filterModal" role="button" data-toggle="modal" class="btn btn-link pull-left">
                     <span class="icon16 icomoon-icon-cog-2"></span><span class="caret"></span>
                 </button>
                 #}
-                <h4>
-                    <span>{% block membersTitle %}Lista osób{% endblock membersTitle %}</span>
-                </h4>
-            </div>
-            <div class="content noPad clearfix">
-                {% block membersBody %}
-                <table cellpadding="0" cellspacing="0" border="0" class="dynamicTable display table table-bordered" width="100%" id="membersList">
-                    <thead>
-                        <tr>
-                            <th class="beltColor"></th>
-                            <th>Imię i nazwisko</th>
-                            <th>Ost. wizyta</th>
-                            <th>Karnet</th>
-                            <th>Akcje</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-        {% for member in members %}
-                        <tr>
-                            <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}">
-                            {# TODO: funny and ugly, gtfo with this :D #}
-                                <span class="hidden">
-                                {% if member.getBelt() == 'blue' %}
-                                    2
-                                {% elseif member.getBelt() == 'purple' %}
-                                    3
-                                {% elseif member.getBelt() == 'brown' %}
-                                    4
-                                {% elseif member.getBelt() == 'black' %}
-                                    5
-                                {% else %}
-                                    1
-                                {% endif %}
-                                </span>
+{% endblock %}
 
-                            </td>
-                            <td class="profileColumn">
-                                {% include "MembersBundle:List:_member_column.html.twig" with {"member" : member } %}
-                            </td>
-                            <td class="lastEntryColumn">
-                                {% if member.getLastEntry() is not null %}
-                                <div class="badge badge-success">{{ member.getLastEntry().getCreated()|date("d.m.y H:i") }}</div>
-                                <div class="badge badge-info">{{ member.getLastEntry().getActivity().getName() }}</div>
-                                {% endif %}
-                            </td>
-                            <td class="voucherColumn">
-                                {# { render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) } #}
-                                {% if member.getCurrentVoucher() is not null %}
-                                    {% set voucher = member.getCurrentVoucher() %}
-                                    {% set endDate = voucher.getEndDate() %}
+{% block listTitle %}Lista osób{% endblock%}
+{% block listTableId %}membersList{% endblock %}
+{% block listThead %}
+<tr>
+    <th class="beltColor"></th>
+    <th>Imię i nazwisko</th>
+    <th>Ost. wizyta</th>
+    <th>Karnet</th>
+    <th>Akcje</th>
+</tr>
+{% endblock %}
+                
+{% block listTbody %}              
+{% for member in members %}
+<tr data-member="{{member.getId()}}" data-barcode="{{member.getBarcode()}}">
+    <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}">
+    {# TODO: funny and ugly, gtfo with this :D #}
+        <span class="hidden">
+        {% if member.getBelt() == 'blue' %}
+            2
+        {% elseif member.getBelt() == 'purple' %}
+            3
+        {% elseif member.getBelt() == 'brown' %}
+            4
+        {% elseif member.getBelt() == 'black' %}
+            5
+        {% else %}
+            1
+        {% endif %}
+        </span>
 
-                                    {% if endDate is not null %}
-                                <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m") }} - {{  endDate|date("d.m") }}</div>
-                                    {%else %}
-                                <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m.y") }}</div> - <div class="badge">open</div>
-                                    {%endif%}
+    </td>
+    <td class="profileColumn">
+        {% include "MembersBundle:List:_member_column.html.twig" with {"member" : member } %}
+    </td>
+    <td class="lastEntryColumn">
+        {% if member.getLastEntry() is not null %}
+        <div class="badge badge-success">{{ member.getLastEntry().getCreated()|date("d.m.y H:i") }}</div>
+        <div class="badge badge-info">{{ member.getLastEntry().getActivity().getName() }}</div>
+        {% endif %}
+    </td>
+    <td class="voucherColumn">
+        {# { render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) } #}
+        {% if member.getCurrentVoucher() is not null %}
+            {% set voucher = member.getCurrentVoucher() %}
+            {% set endDate = voucher.getEndDate() %}
 
-                                    {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
-                                <div class="badge badge-important">{{ voucher.getAmountLeft() }}/{{ voucher.getAmount() }}</div>
-                                    {%else %}
-                                <div class="badge badge-important">open</div>
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-                            <td class="actionColumn">
-                                <div class="btn-group">
-                                    {# <a class="btn editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a> #}
-                                    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn btn-mini newVoucher"><span class="icomoon-icon-clock"></span> Karnet</a>
-                                    <a class="btn btn-mini addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
+            {% if endDate is not null %}
+        <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m") }} - {{  endDate|date("d.m") }}</div>
+            {%else %}
+        <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m.y") }}</div> - <div class="badge">open</div>
+            {%endif%}
 
-                                    {#
-                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-align-left"></span> Sprzedaż<span class="caret"></span></a>
-                                    <ul class="dropdown-menu pull-right">
-                                      <li><a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher"><span class="icomoon-icon-clock"></span> Karnet</a></li>
-                                      <li><a href="#"><span class="icomoon-icon-cart-3"></span> Towar</a></li>
-                                    </ul> #}
-                                </div>
-                            </td>
-                        </tr>
-        {% endfor %}
-                    </tbody>
-                </table>
-                {% endblock membersBody %}
-            </div>
+            {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
+        <div class="badge badge-important">{{ voucher.getAmountLeft() }}/{{ voucher.getAmount() }}</div>
+            {%else %}
+        <div class="badge badge-important">open</div>
+            {% endif %}
+        {% endif %}
+    </td>
+    <td class="actionColumn">
+        <div class="btn-group">
+            {# <a class="btn editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Pokaż</a> #}
+            <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn btn-mini newVoucher"><span class="icomoon-icon-clock"></span> Karnet</a>
+            <a class="btn btn-mini addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
 
-        </div><!-- End .box -->
+            {#
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-align-left"></span> Sprzedaż<span class="caret"></span></a>
+            <ul class="dropdown-menu pull-right">
+              <li><a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher"><span class="icomoon-icon-clock"></span> Karnet</a></li>
+              <li><a href="#"><span class="icomoon-icon-cart-3"></span> Towar</a></li>
+            </ul> #}
+        </div>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}
 
-    </div><!-- End .span12 -->
 
-</div><!-- End .row-fluid -->
+{% block body %}
+    {{ parent() }}
 
-{% include 'MembersBundle::_filterModal.html.twig' %}
-{% include 'MembersBundle::_memberModal.html.twig' %}
-{% include 'MembersBundle::_voucherModal.html.twig' %}
-{% include 'MembersBundle::_entranceModal.html.twig' %}
-
+    {% include 'MembersBundle::_filterModal.html.twig' %}
+    {% include 'MembersBundle::_memberModal.html.twig' %}
+    {% include 'MembersBundle::_voucherModal.html.twig' %}
+    {% include 'MembersBundle::_entranceModal.html.twig' %}
 {% endblock body %}
 
 {# javascripts #}
@@ -132,10 +116,9 @@
     {{ parent() }}
 
     {% javascripts
-        '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
-        '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
         '@MembersBundle/Resources/public/coffee/members.list.coffee'
         '@EntriesBundle/Resources/public/coffee/entries.modal.class.coffee'
+        '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
         '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
         '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
         '@DefaultBundle/Resources/public/js/jquery.fileupload.js'
@@ -153,7 +136,6 @@
     {{ parent() }}
 
     {% stylesheets filter='cssrewrite'
-        'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
         'bundles/layout/plugins/forms/select2/select2.css'
         'bundles/layout/plugins/forms/select2/select2-bootstrap.css'
         '@MembersBundle/Resources/public/less/members-list.less'

@@ -48,7 +48,14 @@ window.setupNewVoucherModalForSelling = ->
     container = $(".modal-body",$(modal))
     action = $form.attr "action"
     data = $form.serialize()
-    $(".modal-footer",$(modal)).block BLOCK_CONFIG
+    $(".modal-footer",$(modal)).block
+      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
+      css : 
+        border: 'none', 
+        backgroundColor:'transparent' 
+      overlayCSS:
+        backgroundColor: '#E8EAEB'
+        
     $.ajax
       url: action
       data: data

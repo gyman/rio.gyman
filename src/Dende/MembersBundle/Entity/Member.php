@@ -4,6 +4,7 @@ namespace Dende\MembersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Dende\DefaultBundle\Validator as DefaultBundle;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Dende\DefaultBundle\Lib\Globals;
@@ -46,6 +47,10 @@ class Member {
      * @var \DateTime
      * 
      * @Assert\Date(message="Data musi być w formacie DD.MM.RR")
+     * @DefaultBundle\DateRangeConstraint(
+     *      min="100 years ago",
+     *      max="today"
+     * )
      * @ORM\Column(name="birthdate", type="string", length=64, nullable=true)
      */
     private $birthdate;

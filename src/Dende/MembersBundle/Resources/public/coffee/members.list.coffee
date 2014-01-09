@@ -1,7 +1,13 @@
 $ ->   
   jQuery.extend jQuery.fn.dataTableExt.oSort,
     "date-eu-pre": (date) ->
+      date = $(date).text()
+      
       date = date.replace(" ", "")
+
+      if date == ""
+        return
+
       if date.indexOf(".") > 0
         eu_date = date.split(".")
       else
@@ -42,7 +48,17 @@ $ ->
       $memberModal.modal
         "show" : true
     
-  $(document).on "click","a.editMember", (e) ->
+  $(document).on "click","td.profileColumn", (e) ->
+    e.preventDefault()
+    $container = $(".modal-body",$memberModal)
+    href = $("[data-member-edit-url]",this).attr "data-member-edit-url"
+    $.get href, (response) ->
+      $container.html response
+      $(".hideForNewMember").removeClass("hidden").show()
+      $memberModal.modal
+        "show" : true
+        
+  $(document).on "click","#membersGallery a.editMember", (e) ->
     e.preventDefault()
     $container = $(".modal-body",$memberModal)
     href = $(this).attr "href"

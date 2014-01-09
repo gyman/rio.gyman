@@ -52,7 +52,7 @@ class Voucher {
 
     /**
      * @var \DateTime
-     * 
+     * @Assert\NotNull(message = "Należy podać datę początkową")
      * @ORM\Column(name="startDate", type="datetime", nullable = true)
      */
     private $startDate;
@@ -172,12 +172,12 @@ class Voucher {
         return $this;
     }
 
-    public function setStartDate(\DateTime $startDate) {
+    public function setStartDate($startDate) {
         $this->startDate = $startDate;
         return $this;
     }
 
-    public function setEndDate(\DateTime $endDate = null) {
+    public function setEndDate($endDate = null) {
         $this->endDate = $endDate ? clone $endDate : null;
         return $this;
     }

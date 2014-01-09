@@ -19,6 +19,11 @@ class VoucherDateTransformer implements DataTransformerInterface {
      * @return DateTime | null
      */
     public function transform($datetime) {
+        if(!$datetime instanceof DateTime) {
+//            return new DateTime();
+            return null;
+        }
+        
         return $this->fixHour($datetime);
     }
 
@@ -28,9 +33,19 @@ class VoucherDateTransformer implements DataTransformerInterface {
      * @return string
      */
     public function reverseTransform($datetime) {
+        if(!$datetime instanceof DateTime) {
+//            return new DateTime();
+            return null;
+        }
+            
         return $this->fixHour($datetime);
     }
 
+    /**
+     * 
+     * @param DateTime $dateTime
+     * @return \DateTime
+     */
     private function fixHour($dateTime) {
         $string = $dateTime->format("Y-m-d");
 

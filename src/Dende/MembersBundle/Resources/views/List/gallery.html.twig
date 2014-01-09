@@ -1,13 +1,10 @@
 {% extends "MembersBundle:List:list.html.twig" %}
 
 {% block body_class %}membersGallery{% endblock %}
+{% block listTitle %}Galeria osób{% endblock %}
 
-{% block membersTitle %}
-Galeria osób
-{% endblock membersTitle %}
-
-{% block membersBody %}
-<div class="container-fluid">
+{% block listTable %}
+<div class="container-fluid" id="membersGallery">
     {% for member in members %}
         {% if loop.index0%6 == 0 %}<div class="row-fluid">{% endif %}
         <a href="{{ path("_member_edit",{id : member.id}) }}" class="thumbnail span2 editMember">
@@ -17,4 +14,4 @@ Galeria osób
         {% if loop.index0%6 == 5 %}</div>{% endif %}
     {% endfor %}
 </div>
-{% endblock membersBody %}
+{% endblock %}

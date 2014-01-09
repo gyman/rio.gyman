@@ -70,11 +70,6 @@ class root.EditMember
     activities = []
     $.each $("#dende_membersbundle_member_activities option"), (i,item) ->
       activities.push $(item).val()  
-
-    $("#dende_membersbundle_member_activities").val(activities).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "200px"
   
   handleDeleteCheckboxChange: (e) =>
     e.preventDefault()
