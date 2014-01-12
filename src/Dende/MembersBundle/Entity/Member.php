@@ -172,9 +172,19 @@ class Member {
      * @ORM\Column(name="barcode", type="string", nullable = true, unique = true, length = 64)
      */
     private $barcode;
+    private $beltN;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getBeltN() {
+        return $this->beltN;
+    }
+
+    public function setBeltN($beltN) {
+        $this->beltN = $beltN;
+        return $this;
+    }
 
     public function getBarcode() {
         return $this->barcode;

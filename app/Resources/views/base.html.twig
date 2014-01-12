@@ -55,31 +55,26 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body class="{% block body_class %}{% endblock %}">
+        <div id="qLoverlay"></div>
+        <div id="qLbar"></div>
+
+        {{ include("_navigation.html.twig") }}
+
         <div id="header">
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container-fluid">
-                        <a href="{{ path("_members_list") }}" class="brand">RIO Grappling Club</a>
+                        <a href="{{ path("_members_list") }}" class="brand">RGC</a>
+                        <div class="nav-no-collapse">
+                            <ul class="nav pull-right usernav">
+                                <li><a href="#" class="openNavigation"><span class="icon16 icomoon-icon-exit"></span><span class="txt"> Otwórz menu</span></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div><!-- /navbar-inner -->
             </div>
         </div><!-- end header -->
         <div id="wrapper">
-            <!--Sidebar background-->
-            <div id="sidebarbg"></div>
-            <!--Sidebar content-->
-            <div id="sidebar">
-                <div class="sidenav">
-
-                    <div style="margin: -1px 0 0 0;" class="sidebar-widget">
-                        <h5 style="margin-bottom:0" class="title">Navigation</h5>
-                    </div><!-- End .sidenav-widget -->
-
-                    <div class="mainnav">
-                        {{ render(controller('DefaultBundle:Default:menu')) }}
-                    </div>
-                </div>
-            </div><!-- End sidebar content-->
             <!--Body content-->
             <div id="content" class="clearfix">
                 <div class="contentwrapper"><!--Content wrapper-->
@@ -119,18 +114,45 @@
         {% if app.session.flashbag.has('notice') %}
         <script>
             {% for flashMessage in app.session.flashbag.get('notice') %}
-        $.pnotify({
-		    title: 'Uwaga!',
-		    text: '{{ flashMessage|e('js') }}',
-		    icon: false,
-		    opacity: 0.95,
-		    sticker: false,
-		    history: false
-        });
+            $.pnotify({
+                title: 'Uwaga!',
+                text: '{{ flashMessage|e('js') }}',
+                icon: false,
+                opacity: 0.95,
+                sticker: false,
+                history: false
+            });
         {% endfor %}
         </script>
         {% endif %}
-        
+
+        <script>
+            $(function() {
+                $.blockUI.defaults = {
+                    message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>',
+                    css: {
+                        border: 'none',
+                        backgroundColor: 'transparent',
+                    },
+                    overlayCSS: {
+                        backgroundColor: '#E8EAEB',
+                        textAlign: "center",
+                    }
+                };
+
+                $("#qLoverlay,#qLbar").fadeOut(750);
+
+                $(document).on("click", "a.openNavigation", function(e) {
+                    e.preventDefault();
+                    $("#overlayNavigation").fadeIn();
+                });
+
+                $(document).on("click", "#overlayNavigation, #closeOverlayNavigation", function() {
+                    $("#overlayNavigation").fadeOut();
+                });
+            });
+        </script>
+
         {% endblock javascripts %}
 
     </body>

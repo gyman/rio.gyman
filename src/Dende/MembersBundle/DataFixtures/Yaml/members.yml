@@ -98,3 +98,13 @@ Member10:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+Member11:
+    birthdate:          "2009-10-14 12:00:00"
+    deletedAt:          null
+    email:              test11@test2.pl
+    foto:               null
+    gender:             male
+    name:               "Majk Wazalsky"
+    notes:              testing old voucher removal
+    phone:              500666666
+    zipcode:            88-888

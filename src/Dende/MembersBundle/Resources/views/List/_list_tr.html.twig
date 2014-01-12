@@ -1,0 +1,53 @@
+<tr data-member="{{member.getId()}}" data-barcode="{{member.getBarcode()}}" data-details-url="{{ path("_member_details",{id:member.getId()}) }}" class="memberRow">
+    <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}">
+    {# TODO: funny and ugly, gtfo with this :D #}
+        <span class="hidden">
+        {% if member.getBelt() == 'blue' %}
+            2
+        {% elseif member.getBelt() == 'purple' %}
+            3
+        {% elseif member.getBelt() == 'brown' %}
+            4
+        {% elseif member.getBelt() == 'black' %}
+            5
+        {% else %}
+            1
+        {% endif %}
+        </span>
+
+    </td>
+    <td class="profileColumn">
+        {% include "MembersBundle:List:_member_column.html.twig" with {"member" : member } %}
+    </td>
+    <td class="lastEntryColumn">
+        {% if member.getLastEntry() is not null %}
+        <div class="badge badge-success">{{ member.getLastEntry().getCreated()|date("d.m.y H:i") }}</div>
+        <div class="badge badge-info">{{ member.getLastEntry().getActivity().getName() }}</div>
+        {% endif %}
+    </td>
+    <td class="voucherColumn">
+        {# { render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) } #}
+        {% if member.getCurrentVoucher() is not null %}
+            {% set voucher = member.getCurrentVoucher() %}
+            {% set endDate = voucher.getEndDate() %}
+
+            {% if endDate is not null %}
+        <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m") }} - {{  endDate|date("d.m") }}</div>
+            {%else %}
+        <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m.y") }}</div> - <div class="badge">open</div>
+            {%endif%}
+
+            {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
+        <div class="badge badge-important">{{ voucher.getAmountLeft() }}/{{ voucher.getAmount() }}</div>
+            {%else %}
+        <div class="badge badge-important">open</div>
+            {% endif %}
+        {% endif %}
+    </td>
+    <td class="actionColumn">
+        <div class="btn-group">
+            <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn btn-mini newVoucher"><span class="icomoon-icon-clock"></span>+ Karnet</a>
+            <a class="btn btn-mini addEntrance" href="{{ path("_entrance_add", {"id" : member.id}) }}"><span class="icomoon-icon-signup "></span>+ Wejście</a>
+        </div>
+    </td>
+</tr>

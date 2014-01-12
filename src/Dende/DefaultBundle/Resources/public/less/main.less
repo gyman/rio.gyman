@@ -1,64 +1,210 @@
-table.dynamicTable {
-    td {
-        vertical-align: middle;
+.navbar .nav > li > a.openNavigation
+{
+    .openNavigationBefore;
+
+    animation:mymove 5s infinite;
+    -webkit-animation:mymove 5s infinite; 
+
+    &:hover {
+        .openNavigationHover;
     }
-    td.profileColumn {
-        .avatar  {
-            border: 1px solid #E3E2E2;
-            border-radius: 2px;
-            float: left;
-            height: 40px;
-            margin-left: 15px;
-            padding: 2px;
-            width: 40px;
-            overflow: hidden;
+}
 
-            img {
-                height: 60px;
+.openNavigationBefore
+{
+    -webkit-box-shadow: 0 0 2px 0 #298CAD;
+    box-shadow: 0 0 2px 0 #298CAD;
+}
+
+.openNavigationAfter
+{
+    -webkit-box-shadow: 0 0 6px 0 #298CAD;
+    box-shadow: 0 0 6px 0 #298CAD;
+}
+
+@keyframes mymove
+{
+    40%   {
+        .openNavigationBefore;
+    }
+    50% {
+        .openNavigationAfter;
+    }
+    60% {
+        .openNavigationBefore;
+    }
+}
+
+@-webkit-keyframes mymove /* Safari and Chrome */
+{
+    40%   {
+        .openNavigationBefore;
+    }
+    50% {
+        .openNavigationAfter;
+    }
+    60% {
+        .openNavigationBefore;
+    }
+}
+
+.openNavigationHover
+{
+    -webkit-box-shadow: 0 0 10px 0 #298CAD;
+    box-shadow: 0 0 10px 0 #298CAD;
+}
+
+
+div#overlayNavigation
+{
+    background: url("/bundles/layout/images/patterns/3-1.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    visibility: visible;
+    width: 100%;
+    z-index: 666998;
+
+    div#toolbox {
+        position: absolute;
+        top: 50%;
+        margin-top: -300px;
+        left: 50%;
+        margin-left: -236px;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    a#closeOverlayNavigation {
+        display: block;
+        position: absolute;
+        top: 1em;
+        left: 2em;
+    }
+
+    #loggedAs {
+        img {
+            height: 48px;
+        }
+    }
+}
+
+
+div.dataTables_length {
+    margin-left: 15px;
+
+    label {
+        div.selector {
+            width: 75px;
+            select {
+                width: 75px;
+            }
+        }
+    }
+}
+
+
+table.dataTable {
+    tr
+    {
+
+        &.entityDetails {
+            td  {
+                div.entityDetailsContent {
+                    min-height: 24px;
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+
+                    div.blockUI.blockElement {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        margin-left: -12px;
+                        margin-top: -12px;
+                    }
+
+                    div.memberActions {
+                        margin: 10px 20px;
+                    }
+                }
             }
         }
 
-        .name {
-            float: left;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
+        td {
+            vertical-align: middle;
 
-        .email {
-            float: left;
-            margin-left: 10px;
-            margin-top: 2px;
-        }
+            &.profileColumn {
+                .avatar  {
+                    border: 1px solid #E3E2E2;
+                    border-radius: 2px;
+                    float: left;
+                    height: 40px;
+                    margin-left: 15px;
+                    padding: 2px;
+                    width: 40px;
+                    overflow: hidden;
 
-        text-align: left;
+                    img {
+                        height: 60px;
+                    }
+                }
 
-        div.status {
-            float: right;
-            margin-right: 15px;
-            margin-top: 2px;
+                .name {
+                    float: left;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
 
-            small {
-                color: #999999;
-                font-size: 11px;
+                .email {
+                    float: left;
+                    margin-left: 10px;
+                    margin-top: 2px;
+                }
+
+                text-align: left;
+
+                div.status {
+                    float: right;
+                    margin-right: 15px;
+                    margin-top: 2px;
+
+                    small {
+                        color: #999999;
+                        font-size: 11px;
+                    }
+                }
+
+                a.btn.editMember {
+                    opacity: 0.3;
+                }
+
+                &:hover a.btn.editMember {
+                    opacity: 1
+                }
+
+                .action {
+                    text-align: left;
+                }
+
+                a.editMember.thumbnail {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
             }
         }
 
-        a.btn.editMember {
-            opacity: 0.3;
-        }
-
-        &:hover a.btn.editMember {
-            opacity: 1
-        }
-
-        .action {
-            text-align: left;
-        }
-
-        a.editMember.thumbnail {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            text-align: center;
+        &.memberRow {
+            cursor: pointer;
         }
     }
 }
@@ -91,8 +237,4 @@ div#editMemberModal.modal {
             padding: 0;
         }
     }
-}
-
-.dataTables_length {
-    margin-left: 15px;
 }

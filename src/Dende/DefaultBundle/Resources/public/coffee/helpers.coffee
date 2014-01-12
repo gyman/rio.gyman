@@ -1,11 +1,3 @@
-BLOCK_CONFIG = 
-  message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
-  css : 
-    border: 'none', 
-    backgroundColor:'transparent' 
-  overlayCSS:
-    backgroundColor: '#E8EAEB' 
-
 # setups modal to close existing voucher
 
 window.setupNewVoucherModalForClosingPrevious = ->
@@ -48,13 +40,7 @@ window.setupNewVoucherModalForSelling = ->
     container = $(".modal-body",$(modal))
     action = $form.attr "action"
     data = $form.serialize()
-    $(".modal-footer",$(modal)).block
-      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
-      css : 
-        border: 'none', 
-        backgroundColor:'transparent' 
-      overlayCSS:
-        backgroundColor: '#E8EAEB'
+    $(".modal-footer",$(modal)).block()
         
     $.ajax
       url: action
@@ -70,19 +56,6 @@ window.setupNewVoucherModalForSelling = ->
         $(modal).trigger "shown"
       type: $form.attr "method"
 
-# setups modal to print voucher
-
-window.setupNewVoucherModalForPrinting = ->
-  modal = "#newVoucherModal"
-  $footer = updateFooter modal, "#ui-printVoucherData"
-  
-  $footer.off("click").on "click", "#printVoucherButton", (e) ->
-      e.preventDefault()
-      url = $(e.target).attr "href"
-      newWin = window.open(url, 'printVoucher', 'width=800,height=500')
-      window.location.reload()
-      newWin.print()
-    
 # updates modal footer
     
 window.updateFooter = (modal, source) ->

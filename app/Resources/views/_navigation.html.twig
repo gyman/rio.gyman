@@ -1,0 +1,85 @@
+<div id="overlayNavigation" style="display: none;" class="container-fluid">
+    <a href="#" id="closeOverlayNavigation">zamknij</a>
+    <div id="toolbox">
+        {#
+        <div class="page-header">
+            <h4>Jesteś zalogowany/a jako:</h4>
+        </div>
+        <div id="loggedAs" class="container-fluid">
+            <div class="row-fluid">
+                <div class="span6">
+                    <img src="/bundles/members/images/no-profile.gif" class="img-circle">
+                    <h3>Grzegorz Kaszuba <small>(administrator)</small></h3>
+                </div>
+                <div class="span6">
+                    <a href="#" class="btn btn-block">edytuj profil</a>
+                    <a href="#" class="btn btn-block">administracja</a>
+                    <a href="#" class="btn btn-block">ustawienia</a>
+                    <a href="#" class="btn btn-block">wyloguj</a>
+                </div>
+            </div>
+        </div>
+        #}
+        <div class="page-header">
+            <h4>Nawigacja:</h4>
+        </div>
+        <ul class="bigBtnIcon">
+            <li>
+                <a class="tipB" href="{{ path("_members_list") }}" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Członkowie</span>
+                                    {# <span class="notification">5</span> #}
+                </a>
+            </li>
+            <li>
+                <a class="tipB" href="{{ path("_schedule_calendar") }}" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Harmonogram</span>
+                                    {# <span class="notification">5</span> #}
+                </a>
+            </li>
+            <li>
+                <a class="tipB" href="{{ path("_voucher_list") }}" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Karnety</span>
+                                    {# <span class="notification">5</span> #}
+                </a>
+            </li>
+            <li>
+                <a class="tipB" href="{{ path("_entries_list") }}" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Wejścia</span>
+                                    {# <span class="notification">5</span> #}
+                </a>
+            </li>
+        </ul>
+        {#
+        <ul class="bigBtnIcon">
+            <li>
+                <a class="tipB" href="#" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Raporty</span>
+                </a>
+            </li>
+            <li>
+                <a class="tipB" href="#" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Powiadomienia</span>
+                </a>
+            </li>
+            <li>
+                <a class="tipB" href="#" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Kluby</span>
+                </a>
+            </li>
+            <li>
+                <a class="tipB" href="#" oldtitle="I`m with gradient" title="" data-hasqtip="true" aria-describedby="qtip-21">
+                    <span class="icon icomoon-icon-users"></span>
+                    <span class="txt">Sekcje</span>
+                </a>
+            </li>
+        </ul>
+#}
+    </div>
+</div>

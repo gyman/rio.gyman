@@ -1,0 +1,57 @@
+<div class="row-fluid">
+    <div class="span2">
+        <img src="{{ member.getFoto() }}" class="img-polaroid"/>
+    </div>
+    <div class="span4">
+        <dl class="dl-horizontal">
+            {% if member.getBirthdate() is not null %}
+            <dt>Data urodzenia:</dt>
+            <dd>{{ member.getBirthdate()|date("d.m.Y") }}</dd>
+            {% endif %}
+
+            {% if member.getEmail() is not null or member.getPhone() is not null %}
+            <dt>Kontakt:</dt>
+            <dd>
+                {% if member.getEmail() is not null %}
+                <a href="mailto:{{ member.getEmail() }}">{{ member.getEmail() }}</a>
+                {% endif %}
+                {% if member.getPhone() is not null %}
+                <br />{{ member.getPhone() }}
+                {% endif %}
+            </dd>
+            {% endif %}
+
+            {% if member.getCurrentVoucher() is not null %}
+            {% set voucher = member.getCurrentVoucher() %}
+            <dt>Karnet:</dt>
+            <dd>
+                {{ voucher.getStartDate()|date("d.m") }} - {{ voucher.getEndDate()|date("d.m") }}
+
+                {% if voucher.getAmount() is null %}
+                nieograniczona liczba wejść
+                {% else %}
+                <br />pozostało {{ voucher.getAmountLeft() }} z {{ voucher.getAmount() }} wejść
+                {% endif %}
+            </dd>
+            {% endif %}
+
+            <dt>Zarejestrowany:</dt>
+            <dd>{{ member.getCreated()|date("d.m.Y") }}</dd>
+
+            <dt>Notatki:</dt>
+            <dd>{{ member.getNotes() }}</dd>
+
+
+        </dl>
+    </div>
+    <div class="span4">
+        
+    </div>
+    <div class="span2">
+        <div class="memberActions">
+            <a href="{{ path("_member_edit", {"id" : member.id}) }}" class="btn editMember btn-block">edytuj profil</a>
+            <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn btn-block newVoucher">dodaj karnet</a>
+            <a href="{{ path("_entrance_add", {"id" : member.id}) }}" class="btn btn-block addEntrance">dodaj wejście</a>
+        </div>
+    </div>
+</div>

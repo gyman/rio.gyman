@@ -4,6 +4,9 @@ namespace Dende\MembersBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
+use Dende\MembersBundle\Entity\Member;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MemberRepository
@@ -12,6 +15,46 @@ use Doctrine\ORM\QueryBuilder;
  * repository methods below.
  */
 class MemberRepository extends EntityRepository {
+    // <editor-fold defaultstate="collapsed" desc="fields">
+
+    /**
+     *
+     * @var QueryBuilder 
+     */
+    private $query;
+
+    /**
+     *
+     * @var Request 
+     */
+    private $request;
+    private $columns = array(
+        0 => "beltN",
+        1 => "m.name",
+        2 => "e.created",
+    ); // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getQuery() {
+        return $this->query;
+    }
+
+    public function getRequest() {
+        return $this->request;
+    }
+
+    public function setQuery(QueryBuilder $query) {
+        $this->query = $query;
+        return $this;
+    }
+
+    public function setRequest(Request $request) {
+        $this->request = $request;
+        return $this;
+    }
+
+// </editor-fold>
 
     /**
      * Get all Members query
@@ -22,11 +65,142 @@ class MemberRepository extends EntityRepository {
         return $query;
     }
 
+    public function getTotalCount() {
+        $query = $this->getMembersQuery();
+        $query->select("count(m.id)");
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function applyFilterFromRequest() {
+        $this->applyLimitFromRequest();
+        $this->applyOffsetFromRequest();
+        $this->applySearchFromRequest();
+        $this->applySortingFromRequest();
+    }
+
+    public function applyLimitFromRequest() {
+        $limit = $this->getRequest()->get("iDisplayLength", 10);
+
+        if (!$limit)
+        {
+            return;
+        }
+
+        $this->getQuery()->setMaxResults($limit);
+    }
+
+    public function applyOffsetFromRequest() {
+        $offset = $this->getRequest()->get("iDisplayStart", 0);
+
+        if (!$offset)
+        {
+            return;
+        }
+
+        $this->getQuery()->setFirstResult($offset);
+    }
+
+    public function applySearchFromRequest() {
+        $search = $this->getRequest()->get("sSearch", null);
+
+        if (!$search)
+        {
+            return;
+        }
+
+        $this->getQuery()->andWhere("m.name like :name");
+        $this->getQuery()->setParameter("name", "%" . $search . "%");
+    }
+
+    public function applySortingFromRequest() {
+        $sortingColumnsCount = (int) $this->getRequest()->get("iSortingCols", 0);
+
+        if ($sortingColumnsCount == 0)
+        {
+            return;
+        }
+
+        for ($a = 0; $a < $sortingColumnsCount; $a++) {
+            $column = (int) $this->getRequest()->get("iSortCol_" . $a, 0);
+            $order = strtoupper($this->getRequest()->get("sSortDir_" . $a, "asc"));
+
+            if (!key_exists($column, $this->columns))
+            {
+                continue;
+            }
+
+            $columnName = $this->columns[$column];
+
+            if ($column === 0)
+            {
+                $select = "(case "
+                        . "when m.belt = 'blue' then 1 "
+                        . "when m.belt = 'purple' then 2 "
+                        . "when m.belt = 'brown' then 3 "
+                        . "when m.belt = 'black' then 4 "
+                        . "else 0 end) as beltN";
+
+                $this->getQuery()->addSelect($select);
+            }
+
+            if ($column === 2)
+            {
+                $this->getQuery()->leftJoin("m.lastEntry", "e");
+            }
+
+            if ($column === 3)
+            {
+                $this->getQuery()->leftJoin("m.currentVoucher", "v");
+            }
+
+            if ($a == 0)
+            {
+                $this->getQuery()->orderBy($columnName, $order);
+            }
+            else
+            {
+                $this->getQuery()->addOrderBy($columnName, $order);
+            }
+        }
+    }
+
     /**
      * @param QueryBuilder $query
      */
     public function setActiveCriteria(QueryBuilder $query) {
         $query->andWhere("m.deletedAt is null");
+    }
+
+    public function findOldVouchers() {
+        $query = $this->getMembersQuery();
+
+        $query
+                ->leftJoin("m.currentVoucher", "v")
+                ->where("v.endDate < :date")
+                ->setParameter("date", new \DateTime("now"))
+
+        ;
+
+        return $query->getQuery()->execute();
+    }
+
+    public function fixAdditionalColumn(array &$members) {
+        if (count($members) == 0)
+        {
+            return;
+        }
+
+        if ($members[0] instanceof Member)
+        {
+            return;
+        }
+
+        foreach ($members as $i => $member) {
+            if ($member[0] instanceof Member)
+            {
+                $members[$i] = $member[0];
+            }
+        }
     }
 
 }

@@ -5,6 +5,7 @@ namespace Dende\MembersBundle\Controller;
 use Dende\MembersBundle\Entity\Member;
 use Dende\MembersBundle\Form\MemberType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -12,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Dende\MembersBundle\Services\Manager\MemberManager;
 use Dende\MembersBundle\Form\MemberListFilterType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ListController extends Controller {
 
@@ -25,56 +27,100 @@ class ListController extends Controller {
     }
 
     /**
-     * @Route("/", name="_members_list")
+     * @Route("/list.{_format}", name="_members_list", defaults={"_format" = "html"},requirements={"_format" = "html|json"})
      * @Template("MembersBundle:List:list.html.twig")
      */
-    public function indexAction() {
-        $memberManager = $this->get("member_manager");
-        $members = $memberManager->getMembers();
+    public function indexAction(Request $request) {
+        if ($request->getRequestFormat() == "json")
+        {
+            /** @var MemberRepository */
+            $memberRepository = $this->get("member_repository");
+            $membersQuery = $memberRepository->getMembersQuery();
 
-        return array("members" => $members);
+            $memberRepository->setRequest($request);
+            $memberRepository->setQuery($membersQuery);
+
+            $totalCount = $memberRepository->getTotalCount();
+
+            $memberRepository->applyFilterFromRequest();
+
+            $members = $membersQuery->getQuery()->execute();
+
+            $memberRepository->fixAdditionalColumn($members);
+
+            $displayedCount = count($members);
+
+            $datatable = array(
+                "sEcho"                => $request->get("sEcho"),
+                "iTotalRecords"        => $totalCount,
+                "iTotalDisplayRecords" => $totalCount,
+                "aaData"               => array()
+            );
+
+            if ($displayedCount == 0)
+            {
+                return new JsonResponse($datatable);
+            }
+
+            foreach ($members as $member) {
+                $datatable["aaData"][] = array(
+                    $this->renderView("MembersBundle:List:_list_tr.html.twig", array("member" => $member)),
+                    null,
+                    null,
+                    null,
+                    null,
+                );
+            }
+
+            return new JsonResponse($datatable);
+        }
+
+        return array();
     }
 
     /**
      * 
      * TODO: action for filter
      * 
-    public function filterListAction() {
-        $form = $this->createForm(new MemberFilterListType($uploaderHelper), $member);
+      public function filterListAction() {
+      $form = $this->createForm(new MemberFilterListType($uploaderHelper), $member);
 
-        if ($request->getMethod() == 'POST')
-        {
-            $form->handleRequest($request);
+      if ($request->getMethod() == 'POST')
+      {
+      $form->handleRequest($request);
 
-            if ($form->isValid())
-            {
-//                $memberManager->persist($member);
-//                $memberManager->flush();
-            }
-            else
-            {
-                $response->setStatusCode(400);
-            }
-        }
+      if ($form->isValid())
+      {
+      //                $memberManager->persist($member);
+      //                $memberManager->flush();
+      }
+      else
+      {
+      $response->setStatusCode(400);
+      }
+      }
 
-        return $response->setContent(
-            $this->renderView("MembersBundle:List:edit.html.twig", array(
-                'form'     => $form->createView(),
-                'member'   => $member,
-                'voucher'  => $voucher,
-                "uploader" => $uploaderHelper,
-                    )
-            )
-        );
-    }
-     **/
+      return $response->setContent(
+      $this->renderView("MembersBundle:List:edit.html.twig", array(
+      'form'     => $form->createView(),
+      'member'   => $member,
+      'voucher'  => $voucher,
+      "uploader" => $uploaderHelper,
+      )
+      )
+      );
+      }
+     * */
 
     /**
      * @Route("/gallery", name="_members_gallery")
      * @Template("MembersBundle:List:gallery.html.twig")
      */
-    public function galleryAction() {
-        return $this->indexAction();
+    public function galleryAction(Request $request) {
+        $memberManager = $this->get("member_manager");
+        $members = $memberManager->getMembers();
+
+        return array("members" => $members);
     }
 
     /**
@@ -146,7 +192,7 @@ class ListController extends Controller {
             if ($form->isValid())
             {
                 $memberManager->save($member);
-                
+
                 $request->getSession()->getFlashBag()->add('notice', 'Dodano nowego użytkownika!');
             }
             else
@@ -178,18 +224,14 @@ class ListController extends Controller {
     }
 
     /**
-     * @Route("/{id}/currentVoucher", name="_member_current_voucher")
+     * @Route("/{id}/details", name="_member_details")
      * @ParamConverter("member", class="MembersBundle:Member")
-     * @Template()
      */
-    public function currentVoucherAction(Member $member) {
-
-//        $voucher = $this->get("member_manager")->getCurrentVoucher($member);
-        $voucher = $member->getCurrentVoucher();
-
-        return array(
-            "voucher" => $voucher
-        );
+    public function detailsAction(Member $member) {
+        return new JsonResponse(array(
+            "data" => $this->renderView("MembersBundle:List:_list_tr_details.html.twig", array(
+                "member" => $member))
+        ));
     }
 
 }

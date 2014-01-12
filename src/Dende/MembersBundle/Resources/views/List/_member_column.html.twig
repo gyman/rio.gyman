@@ -1,8 +1,10 @@
 <div class="clearfix" data-member-edit-url="{{ path("_member_edit", {"id" : member.id}) }}">
+    {#
     <a class="avatar name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}">
         <img src="{{ member.getFoto() }}" class=""/>
     </a>
-
+#}
+    
     <a class="name editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><strong>{{ member.name }}</strong></a>
     {# <div class="action">
         <a class="btn btn-mini editMember" href="{{ path("_member_edit", {"id" : member.id}) }}"><span class="icomoon-icon-pencil-2"></span> Profil</a>

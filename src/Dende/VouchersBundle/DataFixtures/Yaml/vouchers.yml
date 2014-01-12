@@ -7,7 +7,6 @@ Voucher00:
     endDate:			"2013-11-30 12:00:00"
     price:			100
     amount:			10
-    barcode:			1234567891
     amountLeft:			10
     isActive:			true
 Voucher01:
@@ -19,7 +18,6 @@ Voucher01:
     endDate:			+1 month
     price:			100
     amount:			10
-    barcode:			1234567892
     amountLeft:			10
     isActive:			true
 Voucher02:
@@ -31,7 +29,6 @@ Voucher02:
     endDate:			"2013-12-31 12:00:00"
     price:			100
     amount:			10
-    barcode:			1234567893
     amountLeft:			10
     isActive:			true
 Voucher03:
@@ -43,7 +40,6 @@ Voucher03:
     endDate:			"2013-12-31"
     price:			100
     amount:			10
-    barcode:			1234567894
     amountLeft:			10
     isActive:			true
 Voucher04:
@@ -55,6 +51,14 @@ Voucher04:
     endDate:			"2014-12-31 12:00:00"
     price:			100
     amount:			10
-    barcode:			1234567895
+    amountLeft:			10
+    isActive:			true
+Voucher05:
+    activities:			null
+    member:			Member11
+    startDate:			"2014-01-01 12:00:00"
+    endDate:			"2014-02-02 12:00:00"
+    price:			100
+    amount:			10
     amountLeft:			10
     isActive:			true

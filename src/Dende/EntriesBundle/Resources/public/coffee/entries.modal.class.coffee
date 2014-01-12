@@ -4,6 +4,7 @@ $ ->
   # event na liście
   
   $(document).off("click.openAddEntranceModal").on "click.openAddEntranceModal",".addEntrance", (e) ->
+    e.stopPropagation()
     e.preventDefault()
     container = $(".modal-body",$entranceModal)
     href = $(this).attr "href"
@@ -26,13 +27,7 @@ $ ->
     action = $form.attr "action"
     data = $form.serialize()
     
-    $(".modal-footer",$entranceModal).block
-      message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
-      css : 
-        border: 'none', 
-        backgroundColor:'transparent' 
-      overlayCSS:
-        backgroundColor: '#E8EAEB' 
+    $(".modal-footer",$entranceModal).block()
       
     $.ajax
       url: action

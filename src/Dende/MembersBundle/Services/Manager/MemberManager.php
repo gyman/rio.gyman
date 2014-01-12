@@ -35,7 +35,6 @@ class MemberManager extends BaseManager {
      * @return Voucher|null
      */
     public function getCurrentVoucher(Member $member) {
-//        $voucher = $this->get("voucher_repository")->getCurrentVouchers($member);        
         return $member->getCurrentVoucher();
     }
 
