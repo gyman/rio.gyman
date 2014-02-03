@@ -20,15 +20,7 @@ class root.EditMember
   BUTTON_SAVE_CLASS: "btn-primary"
   BUTTON_DELETE_STATE: "Usuń"
   BUTTON_DELETE_CLASS: "btn-danger"
-
-  BLOCK_CONFIG:
-    message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>'
-    css : 
-      border: 'none', 
-      backgroundColor:'transparent' 
-    overlayCSS:
-      backgroundColor: '#E8EAEB' 
-    
+   
   FOTO_UPLOAD_ERROR: "Błąd po stronie serwera! Spróbuj z innym plikiem graficznym"    
     
   swffile : "/bundles/members/js/jQueryWebcam/jscam_canvas_only.swf"
@@ -101,7 +93,7 @@ class root.EditMember
 
   handleDeleteAction: (e) =>
     $(@modalWindow).modal "hide"
-    window.location.reload() 
+    datatable.fnReloadAjax() 
         
   handleSubmitForm: (action,data, container) =>
     $.ajax
@@ -110,7 +102,7 @@ class root.EditMember
       success: (response) ->
         # container.html response
         # $(@modalWindow).modal "hide"
-        window.location.reload()
+        datatable.fnReloadAjax()
       error: (xhr, textStatus, errorThrown) ->
         if xhr.status == 400
           container.html xhr.responseText
@@ -231,7 +223,7 @@ class root.EditMember
     $header
 
   lockFooter: () =>
-    $(".modal-footer",@modalWindow).block @BLOCK_CONFIG
+    $(".modal-footer",@modalWindow).block()
 
   unlockFooter: () =>
     $(".modal-footer",@modalWindow).unblock()

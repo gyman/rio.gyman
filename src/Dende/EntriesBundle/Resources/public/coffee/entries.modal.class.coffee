@@ -35,7 +35,7 @@ $ ->
       success: (response) ->
         container.html response
         $entranceModal.modal "hide"
-        window.location.reload()
+        datatable.fnReloadAjax()
       error: (xhr, textStatus, errorThrown) ->
         if xhr.status == 400
           container.html xhr.responseText

@@ -1,46 +1,10 @@
 $ ->   
-  ###
-  jQuery.extend jQuery.fn.dataTableExt.oSort,
-    "date-eu-pre": (date) ->
-      date = $(date).text()
-      
-      date = date.replace(" ", "")
-
-      if date == ""
-        return
-
-      if date.indexOf(".") > 0
-        eu_date = date.split(".")
-      else
-        eu_date = date.split("/")
-
-      if eu_date[2]
-        year = eu_date[2]
-      else
-        year = 0
-
-      month = eu_date[1]
-      month = 0 + month  if month.length is 1
-
-      day = eu_date[0]
-      day = 0 + day  if day.length is 1
-      (year + month + day) * 1
-
-    "date-eu-asc": (a, b) ->
-      (if (a < b) then -1 else ((if (a > b) then 1 else 0)))
-
-    "date-eu-desc": (a, b) ->
-      (if (a < b) then 1 else ((if (a > b) then -1 else 0)))
-
-
-    $("#membersList").dataTable aoColumns: [null, null, 
-    sType: "date-eu"
-    , null, null]
-    
-  ###
-    
   $memberModal = $("#editMemberModal")
   $voucherModal = $("#newVoucherModal")
+  $filterModal = $("#newVoucherModal")
+  
+  $(document).on "shown", $filterModal, (e) ->
+    console.log "otwarty"
   
   $(document).on "click","a.createNewMember", (e) ->
     e.preventDefault()
@@ -50,18 +14,6 @@ $ ->
       container.html response
       $memberModal.modal
         "show" : true
-
-  ###    
-  $(document).on "click","td.profileColumn", (e) ->
-    e.preventDefault()
-    $container = $(".modal-body",$memberModal)
-    href = $("[data-member-edit-url]",this).attr "data-member-edit-url"
-    $.get href, (response) ->
-      $container.html response
-      $(".hideForNewMember").removeClass("hidden").show()
-      $memberModal.modal
-        "show" : true
-  ###        
 
   $(document).on "click","a.editMember", (e) ->
     e.preventDefault()
@@ -84,8 +36,8 @@ $ ->
       $voucherModal.modal
         "show" : true
         
-#      $voucherModal.on "hidden", () ->
-#        window.location.reload()        
+      $voucherModal.on "hidden", () ->
+        datatable.fnReloadAjax()        
 
   $(document).on "click", "#membersList tbody tr", (e) ->
     $tr = $(this)
@@ -105,9 +57,9 @@ $ ->
       $detailsDiv.unblock()
       $tr.data "detailsOpened", true
 
-  $("table#membersList").dataTable
+  window.datatable = $("table#membersList").dataTable
     sAjaxSource: $("table#membersList").attr("data-ajax-source")
-    sDom: "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
+    sDom: "<'row-fluid'<'span6'><'span6'f>r>t<'row-fluid'<'span6'li><'span6'p>>"
     bProcessing:true
     bFilter: true
     bLengthChange: true
@@ -116,6 +68,10 @@ $ ->
     sPaginationType:"bootstrap"
     bJQueryUI:false
     bAutoWidth:false
+    fnServerParams: ( aoData ) ->
+      aoData.push
+        name: "MyName"
+        value: "MyValue"
     bServerMethod: "POST"
     aoColumns: [
       bSortable: true

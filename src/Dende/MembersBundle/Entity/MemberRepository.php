@@ -138,7 +138,7 @@ class MemberRepository extends EntityRepository {
                         . "when m.belt = 'purple' then 2 "
                         . "when m.belt = 'brown' then 3 "
                         . "when m.belt = 'black' then 4 "
-                        . "else 0 end) as beltN";
+                        . "else 0 end) as HIDDEN beltN";
 
                 $this->getQuery()->addSelect($select);
             }
@@ -183,24 +183,4 @@ class MemberRepository extends EntityRepository {
 
         return $query->getQuery()->execute();
     }
-
-    public function fixAdditionalColumn(array &$members) {
-        if (count($members) == 0)
-        {
-            return;
-        }
-
-        if ($members[0] instanceof Member)
-        {
-            return;
-        }
-
-        foreach ($members as $i => $member) {
-            if ($member[0] instanceof Member)
-            {
-                $members[$i] = $member[0];
-            }
-        }
-    }
-
 }

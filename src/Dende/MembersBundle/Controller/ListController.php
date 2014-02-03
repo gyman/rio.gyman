@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Dende\MembersBundle\Services\Manager\MemberManager;
-use Dende\MembersBundle\Form\MemberListFilterType;
+use Dende\MembersBundle\Form\MemberFilterListType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ListController extends Controller {
@@ -27,7 +27,7 @@ class ListController extends Controller {
     }
 
     /**
-     * @Route("/list.{_format}", name="_members_list", defaults={"_format" = "html"},requirements={"_format" = "html|json"})
+     * @Route("/", name="_members_list")
      * @Template("MembersBundle:List:list.html.twig")
      */
     public function indexAction(Request $request) {
@@ -45,8 +45,6 @@ class ListController extends Controller {
             $memberRepository->applyFilterFromRequest();
 
             $members = $membersQuery->getQuery()->execute();
-
-            $memberRepository->fixAdditionalColumn($members);
 
             $displayedCount = count($members);
 
@@ -79,38 +77,42 @@ class ListController extends Controller {
     }
 
     /**
-     * 
-     * TODO: action for filter
-     * 
-      public function filterListAction() {
-      $form = $this->createForm(new MemberFilterListType($uploaderHelper), $member);
-
-      if ($request->getMethod() == 'POST')
-      {
-      $form->handleRequest($request);
-
-      if ($form->isValid())
-      {
-      //                $memberManager->persist($member);
-      //                $memberManager->flush();
-      }
-      else
-      {
-      $response->setStatusCode(400);
-      }
-      }
-
-      return $response->setContent(
-      $this->renderView("MembersBundle:List:edit.html.twig", array(
-      'form'     => $form->createView(),
-      'member'   => $member,
-      'voucher'  => $voucher,
-      "uploader" => $uploaderHelper,
-      )
-      )
-      );
-      }
-     * */
+     * @Route("/filter", name="_members_filter")
+     * @Template("MembersBundle:List:filter.html.twig")
+     */
+    public function filterListAction() {
+        $form = $this->createForm(new MemberFilterListType());
+//
+//        if ($request->getMethod() == 'POST')
+//        {
+//            $form->handleRequest($request);
+//
+//            if ($form->isValid())
+//            {
+//                //                $memberManager->persist($member);
+//                //                $memberManager->flush();
+//            }
+//            else
+//            {
+//                $response->setStatusCode(400);
+//            }
+//        }
+//
+//        return $response->setContent(
+//                        $this->renderView("MembersBundle:List:edit.html.twig", array(
+//                            'form'     => $form->createView(),
+//                            'member'   => $member,
+//                            'voucher'  => $voucher,
+//                            "uploader" => $uploaderHelper,
+//                                )
+//                        )
+//        );
+        
+        return array(
+            "form" => $form->createView()
+            
+        );
+    }
 
     /**
      * @Route("/gallery", name="_members_gallery")

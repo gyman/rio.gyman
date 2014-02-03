@@ -25,7 +25,7 @@
             {% set voucher = member.getCurrentVoucher() %}
             <dt>Karnet:</dt>
             <dd>
-                {{ voucher.getStartDate()|date("d.m") }} - {{ voucher.getEndDate()|date("d.m") }}
+                {{ voucher.getStartDate()|date("d.m.y") }} - {{ voucher.getEndDate()|date("d.m.y") }}
 
                 {% if voucher.getAmount() is null %}
                 nieograniczona liczba wejść

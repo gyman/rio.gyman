@@ -47,7 +47,7 @@ window.setupNewVoucherModalForSelling = ->
       data: data
       success: (response) ->
         $(modal).modal "hide"
-        window.location.reload()
+        datatable.fnReloadAjax()
       error: (xhr, textStatus, errorThrown) ->
         if xhr.status == 400
           container.html xhr.responseText

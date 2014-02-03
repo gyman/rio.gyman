@@ -15,11 +15,9 @@
 {% endblock %}
 
 {% block listHeaderFilter %}
-                {# TODO unlock for filter
-                <button id="filterModalButton" data-target="#filterModal" role="button" data-toggle="modal" class="btn btn-link pull-left">
-                    <span class="icon16 icomoon-icon-cog-2"></span><span class="caret"></span>
-                </button>
-                #}
+<button id="filterModalButton" data-remote="{{ path("_members_filter") }}" data-target="#filterModal" role="button" data-toggle="modal" class="btn btn-link pull-left">
+    <span class="icon16 icomoon-icon-cog-2"></span><span class="caret"></span>
+</button>
 {% endblock %}
 
 {% block listTitle %}Lista osób{% endblock%}
