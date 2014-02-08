@@ -26,7 +26,7 @@ set :ssh_options, {
 }
 
 # before "deploy:restart", "deploy:install"
-# after "deploy:install", "app:deploy"
+#after "deploy:install", "app:deploy"
 
 namespace :deploy do
     desc "run composer install and ensure all dependencies are installed"

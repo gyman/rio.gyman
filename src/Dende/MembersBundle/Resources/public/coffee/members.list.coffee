@@ -41,7 +41,10 @@ $ ->
 
   $(document).on "click", "#membersList tbody tr", (e) ->
     $tr = $(this)
-    return  if $tr.data("detailsOpened")
+    if $tr.data "detailsOpened"
+      $tr.data "detailsOpened", false
+      $tr.siblings(".entityDetails").remove()
+      return
     return  if $tr.hasClass("entityDetails")
     $("tr.entityDetails").remove()
     $("tr",$(e.target).parents "table").data "detailsOpened", false
