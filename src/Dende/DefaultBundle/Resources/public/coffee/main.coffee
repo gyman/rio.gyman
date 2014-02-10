@@ -29,6 +29,15 @@ $(window).load ->
 
 # document ready function
 $(document).ready ->
+
+
+#-- global ajax setup --//
+
+  $.ajaxSetup
+    success: (e)->
+      # console.log "start ajax"
+    complete: (e)->
+      # console.log "finish ajax"
   
    
   #Auto current system in main navigation 

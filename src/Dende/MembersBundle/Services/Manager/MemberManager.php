@@ -30,6 +30,15 @@ class MemberManager extends BaseManager {
     }
 
     /**
+     * Returns member by barcode
+     * @param int $code
+     * @return Member
+     */
+    public function getByBarcode($code) {
+        return $this->getRepository()->findByBarcode($code);
+    }
+
+    /**
      * 
      * @param Member $member
      * @return Voucher|null

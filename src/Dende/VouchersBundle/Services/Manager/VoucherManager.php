@@ -99,14 +99,10 @@ class VoucherManager extends BaseManager {
 
         $voucher = new Voucher();
         $startDate = new \DateTime();
-//
         if ($currentVoucher)
         {
-//            if ($usePreviousEndDate && $currentVoucher->getEndDate())
-//            {
             $startDate = clone($currentVoucher->getEndDate());
             $startDate->add(new \DateInterval("PT1S"));
-//            }
         }
 
         $endDate = clone($startDate);

@@ -10,8 +10,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller {
+
+    /**
+     * @Route("/entrance/quick/member/{barcode}", name="_entry_quickadd")
+     * @ParamConverter("member", class="MembersBundle:Member")
+     */
+    public function quickSearchAction(Member $member) {
+        return new JsonResponse(json_encode(array(
+                    "memberId" => $member->getId(),
+                    "modalTemplate" => (string) $this->renderView("MembersBundle::_entranceModal.html.twig"),
+                    "addEntryUrl" => $this->generateUrl("_entrance_add",array("id" => $member->getId()))
+        )));
+    }
 
     /**
      * @Route("/entrance/new/member/{id}", name="_entrance_add")
@@ -25,7 +38,8 @@ class DefaultController extends Controller {
                 'Content', 200, array('content-type' => 'text/html')
         );
 
-        $entry = new Entry();
+        $entry = $this->get('entry_manager')->createNewEntry();
+
         $currentVoucher = $member->getCurrentVoucher();
 
         if ($currentVoucher)

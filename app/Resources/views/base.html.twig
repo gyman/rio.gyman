@@ -107,6 +107,7 @@
                 '@LayoutBundle/Resources/public/js/libs/jquery.pnotify.min.js'
                 '@DefaultBundle/Resources/public/coffee/main.coffee'
                 '@DefaultBundle/Resources/public/coffee/helpers.coffee'
+                '@EntriesBundle/Resources/public/coffee/entries.modal.class.coffee'
                 '@DefaultBundle/Resources/public/coffee/keyboardTyping.coffee'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -156,5 +157,7 @@
 
         {% endblock javascripts %}
 
+        <span id="applicationData" data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "::memberBarcode::" }) }}"></span>
+        
     </body>
 </html>

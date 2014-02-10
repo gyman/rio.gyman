@@ -2,7 +2,8 @@
 <div class="alert alert-error">
     <strong>Uwaga!</strong>
     <a class="close" data-dismiss="alert" href="#">&times;</a>
-    Uczestnik nie posiada wykupionego karnetu!
+    Uczestnik nie posiada wykupionego karnetu!<br />
+    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher" data-dismiss="modal">Kliknij tu, by sprzedać karnet.</a>
 </div>
 {% elseif voucher.getAmount() is null %}
 <div class="alert alert-info">
@@ -15,6 +16,7 @@
     <strong>Uwaga!</strong>
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     Uczestnik wykorzystał już wszystkie wejścia z posiadanego karnetu!
+    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher" data-dismiss="modal">Kliknij tu, by sprzedać nowy karnet.</a>
 </div>
 {% endif %}
 
@@ -34,6 +36,7 @@
     {{ form_enctype(form) }}>
 
     {{ form_row(form.entryType,{"label" : "Rodzaj"}) }}
+    {{ form_row(form.entryPrice,{"label" : "Cena (PLN)"}) }}
     {{ form_row(form.activity,{"label" : "Zajęcia"}) }}
 
     <div class="hidden">
@@ -57,34 +60,55 @@
 <script>
     $(function() {
 
-/*
-        $("#addEntrance").off("click.sendForm").on("click.sendForm", function() {
-            var $form = $("form#entranceForm");
-            var $modal = $("div#editEntranceModal");
-
-            $.post($form.attr("action"), $form.serialize(), function(data) {
-                $modal.modal("hide");
-                $.pnotify({
-                    title: 'Uwaga',
-                    text: 'Dodano wejście na zajęcia',
-                    icon: false,
-                    opacity: 0.95,
-                    sticker: false,
-                    history: false
-                });
-            }).fail(function(xhr, textStatus, errorThrown) {
-                $(".modal-body", $modal).html(xhr.responseText);
-            });
-        });
-*/
+        /*
+         $("#addEntrance").off("click.sendForm").on("click.sendForm", function() {
+         var $form = $("form#entranceForm");
+         var $modal = $("div#editEntranceModal");
+         
+         $.post($form.attr("action"), $form.serialize(), function(data) {
+         $modal.modal("hide");
+         $.pnotify({
+         title: 'Uwaga',
+         text: 'Dodano wejście na zajęcia',
+         icon: false,
+         opacity: 0.95,
+         sticker: false,
+         history: false
+         });
+         }).fail(function(xhr, textStatus, errorThrown) {
+         $(".modal-body", $modal).html(xhr.responseText);
+         });
+         });
+         */
 
         $("input[name='dende_entriesbundle_entry\\\[entryType\\\]']").uniform();
+
+        var controlDiv = $("input#dende_entriesbundle_entry_entryPrice").parents("div.control-group");
+
+        controlDiv.hide();
+
+        $(document).on("change", "input[name='dende_entriesbundle_entry\\\[entryType\\\]']", function(e) {
+            if ($(e.target).val() === "paid")
+            {
+                controlDiv.show();
+            } else {
+                controlDiv.hide();
+            }
+        });
+
 
         $("#dende_entriesbundle_entry_activity").select2({
             dropdownAutoWidth: true,
             containerCss: {
                 width: "200px"
             }
+        });
+
+        $("#dende_entriesbundle_entry_entryPrice").spinner({
+            min: 0,
+            step: 10,
+            start: 1000,
+            numberFormat: "C"
         });
 
     });

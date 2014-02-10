@@ -68,6 +68,7 @@ class Voucher {
      * @var string
      * 
      * @ORM\Column(name="price", type="string", nullable = true)
+     * @Assert\RegEx("/^\d+(\.\d\d){0,1}$/")
      */
     private $price;
 

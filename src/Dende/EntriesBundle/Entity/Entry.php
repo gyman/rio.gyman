@@ -11,7 +11,8 @@ use Dende\EntriesBundle\Validator as Validate;
 /**
  * Entry
  * @Assert\Callback(methods={
- *     { "Dende\EntriesBundle\Validator\LeftAmountValidator", "isAmountLeft"}
+ *     { "Dende\EntriesBundle\Validator\LeftAmountValidator", "isAmountLeft"},
+ *     { "Dende\EntriesBundle\Validator\PriceNotBlankIfPaidEntryTypeValidator", "isPaidAndPriceSet"},
  * })
  * @ORM\Table("entries")
  * @ORM\Entity(repositoryClass="Dende\EntriesBundle\Entity\EntryRepository")
@@ -52,12 +53,20 @@ class Entry {
     private $voucher;
 
     /**
-     * @var string $gender
+     * @var string $entryType
      *
      * @ORM\Column(name="entry_type", type="string", columnDefinition="enum('free', 'voucher', 'paid', 'multisport')", nullable=true)
      * @Assert\NotBlank(message = "Pole nie może być puste!")
      */
     private $entryType;
+
+    /**
+     * @var string $entryPrice
+     *
+     * @ORM\Column(name="entry_price", type="string", nullable=true)
+     * @Assert\RegEx("/^\d+(\.\d\d){0,1}$/")
+     */
+    private $entryPrice;
 
     /**
      * @var DateTime $created
@@ -82,6 +91,14 @@ class Entry {
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getEntryPrice() {
+        return $this->entryPrice;
+    }
+
+    public function setEntryPrice($entryPrice) {
+        $this->entryPrice = $entryPrice;
+        return $this;
+    }
 
     public function getEntryType() {
         return $this->entryType;

@@ -12,18 +12,25 @@ $ ->
   ticksToCleanup = 1
   
   $(document).on "keyup", (e) -> 
-    
-    if not $(e.target).is bodyEl
-      return
+    return null if keyboardCache != null && keyboardCache.length > 50
+    return null if not $(e.target).is bodyEl
       
     code = e.which
     character = String.fromCharCode code
  
     if code == 13 && keyboardCache != null
-      alert keyboardCache
+      searchUrlTemplate = $("span#applicationData").attr "data-quicksearch-member-url"
+      searchUrl = searchUrlTemplate.replace "::memberBarcode::", keyboardCache
+
+      $.getJSON searchUrl, (data)->
+        result = $.parseJSON data
+        $("body").append result.modalTemplate if $("body div#editEntranceModal").length == 0
+        $(document).trigger "click.openAddEntranceModal.keytype", [ result.addEntryUrl ]
+        
       keyboardCache = null
       return
     else if code == 13
+      keyboardCache = null
       return    
       
     if not character.match /^[A-Za-z0-9]*[A-Za-z0-9][A-Za-z0-9]*$/

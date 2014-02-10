@@ -1,3 +1,9 @@
+<div class="alert alert-info">
+    <strong>Uwaga!</strong>
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    Jeżeli nie podasz żadnej grupy, to karnet będzie typu <span class="badge badge-important">open</span>
+</div>
+
 <span class="hidden" id="ui-sellVoucherData">
     <div class="modal-footer">
         <a href="" class="btn btn-primary pull-right" id="createNewVoucher">Sprzedaj</a>
@@ -20,5 +26,9 @@
 <script>
     $(function() {
         setupNewVoucherModalForSelling();
+        
+        $(document).on("change","select#dende_vouchersbundle_voucher_activities",function(e){
+            
+        });
     });
 </script>

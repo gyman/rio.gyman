@@ -219,9 +219,10 @@ class EntryType extends AbstractType {
                 )
                 ->add('entryType', 'choice', array(
                     'choices'  => $this->getChoices()->toArray(),
-                    'data'     => "voucher",
+                    'data'     => "free",
                     "expanded" => true
                 ))
+                ->add('entryPrice', 'text')
         ;
     }
 

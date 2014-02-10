@@ -10,4 +10,16 @@ use Dende\DefaultBundle\Services\Manager\BaseManager;
 
 class EntryManager extends BaseManager {
 
+    /**
+     * 
+     * @return \Dende\EntriesBundle\Entity\Entry
+     */
+    public function createNewEntry() {
+        $entry = new Entry();
+
+        $entry->setEntryPrice(15);
+        
+        return $entry;
+    }
+
 }

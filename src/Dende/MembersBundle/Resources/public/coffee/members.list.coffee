@@ -4,8 +4,8 @@ $ ->
   $filterModal = $("#newVoucherModal")
   
   $(document).on "shown", $filterModal, (e) ->
-    console.log "otwarty"
-  
+    return
+    
   $(document).on "click","a.createNewMember", (e) ->
     e.preventDefault()
     container = $(".modal-body",$memberModal)
@@ -35,7 +35,6 @@ $ ->
       $container.html response
       $voucherModal.modal
         "show" : true
-        
       $voucherModal.on "hidden", () ->
         datatable.fnReloadAjax()        
 
