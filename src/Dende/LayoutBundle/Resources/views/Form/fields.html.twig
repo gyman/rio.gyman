@@ -67,10 +67,20 @@
 {% block choice_widget_expanded %}
 {% spaceless %}
     {% for i,child in form %}
-    <div>
+<div>
         {{ form_widget(child) }}
         {{ choices[i].label }}
-    </div>
+</div>
     {% endfor %}
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+<div class="control-group">
+    <div class="controls">
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    </div>
+</div>
+{% endspaceless %}
+{% endblock checkbox_widget %}

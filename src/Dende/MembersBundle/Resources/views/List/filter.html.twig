@@ -1,3 +1,31 @@
-<form action="{{ path("_members_filter") }}" class="form form-horizontal">
+<form action="{{ path("_members_filter") }}" class="form form-horizontal" method="POST">
 {{ form_widget(form) }}
 </form>
+
+{% block modal %}
+<div class="hidden" id="ui-editFilterData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% block modalTitle %}Filtrowanie wyników{%endblock modalTitle%}</h3>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-primary pull-right" id="useFilter">Zastosuj</a>
+    </div>
+</div>
+{% endblock modal %}
+
+{% block javascript %}
+{% javascripts
+
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+    $(function() {
+        modal.setupFromNode("div#ui-editFilterData");
+        modal.setModalWindowClass("addFilterModal");
+
+        // window.editMemberModal = new EditMember();
+    });
+</script>
+{% endblock javascript %}

@@ -9,15 +9,14 @@
 
 {% block listHeaderRightToolbox %}
 <div class="pull-right" id="chooseMembersListForm">
-    <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
-    <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
+    <a class="icomoon-icon-list green"  href="{{ path("_members_list") }}"></a>
+    <a class="icomoon-icon-grid green" href="{{ path("_members_gallery") }}"></a>
 </div>
-{% endblock %}
-
-{% block listHeaderFilter %}
-<button id="filterModalButton" data-remote="{{ path("_members_filter") }}" data-target="#filterModal" role="button" data-toggle="modal" class="btn btn-link pull-left">
-    <span class="icon16 icomoon-icon-cog-2"></span><span class="caret"></span>
-</button>
+<div class="pull-left">
+    <a id="filterModalButton" href="{{ path("_members_filter") }}" class="btn btn-link openUrlInModal">
+        <span class="icon16 icomoon-icon-cog-2"></span><span class="icon16 caret"></span>
+    </a>
+</div>
 {% endblock %}
 
 {% block listTitle %}Lista osób{% endblock%}
@@ -33,19 +32,6 @@
     <th>Akcje</th>
 </tr>
 {% endblock %}
-                
-{% block listTbody %}
-{#
-{% for member in members %}
-    {% include 'MembersBundle:List:_list_tr.html.twig' with {"member" : member} %}
-{% endfor %}
-#}
-{% endblock %}
-
-
-{% block body %}
-    {{ parent() }}
-{% endblock body %}
 
 {# javascripts #}
 

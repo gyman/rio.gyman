@@ -10,39 +10,58 @@ use Dende\MembersBundle\Entity\Member;
 use Dende\VouchersBundle\Entity\Voucher;
 
 class MemberFilterListType extends AbstractType {
-    
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        
+
         $builder
-                ->add('searchText')
+                ->add('searchText', "text", array(
+                    "label" => "Szukaj tekstu"
+                ))
                 ->add('gender', "choice", array(
-                    "choices" => array(
+                    "choices"     => array(
                         "male"   => "Mężczyzna",
                         "female" => "Kobieta"
                     ),
-                    "label" => "Płeć",
+                    "label"       => "Płeć",
                     "empty_value" => "każda"
                 ))
                 ->add('belt', "choice", array(
                     "empty_value" => "każdy",
-                    "choices" => array(
+                    "choices"     => array(
                         "white"  => "biały",
                         "blue"   => "niebieski",
                         "purple" => "purpurowy",
                         "brown"  => "brązowy",
                         "black"  => "czarny"
-                    )
+                    ),
+                    "label"       => "Kolor pasa"
                 ))
-//                ->add('activities', "choice", array(
-//                    'multiple' => true,
-//                    'choices'  => $this->getActivitiesFromOptions($options),
-//                    "mapped"   => false,
-//                    "disabled" => true
-//                ))
+                ->add('voucherStartFrom', "text", array(
+                    "label" => "Początek karnetu"
+                ))
+                ->add('activities', "entity", array(
+                    "label"         => "Zajęcia",
+                    "empty_value"   => "open",
+                    'class'         => 'ScheduleBundle:Activity',
+                    'property'      => 'name',
+                    'multiple'      => true,
+                    'query_builder' => function($er) {
+                return $er->createQueryBuilder('a');
+            }
+                ))
+                ->add("saveFilter", "checkbox", array(
+                    "label" => "Zapisz"
+                ))
+                ->add('name', "text", array(
+                    "label" => "Nazwa filtra"
+                ))
+                ->add("addToDashboard", "checkbox", array(
+                    "label" => "Przypnij na dashboardzie"
+                ))
         ;
     }
 
@@ -52,4 +71,5 @@ class MemberFilterListType extends AbstractType {
     public function getName() {
         return 'dende_membersbundle_memberfilterlist';
     }
+
 }
