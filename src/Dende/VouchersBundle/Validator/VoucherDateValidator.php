@@ -23,6 +23,11 @@ class VoucherDateValidator extends ConstraintValidator {
     public function validate($voucher, Constraint $constraint) {
         $currentVoucher = $voucher->getMember()->getCurrentVoucher();
        
+        if($currentVoucher == $voucher)
+        {
+            return;
+        }
+        
         if ($currentVoucher && $currentVoucher->getEndDate() > $voucher->getStartDate() && !$currentVoucher->getDeletedAt())
         {
             $currentEndDate = $currentVoucher->getEndDate();

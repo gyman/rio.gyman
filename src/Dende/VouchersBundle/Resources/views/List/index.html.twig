@@ -29,7 +29,7 @@
     <th>Data sprzedaży</th>
     <th>Cena</th>
     <th>Aktywności</th>
-    {# <th>Akcje</th> #}
+    <th>Akcje</th> 
 </tr>
 {% endblock %}
 
@@ -63,24 +63,17 @@
         <div class="badge badge-success">{{ activity.getName() }}</div><br />
         {% endfor %}
     </td>
-            {# 
-            <td class="actionColumn">
-                <div class="btn-group">
-            <a class="btn btn-mini addEntrance" href="{{ path("_entrance_add", {"id" : voucher.getMember().getId() }) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
-            <a class="btn btn-mini addEntrance" href=""><span class="icomoon-icon-signup "></span> Zamknij</a>
-                </div>
-            </td>
-            #}
+    <td class="actionColumn">
+        <div class="btn-group">
+            <a class="btn btn-mini openUrlInModal" href="{{ path("_voucher_edit", {"id" : voucher.getId() }) }}"><span class="icomoon-icon-file "></span> Edytuj</a>
+            <a class="btn btn-mini openUrlInModal" href="{{ path("_entrance_add", {"id" : voucher.getMember().getId() }) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
+            <a class="btn btn-mini openUrlInModal" href=""><span class="icomoon-icon-exit"></span> Usuń</a>
+        </div>
+    </td>
 </tr>
     {% endfor %}
 {% endblock %}
 
-
-{% block body %}
-    {{ parent() }}
-    {% include 'MembersBundle::_memberModal.html.twig' %}
-    {% include 'MembersBundle::_voucherModal.html.twig' %}
-{% endblock body %}
 
 {# javascripts #}
 
@@ -88,11 +81,9 @@
     {{ parent() }}
 
     {% javascripts
+        '@VouchersBundle/Resources/public/coffee/vouchers.list.coffee'
         '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
-        '@MembersBundle/Resources/public/coffee/members.list.coffee'
         '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
-        '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
-        '@DefaultBundle/Resources/public/js/jquery.fileupload.js'
         '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
      %}
 
@@ -100,11 +91,6 @@
 
     {% endjavascripts %}
 
-<script>
-    $(function() {
-        $("table#vouchersList").dataTable();
-    });
-</script>
 {% endblock javascripts %}
 
 {# CSS #}

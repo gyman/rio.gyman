@@ -45,11 +45,6 @@
 
 {% block body %}
     {{ parent() }}
-
-    {% include 'MembersBundle::_filterModal.html.twig' %}
-    {% include 'MembersBundle::_memberModal.html.twig' %}
-    {% include 'MembersBundle::_voucherModal.html.twig' %}
-    {% include 'MembersBundle::_entranceModal.html.twig' %}
 {% endblock body %}
 
 {# javascripts #}
@@ -59,7 +54,6 @@
 
     {% javascripts
         '@MembersBundle/Resources/public/coffee/members.list.coffee'
-        '@EntriesBundle/Resources/public/coffee/entries.modal.class.coffee'
         '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
         '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
         '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'

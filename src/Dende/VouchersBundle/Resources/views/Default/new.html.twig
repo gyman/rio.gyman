@@ -1,14 +1,8 @@
-<div class="alert alert-info">
+<div class="alert alert-info" id="ui-activitiesInfo">
     <strong>Uwaga!</strong>
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     Jeżeli nie podasz żadnej grupy, to karnet będzie typu <span class="badge badge-important">open</span>
 </div>
-
-<span class="hidden" id="ui-sellVoucherData">
-    <div class="modal-footer">
-        <a href="" class="btn btn-primary pull-right" id="createNewVoucher">Sprzedaj</a>
-    </div>
-</span>
 
 <form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id, "decision" : decision}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_delete", {id : voucher.id})}}{% endif %}">
     <div class="span12">    
@@ -23,12 +17,31 @@
     </div>    
 </form>
 
+{% block modal %}
+<span class="hidden" id="ui-sellVoucherData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% block title %}Nowy karnet{% endblock %}</h3>
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-primary pull-right" id="submitVoucherFormButton">{% block button %}Sprzedaj{% endblock %}</a>
+    </div>
+</span>
+{% endblock %}
+
+{% block javascript %}
+{% javascripts
+    '@VouchersBundle/Resources/public/coffee/vouchers.editVoucher.coffee'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
 <script>
     $(function() {
-        setupNewVoucherModalForSelling();
+        modal.setupFromNode("span#ui-sellVoucherData");
+        modal.setModalWindowClass("newVoucherModal");
         
-        $(document).on("change","select#dende_vouchersbundle_voucher_activities",function(e){
-            
-        });
+        window.editVoucherModal = new EditVoucher();
     });
 </script>
+{% endblock javascript %}
+

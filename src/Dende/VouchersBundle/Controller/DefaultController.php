@@ -14,17 +14,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Hackzilla\BarcodeBundle\Utility\Barcode;
-use Dende\VouchersBundle\Exception\VoucherManagerException; // </editor-fold>
+use Dende\VouchersBundle\Exception\VoucherManagerException;
+// </editor-fold>
 
 class DefaultController extends Controller {
 
     /**
      * @Route("/new/member/{id}/decision/{decision}", name="_voucher_new", defaults={"decision" = null})
      * @ParamConverter("member", class="MembersBundle:Member")
-     * @Template()
+     * @Template("VouchersBundle:Default:new.html.twig")
      */
-    public function newVoucherAction(Request $request, Member $member, $decision) {
+    public function newAction(Request $request, Member $member, $decision) {
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
@@ -42,7 +42,7 @@ class DefaultController extends Controller {
 
         if ($currentVoucher && $decision != "deny")
         {
-            return $this->forward("VouchersBundle:Default:closeVoucher", array(
+            return $this->forward("VouchersBundle:Default:close", array(
                         "id" => $currentVoucher->getId(),
             ));
         }
@@ -66,8 +66,6 @@ class DefaultController extends Controller {
             {
                 $voucher->setAmountLeft($voucher->getAmount());
                 $voucherManager->save($voucher);
-
-                $request->getSession()->getFlashBag()->add('notice', 'Dodano nowy karnet!');
             }
             else
             {
@@ -76,7 +74,7 @@ class DefaultController extends Controller {
         }
 
         return $response->setContent(
-                        $this->renderView("VouchersBundle:Default:newVoucher.html.twig", array(
+                        $this->renderView("VouchersBundle:Default:new.html.twig", array(
                             'form'     => $form->createView(),
                             'voucher'  => $voucher,
                             "member"   => $member,
@@ -85,13 +83,51 @@ class DefaultController extends Controller {
                         )
         );
     }
+    /**
+     * @Route("/edit/{id}", name="_voucher_edit")
+     * @ParamConverter("voucher", class="VouchersBundle:Voucher")
+     * @Template("VouchersBundle:Default:edit.html.twig")
+     */
+    public function editAction(Voucher $voucher, Request $request) {
+        $response = new Response(
+                'Content', 200, array('content-type' => 'text/html')
+        );
+
+        $voucherManager = $this->get("voucher_manager");
+
+        $form = $this->createForm(new VoucherType($this->get("activity_manager")), $voucher);
+
+        if ($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $voucher->setAmountLeft($voucher->getAmount());
+                $voucherManager->save($voucher);
+            }
+            else
+            {
+                $response->setStatusCode(400);
+            }
+        }
+
+        return $response->setContent(
+                        $this->renderView("VouchersBundle:Default:edit.html.twig", array(
+                            'form'     => $form->createView(),
+                            'voucher'  => $voucher,
+                            "member"   => $voucher->getMember(),
+                                )
+                        )
+        );
+    }
 
     /**
      * @Route("/{id}/close", name="_voucher_close")
      * @ParamConverter("voucher", class="VouchersBundle:Voucher")
-     * @Template()
+     * @Template("VouchersBundle:Default:close.html.twig")
      */
-    public function closeVoucherAction(Request $request, Voucher $voucher) {
+    public function closeAction(Request $request, Voucher $voucher) {
 
         $diff = $voucher->getEndDate()->diff(new \DateTime());
 
@@ -108,39 +144,6 @@ class DefaultController extends Controller {
     public function deleteAction($id) {
         $voucherManager = $this->get("voucher_manager");
         $voucherManager->setAsDeleted($id);
-        return array();
-    }
-
-    /**
-     * @Route("/{id}/printButton", name="_voucher_print_modal_content")
-     * @Template()
-     */
-    public function printVoucherButtonAction(Voucher $voucher) {
-        return array(
-            "voucher" => $voucher
-        );
-    }
-
-    /**
-     * @Route("/{id}/print", name="_voucher_print")
-     * @Template()
-     */
-    public function printVoucherAction(Voucher $voucher) {
-        return array(
-            "voucher" => $voucher
-        );
-    }
-
-    /**
-     * @Route("/barcode/{code}", name="_voucher_barcode")
-     */
-    public function getBarcodeAction($code) {
-        $barcode = new Barcode($this->container);
-        $barcode->setEncoding("128B");
-        $barcode->setScale(1);
-        $barcode->setHeight(50);
-        echo $barcode->outputImage($code);
-
         return array();
     }
 

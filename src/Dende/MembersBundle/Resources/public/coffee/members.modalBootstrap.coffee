@@ -1,3 +1,0 @@
-$ ->
-  editMemberModal = new EditMember $("#editMemberModal")
-  

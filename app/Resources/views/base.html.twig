@@ -105,9 +105,8 @@
                 '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-sliderAccess.js'
                 '@LayoutBundle/Resources/public/js/supr-theme/jquery-ui-timepicker-addon.js'
                 '@LayoutBundle/Resources/public/js/libs/jquery.pnotify.min.js'
+                '@DefaultBundle/Resources/public/coffee/modal.coffee'
                 '@DefaultBundle/Resources/public/coffee/main.coffee'
-                '@DefaultBundle/Resources/public/coffee/helpers.coffee'
-                '@EntriesBundle/Resources/public/coffee/entries.modal.class.coffee'
                 '@DefaultBundle/Resources/public/coffee/keyboardTyping.coffee'
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -130,18 +129,6 @@
 
         <script>
             $(function() {
-                $.blockUI.defaults = {
-                    message: '<img src="/bundles/layout/images/loaders/circular/072.gif" alt="loading"/>',
-                    css: {
-                        border: 'none',
-                        backgroundColor: 'transparent',
-                    },
-                    overlayCSS: {
-                        backgroundColor: '#E8EAEB',
-                        textAlign: "center",
-                    }
-                };
-
                 $("#qLoverlay,#qLbar").fadeOut(750);
 
                 $(document).on("click", "a.openNavigation", function(e) {
@@ -158,6 +145,7 @@
         {% endblock javascripts %}
 
         <span id="applicationData" data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "::memberBarcode::" }) }}"></span>
-        
+
+        {% include 'DefaultBundle::_modal.html.twig' %}
     </body>
 </html>

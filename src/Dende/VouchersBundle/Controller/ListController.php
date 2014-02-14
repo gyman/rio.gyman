@@ -15,7 +15,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Hackzilla\BarcodeBundle\Utility\Barcode;
-use Dende\VouchersBundle\Exception\VoucherManagerException; // </editor-fold>
+use Dende\VouchersBundle\Exception\VoucherManagerException;
+// </editor-fold>
 
 class ListController extends Controller {
 

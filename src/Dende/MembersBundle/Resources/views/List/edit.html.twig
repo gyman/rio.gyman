@@ -1,5 +1,4 @@
 <form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
-
     <div class="span4">
         {% include 'MembersBundle::_member_picture.html.twig' with {'form' : form, 'member' : member} %}
     </div>
@@ -75,7 +74,7 @@
         <h3>{% block modalTitle %}Edycja użytkownika{%endblock modalTitle%}</h3>
     </div>
     <div class="modal-footer">
-        <form id="deleteUserForm" class="pull-left hidden hideForNewMember"> 
+        <form id="deleteUserForm" class="pull-left hideForNewMember"> 
             <label>
                 <input type="checkbox" id="deleteUserCheckbox" />
                 Usuń użytkownika
@@ -89,10 +88,18 @@
 {% block javascript %}
 {% javascripts
     '@MembersBundle/Resources/public/js/jQueryWebcam/jquery.webcam.js'
-    '@MembersBundle/Resources/public/coffee/members.editMember.class.coffee'
-    '@MembersBundle/Resources/public/coffee/members.modalBootstrap.coffee'
+    '@MembersBundle/Resources/public/coffee/members.editMember.coffee'
+    '@MembersBundle/Resources/public/coffee/members.webcam.coffee'
 %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
+<script>
+    $(function() {
+        modal.setupFromNode("div#ui-editMemberData");
+        modal.setModalWindowClass("editMemberModal");
+
+        window.editMemberModal = new EditMember();
+    });
+</script>
 {% endblock javascript %}
 

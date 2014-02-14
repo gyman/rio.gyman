@@ -128,7 +128,6 @@ $(document).ready ->
     
     #domain not found looks like is in testing phase
     pageUrl = window.location.pathname.split("/")
-    console.log pageUrl
     winLoc = pageUrl.pop() # get last item
     setCurrentClass mainNavLinkAll, winLoc
   else
@@ -402,3 +401,24 @@ $(document).ready ->
   #remove overlay and show page
   $("#qLoverlay").fadeOut 250
   $("#qLbar").fadeOut 250
+
+  # default blockUi setup
+  
+  $.blockUI.defaults =
+    message: "<img src=\"/bundles/layout/images/loaders/circular/072.gif\" alt=\"loading\"/>"
+    css:
+      border: "none"
+      backgroundColor: "transparent"
+    overlayCSS:
+      backgroundColor: "#E8EAEB"
+      textAlign: "center"
+  
+  # modal setup
+
+  window.modal = new Modal
+            
+  $(document).off("click.modal.open").on "click.modal.open", "a.openUrlInModal", (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    href = $(this).attr "href"
+    modal.showFromUrl(href)

@@ -3,11 +3,11 @@
     <strong>Uwaga!</strong>
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     Uczestnik nie posiada wykupionego karnetu!<br />
-    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher" data-dismiss="modal">Kliknij tu, by sprzedać karnet.</a>
+    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="openUrlInModal" data-dismiss="modal">Kliknij tu, by sprzedać karnet.</a>
 </div>
 {% elseif voucher.getAmount() is null %}
 <div class="alert alert-info">
-    <strong>Informacja.</strong>
+    <strong>Informacja</strong>
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     Uczestnik posiada karnet OPEN.
 </div>
@@ -16,7 +16,7 @@
     <strong>Uwaga!</strong>
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     Uczestnik wykorzystał już wszystkie wejścia z posiadanego karnetu!
-    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="newVoucher" data-dismiss="modal">Kliknij tu, by sprzedać nowy karnet.</a>
+    <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="openUrlInModal" data-dismiss="modal">Kliknij tu, by sprzedać nowy karnet.</a>
 </div>
 {% endif %}
 
@@ -57,9 +57,34 @@
 </div>
 {% endif %}
 
+{% block modal %}
+<div class="hidden" id="ui-editEntryData">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% block modalTitle %}Dodaj wejście{%endblock modalTitle%}</h3>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Dodaj wejście</a>
+    </div>
+</div>
+{% endblock modal %}
+
+
+{% block javascript %}
+{% javascripts
+    '@EntriesBundle/Resources/public/coffee/entries.editEntry.coffee'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
 <script>
     $(function() {
 
+        modal.setupFromNode("div#ui-editEntryData");
+        modal.setModalWindowClass("editEntryModal");
+
+        window.editEntryModal = new EditEntry();
+
+        return;
         /*
          $("#addEntrance").off("click.sendForm").on("click.sendForm", function() {
          var $form = $("form#entranceForm");
@@ -80,36 +105,7 @@
          });
          });
          */
-
-        $("input[name='dende_entriesbundle_entry\\\[entryType\\\]']").uniform();
-
-        var controlDiv = $("input#dende_entriesbundle_entry_entryPrice").parents("div.control-group");
-
-        controlDiv.hide();
-
-        $(document).on("change", "input[name='dende_entriesbundle_entry\\\[entryType\\\]']", function(e) {
-            if ($(e.target).val() === "paid")
-            {
-                controlDiv.show();
-            } else {
-                controlDiv.hide();
-            }
-        });
-
-
-        $("#dende_entriesbundle_entry_activity").select2({
-            dropdownAutoWidth: true,
-            containerCss: {
-                width: "200px"
-            }
-        });
-
-        $("#dende_entriesbundle_entry_entryPrice").spinner({
-            min: 0,
-            step: 10,
-            start: 1000,
-            numberFormat: "C"
-        });
-
     });
 </script>
+{% endblock javascript %}
+

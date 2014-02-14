@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class DefaultController extends Controller {
 
     /**
-     * @Route("/entrance/quick/member/{barcode}", name="_entry_quickadd")
+     * @Route("/quick/member/{barcode}", name="_entry_quickadd")
      * @ParamConverter("member", class="MembersBundle:Member")
      */
     public function quickSearchAction(Member $member) {
@@ -27,7 +27,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/entrance/new/member/{id}", name="_entrance_add")
+     * @Route("/new/member/{id}", name="_entrance_add")
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */

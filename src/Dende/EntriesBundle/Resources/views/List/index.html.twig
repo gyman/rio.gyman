@@ -45,13 +45,6 @@
 {% endfor %}
 {% endblock %}
 
-{% block body %}
-{{ parent() }}
-
-{% include 'MembersBundle::_memberModal.html.twig' %}
-{% include 'MembersBundle::_entranceModal.html.twig' %}
-{% endblock body %}
-
 {# javascripts #}
 
 {% block javascripts %}
