@@ -4,12 +4,7 @@ namespace Dende\MembersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Dende\DefaultBundle\Validator as DefaultBundle;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
-use Dende\DefaultBundle\Lib\Globals;
-use Gedmo\Mapping\Annotation as Gedmo;
-use DateTime;
 
 /**
  * Member
@@ -19,7 +14,6 @@ use DateTime;
  */
 class Filter {
 
-// <editor-fold defaultstate="collapsed" desc="class fields">
     /**
      * @var integer
      *
@@ -33,7 +27,6 @@ class Filter {
      * @var string
      * 
      * @Assert\NotBlank(message = "Pole nie może być puste!")
-     * 
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
@@ -46,35 +39,51 @@ class Filter {
     private $filter;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dende\EntriesBundle\Entity\Entry", mappedBy="member",cascade={"remove"}, orphanRemoval=true)
+     * @var ArrayCollection
      */
-    private $entries;
+    private $subfilters;
 
     /**
-     * @var DateTime $created
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created", type="datetime", nullable=false)
+     * @var string
+     * 
+     * @ORM\Column(name="pinned", type="boolean", nullable=true)
      */
-    private $created;
-
-    /**
-     * @var DateTime $modified
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="modified", type="datetime", nullable=false)
-     */
-    private $modified;
-
-    /**
-     * @var Datetime $deletedAt
-     *
-     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
-     */
-    private $deletedAt;
-
-// </editor-fold>
+    private $pinned;
 
     public function __construct() {
-        $this->vouchers = new ArrayCollection();
+        $this->subfilters = new ArrayCollection();
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getFilter() {
+        return $this->filter;
+    }
+
+    public function getPinned() {
+        return $this->pinned;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function setFilter($filter) {
+        $this->filter = $filter;
+    }
+
+    public function setPinned($pinned) {
+        $this->pinned = $pinned;
+    }
+
+    public function getSubfilters() {
+        return $this->subfilters;
+    }
+
+    public function setSubfilters(ArrayCollection $subfilters) {
+        $this->subfilters = $subfilters;
     }
 
 }

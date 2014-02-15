@@ -53,7 +53,6 @@ class @EditMember
     @$saveButton.off("click.saveButton").on "click.saveButton", @handleSaveButton
         
   handleSaveButton: (e) =>
-    console.log "click to save"
     e.preventDefault()
     @form = $("form#memberForm",@$modalWindow)
     if @deleteCheckbox? and @deleteCheckbox.is ":checked" 
@@ -78,13 +77,13 @@ class @EditMember
       success: (response) =>
         datatable.fnReloadAjax()
         @modal.hide()
-      error: (xhr, textStatus, errorThrown) ->
+      error: (xhr, textStatus, errorThrown) =>
         if xhr.status == 400
-          container.html xhr.responseText
+          @modal.setBody xhr.responseText
         else if xhr.status == 500
           alert xhr.responseText
       complete: =>
-        modal.unblock()
+        @modal.unblock()
       type: @form.attr "method"
   
   initDatepickers: () =>

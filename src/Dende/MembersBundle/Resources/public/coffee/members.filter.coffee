@@ -1,0 +1,202 @@
+class @Filter
+  constructor: ()->
+    @modal = window.modal
+    @$modalWindow = @modal.getModal()
+    @setupAddFilterSelect()
+    @setupUniform()
+    @setupSaveFilterCheckbox()
+    @setupSubmitButton()
+    @setupRemoveFilter()
+    
+  addFilterSelector: "#dende_membersbundle_filter_addFilter"
+  saveFilterSelector: "#dende_membersbundle_filter_save"
+  filterNameSelector: "#dende_membersbundle_filter_name"
+  pinToDashboardSalector: "#dende_membersbundle_filter_pinned"
+  filterFormSelector: "form#filterForm"
+  $form: $("form#filterForm")
+  useFilterButtonSelector: "#useFilter"
+
+  # addFilter dropdown
+
+  setupAddFilterSelect: =>
+    @$modalWindow.off("change.filter.addFilter").on "change.filter.addFilter", @addFilterSelector, (e) =>
+      @modal.block()
+      filterName = $(e.target).val()
+      action = @$form.attr("data-get-filter-url").replace("__name__",filterName)
+      $.get action, (result) =>
+        $(@saveFilterSelector).parents(".control-group").before result
+        $("input, textarea, select",@$form).filter("[name*=FILTERNAME]").each (index,element) =>
+          newName = $(element).attr("name").replace /_FILTERNAME(?:_?)/g, "["+filterName+"]" 
+          $(element).attr "name",newName
+          oldId = $(element).attr("id")
+          $label = $("label[for='"+oldId+"']")
+          newId = oldId.replace /_FILTERNAME_/g, "_"+filterName+"_" 
+          $(element).attr "id",newId
+          $label.attr "for", newId
+        $("option[value='"+filterName+"']",@addFilterSelector).attr("disabled",true).hide()
+        $(@addFilterSelector).val(null)
+        @[filterName+"SubfilterHandler"]()
+        @modal.unblock()
+        
+        
+  # search filter handler
+        
+  searchSubfilterHandler: () =>
+
+  # registrationDate filter handler
+        
+  registrationDateSubfilterHandler: () =>
+    @handleVoucherDates("registrationDate")
+  
+
+  # activities filter handler
+        
+  activitiesSubfilterHandler: () =>
+    activitySelector = "#dende_membersbundle_filter_subfilters_activities_activity"
+    
+    $(activitySelector).select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "400px"
+    
+    
+  # gender filter handler
+  
+  genderSubfilterHandler: () =>
+    $("#dende_membersbundle_filter_subfilters_gender_gender").select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"  
+  
+  entriesSubfilterHandler: () =>
+    @handleVoucherDates("entries")
+    
+  # vouchers filter handlers
+  
+  voucherStartSubfilterHandler: () =>
+    @handleVoucherDates("voucherStart")
+    
+  voucherEndSubfilterHandler: () =>
+    @handleVoucherDates("voucherEnd")
+                
+  handleVoucherDates: (type) =>
+    typeSelector = "#dende_membersbundle_filter_subfilters_"+type+"_type"
+    date1Selector = "#dende_membersbundle_filter_subfilters_"+type+"_date1"
+    date2Selector = "#dende_membersbundle_filter_subfilters_"+type+"_date2"
+    
+    $(typeSelector).select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"  
+    
+    $([date1Selector,date2Selector].join(",")).datepicker
+      dateFormat: "dd.mm.yy"
+      
+    $(date2Selector).hide()
+      
+    eventName = "change.filter."+type+".type"
+      
+    @$modalWindow.off(eventName).on eventName, typeSelector, (e) =>
+      noneInputsArray = ["today","yesterday","this_week","last_week","this_month","last_month","this_year","last_year"]
+      singleInputArray =  ["eq","lt","gt"]
+      doubleInputsArray = ["between","notBetween"]
+      
+      value = $(e.target).val()
+      
+      if noneInputsArray.indexOf(value) != -1
+        $(date1Selector).hide()
+        $(date2Selector).hide()
+      else if doubleInputsArray.indexOf(value) != -1
+        $(date1Selector).show()
+        $(date2Selector).show()
+      else if singleInputArray.indexOf(value) != -1
+        $(date1Selector).show()
+        $(date2Selector).hide()
+  
+  # belt filter handler
+  
+  beltSubfilterHandler: () =>
+    typeSelector = "#dende_membersbundle_filter_subfilters_belt_type"
+    colorSelector = "#dende_membersbundle_filter_subfilters_belt_belt"
+    
+    $([typeSelector,colorSelector].join(",")).select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"  
+    
+  # age filter handler
+  
+  ageSubfilterHandler: () =>
+    typeSelector = "#dende_membersbundle_filter_subfilters_age_type"
+    age1Selector = "#dende_membersbundle_filter_subfilters_age_age1"
+    age2Selector = "#dende_membersbundle_filter_subfilters_age_age2"
+    
+    @$modalWindow.off("change.filter.age.type").on "change.filter.age.type", typeSelector, (e) =>
+      if $(e.target).val() == "between"
+        $(age2Selector).show()
+      else
+        $(age2Selector).hide()
+        
+    $(age2Selector).hide()
+    
+    $(typeSelector).select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"
+    
+    $([age1Selector,age2Selector].join ",").spinner
+      min: 0
+      step: 1
+      start: 100
+      numberFormat: "C"
+  
+  # delete filter from list
+  
+  setupRemoveFilter: =>
+    @$modalWindow.off("click.filter.removeFilter").on "click.filter.removeFilter", "a.removeFilter", (e) =>
+      e.preventDefault()
+      $group = $(e.target).parents ".control-group"
+      filterName = $group.attr "data-filter-name"
+      $("option[value='"+filterName+"']",@addFilterSelector).removeAttr("disabled").show()
+      $group.remove()
+      $(@addFilterSelector).val(null)
+  
+  
+  setupUniform: =>
+    $(":checkbox",@$modalWindow).uniform()
+  
+  setupSaveFilterCheckbox: =>
+    $groupsToHide = $(@filterNameSelector+", "+@pinToDashboardSalector).parents(".control-group");
+    
+    $groupsToHide.hide()
+    
+    @$modalWindow.off("click.filter.saveFilter").on "click.filter.saveFilter", @saveFilterSelector, (e) =>
+      if $(@saveFilterSelector).is(":checked")
+        $groupsToHide.show()
+      else
+        $groupsToHide.hide()
+        
+  setupSubmitButton: =>
+    @$saveButton = $(@useFilterButtonSelector,@$modalWindow)
+    @$saveButton.off("click.filter.saveButton").on "click.filter.saveButton", (e) =>
+      e.preventDefault()
+      action = @$form.attr "action"
+      data = @$form.serialize()
+      @modal.block()
+
+      $.ajax
+        url: action
+        data: data
+        success: (response) =>
+          datatable.fnReloadAjax()
+          @modal.hide()
+        error: (xhr, textStatus, errorThrown) =>
+          if xhr.status == 400
+            @modal.setBody xhr.responseText
+            if $(@saveFilterSelector).is(":checked")
+              $(@filterNameSelector+", "+@pinToDashboardSalector).parents(".control-group").show()
+          else if xhr.status == 500
+            alert xhr.responseText
+        complete: =>
+          @modal.unblock()
+        type: @$form.attr "method"

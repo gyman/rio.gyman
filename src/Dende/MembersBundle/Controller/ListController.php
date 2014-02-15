@@ -12,8 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Dende\MembersBundle\Services\Manager\MemberManager;
-use Dende\MembersBundle\Form\MemberFilterListType;
+use Dende\MembersBundle\Form\FilterType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Dende\MembersBundle\Entity\Filter;
+use Dende\MembersBundle\Form\Subfilters as Subfilters;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ListController extends Controller {
 
@@ -77,41 +80,64 @@ class ListController extends Controller {
     }
 
     /**
-     * @Route("/filter", name="_members_filter")
+     * @Route("/filter/new", name="_members_filter")
      * @Template("MembersBundle:List:filter.html.twig")
      */
-    public function filterListAction() {
-        $form = $this->createForm(new MemberFilterListType());
-//
-//        if ($request->getMethod() == 'POST')
-//        {
-//            $form->handleRequest($request);
-//
-//            if ($form->isValid())
-//            {
-//                //                $memberManager->persist($member);
-//                //                $memberManager->flush();
-//            }
-//            else
-//            {
-//                $response->setStatusCode(400);
-//            }
-//        }
-//
-//        return $response->setContent(
-//                        $this->renderView("MembersBundle:List:edit.html.twig", array(
-//                            'form'     => $form->createView(),
-//                            'member'   => $member,
-//                            'voucher'  => $voucher,
-//                            "uploader" => $uploaderHelper,
-//                                )
-//                        )
-//        );
-        
-        return array(
-            "form" => $form->createView()
-            
+    public function newFilterAction(Request $request) {
+        $response = new Response(
+                'Content', 200, array('content-type' => 'text/html')
         );
+
+        $filter = new Filter();
+
+        $form = $this->createForm(new FilterType(), $filter);
+
+        $subformNamePattern = $form->getName() . "_subfilters";
+        
+        $filterParams = $request->get($subformNamePattern);
+        
+        if ($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request);
+            $filter->setFilter(json_encode($filterParams));
+
+            if ($form->get("save")->getData() === true)
+            {
+                if ($form->isValid())
+                {
+                    $manager = $this->getDoctrine()->getManager();
+                    $manager->persist($filter);
+                    $manager->flush();
+                }
+                else
+                {
+                    $response->setStatusCode(400);
+                }
+            }
+
+//            throw new \Exception("Apply use filter here");
+        }
+
+        return $response->setContent(
+                        $this->renderView("MembersBundle:List:filter.html.twig", array(
+                            'form' => $form->createView(),
+                        ))
+        );
+    }
+
+    /**
+     * @Route("/filter/{name}", name="_members_filter_get")
+     * @Template()
+     */
+    public function getSubfilterAction($name) {
+        $typeClass = 'Dende\\MembersBundle\\Form\\Subfilters\\' . ucfirst($name) . 'Type';
+        
+        $form = $this->createForm(new $typeClass());
+
+        return new Response($this->renderView("MembersBundle:List:Subfilters/" . $name . ".html.twig", array(
+                    "form"   => $form->createView(),
+                    "widget" => $name
+        )));
     }
 
     /**
@@ -130,9 +156,7 @@ class ListController extends Controller {
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function editAction(Member $member) {
-        $request = $this->get('request');
-
+    public function editAction(Member $member, Request $request) {
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );

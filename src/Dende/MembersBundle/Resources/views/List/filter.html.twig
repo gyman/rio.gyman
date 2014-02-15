@@ -1,5 +1,27 @@
-<form action="{{ path("_members_filter") }}" class="form form-horizontal" method="POST">
-{{ form_widget(form) }}
+{% if form.vars.errors|length > 0 %}
+<div class="alert alert-error">
+    <strong>Uwaga!</strong><a class="close" data-dismiss="alert" href="#">&times;</a>
+    {{ form_errors(form) }}
+</div>
+{%endif %}
+
+<form
+    action="{{ path("_members_filter") }}"
+    class="form form-horizontal"
+    method="POST"
+    id="filterForm"
+    data-get-filter-url="{{ path("_members_filter_get",{name: "__name__"}) }}"
+    >
+{{ form_row(form.addFilter) }}
+
+    <span class="subfilters"></span>
+
+{{ form_row(form.save) }}
+{{ form_row(form.name) }}
+{{ form_row(form.pinned) }}
+{{ form_row(form.filter) }}
+
+{{form_rest(form)}}
 </form>
 
 {% block modal %}
@@ -16,7 +38,7 @@
 
 {% block javascript %}
 {% javascripts
-
+    '@MembersBundle/Resources/public/coffee/members.filter.coffee'
 %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
@@ -25,7 +47,7 @@
         modal.setupFromNode("div#ui-editFilterData");
         modal.setModalWindowClass("addFilterModal");
 
-        // window.editMemberModal = new EditMember();
+        window.filter = new Filter();
     });
 </script>
 {% endblock javascript %}
