@@ -3,12 +3,21 @@ parameters:
     member_manager.class: Dende\MembersBundle\Services\Manager\MemberManager
     member_repository.class: Dende\MembersBundle\Entity\MemberRepository
     
+    member_filter_entity.class: Dende\MembersBundle\Entity\Filter
+    member_filter_repository.class: Dende\MembersBundle\Entity\FilterRepository
+        
 services:
     member_repository:
         class:          "%member_repository.class%"
         factory_service: doctrine
         factory_method:  getRepository
         arguments: [ "%member_entity.class%" ]
+
+    member_filter_repository:
+        class:          "%member_filter_repository.class%"
+        factory_service: doctrine
+        factory_method:  getRepository
+        arguments: [ "%member_filter_entity.class%" ]
         
     member_manager:
         class:          "%member_manager.class%"

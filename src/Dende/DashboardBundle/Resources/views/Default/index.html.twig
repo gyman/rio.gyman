@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block body_class %}dashboard{% endblock %}
+
+{% block body %}
+
+<div class="heading">
+
+    <h3>Pulpit nawigatora</h3>                    
+
+</div><!-- End .heading-->
+<div class="form-row row-fluid">
+    <div class="box span6">
+        <div class="title"><h4><span>Filtry uczestników</span></h4></div>
+        <div class="content">
+            <ul class="bigBtnIcon">
+                {% for filter in filters %}
+                <li>
+                    <a class="tipB" href="{{ path("_dashboard") }}">
+                        <span class="icon icomoon-icon-stats-up"></span>
+                        <span class="notification">5</span>
+                    </a>
+                    <div>{{ filter.getName() }}</div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="reminder">
+            <h4>Zajęcia dzisiaj ({{ "now"|date("l") }}):
+                <a class="icon tip" href="{{ path("_schedule_calendar") }}" oldtitle="Configure" title="" data-hasqtip="true"><span class="icon16 icomoon-icon-cog-2"></span></a>
+            </h4>
+            <ul>
+                {% for event in events %}
+                <li class="clearfix">
+                    <span class="number">{{ event.getStartHour() }} - {{ event.getEndHour() }}</span> 
+                    <span class="txt">{{ event.getActivity().getName() }}</span>
+                     <a class="btn btn-warning" href="#">15 osób</a>
+                </li>               
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts
+
+ %}
+                        <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}

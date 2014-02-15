@@ -10,4 +10,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class FilterRepository extends EntityRepository {
 
+    public function getPinnedFilters() {
+        return $this->createQueryBuilder("f")
+                ->where("f.pinned = true")
+                ->getQuery()
+                ->execute();
+    }
+
 }

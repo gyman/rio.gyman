@@ -21,15 +21,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ListController extends Controller {
 
     /**
-     * @Route("/dashboard", name="_dashboard")
-     * @Template("MembersBundle:List:dashboard.html.twig")
-     * @todo Przenieść do osobnego bundle'a
-     */
-    public function dashboardAction() {
-        return array();
-    }
-
-    /**
      * @Route("/", name="_members_list")
      * @Template("MembersBundle:List:list.html.twig")
      */

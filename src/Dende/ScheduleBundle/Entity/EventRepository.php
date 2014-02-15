@@ -38,4 +38,15 @@ class EventRepository extends EntityRepository {
         return $query->execute();
     }
 
+    public function getTodayEvents() {
+        $queryBuilder = $this->createQueryBuilder("e");
+        
+        $queryBuilder->where("e.dayOfWeek = :day");
+        $queryBuilder->setParameter("day", strtolower(date("l")));
+        
+        $query = $queryBuilder->getQuery();
+        
+        return $query->execute();
+    }
+
 }
