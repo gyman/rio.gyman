@@ -40,6 +40,8 @@ class MembersData extends AbstractFixture implements OrderedFixtureInterface {
         $member->setNotes($notes);
         $member->setPhone($phone);
         $member->setZipcode($zipcode);
+        $member->setBelt($belt);
+        $member->setBarcode($barcode);
 
         $this->manager->persist($member);
         $this->manager->flush();

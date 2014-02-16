@@ -8,8 +8,10 @@ Member01:
     notes:              notes
     phone:              604411089
     zipcode:            88-888
+    belt:               white
+    barcode:            abcd12301
 Member02:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test02@test2.pl
     foto:               null
@@ -18,8 +20,10 @@ Member02:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               white
+    barcode:            abcd12302
 Member03:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test03@test2.pl
     foto:               null
@@ -28,8 +32,10 @@ Member03:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               blue
+    barcode:            abcd12303
 Member04:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test04@test2.pl
     foto:               null
@@ -38,8 +44,10 @@ Member04:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               brown
+    barcode:            abcd12304
 Member05:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test05@test2.pl
     foto:               null
@@ -48,8 +56,10 @@ Member05:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               purple
+    barcode:            abcd12305
 Member06:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test06@test2.pl
     foto:               null
@@ -58,8 +68,10 @@ Member06:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               black
+    barcode:            abcd12306
 Member07:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test07@test2.pl
     foto:               null
@@ -68,8 +80,10 @@ Member07:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               white
+    barcode:            abcd12307
 Member08:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test08@test2.pl
     foto:               null
@@ -78,8 +92,10 @@ Member08:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               blue
+    barcode:            abcd12308
 Member09:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1990-10-15 12:00:00"
     deletedAt:          null
     email:              test09@test2.pl
     foto:               null
@@ -88,8 +104,10 @@ Member09:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               blue
+    barcode:            abcd12309
 Member10:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1975-10-15 12:00:00"
     deletedAt:          null
     email:              test10@test2.pl
     foto:               null
@@ -98,8 +116,10 @@ Member10:
     notes:              notes
     phone:              500666666
     zipcode:            88-888
+    belt:               
+    barcode:            abcd12310
 Member11:
-    birthdate:          "2009-10-14 12:00:00"
+    birthdate:          "1980-10-15 12:00:00"
     deletedAt:          null
     email:              test11@test2.pl
     foto:               null
@@ -108,3 +128,5 @@ Member11:
     notes:              testing old voucher removal
     phone:              500666666
     zipcode:            88-888
+    belt:               
+    barcode:            abcd12311

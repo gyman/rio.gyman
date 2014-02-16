@@ -9,21 +9,37 @@
 
 {% block listHeaderRightToolbox %}
 <div class="pull-right" id="chooseMembersListForm">
-    <a class="icomoon-icon-list green pull-left"  href="{{ path("_members_list") }}"></a>
-    <a class="icomoon-icon-grid green pull-left" href="{{ path("_members_gallery") }}"></a>
+    <a class="icomoon-icon-list green"  href="{{ path("_members_list") }}"></a>
+    <a class="icomoon-icon-grid green" href="{{ path("_members_gallery") }}"></a>
 </div>
-{% endblock %}
-
-{% block listHeaderFilter %}
-<button id="filterModalButton" data-remote="{{ path("_members_filter") }}" data-target="#filterModal" role="button" data-toggle="modal" class="btn btn-link pull-left">
-    <span class="icon16 icomoon-icon-cog-2"></span><span class="caret"></span>
-</button>
+<div class="pull-left">
+    <a id="filterModalButton" href="{{ path("_members_filter") }}" class="btn btn-link openUrlInModal">
+        <span class="icon16 icomoon-icon-cog-2"></span><span class="icon16 caret"></span>
+    </a>
+</div>
 {% endblock %}
 
 {% block listTitle %}Lista osób{% endblock%}
 {% block listTableId %}membersList{% endblock %}
 {% block listTableClass %}table table-bordered{% endblock %}
 {% block listTableAttr %}data-ajax-source="{{ path("_members_list", {_format: "json"}) }}"{% endblock %}
+
+{% block listTabs %}
+<ul class="nav nav-tabs pattern" id="filterTabs">
+    <li{% if filter is null %} class="active"{% endif %}><a href="{{ path("_members_list_filter_reset") }}"><span class="filterName">Wszystkie</span></a></li>
+
+    {% for filterItem in filters if filters|length > 0 %}
+    <li{% if filter is not null and filter.getId() == filterItem.getId() %} class="active"{% endif %}>
+        <a href="{{ path("_members_list_filter_set",{id: filterItem.getId()}) }}"><span class="filterName">{{ filterItem.getName() }}</span><span class="delete-filter" data-href="{{ path("_members_list_filter_delete",{id:filterItem.getId()}) }}">x</span></a>
+    </li>
+    {% endfor %}
+
+    <li class="hidden template">
+        <a href="{{ path("_members_list_filter_set",{id: "__FILTERID__"}) }}"><span class="filterName">__FILTERNAME__</span><span class="delete-filter" data-href="{{ path("_members_list_filter_delete",{id:"__FILTERID__"}) }}">x</span></a>
+    </li>
+</ul>
+{% endblock listTabs %}
+
 {% block listThead %}
 <tr>
     <th class="beltColor"></th>
@@ -33,19 +49,6 @@
     <th>Akcje</th>
 </tr>
 {% endblock %}
-                
-{% block listTbody %}
-{#
-{% for member in members %}
-    {% include 'MembersBundle:List:_list_tr.html.twig' with {"member" : member} %}
-{% endfor %}
-#}
-{% endblock %}
-
-
-{% block body %}
-    {{ parent() }}
-{% endblock body %}
 
 {# javascripts #}
 

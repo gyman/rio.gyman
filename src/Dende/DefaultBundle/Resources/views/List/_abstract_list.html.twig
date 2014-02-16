@@ -3,14 +3,14 @@
 {% block body %}
 <div class="heading">
     <h3>{% block headingTitle %}{% endblock %}</h3>
-    
+
     {% block buttonHeading %}
     <a href="{% block buttonPath %}{% endblock %}" class="btn pull-right {% block buttonClasses %}{% endblock %}" id="{% block buttonId %}{% endblock %}">
         <span class="icon32 icomoon-icon-new green"></span>
         {% block buttonLabel %}{% endblock %}
     </a>
     {% endblock %}
-    
+
 </div><!-- End .heading-->
 
 <!-- Build page from here: Usual with <div class="row-fluid"></div> -->
@@ -24,13 +24,13 @@
 
             <div class="title">
                 {% block listHeaderRightToolbox %}{% endblock %}
-                {% block listHeaderFilter %}{% endblock %}
                 <h4>
                     <span>{% block listTitle %}{% endblock%}</span>
                 </h4>
             </div>
 
             <div class="content noPad clearfix">
+                {% block listTabs %}{% endblock listTabs %}
                 {% block listTable %}
                 <table
                     cellpadding="0" cellspacing="0" border="0"

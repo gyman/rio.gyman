@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Dende\EntriesBundle\EntriesBundle(),
             new Hackzilla\BarcodeBundle\HackzillaBarcodeBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Dende\DashboardBundle\DashboardBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

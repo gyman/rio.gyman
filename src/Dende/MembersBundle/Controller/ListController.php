@@ -12,25 +12,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Dende\MembersBundle\Services\Manager\MemberManager;
-use Dende\MembersBundle\Form\MemberFilterListType;
+use Dende\MembersBundle\Form\FilterType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Dende\MembersBundle\Entity\Filter;
+use Dende\MembersBundle\Form\Subfilters as Subfilters;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ListController extends Controller {
 
-    /**
-     * @Route("/dashboard", name="_dashboard")
-     * @Template("MembersBundle:List:dashboard.html.twig")
-     * @todo Przenieść do osobnego bundle'a
-     */
-    public function dashboardAction() {
-        return array();
-    }
+    public static $filter_session_key = "members_list_filter";
 
     /**
-     * @Route("/", name="_members_list")
+     * @Route("/list", name="_members_list")
      * @Template("MembersBundle:List:list.html.twig")
      */
     public function indexAction(Request $request) {
+        $session = new Session();
+        $filter = $session->get(self::$filter_session_key);
+
         if ($request->getRequestFormat() == "json")
         {
             /** @var MemberRepository */
@@ -39,6 +39,11 @@ class ListController extends Controller {
 
             $memberRepository->setRequest($request);
             $memberRepository->setQuery($membersQuery);
+
+            if ($filter)
+            {
+                $this->get("filter_manager")->applyFilterToQuery($filter, $membersQuery);
+            }
 
             $totalCount = $memberRepository->getTotalCount();
 
@@ -73,45 +78,143 @@ class ListController extends Controller {
             return new JsonResponse($datatable);
         }
 
-        return array();
+        $filters = $this->get("member_filter_repository")->getFilters();
+
+        return array(
+            "filter"  => $filter,
+            "filters" => $filters
+        );
     }
 
     /**
-     * @Route("/filter", name="_members_filter")
+     * @Route("/filter/{id}/delete", name="_members_list_filter_delete")
+     * @ParamConverter("filter", class="MembersBundle:Filter")
+     */
+    public function deleteFilterAction(Filter $filter, Request $request) {
+        $session = new Session();
+        $filterInSession = $session->get(self::$filter_session_key);
+
+        if ($filterInSession && $filter->getId() == $filterInSession->getId())
+        {
+            $session->remove(self::$filter_session_key);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($filter);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest())
+        {
+            return new JsonResponse(array("status" => "ok"));
+        }
+
+        return $this->redirect($this->generateUrl("_members_list"));
+    }
+
+    /**
+     * @Route("/filter/reset", name="_members_list_filter_reset")
+     */
+    public function resetFilterAction(Request $request) {
+        $session = new Session();
+        $session->remove(self::$filter_session_key);
+
+        if ($request->isXmlHttpRequest())
+        {
+            return new JsonResponse(array("status" => "ok"));
+        }
+
+        return $this->redirect($this->generateUrl("_members_list"));
+    }
+
+    /**
+     * @Route("/filter/{id}/set", name="_members_list_filter_set")
+     * @ParamConverter("filter", class="MembersBundle:Filter")
+     */
+    public function setFilterAction(Filter $filter, Request $request) {
+        $session = new Session();
+        $session->set(self::$filter_session_key, $filter);
+
+        if ($request->isXmlHttpRequest())
+        {
+            return new JsonResponse(array("status" => "ok"));
+        }
+
+        return $this->redirect($this->generateUrl("_members_list"));
+    }
+
+    /**
+     * @Route("/filter/new", name="_members_filter")
      * @Template("MembersBundle:List:filter.html.twig")
      */
-    public function filterListAction() {
-        $form = $this->createForm(new MemberFilterListType());
-//
-//        if ($request->getMethod() == 'POST')
-//        {
-//            $form->handleRequest($request);
-//
-//            if ($form->isValid())
-//            {
-//                //                $memberManager->persist($member);
-//                //                $memberManager->flush();
-//            }
-//            else
-//            {
-//                $response->setStatusCode(400);
-//            }
-//        }
-//
-//        return $response->setContent(
-//                        $this->renderView("MembersBundle:List:edit.html.twig", array(
-//                            'form'     => $form->createView(),
-//                            'member'   => $member,
-//                            'voucher'  => $voucher,
-//                            "uploader" => $uploaderHelper,
-//                                )
-//                        )
-//        );
-        
-        return array(
-            "form" => $form->createView()
-            
+    public function newFilterAction(Request $request) {
+        $response = new Response(
+                'Content', 200, array('content-type' => 'text/html')
         );
+
+        $filter = new Filter();
+
+        $form = $this->createForm(new FilterType(), $filter);
+
+        $subformNamePattern = $form->getName() . "_subfilters";
+
+        $filterParams = $request->get($subformNamePattern);
+
+        if ($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request);
+            $filter->setFilter(json_encode($filterParams));
+
+            $data = array();
+
+            if ($form->get("save")->getData() === true)
+            {
+                if ($form->isValid())
+                {
+                    $manager = $this->getDoctrine()->getManager();
+                    $manager->persist($filter);
+                    $manager->flush();
+                }
+                else
+                {
+                    $response->setStatusCode(400);
+                }
+
+                $data = array(
+                    "name" => $filter->getName(),
+                    "id"   => $filter->getId()
+                );
+            }
+
+            $session = new Session();
+            $session->set(self::$filter_session_key, $filter);
+
+            return new JsonResponse(array(
+                "status" => "ok",
+                "data"   => $data
+            ));
+        }
+
+        return $response->setContent(
+                        $this->renderView("MembersBundle:List:filter.html.twig", array(
+                            'form' => $form->createView(),
+                        ))
+        );
+    }
+
+    /**
+     * @Route("/filter/{name}", name="_members_filter_get")
+     * @Template()
+     */
+    public function getSubfilterAction($name) {
+        $typeClass = 'Dende\\MembersBundle\\Form\\Subfilters\\' . ucfirst($name) . 'Type';
+
+        $form = $this->createForm(new $typeClass());
+
+        return new Response($this->renderView("MembersBundle:List:Subfilters/" . $name . ".html.twig", array(
+                    "form"   => $form->createView(),
+                    "widget" => $name
+        )));
     }
 
     /**
@@ -130,9 +233,7 @@ class ListController extends Controller {
      * @ParamConverter("member", class="MembersBundle:Member")
      * @Template()
      */
-    public function editAction(Member $member) {
-        $request = $this->get('request');
-
+    public function editAction(Member $member, Request $request) {
         $response = new Response(
                 'Content', 200, array('content-type' => 'text/html')
         );
