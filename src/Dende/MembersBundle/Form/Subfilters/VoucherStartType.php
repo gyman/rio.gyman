@@ -23,12 +23,12 @@ class VoucherStartType extends SubfilterType {
                         "notBetween" => "poza",
                         "today"      => "dzisiaj",
                         "yesterday"  => "wczoraj",
-                        "this_week"  => "ten tydzień",
-                        "last_week"  => "poprzedni tydzień",
-                        "this_month" => "ten miesiąc",
-                        "last_month" => "poprzedni miesiąc",
-                        "this_year"  => "ten rok",
-                        "last_year"  => "poprzedni rok",
+                        "thisWeek"   => "ten tydzień",
+                        "lastWeek"   => "poprzedni tydzień",
+                        "thisMonth"  => "ten miesiąc",
+                        "lastMonth"  => "poprzedni miesiąc",
+                        "thisYear"   => "ten rok",
+                        "lastYear"   => "poprzedni rok",
                     )
                 ))
                 ->add("date1", "text")

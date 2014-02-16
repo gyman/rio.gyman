@@ -13,6 +13,6 @@ class Search extends Subfilter {
                         $queryBuilder->expr()->like('m.name', ':string'), $queryBuilder->expr()->like('m.notes', ':string')
         ));
         
-        $queryBuilder->setParameter(":string", "%".$string."%");
+        $queryBuilder->setParameter("string", "%".$string."%");
     }
 }

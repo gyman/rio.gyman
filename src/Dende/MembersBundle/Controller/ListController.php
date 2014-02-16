@@ -90,19 +90,26 @@ class ListController extends Controller {
      * @Route("/filter/{id}/delete", name="_members_list_filter_delete")
      * @ParamConverter("filter", class="MembersBundle:Filter")
      */
-    public function deleteFilterAction(Filter $filter) {
+    public function deleteFilterAction(Filter $filter, Request $request) {
         $session = new Session();
         $filterInSession = $session->get(self::$filter_session_key);
-        
-        if ($filter->getId() == $filterInSession->getId())
+
+        if ($filterInSession && $filter->getId() == $filterInSession->getId())
         {
-            $session->set(self::$filter_session_key, null);
+            $session->remove(self::$filter_session_key);
         }
 
-        $this->getDoctrine()->getManager()->remove($filter);
-        $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
 
-        return new JsonResponse(array("status" => "ok"));
+        $em->remove($filter);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest())
+        {
+            return new JsonResponse(array("status" => "ok"));
+        }
+
+        return $this->redirect($this->generateUrl("_members_list"));
     }
 
     /**
@@ -110,13 +117,13 @@ class ListController extends Controller {
      */
     public function resetFilterAction(Request $request) {
         $session = new Session();
-        $session->set(self::$filter_session_key, null);
-        
+        $session->remove(self::$filter_session_key);
+
         if ($request->isXmlHttpRequest())
         {
             return new JsonResponse(array("status" => "ok"));
         }
-        
+
         return $this->redirect($this->generateUrl("_members_list"));
     }
 
@@ -127,12 +134,12 @@ class ListController extends Controller {
     public function setFilterAction(Filter $filter, Request $request) {
         $session = new Session();
         $session->set(self::$filter_session_key, $filter);
-        
+
         if ($request->isXmlHttpRequest())
         {
             return new JsonResponse(array("status" => "ok"));
         }
-        
+
         return $this->redirect($this->generateUrl("_members_list"));
     }
 
@@ -159,7 +166,7 @@ class ListController extends Controller {
             $filter->setFilter(json_encode($filterParams));
 
             $data = array();
-            
+
             if ($form->get("save")->getData() === true)
             {
                 if ($form->isValid())
@@ -172,19 +179,19 @@ class ListController extends Controller {
                 {
                     $response->setStatusCode(400);
                 }
-                
+
                 $data = array(
                     "name" => $filter->getName(),
-                    "id" => $filter->getId()
+                    "id"   => $filter->getId()
                 );
             }
 
             $session = new Session();
             $session->set(self::$filter_session_key, $filter);
-            
+
             return new JsonResponse(array(
                 "status" => "ok",
-                "data" => $data
+                "data"   => $data
             ));
         }
 

@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Dende\MembersBundle\Form\Subfilters\SubfilterType;
 
-class EntriesType extends SubfilterType {
+class EntryDateType extends SubfilterType {
 
     /**
      * @param FormBuilderInterface $builder

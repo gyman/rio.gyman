@@ -43,7 +43,15 @@ class @Filter
   # search filter handler
         
   searchSubfilterHandler: () =>
-
+        
+  # current voucher filter handler
+        
+  currentVoucherSubfilterHandler: () =>
+    $("#dende_membersbundle_filter_subfilters_currentVoucher_currentVoucher").select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"  
+    
   # registrationDate filter handler
         
   registrationDateSubfilterHandler: () =>
@@ -69,8 +77,17 @@ class @Filter
       containerCss : 
         width : "120px"  
   
-  entriesSubfilterHandler: () =>
-    @handleVoucherDates("entries")
+  entryDateSubfilterHandler: () =>
+    @handleVoucherDates("entryDate")
+  
+  entryTypeSubfilterHandler: () =>
+    typeSelector = "#dende_membersbundle_filter_subfilters_entryType_type"
+    entryTypeSelector = "#dende_membersbundle_filter_subfilters_entryType_entryType"
+    
+    $([typeSelector,entryTypeSelector].join(",")).select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"  
     
   # vouchers filter handlers
   
@@ -98,7 +115,7 @@ class @Filter
     eventName = "change.filter."+type+".type"
       
     @$modalWindow.off(eventName).on eventName, typeSelector, (e) =>
-      noneInputsArray = ["today","yesterday","this_week","last_week","this_month","last_month","this_year","last_year"]
+      noneInputsArray = ["today","yesterday","thisWeek","lastWeek","thisMonth","lastMonth","thisYear","lastYear"]
       singleInputArray =  ["eq","lt","gt"]
       doubleInputsArray = ["between","notBetween"]
       
@@ -113,7 +130,7 @@ class @Filter
       else if singleInputArray.indexOf(value) != -1
         $(date1Selector).show()
         $(date2Selector).hide()
-  
+      
   # belt filter handler
   
   beltSubfilterHandler: () =>
@@ -213,7 +230,7 @@ class @Filter
   addFilterTab: (filter) =>
     $("li",@filterTabsSelector).removeClass "active"
     $templateElement = $("li.template",@filterTabsSelector)
-    originalHref = $templateElement.find("a").attr("href")
+    originalHref = $templateElement.find("a").attr "href"
     href = originalHref.replace /__FILTERID__/g, filter.id
     
     $newElement = $templateElement.clone()

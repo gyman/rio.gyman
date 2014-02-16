@@ -20,6 +20,7 @@ $ ->
     e.stopPropagation()
     $tabContainer = $(e.currentTarget).parents("ul#filterTabs")
     $tab = $(e.currentTarget).parents("li")
+    return if $tab.hasClass "active"
     href = $(e.currentTarget).attr("href")
     $.get href, (response) =>
       $tabContainer.find("li").removeClass("active")
