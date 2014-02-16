@@ -17,4 +17,10 @@ class FilterRepository extends EntityRepository {
                 ->execute();
     }
 
+    public function getFilters() {
+        return $this->createQueryBuilder("f")
+                ->getQuery()
+                ->execute();
+    }
+
 }

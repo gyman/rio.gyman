@@ -15,13 +15,14 @@ class @Filter
   filterFormSelector: "form#filterForm"
   $form: $("form#filterForm")
   useFilterButtonSelector: "#useFilter"
-
+  filterTabsSelector: "ul#filterTabs"
+  
   # addFilter dropdown
 
   setupAddFilterSelect: =>
     @$modalWindow.off("change.filter.addFilter").on "change.filter.addFilter", @addFilterSelector, (e) =>
       @modal.block()
-      filterName = $(e.target).val()
+      filterName = $(e.currentTarget).val()
       action = @$form.attr("data-get-filter-url").replace("__name__",filterName)
       $.get action, (result) =>
         $(@saveFilterSelector).parents(".control-group").before result
@@ -101,7 +102,7 @@ class @Filter
       singleInputArray =  ["eq","lt","gt"]
       doubleInputsArray = ["between","notBetween"]
       
-      value = $(e.target).val()
+      value = $(e.currentTarget).val()
       
       if noneInputsArray.indexOf(value) != -1
         $(date1Selector).hide()
@@ -132,7 +133,7 @@ class @Filter
     age2Selector = "#dende_membersbundle_filter_subfilters_age_age2"
     
     @$modalWindow.off("change.filter.age.type").on "change.filter.age.type", typeSelector, (e) =>
-      if $(e.target).val() == "between"
+      if $(e.currentTarget).val() == "between"
         $(age2Selector).show()
       else
         $(age2Selector).hide()
@@ -155,7 +156,7 @@ class @Filter
   setupRemoveFilter: =>
     @$modalWindow.off("click.filter.removeFilter").on "click.filter.removeFilter", "a.removeFilter", (e) =>
       e.preventDefault()
-      $group = $(e.target).parents ".control-group"
+      $group = $(e.currentTarget).parents ".control-group"
       filterName = $group.attr "data-filter-name"
       $("option[value='"+filterName+"']",@addFilterSelector).removeAttr("disabled").show()
       $group.remove()
@@ -164,6 +165,8 @@ class @Filter
   
   setupUniform: =>
     $(":checkbox",@$modalWindow).uniform()
+  
+  # save filter needs to show div with filter name and pin to dashboard checkbox
   
   setupSaveFilterCheckbox: =>
     $groupsToHide = $(@filterNameSelector+", "+@pinToDashboardSalector).parents(".control-group");
@@ -175,6 +178,8 @@ class @Filter
         $groupsToHide.show()
       else
         $groupsToHide.hide()
+        
+  # submission of the filter
         
   setupSubmitButton: =>
     @$saveButton = $(@useFilterButtonSelector,@$modalWindow)
@@ -188,6 +193,8 @@ class @Filter
         url: action
         data: data
         success: (response) =>
+          if $(@saveFilterSelector).is(":checked")
+            @addFilterTab(response.data)
           datatable.fnReloadAjax()
           @modal.hide()
         error: (xhr, textStatus, errorThrown) =>
@@ -200,3 +207,23 @@ class @Filter
         complete: =>
           @modal.unblock()
         type: @$form.attr "method"
+        
+  # add filter tab when saved
+        
+  addFilterTab: (filter) =>
+    $("li",@filterTabsSelector).removeClass "active"
+    $templateElement = $("li.template",@filterTabsSelector)
+    originalHref = $templateElement.find("a").attr("href")
+    href = originalHref.replace /__FILTERID__/g, filter.id
+    
+    $newElement = $templateElement.clone()
+    
+    $newElement.removeClass("hidden")
+    $newElement.removeClass("template")
+    $newElement.addClass("active")
+    
+    $newElement.find("span.filterName").text filter.name
+    $newElement.find("a").attr "href", href
+    $newElement.find("span.delete-filter").attr "data-href", href
+    
+    $templateElement.before $newElement

@@ -1,4 +1,31 @@
 $ ->   
+
+  # deleting filters from tabs
+
+  $(document).off("click.members.list.filter.delete").on "click.members.list.filter.delete", "span.delete-filter", (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    return if !confirm("Czy na pewno chcesz usunąć filtr?")
+    $tab = $(e.currentTarget).parents("li")
+    href = $(e.currentTarget).attr("data-href")
+    $.get href, (response) =>
+      $tab.parents("ul").find("li:first-child").addClass("active")
+      $tab.remove()
+      datatable.fnReloadAjax()
+
+  # setting filters from tabs
+
+  $(document).off("click.members.list.filter.set").on "click.members.list.filter.set", "ul#filterTabs.nav li a", (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    $tabContainer = $(e.currentTarget).parents("ul#filterTabs")
+    $tab = $(e.currentTarget).parents("li")
+    href = $(e.currentTarget).attr("href")
+    $.get href, (response) =>
+      $tabContainer.find("li").removeClass("active")
+      $tab.addClass("active")
+      datatable.fnReloadAjax()
+      
   # unrolling the details
 
   $(document).on "click", "#membersList tbody tr", (e) ->
@@ -9,7 +36,7 @@ $ ->
       return
     return  if $tr.hasClass("entityDetails")
     $("tr.entityDetails").remove()
-    $("tr",$(e.target).parents "table").data "detailsOpened", false
+    $("tr",$(e.currentTarget).parents "table").data "detailsOpened", false
     url = $tr.attr("data-details-url")
     columnsCount = $tr.children().length
     $newTr = $("<tr />").addClass("entityDetails")

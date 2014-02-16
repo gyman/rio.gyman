@@ -70,7 +70,7 @@ class MemberRepository extends EntityRepository {
         $query->select("count(m.id)");
         return $query->getQuery()->getSingleScalarResult();
     }
-
+    
     public function applyFilterFromRequest() {
         $this->applyLimitFromRequest();
         $this->applyOffsetFromRequest();
