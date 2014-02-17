@@ -61,10 +61,12 @@
                 {% include 'MembersBundle::_member_additional.html.twig' with {'form' : form} %}
             </div>
         </div>
+        {% if ifNew is defined and ifNew == false %}
         <div class="pull-right" id="memberModalToolbox">
             <a href="{{ path("_voucher_new",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-signup"></i> Karnet</a>
             <a href="{{ path("_entrance_add",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-enter"></i> Wejście</a>
         </div>
+        {% endif %}
     </div>
     <div class="hidden">
     {{ form_rest(form) }}
