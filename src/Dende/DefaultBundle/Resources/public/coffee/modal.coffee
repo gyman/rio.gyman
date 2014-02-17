@@ -114,13 +114,11 @@ class @Modal
     @$footerElement.unblock()
     
   loadFromUrl: (url) =>
-    console.log "loadFromUrl"
     $.get url, (response) =>
       @setBody response
   
   showFromUrl: (url) =>
     if @isOpened == true
-      console.log "Already showed!"
       @$modal.off("hidden.imidiateShow").on "hidden.imidiateShow", (e) =>
         $.get url, (response) =>
           window.modal.setBody response

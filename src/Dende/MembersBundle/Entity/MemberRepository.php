@@ -113,8 +113,12 @@ class MemberRepository extends EntityRepository {
             return;
         }
 
-        $this->getQuery()->andWhere("m.name like :name");
-        $this->getQuery()->setParameter("name", "%" . $search . "%");
+        $qb = $this->getQuery();
+
+        $qb->andWhere($qb->expr()->orX(
+                        $qb->expr()->like("m.name", ":string"), $qb->expr()->like("m.barcode", ":string"), $qb->expr()->like("m.notes", ":string")
+        ));
+        $qb->setParameter("string", "%" . $search . "%");
     }
 
     public function applySortingFromRequest() {

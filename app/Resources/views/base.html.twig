@@ -145,7 +145,7 @@
         {% endblock javascripts %}
 
         <span id="applicationData"
-              data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "::memberBarcode::" }) }}"
+              data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "__BARCODE__" }) }}"
               data-member-list-apply-filter-url="{{ path("_members_list_filter_set",{id : "__FILTERID__" }) }}"
               
         ></span>

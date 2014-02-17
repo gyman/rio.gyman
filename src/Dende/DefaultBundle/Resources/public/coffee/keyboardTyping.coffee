@@ -20,12 +20,9 @@ $ ->
  
     if code == 13 && keyboardCache != null
       searchUrlTemplate = $("span#applicationData").attr "data-quicksearch-member-url"
-      searchUrl = searchUrlTemplate.replace "::memberBarcode::", keyboardCache
+      searchUrl = searchUrlTemplate.replace "__BARCODE__", keyboardCache
 
-      $.getJSON searchUrl, (data)->
-        result = $.parseJSON data
-        $("body").append result.modalTemplate if $("body div#editEntranceModal").length == 0
-        $(document).trigger "click.openAddEntranceModal.keytype", [ result.addEntryUrl ]
+      window.modal.showFromUrl searchUrl
         
       keyboardCache = null
       return

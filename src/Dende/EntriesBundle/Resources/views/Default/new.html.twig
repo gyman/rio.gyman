@@ -61,7 +61,7 @@
 <div class="hidden" id="ui-editEntryData">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>{% block modalTitle %}Dodaj wejście{%endblock modalTitle%}</h3>
+        <h3>{% block modalTitle %}Dodaj wejście dla {{ member.getName() }}{%endblock modalTitle%}</h3>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn btn-primary pull-right" id="saveFormInModal">Dodaj wejście</a>

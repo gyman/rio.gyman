@@ -39,10 +39,11 @@ class Belt extends Subfilter {
 
     protected function eq(QueryBuilder $queryBuilder) {
         $queryBuilder->setParameter("belt", $this->options["belt"]);
+
         if ($this->options["belt"] == "white")
         {
             $queryBuilder->andWhere($queryBuilder->expr()->orX(
-                            $queryBuilder->expr()->eq("m.belt", "white"), $queryBuilder->expr()->isNull("m.belt")
+                            $queryBuilder->expr()->eq("m.belt", ":belt"), $queryBuilder->expr()->isNull("m.belt")
                     )
             );
         }

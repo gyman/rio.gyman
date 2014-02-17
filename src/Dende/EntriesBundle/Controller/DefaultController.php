@@ -19,11 +19,13 @@ class DefaultController extends Controller {
      * @ParamConverter("member", class="MembersBundle:Member")
      */
     public function quickSearchAction(Member $member) {
-        return new JsonResponse(json_encode(array(
-                    "memberId" => $member->getId(),
-                    "modalTemplate" => (string) $this->renderView("MembersBundle::_entranceModal.html.twig"),
-                    "addEntryUrl" => $this->generateUrl("_entrance_add",array("id" => $member->getId()))
-        )));
+//        return new JsonResponse(json_encode(array(
+//                    "memberId" => $member->getId(),
+//                    "modalTemplate" => (string) $this->renderView("MembersBundle::_entranceModal.html.twig"),
+//                    "addEntryUrl" => $this->generateUrl("_entrance_add",array("id" => $member->getId()))
+//        )));
+
+        return $this->forward("EntriesBundle:Default:new", array("id" => $member->getId()));
     }
 
     /**
