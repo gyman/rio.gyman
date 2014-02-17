@@ -138,16 +138,6 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/{id}/delete", name="_voucher_delete")
-     * @Template()
-     */
-    public function deleteAction($id) {
-        $voucherManager = $this->get("voucher_manager");
-        $voucherManager->setAsDeleted($id);
-        return array();
-    }
-
-    /**
      * @Template("MembersBundle::_member_voucher.html.twig")
      */
     public function voucherInfoInMemberModalAction(Voucher $voucher) {

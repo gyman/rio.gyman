@@ -9,16 +9,25 @@
     <h3>Pulpit nawigatora</h3>                    
 
 </div><!-- End .heading-->
+
 <div class="form-row row-fluid">
+    <div class="span12">
+        {% include "_navigation_items.html.twig" %}
+    </div>
+</div>
+
+<div class="form-row row-fluid">
+
+    {% if filters|length > 0 %}
     <div class="box span6">
         <div class="title"><h4><span>Filtry uczestników</span></h4></div>
         <div class="content">
             <ul class="bigBtnIcon">
                 {% for filter in filters %}
                 <li>
-                    <a class="tipB" href="{{ path("_dashboard") }}">
+                    <a class="tipB" href="{{ path("_members_list_filter_set",{id: filter.getId()}) }}">
                         <span class="icon icomoon-icon-stats-up"></span>
-                        <span class="notification">5</span>
+                        {# <span class="notification">5</span> #}
                     </a>
                     <div>{{ filter.getName() }}</div>
                 </li>
@@ -26,6 +35,7 @@
             </ul>
         </div>
     </div>
+    {% endif %}
     <div class="span6">
         <div class="reminder">
             <h4>Zajęcia dzisiaj ({{ "now"|date("l") }}):
@@ -36,7 +46,7 @@
                 <li class="clearfix">
                     <span class="number">{{ event.getStartHour() }} - {{ event.getEndHour() }}</span> 
                     <span class="txt">{{ event.getActivity().getName() }}</span>
-                     <a class="btn btn-warning" href="#">15 osób</a>
+                    {# <a class="btn btn-warning" href="#">15 osób</a> #}
                 </li>               
                 {% endfor %}
             </ul>
@@ -48,8 +58,8 @@
 {% block javascripts %}
 {{ parent() }}
 {% javascripts
-
+    "@DashboardBundle/Resources/public/coffee/dashboard.coffee"
  %}
-                        <script src="{{ asset_url }}"></script>
+<script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock %}

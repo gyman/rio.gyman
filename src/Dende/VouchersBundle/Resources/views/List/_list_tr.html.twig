@@ -1,0 +1,35 @@
+<tr>
+    <td class="profileColumn">
+        {% include "MembersBundle:List:_member_column.html.twig" with {"member" : voucher.getMember() } %}
+    </td>
+    <td>
+        {{ voucher.getStartDate()|date("d.m.y") }} - {{ voucher.getEndDate()|date("d.m.y") }}
+    </td>
+    <td>
+        <div class="badge badge-warning">
+        {% if voucher.getAmount() is not null %}
+        {{ voucher.getAmountLeft() }}/{{ voucher.getAmount() }}
+        {% else %}
+            open
+        {% endif %}
+        </div>
+    </td>
+    <td>
+        {{ voucher.getCreated()|date("d.m.y") }}
+        <sup>{{ voucher.getCreated()|date("H:i") }}</sup>
+    </td>
+    <td>
+        {{ voucher.getPrice() }} zł
+    </td>
+    <td>
+        {% for i,activity in voucher.getActivities() %}
+        <div class="badge badge-success">{{ activity.getName() }}</div><br />
+        {% endfor %}
+    </td>
+    <td class="actionColumn">
+        <div class="btn-group">
+            <a class="btn btn-mini openUrlInModal" href="{{ path("_voucher_edit", {"id" : voucher.getId() }) }}"><span class="icomoon-icon-file "></span> Edytuj</a>
+            <a class="btn btn-mini removeVoucher" href="{{ path("_voucher_remove", {"id" : voucher.getId() }) }}"><span class="icomoon-icon-exit"></span> Usuń</a>
+        </div>
+    </td>
+</tr>

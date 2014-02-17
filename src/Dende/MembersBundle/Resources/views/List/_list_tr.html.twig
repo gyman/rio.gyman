@@ -29,6 +29,7 @@
         {# { render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) } #}
         {% if member.getCurrentVoucher() is not null %}
             {% set voucher = member.getCurrentVoucher() %}
+        {% if voucher is not null and voucher.getId() %}
             {% set endDate = voucher.getEndDate() %}
 
             {% if endDate is not null %}
@@ -42,6 +43,7 @@
             {%else %}
         <div class="badge badge-important">open</div>
             {% endif %}
+        {% endif %}
         {% endif %}
     </td>
     <td class="actionColumn">

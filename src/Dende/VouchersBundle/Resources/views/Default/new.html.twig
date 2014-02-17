@@ -4,7 +4,7 @@
     Jeżeli nie podasz żadnej grupy, to karnet będzie typu <span class="badge badge-important">open</span>
 </div>
 
-<form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id, "decision" : decision}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_delete", {id : voucher.id})}}{% endif %}">
+<form id="voucherForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_voucher_new', {"id" : member.id, "decision" : decision}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if voucher.id is not null %}data-delete-action="{{ path("_voucher_remove", {id : voucher.id})}}{% endif %}">
     <div class="span12">    
         {{ form_row(form.startDate,{"label" : "Data rozpoczęcia", "attr" : {"placeholder" : "wybierz datę"}}) }}
         {{ form_row(form.endDate,{"label" : "Data zakończenia", "attr" : {"placeholder" : "wybierz datę"}}) }}

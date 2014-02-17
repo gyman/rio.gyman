@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller {
 
     /**
-     * @Route("/dashboard", name="_dashboard")
+     * @Route("/", name="_dashboard")
      * @Template("DashboardBundle:Default:index.html.twig")
      * @todo Przenieść do osobnego bundle'a
      */

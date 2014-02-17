@@ -21,7 +21,7 @@ layout:
 default:
     resource: "@DefaultBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /default
 
 members:
     resource: "@MembersBundle/Controller/"

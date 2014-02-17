@@ -2,7 +2,7 @@
 
 {% block body_class %}vouchersList{% endblock %}
 
-{% block headingTitle %}Karnety <small>(tylko odczyt)</small>{% endblock %}
+{% block headingTitle %}Karnety{% endblock %}
 {% block buttonHeading %}{% endblock %}
 
 {#
@@ -21,6 +21,7 @@
 
 {% block listTitle %}Lista karnetów{% endblock%}
 {% block listTableId %}vouchersList{% endblock %}
+{% block listTableAttr %}data-ajax-source="{{ path("_voucher_list", {_format: "json"}) }}"{% endblock %}
 {% block listThead %}
 <tr>
     <th>Właściciel</th>
@@ -33,47 +34,7 @@
 </tr>
 {% endblock %}
 
-{% block listTbody %}              
-    {% for voucher in vouchers %}
-<tr>
-    <td class="profileColumn">
-        {% include "MembersBundle:List:_member_column.html.twig" with {"member" : voucher.getMember() } %}
-    </td>
-    <td>
-        {{ voucher.getStartDate()|date("d.m.y") }} - {{ voucher.getEndDate()|date("d.m.y") }}
-    </td>
-    <td>
-        <div class="badge badge-warning">
-        {% if voucher.getAmount() is not null %}
-        {{ voucher.getAmountLeft() }}/{{ voucher.getAmount() }}
-        {% else %}
-            open
-        {% endif %}
-        </div>
-    </td>
-    <td>
-        {{ voucher.getCreated()|date("d.m.y") }}
-        <sup>{{ voucher.getCreated()|date("H:i") }}</sup>
-    </td>
-    <td>
-        {{ voucher.getPrice() }} zł
-    </td>
-    <td>
-        {% for i,activity in voucher.getActivities() %}
-        <div class="badge badge-success">{{ activity.getName() }}</div><br />
-        {% endfor %}
-    </td>
-    <td class="actionColumn">
-        <div class="btn-group">
-            <a class="btn btn-mini openUrlInModal" href="{{ path("_voucher_edit", {"id" : voucher.getId() }) }}"><span class="icomoon-icon-file "></span> Edytuj</a>
-            <a class="btn btn-mini openUrlInModal" href="{{ path("_entrance_add", {"id" : voucher.getMember().getId() }) }}"><span class="icomoon-icon-signup "></span> Wejście</a>
-            <a class="btn btn-mini openUrlInModal" href=""><span class="icomoon-icon-exit"></span> Usuń</a>
-        </div>
-    </td>
-</tr>
-    {% endfor %}
-{% endblock %}
-
+{% block listTbody %}{% endblock %}
 
 {# javascripts #}
 
@@ -85,6 +46,10 @@
         '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
         '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
         '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
+
+        '@MembersBundle/Resources/public/coffee/members.list.coffee'
+        '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
+        '@DefaultBundle/Resources/public/js/jquery.fileupload.js'
      %}
 
 <script src="{{ asset_url }}"></script>
