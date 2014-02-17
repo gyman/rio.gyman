@@ -13,8 +13,19 @@ abstract class Subfilter {
     protected $options = array();
     protected $format = "Y-m-d H:i:s";
 
+    /**
+     * classHash, so the params won't collide
+     * @var type 
+     */
+    protected $class = null;
+
+    protected function prep($param) {
+        return $param . md5($this->class);
+    }
+
     public function __construct($options) {
         $this->options = $options;
+        $this->class = get_class($this);
     }
 
     public function applyFilterToQuery(QueryBuilder $query) {
@@ -22,16 +33,16 @@ abstract class Subfilter {
     }
 
     protected function eq(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
-        $qb->setParameter("dateFrom", $this->d1->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $this->d1->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $this->d1->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $this->d1->format("Y-m-d 23:59:59"));
     }
 
     protected function lt(QueryBuilder $qb) {
         $qb->andWhere($this->field . " < :date");
-        $qb->setParameters("date", $this->d1->format("Y-m-d 00:00:00"));
+        $qb->setParameters($this->prep("date"), $this->d1->format("Y-m-d 00:00:00"));
     }
 
     protected function gt(QueryBuilder $qb) {
@@ -40,44 +51,44 @@ abstract class Subfilter {
     }
 
     protected function between(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
-        $qb->setParameter("dateFrom", $this->d1->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $this->d2->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $this->d1->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $this->d2->format("Y-m-d 23:59:59"));
     }
 
     protected function notBetween(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " <= :dateFrom");
-        $qb->andWhere($this->field . " >= :dateTo");
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateTo"));
 
-        $qb->setParameter("dateFrom", $this->d1->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $this->d2->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $this->d1->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $this->d2->format("Y-m-d 23:59:59"));
     }
 
     protected function today(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $today = new \DateTime();
 
-        $qb->setParameter("dateFrom", $today->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $today->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $today->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $today->format("Y-m-d 23:59:59"));
     }
 
     protected function yesterday(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $yesterday = new \DateTime("yesterday");
 
-        $qb->setParameter("dateFrom", $yesterday->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $yesterday->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $yesterday->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $yesterday->format("Y-m-d 23:59:59"));
     }
 
     protected function thisWeek(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $Y = date("Y");
         $W = (int) date("W");
@@ -88,13 +99,13 @@ abstract class Subfilter {
         $firstDayOfWeek = new \DateTime($first);
         $lastDayOfWeek = new \DateTime($last);
 
-        $qb->setParameter("dateFrom", $firstDayOfWeek->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $lastDayOfWeek->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $firstDayOfWeek->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $lastDayOfWeek->format("Y-m-d 23:59:59"));
     }
 
     protected function lastWeek(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $Y = date("Y");
         $W = (int) date("W") - 1;
@@ -105,52 +116,52 @@ abstract class Subfilter {
         $firstDayOfWeek = new \DateTime($first);
         $lastDayOfWeek = new \DateTime($last);
 
-        $qb->setParameter("dateFrom", $firstDayOfWeek->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $lastDayOfWeek->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $firstDayOfWeek->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $lastDayOfWeek->format("Y-m-d 23:59:59"));
     }
 
     protected function thisMonth(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $firstDayOfMonth = new \DateTime("first day of this month");
         $lastDayOfMonth = new \DateTime("last day of this month");
 
-        $qb->setParameter("dateFrom", $firstDayOfMonth->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $lastDayOfMonth->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $firstDayOfMonth->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $lastDayOfMonth->format("Y-m-d 23:59:59"));
     }
 
     protected function lastMonth(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $firstDayOfMonth = new \DateTime("first day of previous month");
         $lastDayOfMonth = new \DateTime("last day of previous month");
 
-        $qb->setParameter("dateFrom", $firstDayOfMonth->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $lastDayOfMonth->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $firstDayOfMonth->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $lastDayOfMonth->format("Y-m-d 23:59:59"));
     }
 
     protected function thisYear(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $firstDayOfYear = new \DateTime("Y-01-01");
         $lastDayOfYear = new \DateTime("Y-12-31");
 
-        $qb->setParameter("dateFrom", $firstDayOfYear->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $lastDayOfYear->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $firstDayOfYear->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $lastDayOfYear->format("Y-m-d 23:59:59"));
     }
 
     protected function lastYear(QueryBuilder $qb) {
-        $qb->andWhere($this->field . " >= :dateFrom");
-        $qb->andWhere($this->field . " <= :dateTo");
+        $qb->andWhere($this->field . " >= :" . $this->prep("dateFrom"));
+        $qb->andWhere($this->field . " <= :" . $this->prep("dateTo"));
 
         $firstDayOfYear = new \DateTime(date("Y-01-01", strtotime("-1 year")));
         $lastDayOfYear = new \DateTime(date("Y-12-31", strtotime("-1 year")));
 
-        $qb->setParameter("dateFrom", $firstDayOfYear->format("Y-m-d 00:00:00"));
-        $qb->setParameter("dateTo", $lastDayOfYear->format("Y-m-d 23:59:59"));
+        $qb->setParameter($this->prep("dateFrom"), $firstDayOfYear->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("dateTo"), $lastDayOfYear->format("Y-m-d 23:59:59"));
     }
 
 }

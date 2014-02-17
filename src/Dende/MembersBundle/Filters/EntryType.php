@@ -13,11 +13,11 @@ class EntryType extends Subfilter {
         $this->$method($queryBuilder);
     }
 
-    private function eq(QueryBuilder $queryBuilder) {
+    protected function eq(QueryBuilder $queryBuilder) {
         $queryBuilder->andWhere("e.entryType = :entryType");
     }
 
-    private function not(QueryBuilder $queryBuilder) {
+    protected function not(QueryBuilder $queryBuilder) {
         $queryBuilder->andWhere("e.entryType != :entryType");
     }
 

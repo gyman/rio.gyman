@@ -5,6 +5,7 @@ namespace Dende\MembersBundle\Form\Subfilters;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Dende\MembersBundle\Form\Subfilters\SubfilterType;
+use Dende\DefaultBundle\Lib\Globals;
 
 class VoucherStartType extends SubfilterType {
 
@@ -15,21 +16,7 @@ class VoucherStartType extends SubfilterType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add("type", "choice", array(
-                    "choices" => array(
-                        "eq"         => "równy",
-                        "lt"         => "wcześniej niż",
-                        "gt"         => "później niż",
-                        "between"    => "pomiędzy",
-                        "notBetween" => "poza",
-                        "today"      => "dzisiaj",
-                        "yesterday"  => "wczoraj",
-                        "thisWeek"   => "ten tydzień",
-                        "lastWeek"   => "poprzedni tydzień",
-                        "thisMonth"  => "ten miesiąc",
-                        "lastMonth"  => "poprzedni miesiąc",
-                        "thisYear"   => "ten rok",
-                        "lastYear"   => "poprzedni rok",
-                    )
+                    "choices" => Globals::getCompareChoices()
                 ))
                 ->add("date1", "text")
                 ->add("date2", "text")

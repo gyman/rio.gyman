@@ -11,28 +11,28 @@ class Age extends Subfilter {
         $this->$method($queryBuilder);
     }
 
-    private function between(QueryBuilder $qb) {
+    protected function between(QueryBuilder $qb) {
         $x = new \DateTime($this->options["age2"] . " years ago");
         $y = new \DateTime($this->options["age1"] . " years ago");
 
-        $qb->andWhere("m.birthdate >= :dateFrom");
-        $qb->andWhere("m.birthdate <= :dateTo");
-        $qb->setParameter("dateFrom", $x->format($this->format));
-        $qb->setParameter("dateTo", $y->format($this->format));
+        $qb->andWhere("m.birthdate >= :" . $this->prep("dateFrom"));
+        $qb->andWhere("m.birthdate <= :" . $this->prep("dateTo"));
+        $qb->setParameter($this->prep("dateFrom"), $x->format($this->format));
+        $qb->setParameter($this->prep("dateTo"), $y->format($this->format));
     }
 
-    private function gt(QueryBuilder $queryBuilder) {
+    protected function gt(QueryBuilder $queryBuilder) {
         $x = new \DateTime($this->options["age1"] . " years ago");
 
-        $queryBuilder->andWhere("m.birthdate <= :dateTo");
-        $queryBuilder->setParameter("dateTo", $x->format($this->format));
+        $queryBuilder->andWhere("m.birthdate <= :" . $this->prep("dateTo"));
+        $queryBuilder->setParameter($this->prep("dateTo"), $x->format($this->format));
     }
 
-    private function lt(QueryBuilder $queryBuilder) {
+    protected function lt(QueryBuilder $queryBuilder) {
         $x = new \DateTime($this->options["age1"] . " years ago");
 
-        $queryBuilder->andWhere("m.birthdate >= :dateFrom");
-        $queryBuilder->setParameter("dateFrom",$x->format($this->format));
+        $queryBuilder->andWhere("m.birthdate >= :" . $this->prep("dateFrom"));
+        $queryBuilder->setParameter($this->prep("dateFrom"), $x->format($this->format));
     }
 
 }

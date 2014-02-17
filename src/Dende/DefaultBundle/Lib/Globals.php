@@ -6,8 +6,23 @@ class Globals {
 
     protected static $galleryDir;
     protected static $noImage;
+    protected static $compareChoices = array(
+        "eq"         => "równy",
+        "lt"         => "wcześniej niż",
+        "gt"         => "później niż",
+        "between"    => "pomiędzy",
+        "notBetween" => "poza",
+        "today"      => "dzisiaj",
+        "yesterday"  => "wczoraj",
+        "thisWeek"   => "ten tydzień",
+        "lastWeek"   => "poprzedni tydzień",
+        "thisMonth"  => "ten miesiąc",
+        "lastMonth"  => "poprzedni miesiąc",
+        "thisYear"   => "ten rok",
+        "lastYear"   => "poprzedni rok",
+    );
 
-    // <editor-fold defaultstate="collapsed" desc="setters and getters">
+// <editor-fold defaultstate="collapsed" desc="setters and getters">
 
     public static function getGalleryDir() {
         return self::$galleryDir;
@@ -43,9 +58,13 @@ class Globals {
 
     public static function checkIfImageExists($string) {
         $file = self::getGalleryDir() . $string;
-        $filepath = __DIR__."/../../../../web/".$file;
-        
+        $filepath = __DIR__ . "/../../../../web/" . $file;
+
         return is_file($filepath) && file_exists($filepath);
+    }
+
+    public static function getCompareChoices() {
+        return self::$compareChoices;
     }
 
 }

@@ -9,7 +9,9 @@ $ ->
     $tab = $(e.currentTarget).parents("li")
     href = $(e.currentTarget).attr("data-href")
     $.get href, (response) =>
-      $tab.parents("ul").find("li:first-child").addClass("active")
+      $tabs = $tab.parents("ul").find("li")
+      $tabs.removeClass "active"
+      $tabs.filter(":first-child").addClass("active")
       $tab.remove()
       datatable.fnReloadAjax()
 

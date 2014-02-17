@@ -212,6 +212,8 @@ class @Filter
         success: (response) =>
           if $(@saveFilterSelector).is(":checked")
             @addFilterTab(response.data)
+          else
+            $("li",@filterTabsSelector).removeClass "active"
           datatable.fnReloadAjax()
           @modal.hide()
         error: (xhr, textStatus, errorThrown) =>
@@ -231,7 +233,9 @@ class @Filter
     $("li",@filterTabsSelector).removeClass "active"
     $templateElement = $("li.template",@filterTabsSelector)
     originalHref = $templateElement.find("a").attr "href"
+    deleteHref = $templateElement.find("span.delete-filter").attr "data-href"
     href = originalHref.replace /__FILTERID__/g, filter.id
+    deleteHref = deleteHref.replace /__FILTERID__/g, filter.id
     
     $newElement = $templateElement.clone()
     
@@ -241,6 +245,6 @@ class @Filter
     
     $newElement.find("span.filterName").text filter.name
     $newElement.find("a").attr "href", href
-    $newElement.find("span.delete-filter").attr "data-href", href
+    $newElement.find("span.delete-filter").attr "data-href", deleteHref
     
     $templateElement.before $newElement
