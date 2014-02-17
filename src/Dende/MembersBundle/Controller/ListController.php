@@ -49,14 +49,14 @@ class ListController extends Controller {
 
             $memberRepository->applyFilterFromRequest();
 
-            $members = $membersQuery->getQuery()->execute();
+            $paginator = $memberRepository->getPaginator();
 
-            $displayedCount = count($members);
+            $displayedCount = count($paginator);
 
             $datatable = array(
                 "sEcho"                => $request->get("sEcho"),
                 "iTotalRecords"        => $totalCount,
-                "iTotalDisplayRecords" => $totalCount,
+                "iTotalDisplayRecords" => $displayedCount,
                 "aaData"               => array()
             );
 
@@ -65,7 +65,7 @@ class ListController extends Controller {
                 return new JsonResponse($datatable);
             }
 
-            foreach ($members as $member) {
+            foreach ($paginator as $member) {
                 $datatable["aaData"][] = array(
                     $this->renderView("MembersBundle:List:_list_tr.html.twig", array("member" => $member)),
                     null,

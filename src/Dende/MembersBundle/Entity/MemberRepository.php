@@ -7,6 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Dende\MembersBundle\Entity\Member;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * MemberRepository
@@ -70,12 +71,16 @@ class MemberRepository extends EntityRepository {
         $query->select("count(m.id)");
         return $query->getQuery()->getSingleScalarResult();
     }
-    
+
     public function applyFilterFromRequest() {
         $this->applyLimitFromRequest();
         $this->applyOffsetFromRequest();
         $this->applySearchFromRequest();
         $this->applySortingFromRequest();
+    }
+
+    public function getPaginator() {
+        return new Paginator($this->getQuery());
     }
 
     public function applyLimitFromRequest() {
@@ -183,4 +188,5 @@ class MemberRepository extends EntityRepository {
 
         return $query->getQuery()->execute();
     }
+
 }
