@@ -25,7 +25,7 @@
             <ul class="bigBtnIcon">
                 {% for filter in filters %}
                 <li>
-                    <a class="tipB" href="{{ path("_members_list_filter_set",{id: filter.getId()}) }}">
+                    <a class="tipB" href="{{ path("_filter_set",{id: filter.getId(), listname : "member"}) }}">
                         <span class="icon icomoon-icon-stats-up"></span>
                         {# <span class="notification">5</span> #}
                     </a>

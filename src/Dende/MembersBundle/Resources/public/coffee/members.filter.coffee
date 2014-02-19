@@ -8,10 +8,10 @@ class @Filter
     @setupSubmitButton()
     @setupRemoveFilter()
     
-  addFilterSelector: "#dende_membersbundle_filter_addFilter"
-  saveFilterSelector: "#dende_membersbundle_filter_save"
-  filterNameSelector: "#dende_membersbundle_filter_name"
-  pinToDashboardSalector: "#dende_membersbundle_filter_pinned"
+  addFilterSelector: "#filter_addFilter"
+  saveFilterSelector: "#filter_save"
+  filterNameSelector: "#filter_name"
+  pinToDashboardSalector: "#filter_pinned"
   filterFormSelector: "form#filterForm"
   $form: $("form#filterForm")
   useFilterButtonSelector: "#useFilter"
@@ -47,7 +47,7 @@ class @Filter
   # current voucher filter handler
         
   currentVoucherSubfilterHandler: () =>
-    $("#dende_membersbundle_filter_subfilters_currentVoucher_currentVoucher").select2
+    $("#filter_subfilters_currentVoucher_currentVoucher").select2
       dropdownAutoWidth : true
       containerCss : 
         width : "120px"  
@@ -61,7 +61,7 @@ class @Filter
   # activities filter handler
         
   activitiesSubfilterHandler: () =>
-    activitySelector = "#dende_membersbundle_filter_subfilters_activities_activity"
+    activitySelector = "#filter_subfilters_activities_activity"
     
     $(activitySelector).select2
       dropdownAutoWidth : true
@@ -72,7 +72,7 @@ class @Filter
   # gender filter handler
   
   genderSubfilterHandler: () =>
-    $("#dende_membersbundle_filter_subfilters_gender_gender").select2
+    $("#filter_subfilters_gender_gender").select2
       dropdownAutoWidth : true
       containerCss : 
         width : "120px"  
@@ -81,8 +81,8 @@ class @Filter
     @handleVoucherDates("entryDate")
   
   entryTypeSubfilterHandler: () =>
-    typeSelector = "#dende_membersbundle_filter_subfilters_entryType_type"
-    entryTypeSelector = "#dende_membersbundle_filter_subfilters_entryType_entryType"
+    typeSelector = "#filter_subfilters_entryType_type"
+    entryTypeSelector = "#filter_subfilters_entryType_entryType"
     
     $([typeSelector,entryTypeSelector].join(",")).select2
       dropdownAutoWidth : true
@@ -98,9 +98,9 @@ class @Filter
     @handleVoucherDates("voucherEnd")
                 
   handleVoucherDates: (type) =>
-    typeSelector = "#dende_membersbundle_filter_subfilters_"+type+"_type"
-    date1Selector = "#dende_membersbundle_filter_subfilters_"+type+"_date1"
-    date2Selector = "#dende_membersbundle_filter_subfilters_"+type+"_date2"
+    typeSelector = "#filter_subfilters_"+type+"_type"
+    date1Selector = "#filter_subfilters_"+type+"_date1"
+    date2Selector = "#filter_subfilters_"+type+"_date2"
     
     $(typeSelector).select2
       dropdownAutoWidth : true
@@ -134,8 +134,8 @@ class @Filter
   # belt filter handler
   
   beltSubfilterHandler: () =>
-    typeSelector = "#dende_membersbundle_filter_subfilters_belt_type"
-    colorSelector = "#dende_membersbundle_filter_subfilters_belt_belt"
+    typeSelector = "#filter_subfilters_belt_type"
+    colorSelector = "#filter_subfilters_belt_belt"
     
     $([typeSelector,colorSelector].join(",")).select2
       dropdownAutoWidth : true
@@ -145,9 +145,9 @@ class @Filter
   # age filter handler
   
   ageSubfilterHandler: () =>
-    typeSelector = "#dende_membersbundle_filter_subfilters_age_type"
-    age1Selector = "#dende_membersbundle_filter_subfilters_age_age1"
-    age2Selector = "#dende_membersbundle_filter_subfilters_age_age2"
+    typeSelector = "#filter_subfilters_age_type"
+    age1Selector = "#filter_subfilters_age_age1"
+    age2Selector = "#filter_subfilters_age_age2"
     
     @$modalWindow.off("change.filter.age.type").on "change.filter.age.type", typeSelector, (e) =>
       if $(e.currentTarget).val() == "between"

@@ -1,3 +1,8 @@
+filters:
+    resource: "@FiltersBundle/Controller/"
+    type:     annotation
+    prefix:   /filter
+
 dashboard:
     resource: "@DashboardBundle/Controller/"
     type:     annotation

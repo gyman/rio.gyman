@@ -19,12 +19,6 @@
     <td class="profileColumn">
         {% include "MembersBundle:List:_member_column.html.twig" with {"member" : member } %}
     </td>
-    <td class="lastEntryColumn">
-        {% if member.getLastEntry() is not null %}
-        <div class="badge badge-success">{{ member.getLastEntry().getCreated()|date("d.m.y H:i") }}</div>
-        <div class="badge badge-info">{{ member.getLastEntry().getActivity().getName() }}</div>
-        {% endif %}
-    </td>
     <td class="voucherColumn">
         {# { render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) } #}
         {% if member.getCurrentVoucher() is not null %}

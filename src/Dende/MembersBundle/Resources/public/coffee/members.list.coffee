@@ -73,8 +73,6 @@ $ ->
     ,
       bSortable: true
     ,
-      bSortable: true
-    ,
       bSortable: false
     ,
       bSortable: false

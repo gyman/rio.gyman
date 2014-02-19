@@ -34,7 +34,15 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [DefaultBundle,MembersBundle,LayoutBundle,ScheduleBundle,VouchersBundle,EntriesBundle,DashboardBundle]
+    bundles:        
+        - DefaultBundle
+        - MembersBundle
+        - LayoutBundle
+        - ScheduleBundle
+        - VouchersBundle
+        - EntriesBundle
+        - DashboardBundle
+        - FiltersBundle
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

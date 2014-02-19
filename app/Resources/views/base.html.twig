@@ -146,9 +146,7 @@
 
         <span id="applicationData"
               data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "__BARCODE__" }) }}"
-              data-member-list-apply-filter-url="{{ path("_members_list_filter_set",{id : "__FILTERID__" }) }}"
-              
-        ></span>
+              data-member-list-apply-filter-url="{{ path("_filter_set",{id : "__FILTERID__", listname : "member"}) }}" />
 
         {% include 'DefaultBundle::_modal.html.twig' %}
     </body>

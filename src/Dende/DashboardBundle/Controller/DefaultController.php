@@ -14,7 +14,7 @@ class DefaultController extends Controller {
      * @todo Przenieść do osobnego bundle'a
      */
     public function indexAction() {
-        $pinnedFilters = $this->get("member_filter_repository")->getPinnedFilters();
+        $pinnedFilters = $this->get("filter_repository")->getPinnedFilters();
         $events = $this->get("event_repository")->getTodayEvents();
 
         return array(

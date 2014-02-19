@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="filter_entity.class">Dende\FiltersBundle\Entity\Filter</parameter>
+        <parameter key="filter_repository.class">Dende\FiltersBundle\Entity\FilterRepository</parameter>
+        <parameter key="filter_provider.class">Dende\FiltersBundle\Services\FilterProvider</parameter>
+        <parameter key="filter.activities.class">Dende\FiltersBundle\Filters\Activities</parameter>
+        
+        <parameter key="filter.age.class">Dende\FiltersBundle\Filters\Age</parameter>
+        <parameter key="filter.belt.class">Dende\FiltersBundle\Filters\Belt</parameter>
+        <parameter key="filter.current_voucher.class">Dende\FiltersBundle\Filters\CurrentVoucher</parameter>
+        <parameter key="filter.entry_date.class">Dende\FiltersBundle\Filters\EntryDate</parameter>
+        <parameter key="filter.entry_type.class">Dende\FiltersBundle\Filters\EntryType</parameter>
+        <parameter key="filter.gender.class">Dende\FiltersBundle\Filters\Gender</parameter>
+        <parameter key="filter.registration_date.class">Dende\FiltersBundle\Filters\RegistrationDate</parameter>
+        <parameter key="filter.search.class">Dende\FiltersBundle\Filters\Search</parameter>
+        <parameter key="filter.voucher_end.class">Dende\FiltersBundle\Filters\VoucherEnd</parameter>
+        <parameter key="filter.voucher_start.class">Dende\FiltersBundle\Filters\VoucherStart</parameter>
+        
+        <parameter key="filter_provider.lists" type="collection">
+            <parameter>members</parameter>
+            <parameter>vouchers</parameter>
+            <parameter>entries</parameter>
+        </parameter>
+    </parameters>
+    
+    <services>
+        <service id="filter_repository" class="%filter_repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>%filter_entity.class%</argument>
+        </service>
+        <service id="filter_provider" class="%filter_provider.class%" scope="request">
+            <call method="setSession">
+                <argument type="service" id="session" />
+            </call>
+        </service>
+        <service id="filters.belt" class="%filter.belt.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.current_voucher" class="%filter.current_voucher.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.registration_date" class="%filter.registration_date.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.search" class="%filter.search.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.voucher_start" class="%filter.voucher_start.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.voucher_end" class="%filter.voucher_end.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.entry_date" class="%filter.entry_date.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.entry_type" class="%filter.entry_type.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.gender" class="%filter.gender.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.activities" class="%filter.activities.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.age" class="%filter.age.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+    </services>
+</container>
