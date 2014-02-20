@@ -17,18 +17,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class ListController extends Controller {
 
+    private $listname = "members";
+
     /**
      * @Route("/list", name="_members_list")
      * @Template("MembersBundle:List:list.html.twig")
      */
     public function indexAction(Request $request) {
-        $filter = $this->get("filter_provider")->getListFilter("member");
+        $filter = $this->get("filter_provider")->getListFilter($this->listname);
 
         if ($request->getRequestFormat() == "json")
         {
-            
+
             // @TODO: gruby refaktor potrzebny :/
-            
+
             /** @var MemberRepository */
             $memberRepository = $this->get("member_repository");
             $membersQuery = $memberRepository->getMembersQuery();
@@ -38,6 +40,10 @@ class ListController extends Controller {
 
             if ($filter)
             {
+                $membersQuery->join("m.vouchers", "v");
+                $membersQuery->join("m.entries", "e");
+                $membersQuery->join("e.activity", "a");
+
                 $this->get("filter_provider")->applyFilterToQuery($filter, $membersQuery);
             }
 

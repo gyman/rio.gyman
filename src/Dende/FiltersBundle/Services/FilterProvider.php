@@ -25,18 +25,22 @@ class FilterProvider {
         $this->filters[$filter->getName()] = $filter;
     }
 
-    public function addFilterForList($filter,$list) {
+    public function addFilterForList($filter, $list) {
         $this->filtersPerLists[$list][$filter->getName()] = $filter;
     }
-    
+
     public function getFiltersForList($list) {
         return $this->filtersPerLists[$list];
-    }    
+    }
 
     public function getFilter($filter) {
         return $this->filters[$filter];
     }
 
+    /**
+     * 
+     * @return Session
+     */
     public function getSession() {
         return $this->session;
     }
@@ -47,6 +51,10 @@ class FilterProvider {
 
     public function setListFilter(Filter $filter, $list) {
         $this->getSession()->set("filters[$list]", $filter);
+    }
+
+    public function resetListFilter($list) {
+        $this->getSession()->remove("filters[$list]");
     }
 
     /**

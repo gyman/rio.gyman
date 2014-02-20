@@ -22,7 +22,7 @@ abstract class Subfilter {
     }
 
     protected function prep($param) {
-        return $param . md5($this->getName());
+        return $param;
     }
 
     public function applyFilterToQuery(QueryBuilder $query) {

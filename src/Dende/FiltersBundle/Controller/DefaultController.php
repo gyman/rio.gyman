@@ -18,48 +18,41 @@ class DefaultController extends Controller {
     public static $filter_session_key = "members_list_filter";
 
     /**
-     * @Route("/{id}/delete", name="_filter_delete")
+     * @Route("/{id}/delete/{listname}", name="_filter_delete", requirements={"listname" = "(members|vouchers|entries)"})
      * @ParamConverter("filter", class="FiltersBundle:Filter")
      */
-    public function deleteFilterAction(Filter $filter, Request $request) {
-        $session = $request->getSession();
-        $filterInSession = $session->get(self::$filter_session_key);
-
-        if ($filterInSession && $filter->getId() == $filterInSession->getId())
-        {
-            $session->remove(self::$filter_session_key);
-        }
-
+    public function deleteFilterAction(Filter $filter, Request $request, $listname) {
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($filter);
         $em->flush();
 
+        $this->resetFilterAction($request, $listname);
+        
         if ($request->isXmlHttpRequest())
         {
             return new JsonResponse(array("status" => "ok"));
         }
 
-        return $this->redirect($this->generateUrl("_members_list"));
+        return $this->redirect($this->generateUrl("_{$listname}_list"));
     }
 
     /**
-     * @Route("/reset", name="_filter_reset")
+     * @Route("/reset/{listname}", name="_filter_reset", requirements={"listname" = "(members|vouchers|entries)"})
      */
-    public function resetFilterAction(Request $request) {
-        $session = $request->getSession();
-        $session->remove(self::$filter_session_key);
+    public function resetFilterAction(Request $request, $listname) {
+        $this->get("filter_provider")->resetListFilter($listname);
 
         if ($request->isXmlHttpRequest())
         {
             return new JsonResponse(array("status" => "ok"));
         }
 
-        return $this->redirect($this->generateUrl("_members_list"));
+        return $this->redirect($this->generateUrl("_{$listname}_list"));
     }
 
     /**
-     * @Route("/{id}/{listname}/set", name="_filter_set")
+     * @Route("/{id}/{listname}/set", name="_filter_set", requirements={"listname" = "(members|vouchers|entries)"})
      * @ParamConverter("filter", class="FiltersBundle:Filter")
      */
     public function setFilterAction(Filter $filter, Request $request, $listname) {
@@ -85,9 +78,9 @@ class DefaultController extends Controller {
         );
 
         $filter = new Filter();
-        
+
         $filters = $this->get("filter_provider")->getFiltersForList($listname);
-        
+
         $form = $this->createForm(new FilterType($filters), $filter);
 
         $subformNamePattern = $form->getName() . "_subfilters";
@@ -120,8 +113,7 @@ class DefaultController extends Controller {
                 );
             }
 
-            $session = $request->getSession();
-            $session->set(self::$filter_session_key, $filter);
+            $this->get("filter_provider")->setListFilter($filter,$listname);
 
             return new JsonResponse(array(
                 "status" => "ok",
@@ -131,7 +123,7 @@ class DefaultController extends Controller {
 
         return $response->setContent(
                         $this->renderView("FiltersBundle::filter.html.twig", array(
-                            'form' => $form->createView(),
+                            'form'     => $form->createView(),
                             'listname' => $listname
                         ))
         );

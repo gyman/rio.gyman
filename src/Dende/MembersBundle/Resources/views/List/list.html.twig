@@ -29,16 +29,16 @@
 
 {% block listTabs %}
 <ul class="nav nav-tabs pattern" id="filterTabs">
-    <li{% if filter is null %} class="active"{% endif %}><a href="{{ path("_filter_reset") }}"><span class="filterName">Wszystkie</span></a></li>
+    <li{% if filter is null %} class="active"{% endif %}><a href="{{ path("_filter_reset",{listname: "members"}) }}"><span class="filterName">Wszystkie</span></a></li>
 
     {% for filterItem in filters if filters|length > 0 %}
     <li{% if filter is not null and filter.getId() == filterItem.getId() %} class="active"{% endif %}>
-        <a href="{{ path("_filter_set",{id: filterItem.getId(), listname : "member"}) }}"><span class="filterName">{{ filterItem.getName() }}</span><span class="delete-filter" data-href="{{ path("_filter_delete",{id:filterItem.getId()}) }}">x</span></a>
+        <a href="{{ path("_filter_set",{id: filterItem.getId(), listname : "members"}) }}"><span class="filterName">{{ filterItem.getName() }}</span><span class="delete-filter" data-href="{{ path("_filter_delete",{id:filterItem.getId(),listname: "members"}) }}">x</span></a>
     </li>
     {% endfor %}
 
     <li class="hidden template">
-        <a href="{{ path("_filter_set",{id: "__FILTERID__", listname : "member"}) }}"><span class="filterName">__FILTERNAME__</span><span class="delete-filter" data-href="{{ path("_filter_delete",{id:"__FILTERID__"}) }}">x</span></a>
+        <a href="{{ path("_filter_set",{id: "__FILTERID__", listname : "members"}) }}"><span class="filterName">__FILTERNAME__</span><span class="delete-filter" data-href="{{ path("_filter_delete",{id:"__FILTERID__", listname: "members"}) }}">x</span></a>
     </li>
 </ul>
 {% endblock listTabs %}

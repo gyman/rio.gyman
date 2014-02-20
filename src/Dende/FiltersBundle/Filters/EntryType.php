@@ -12,7 +12,6 @@ class EntryType extends Subfilter {
     public function applyToQuery(QueryBuilder $queryBuilder) {
         $method = $this->options["type"];
         $queryBuilder->setParameter("entryType", $this->options["entryType"]);
-        $queryBuilder->innerJoin("m.entries", "e");
         $this->$method($queryBuilder);
     }
 
