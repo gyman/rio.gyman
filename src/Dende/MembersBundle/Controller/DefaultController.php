@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class DefaultController extends Controller {
+
     /**
      * @Route("/{id}/edit", name="_member_edit")
      * @ParamConverter("member", class="MembersBundle:Member")
@@ -111,4 +112,26 @@ class DefaultController extends Controller {
         $this->get("member_manager")->delete($member);
         return array();
     }
+
+    /**
+     * @Route("/{id}/starred", name="_member_starred")
+     * @ParamConverter("member", class="MembersBundle:Member")
+     * @Template()
+     */
+    public function starredAction(Member $member) {
+        if ($member->getStarred())
+        {
+            $member->setStarred(false);
+        }
+        else
+        {
+            $member->setStarred(true);
+        }
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($member);
+        $manager->flush();
+
+        return new JsonResponse(array("status" => "ok", "starred" => $member->getStarred()));
+    }
+
 }

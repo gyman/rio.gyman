@@ -69,12 +69,16 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/{listname}/favourites", name="_filter_favourites", requirements={"listname" = "(members|vouchers|entries)"})
-     * @ParamConverter("filter", class="FiltersBundle:Filter")
+     * @Route("/{listname}/favourites", name="_filter_starred", requirements={"listname" = "(members|vouchers|entries)"})
+     * @Template()
      */
-    public function setFavouritesFilterAction(Filter $filter, Request $request, $listname) {
+    public function filterStarredAction(Request $request, $listname) {
+        $starredSubfilter = new \Dende\FiltersBundle\Filters\Starred();
+        
+        $filter = new Filter();
+        $filter->setFilter(json_encode(array($starredSubfilter->getName() => array("starred" => true))));
+        
         $filterProvider = $this->get("filter_provider");
-
         $filterProvider->setListFilter($filter, $listname);
 
         if ($request->isXmlHttpRequest())

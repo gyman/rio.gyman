@@ -28,6 +28,18 @@ $ ->
       $tabContainer.find("li").removeClass("active")
       $tab.addClass("active")
       datatable.fnReloadAjax()
+
+  # adding favourites
+
+  $(document).off("click.members.list.favourite.toggle").on "click.members.list.favourite.toggle", "a.starToggle", (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    href = $(e.currentTarget).attr("href")
+    $.get href, (response) =>
+      if response.starred
+        $(e.currentTarget).addClass "starred"
+      else
+        $(e.currentTarget).removeClass "starred"
       
   # unrolling the details
 

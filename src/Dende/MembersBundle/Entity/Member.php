@@ -172,10 +172,24 @@ class Member {
      * @ORM\Column(name="barcode", type="string", nullable = true, unique = true, length = 64)
      */
     private $barcode;
+
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="is_starred", type="boolean", nullable = true)
+     */
+    private $starred;
     private $beltN;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+    public function getStarred() {
+        return $this->starred;
+    }
+
+    public function setStarred($starred) {
+        $this->starred = $starred;
+    }
 
     public function getBeltN() {
         return $this->beltN;

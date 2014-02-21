@@ -16,6 +16,7 @@
         <parameter key="filter.entry_date.class">Dende\FiltersBundle\Filters\EntryDate</parameter>
         <parameter key="filter.entry_type.class">Dende\FiltersBundle\Filters\EntryType</parameter>
         <parameter key="filter.gender.class">Dende\FiltersBundle\Filters\Gender</parameter>
+        <parameter key="filter.starred.class">Dende\FiltersBundle\Filters\Starred</parameter>
         <parameter key="filter.registration_date.class">Dende\FiltersBundle\Filters\RegistrationDate</parameter>
         <parameter key="filter.search.class">Dende\FiltersBundle\Filters\Search</parameter>
         <parameter key="filter.voucher_end.class">Dende\FiltersBundle\Filters\VoucherEnd</parameter>
@@ -70,6 +71,10 @@
             <tag name="filter" />
         </service>
         <service id="filters.gender" class="%filter.gender.class%">
+            <tag name="members" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.gender" class="%filter.starred.class%">
             <tag name="members" />
             <tag name="filter" />
         </service>

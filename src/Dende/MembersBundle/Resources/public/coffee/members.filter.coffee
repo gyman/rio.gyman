@@ -69,6 +69,14 @@ class @Filter
         width : "400px"
     
     
+  # starred filter handler
+  
+  starredSubfilterHandler: () =>
+    $("#filter_subfilters_starred_starred").select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"  
+    
   # gender filter handler
   
   genderSubfilterHandler: () =>
