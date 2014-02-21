@@ -17,4 +17,12 @@ class EntryRepository extends EntityRepository {
                         ->getQuery()->execute();
     }
 
+    /**
+     * 
+     * @return QueryBuilder
+     */
+    public function getQuery() {
+        return $this->createQueryBuilder("e");
+    }
+
 }

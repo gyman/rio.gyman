@@ -1,6 +1,6 @@
 <tr>
     <td class="profileColumn">
-        {% include "MembersBundle:List:_member_column.html.twig" with {"member" : voucher.getMember() } %}
+        {% include "MembersBundle:Default:_member_column.html.twig" with {"member" : voucher.getMember() } %}
     </td>
     <td>
         {{ voucher.getStartDate()|date("d.m.y") }} - {{ voucher.getEndDate()|date("d.m.y") }}

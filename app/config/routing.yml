@@ -1,3 +1,8 @@
+lists:
+    resource: "@ListsBundle/Controller/"
+    type:     annotation
+    prefix:   /list
+
 filters:
     resource: "@FiltersBundle/Controller/"
     type:     annotation

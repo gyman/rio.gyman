@@ -1,4 +1,4 @@
-{% extends "DefaultBundle:List:_abstract_list.html.twig" %}
+{% extends "ListsBundle::_abstract_list.html.twig" %}
 
 {% block body_class %}membersList{% endblock %}
 
@@ -9,8 +9,8 @@
 
 {% block listHeaderRightToolbox %}
 <div class="pull-right" id="chooseMembersListForm">
-    <a class="icomoon-icon-list green"  href="{{ path("_members_list") }}"></a>
-    <a class="icomoon-icon-grid green" href="{{ path("_members_gallery") }}"></a>
+    <a class="icomoon-icon-list green"  href="{{ path("_list_members") }}"></a>
+    <a class="icomoon-icon-grid green" href="{{ path("_list_members_gallery") }}"></a>
 </div>
 
 {% block filterButton %}
@@ -25,23 +25,9 @@
 {% block listTitle %}Lista osób{% endblock%}
 {% block listTableId %}membersList{% endblock %}
 {% block listTableClass %}table table-bordered{% endblock %}
-{% block listTableAttr %}data-ajax-source="{{ path("_members_list", {_format: "json"}) }}"{% endblock %}
+{% block listTableAttr %}data-ajax-source="{{ path("_list_members", {_format: "json"}) }}"{% endblock %}
 
-{% block listTabs %}
-<ul class="nav nav-tabs pattern" id="filterTabs">
-    <li{% if filter is null %} class="active"{% endif %}><a href="{{ path("_filter_reset",{listname: "members"}) }}"><span class="filterName">Wszystkie</span></a></li>
-
-    {% for filterItem in filters if filters|length > 0 %}
-    <li{% if filter is not null and filter.getId() == filterItem.getId() %} class="active"{% endif %}>
-        <a href="{{ path("_filter_set",{id: filterItem.getId(), listname : "members"}) }}"><span class="filterName">{{ filterItem.getName() }}</span><span class="delete-filter" data-href="{{ path("_filter_delete",{id:filterItem.getId(),listname: "members"}) }}">x</span></a>
-    </li>
-    {% endfor %}
-
-    <li class="hidden template">
-        <a href="{{ path("_filter_set",{id: "__FILTERID__", listname : "members"}) }}"><span class="filterName">__FILTERNAME__</span><span class="delete-filter" data-href="{{ path("_filter_delete",{id:"__FILTERID__", listname: "members"}) }}">x</span></a>
-    </li>
-</ul>
-{% endblock listTabs %}
+{% block listTabs %}{% include "FiltersBundle:Default:_tabs.html.twig" with {"filter": filter, "listname" :listname} %}{% endblock listTabs %}
 
 {% block listThead %}
 <tr>
@@ -58,7 +44,7 @@
     {{ parent() }}
 
     {% javascripts
-        '@MembersBundle/Resources/public/coffee/members.list.coffee'
+        '@ListsBundle/Resources/public/coffee/members.list.coffee'
         '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
         '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
         '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
@@ -78,7 +64,7 @@
     {% stylesheets filter='cssrewrite'
         'bundles/layout/plugins/forms/select2/select2.css'
         'bundles/layout/plugins/forms/select2/select2-bootstrap.css'
-        '@MembersBundle/Resources/public/less/members-list.less'
+        '@ListsBundle/Resources/public/less/members-list.less'
         filter="cssrewrite"
     %}
 

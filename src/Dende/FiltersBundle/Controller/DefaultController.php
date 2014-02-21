@@ -65,7 +65,24 @@ class DefaultController extends Controller {
             return new JsonResponse(array("status" => "ok"));
         }
 
-        return $this->redirect($this->generateUrl("_members_list"));
+        return $this->redirect($this->generateUrl("_list_members"));
+    }
+
+    /**
+     * @Route("/{listname}/favourites", name="_filter_favourites", requirements={"listname" = "(members|vouchers|entries)"})
+     * @ParamConverter("filter", class="FiltersBundle:Filter")
+     */
+    public function setFavouritesFilterAction(Filter $filter, Request $request, $listname) {
+        $filterProvider = $this->get("filter_provider");
+
+        $filterProvider->setListFilter($filter, $listname);
+
+        if ($request->isXmlHttpRequest())
+        {
+            return new JsonResponse(array("status" => "ok"));
+        }
+
+        return $this->redirect($this->generateUrl("_list_members"));
     }
 
     /**

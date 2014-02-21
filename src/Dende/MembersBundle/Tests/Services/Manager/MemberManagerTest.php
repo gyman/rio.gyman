@@ -53,7 +53,7 @@ class MemberManagerTest extends WebTestCase {
 
     public function testGetAllMembers() {
         $repo = $this->em->getRepository("MembersBundle:Member");
-        $query = $repo->getMembersQuery();
+        $query = $repo->getQuery();
         $this->assertCount(10,$query->getQuery()->execute());
     }
     

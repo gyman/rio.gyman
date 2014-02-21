@@ -15,7 +15,7 @@ class MemberManager extends BaseManager {
      * @return array
      */
     public function getMembers() {
-        $query = $this->getRepository()->getMembersQuery();
+        $query = $this->getRepository()->getQuery();
         $this->getRepository()->setActiveCriteria($query);
         return $query->getQuery()->execute();
     }

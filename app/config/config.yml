@@ -43,6 +43,7 @@ assetic:
         - EntriesBundle
         - DashboardBundle
         - FiltersBundle
+        - ListsBundle
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

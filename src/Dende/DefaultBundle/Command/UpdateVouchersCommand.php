@@ -45,7 +45,7 @@ class UpdateVouchersCommand extends ContainerAwareCommand {
         $em = $this->getContainer()->get("doctrine")->getManager();
         $now = new \DateTime();
         $memberRepository = $this->getContainer()->get("member_repository");
-        $members = $memberRepository->getMembersQuery()
+        $members = $memberRepository->getQuery()
                         ->leftJoin("m.vouchers", "v")
                         ->where("v.startDate <= :now")
                         ->andWhere("v.endDate >= :now")

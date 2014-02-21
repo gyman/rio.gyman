@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Dende\VouchersBundle\Exception\VoucherManagerException;
+
 // </editor-fold>
 
 class DefaultController extends Controller {
@@ -31,7 +32,7 @@ class DefaultController extends Controller {
 
         $voucherManager = $this->get("voucher_manager");
         $currentVoucher = $member->getCurrentVoucher();
-        
+
         $decision = $request->get("decision");
 
         if ($decision == "confirm" && $currentVoucher)
@@ -83,6 +84,7 @@ class DefaultController extends Controller {
                         )
         );
     }
+
     /**
      * @Route("/edit/{id}", name="_voucher_edit")
      * @ParamConverter("voucher", class="VouchersBundle:Voucher")
@@ -114,9 +116,9 @@ class DefaultController extends Controller {
 
         return $response->setContent(
                         $this->renderView("VouchersBundle:Default:edit.html.twig", array(
-                            'form'     => $form->createView(),
-                            'voucher'  => $voucher,
-                            "member"   => $voucher->getMember(),
+                            'form'    => $form->createView(),
+                            'voucher' => $voucher,
+                            "member"  => $voucher->getMember(),
                                 )
                         )
         );
@@ -138,7 +140,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Template("MembersBundle::_member_voucher.html.twig")
+     * @Template("MembersBundle:Default:Modal/_voucher.html.twig")
      */
     public function voucherInfoInMemberModalAction(Voucher $voucher) {
 
@@ -157,6 +159,34 @@ class DefaultController extends Controller {
             "leftEntries" => $leftEntries,
             "usedEntries" => $usedEntries
         );
+    }
+
+    /**
+     * @Route("/{id}/delete", name="_voucher_remove")
+     * @ParamConverter("voucher", class="VouchersBundle:Voucher")
+     * @Template()
+     */
+    public function deleteAction(Voucher $voucher, Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        $member = $voucher->getMember();
+        $currentVoucher = $member->getCurrentVoucher();
+
+        if ($currentVoucher && $currentVoucher->getId() == $voucher->getId())
+        {
+            $member->setCurrentVoucher(null);
+        }
+
+        $em->persist($member);
+        $em->remove($voucher);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest())
+        {
+            return new JsonResponse(array("status" => "ok"));
+        }
+
+        return $this->redirect($this->generateUrl("_voucher_list"));
     }
 
 }

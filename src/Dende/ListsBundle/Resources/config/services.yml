@@ -1,0 +1,10 @@
+parameters:
+    list_parameters.class: Dende\ListsBundle\Services\ListParameters
+    
+services:
+    list_parameters:
+        class:          "%list_parameters.class%"
+        scope: request
+        arguments: ["@request"]
+#        calls:
+#            - [ setRequest, [@request]]

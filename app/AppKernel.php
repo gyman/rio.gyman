@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Dende\DashboardBundle\DashboardBundle(),
             new Dende\FiltersBundle\FiltersBundle(),
+            new Dende\ListsBundle\ListsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

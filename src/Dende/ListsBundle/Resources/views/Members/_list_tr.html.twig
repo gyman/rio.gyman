@@ -1,4 +1,4 @@
-<tr data-member="{{member.getId()}}" data-barcode="{{member.getBarcode()}}" data-details-url="{{ path("_member_details",{id:member.getId()}) }}" class="memberRow">
+<tr data-member="{{member.getId()}}" data-barcode="{{member.getBarcode()}}" data-details-url="{{ path("_list_members_details",{id:member.getId()}) }}" class="memberRow">
     <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}">
     {# TODO: funny and ugly, gtfo with this :D #}
         <span class="hidden">
@@ -14,13 +14,13 @@
             1
         {% endif %}
         </span>
-
+        <span class="icon16 icomoon-icon-star"></span>
     </td>
     <td class="profileColumn">
-        {% include "MembersBundle:List:_member_column.html.twig" with {"member" : member } %}
+        {% include "MembersBundle:Default:_member_column.html.twig" with {"member" : member } %}
     </td>
     <td class="voucherColumn">
-        {# { render(controller('MembersBundle:List:currentVoucher', { 'id': member.getId() })) } #}
+        {# { render(controller('MembersBundle:Default:currentVoucher', { 'id': member.getId() })) } #}
         {% if member.getCurrentVoucher() is not null %}
             {% set voucher = member.getCurrentVoucher() %}
         {% if voucher is not null and voucher.getId() %}

@@ -1,6 +1,6 @@
 <form id="memberForm" class="form-horizontal row-fluid" action="{% block action %}{{ path('_member_edit', {"id" : member.id}) }}{% endblock action %}" method="{% block method %}post{% endblock method %}" {{ form_enctype(form) }} {% if member.id is not null %}data-delete-action="{{ path("_member_delete", {id : member.id})}}"{% endif %}>
     <div class="span4">
-        {% include 'MembersBundle::_member_picture.html.twig' with {'form' : form, 'member' : member} %}
+        {% include 'MembersBundle:Default:Modal/_picture.html.twig' with {'form' : form, 'member' : member} %}
     </div>
 
     <div class="span8">
@@ -43,30 +43,29 @@
 
         <div class="tab-content">
             <div id="detailsPane" class="tab-pane fade in active">
-                {% include 'MembersBundle::_member_details.html.twig' with {'form' : form} %}
+                {% include 'MembersBundle:Default:Modal/_details.html.twig' with {'form' : form} %}
             </div>
             {% if voucher is defined and voucher is not null %}
             <div class="tab-pane fade in" id="voucherPane">
                  {{ render(controller('VouchersBundle:Default:voucherInfoInMemberModal', { 'voucher': voucher })) }}
-                {# % include 'MembersBundle::_member_voucher.html.twig' % #}
             </div>
             {% endif %}
             <div class="tab-pane fade in" id="sellPane">
-                {% include 'MembersBundle::_member_sell.html.twig' with {'member' : member} %}
+                {% include 'MembersBundle:Default:Modal/_sell.html.twig' with {'member' : member} %}
             </div>
             <div class="tab-pane fade in" id="entriesPane">
-                {% include 'MembersBundle::_member_entries.html.twig' with {'member' : member} %}
+                {% include 'MembersBundle:Default:Modal/_entries.html.twig' with {'member' : member} %}
             </div>
             <div class="tab-pane fade in" id="additionalsPane">
-                {% include 'MembersBundle::_member_additional.html.twig' with {'form' : form} %}
+                {% include 'MembersBundle:Default:Modal/_additional.html.twig' with {'form' : form} %}
             </div>
         </div>
-        {% if ifNew is defined and ifNew == false %}
-        <div class="pull-right" id="memberModalToolbox">
+        {% block memberToolbox %}
+        <div class="pull-right hideForNewMember" id="memberModalToolbox">
             <a href="{{ path("_voucher_new",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-signup"></i> Karnet</a>
             <a href="{{ path("_entrance_add",{id: member.getId()}) }}" class="btn openUrlInModal"><i class="icomoon-icon-enter"></i> Wejście</a>
         </div>
-        {% endif %}
+        {% endblock memberToolbox %}
     </div>
     <div class="hidden">
     {{ form_rest(form) }}

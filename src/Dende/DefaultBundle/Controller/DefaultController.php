@@ -12,7 +12,7 @@ class DefaultController extends Controller {
      * @Route("/", name="_default_index")
      */
     public function indexAction() {
-        return $this->forward("MembersBundle:List:index");
+        return $this->forward("MembersBundle:Default:index");
     }
 
     /**

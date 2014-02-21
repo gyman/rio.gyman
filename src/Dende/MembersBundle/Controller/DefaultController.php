@@ -15,89 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class ListController extends Controller {
-
-    private $listname = "members";
-
-    /**
-     * @Route("/list", name="_members_list")
-     * @Template("MembersBundle:List:list.html.twig")
-     */
-    public function indexAction(Request $request) {
-        $filter = $this->get("filter_provider")->getListFilter($this->listname);
-
-        if ($request->getRequestFormat() == "json")
-        {
-
-            // @TODO: gruby refaktor potrzebny :/
-
-            /** @var MemberRepository */
-            $memberRepository = $this->get("member_repository");
-            $membersQuery = $memberRepository->getMembersQuery();
-
-            $memberRepository->setRequest($request);
-            $memberRepository->setQuery($membersQuery);
-
-            if ($filter)
-            {
-                $membersQuery->join("m.vouchers", "v");
-                $membersQuery->join("m.entries", "e");
-                $membersQuery->join("e.activity", "a");
-
-                $this->get("filter_provider")->applyFilterToQuery($filter, $membersQuery);
-            }
-
-            $totalCount = $memberRepository->getTotalCount();
-
-            $memberRepository->applyFilterFromRequest();
-
-            $paginator = $memberRepository->getPaginator();
-
-            $displayedCount = count($paginator);
-
-            $datatable = array(
-                "sEcho"                => $request->get("sEcho"),
-                "iTotalRecords"        => $totalCount,
-                "iTotalDisplayRecords" => $displayedCount,
-                "aaData"               => array()
-            );
-
-            if ($displayedCount == 0)
-            {
-                return new JsonResponse($datatable);
-            }
-
-            foreach ($paginator as $member) {
-                $datatable["aaData"][] = array(
-                    $this->renderView("MembersBundle:List:_list_tr.html.twig", array("member" => $member)),
-                    null,
-                    null,
-                    null,
-                );
-            }
-
-            return new JsonResponse($datatable);
-        }
-
-        $filters = $this->get("filter_repository")->getFilters();
-
-        return array(
-            "filter"  => $filter,
-            "filters" => $filters
-        );
-    }
-
-    /**
-     * @Route("/gallery", name="_members_gallery")
-     * @Template("MembersBundle:List:gallery.html.twig")
-     */
-    public function galleryAction(Request $request) {
-        $memberManager = $this->get("member_manager");
-        $members = $memberManager->getMembers();
-
-        return array("members" => $members);
-    }
-
+class DefaultController extends Controller {
     /**
      * @Route("/{id}/edit", name="_member_edit")
      * @ParamConverter("member", class="MembersBundle:Member")
@@ -133,7 +51,7 @@ class ListController extends Controller {
         $voucher = $memberManager->getCurrentVoucher($member);
 
         return $response->setContent(
-                        $this->renderView("MembersBundle:List:edit.html.twig", array(
+                        $this->renderView("MembersBundle:Default:edit.html.twig", array(
                             'form'     => $form->createView(),
                             'member'   => $member,
                             'voucher'  => $voucher,
@@ -174,7 +92,7 @@ class ListController extends Controller {
         }
 
         return $response->setContent(
-                        $this->renderView("MembersBundle:List:new.html.twig", array(
+                        $this->renderView("MembersBundle:Default:new.html.twig", array(
                             'form'     => $form->createView(),
                             'member'   => $member,
                             'isNew'    => true,
@@ -193,16 +111,4 @@ class ListController extends Controller {
         $this->get("member_manager")->delete($member);
         return array();
     }
-
-    /**
-     * @Route("/{id}/details", name="_member_details")
-     * @ParamConverter("member", class="MembersBundle:Member")
-     */
-    public function detailsAction(Member $member) {
-        return new JsonResponse(array(
-            "data" => $this->renderView("MembersBundle:List:_list_tr_details.html.twig", array(
-                "member" => $member))
-        ));
-    }
-
 }

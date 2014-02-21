@@ -22,7 +22,7 @@ class VoucherManager extends BaseManager {
      * @return array
      */
     public function getMembers() {
-        $query = $this->getRepository()->getMembersQuery();
+        $query = $this->getRepository()->getQuery();
         $this->setActiveCriteria($query);
         return $query->getQuery()->execute();
     }

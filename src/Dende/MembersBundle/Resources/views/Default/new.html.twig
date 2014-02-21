@@ -1,4 +1,4 @@
-{% extends "MembersBundle:List:edit.html.twig" %}
+{% extends "MembersBundle:Default:edit.html.twig" %}
 
 {% block action %}{{ path("_member_new") }}{% endblock action %}
 {% block method %}post{% endblock method %}
@@ -18,3 +18,5 @@
 {% block birthday %}
     {{ form_row(form.birthdate,{"label" : "Data urodzin", "attr": { "value" : null }}) }}
 {% endblock birthday %}
+    
+{% block memberToolbox %}{% endblock memberToolbox %}
