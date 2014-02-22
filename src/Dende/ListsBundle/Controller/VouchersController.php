@@ -14,33 +14,35 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class VouchersController extends DefaultController {
 
+    private $listname = "vouchers";
+    private $list_tr_partial = "ListsBundle:Vouchers:_list_tr.html.twig";
+
     /**
-     * @Route("/", name="_voucher_list")
+     * @Route("/", name="_vouchers_list")
      * @Template()
      */
     public function indexAction(Request $request) {
-//        $session = new Session();
-//        $filter = $session->get(self::$filter_session_key);
+        $filter = $this->get("filter_provider")->getListFilter($this->listname);
 
         if ($request->getRequestFormat() == "json")
         {
-            /** @var MemberRepository */
-            $voucherRepository = $this->get("voucher_repository");
-            $vouchersQuery = $voucherRepository->getVouchersQuery();
+            $repository = $this->get("voucher_repository");
+            $listParameters = $this->get("list_parameters");
+            $query = $repository->getQuery();
 
-            $voucherRepository->setRequest($request);
-            $voucherRepository->setQuery($vouchersQuery);
+            if ($filter)
+            {
+                $query->join("v.member", "m");
+                $query->join("m.currentVoucher", "cv");
+                $this->get("filter_provider")->applyFilterToQuery($filter, $query);
+            }
 
-//            if ($filter)
-//            {
-//                $this->get("filter_manager")->applyFilterToQuery($filter, $vouchersQuery);
-//            }
+            $totalCount = $repository->getTotalCount();
 
-            $totalCount = $voucherRepository->getTotalCount();
+            $listParameters->setColumns($repository->getSortingColumns());
+            $listParameters->applyRequest($query);
 
-            $voucherRepository->applyFilterFromRequest();
-
-            $paginator = $voucherRepository->getPaginator();
+            $paginator = $repository->getPaginator($query);
 
             $displayedCount = count($paginator);
 
@@ -58,8 +60,7 @@ class VouchersController extends DefaultController {
 
             foreach ($paginator as $voucher) {
                 $datatable["aaData"][] = array(
-                    $this->renderView("ListsBundle:Vouchers:_list_tr.html.twig", array("voucher" => $voucher)),
-                    null,
+                    $this->renderView($this->list_tr_partial, array("voucher" => $voucher)),
                     null,
                     null,
                     null,
@@ -71,11 +72,12 @@ class VouchersController extends DefaultController {
             return new JsonResponse($datatable);
         }
 
-//        $filters = $this->get("voucher_filter_repository")->getFilters();
+        $filters = $this->get("filter_repository")->getFilters();
 
         return array(
-//            "filter"  => $filter,
-//            "filters" => $filters
+            "filter"   => $filter,
+            "filters"  => $filters,
+            "listname" => $this->listname
         );
     }
 

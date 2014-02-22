@@ -10,24 +10,9 @@
 
 
 <div class="row-fluid">
-
     <div class="span12">
-
-        <div class="box gradient">
-
-            <div class="title">
-                <h4>
-                    <span>{% block membersTitle %}Lista osób{% endblock membersTitle %}</span>
-                </h4>
-            </div>
-            <div class="content noPad clearfix">
-                <div id="calendar"></div>
-            </div>
-
-        </div><!-- End .box -->
-
-    </div><!-- End .span12 -->
-
+        <div id="calendar"></div>
+    </div>
 </div><!-- End .row-fluid -->
 {% endblock body %}
 
@@ -38,41 +23,14 @@
 
     {% javascripts
         '@ScheduleBundle/Resources/public/js/fullcalendar.js'
+        '@ScheduleBundle/Resources/public/coffee/schedule-calendar.coffee'
      %}
 
 <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
 <script>
-    $(document).ready(function() {
-
-        // page is now ready, initialize the calendar...
-
-        $('#calendar').fullCalendar({
-            header: false,
-            allDaySlot: false,
-            defaultView: "agendaWeek",
-            firstDay: 1,
-            events: {{ eventJson|raw }},
-            timeFormat: 'H:mm',
-            minTime: "8:00",
-            maxTime: "23:00",
-            axisFormat: "H:mm",
-            columnFormat: {
-                week: "dddd"
-            },
-            dayNames: [
-                "Niedziela",
-                "Poniedziałek",
-                "Wtorek",
-                "Środa",
-                "Czwartek",
-                "Piątek",
-                "Sobota"
-            ]
-        });
-
-    });
+    var scheduleEvents = {{ eventJson|raw }}
 </script>
 {% endblock javascripts %}
 
@@ -83,7 +41,6 @@
 
     {% stylesheets filter='cssrewrite'
         'bundles/schedule/css/fullcalendar.css'
-        '@MembersBundle/Resources/public/less/members-list.less'
         filter="cssrewrite"
     %}
 

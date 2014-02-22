@@ -186,7 +186,7 @@ class DefaultController extends Controller {
             return new JsonResponse(array("status" => "ok"));
         }
 
-        return $this->redirect($this->generateUrl("_voucher_list"));
+        return $this->redirect($this->generateUrl("_vouchers_list"));
     }
 
 }

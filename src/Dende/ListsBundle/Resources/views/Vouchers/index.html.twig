@@ -11,6 +11,18 @@
 {% block buttonLabel %}Nowy karnet{% endblock %}
 #}
 
+{% block listHeaderRightToolbox %}
+{% block filterButton %}
+<div class="pull-left">
+    <a id="filterModalButton" href="{{ path("_filter_new",{"listname" : "vouchers"}) }}" class="btn btn-link openUrlInModal">
+        <span class="icon16 icomoon-icon-cog-2"></span><span class="icon16 caret"></span>
+    </a>
+</div>
+{% endblock filterButton %}
+{% endblock %}
+
+{% block listTabs %}{% include "FiltersBundle:Default:_tabs.html.twig" with {"filter": filter, "listname" :listname, "starred" : false} %}{% endblock listTabs %}
+
 {% block listHeaderFilter %}
                 {# TODO unlock for filter
                 <button id="filterModalButton" data-target="#filterModal" role="button" data-toggle="modal" class="btn btn-link pull-left">
@@ -21,7 +33,7 @@
 
 {% block listTitle %}Lista karnetów{% endblock%}
 {% block listTableId %}vouchersList{% endblock %}
-{% block listTableAttr %}data-ajax-source="{{ path("_voucher_list", {_format: "json"}) }}"{% endblock %}
+{% block listTableAttr %}data-ajax-source="{{ path("_vouchers_list", {_format: "json"}) }}"{% endblock %}
 {% block listThead %}
 <tr>
     <th>Właściciel</th>
@@ -29,7 +41,6 @@
     <th>Wejść</th>
     <th>Data sprzedaży</th>
     <th>Cena</th>
-    <th>Aktywności</th>
     <th>Akcje</th> 
 </tr>
 {% endblock %}

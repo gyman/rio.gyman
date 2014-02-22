@@ -18,7 +18,7 @@ class ListParameters {
      *
      * @var array 
      */
-    private $columns;
+    private $columns = array();
 
 // </editor-fold>
 
@@ -85,6 +85,7 @@ class ListParameters {
     }
 
     public function applySort(QueryBuilder $query) {
+        return;
         $sortingColumnsCount = (int) $this->getRequest()->get("iSortingCols", 0);
 
         if ($sortingColumnsCount == 0)
@@ -113,16 +114,6 @@ class ListParameters {
                         . "else 0 end) as HIDDEN beltN";
 
                 $query->addSelect($select);
-            }
-
-            if ($column === 2)
-            {
-                $query->leftJoin("m.lastEntry", "e");
-            }
-
-            if ($column === 3)
-            {
-                $query->leftJoin("m.currentVoucher", "v");
             }
 
             if ($a == 0)

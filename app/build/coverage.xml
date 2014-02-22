@@ -1100,7 +1100,7 @@
         <class name="VoucherRepository" namespace="Dende\VouchersBundle\Entity">
           <metrics methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="30" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="getVouchersQuery" crap="2" count="0"/>
+        <line num="15" type="method" name="getQuery" crap="2" count="0"/>
         <line num="16" type="stmt" count="0"/>
         <line num="17" type="stmt" count="0"/>
         <line num="18" type="stmt" count="0"/>

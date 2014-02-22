@@ -1,3 +1,8 @@
+reports:
+    resource: "@ReportsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 lists:
     resource: "@ListsBundle/Controller/"
     type:     annotation

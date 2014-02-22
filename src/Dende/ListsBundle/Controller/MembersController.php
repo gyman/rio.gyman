@@ -29,11 +29,9 @@ class MembersController extends DefaultController {
 
         if ($request->getRequestFormat() == "json")
         {
-            /** @var MemberRepository */
             $repository = $this->get("member_repository");
+            $listParameters = $this->get("list_parameters");
             $query = $repository->getQuery();
-
-//            $repository->setRequest($request);
 
             if ($filter)
             {
@@ -46,12 +44,8 @@ class MembersController extends DefaultController {
 
             $totalCount = $repository->getTotalCount();
 
-            $this->get("list_parameters")->setColumns(array(
-                0 => "beltN",
-                1 => "m.name",
-                2 => "e.created",
-            ));
-            $this->get("list_parameters")->applyRequest($query);
+            $listParameters->setColumns($repository->getSortingColumns());
+            $listParameters->applyRequest($query);
 
             $paginator = $repository->getPaginator($query);
 

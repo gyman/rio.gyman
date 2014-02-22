@@ -63,6 +63,7 @@
     {% javascripts
         '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
         '@ListsBundle/Resources/public/coffee/reloadAjax.coffee'
+        '@FiltersBundle/Resources/public/coffee/tabs.coffee'
      %}
 
 <script src="{{ asset_url }}"></script>
@@ -77,6 +78,7 @@
 
     {% stylesheets filter='cssrewrite'
         'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
+        '@FiltersBundle/Resources/public/less/filters.less'
         filter="cssrewrite"
     %}
 
