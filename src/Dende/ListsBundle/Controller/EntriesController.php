@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * @Route("/entries")
  */
-class EntriesController extends DefaultController {
+class EntriesController extends Controller {
 
     private $listname = "entries";
     private $list_tr_partial = "ListsBundle:Entries:_list_tr.html.twig";

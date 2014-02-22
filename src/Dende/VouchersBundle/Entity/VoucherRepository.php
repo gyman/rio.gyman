@@ -8,9 +8,9 @@ use Doctrine\ORM\QueryBuilder;
 use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Dende\ListsBundle\Entity\ListCompatible;
+use Dende\ListsBundle\Entity\RepositoryListCompatible;
 
-class VoucherRepository extends EntityRepository implements ListCompatible {
+class VoucherRepository extends EntityRepository implements RepositoryListCompatible {
 
     private $columns = array(
         0 => "m.name",
@@ -19,10 +19,6 @@ class VoucherRepository extends EntityRepository implements ListCompatible {
         3 => "v.created",
         4 => "v.price",
     );
-
-    public function getSortingColumns() {
-        return $this->columns;
-    }
 
     public function getAllVouchers() {
         return $this->getQuery()

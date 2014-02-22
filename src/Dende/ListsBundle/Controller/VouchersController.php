@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * @Route("/vouchers")
  */
-class VouchersController extends DefaultController {
+class VouchersController extends Controller {
 
     private $listname = "vouchers";
     private $list_tr_partial = "ListsBundle:Vouchers:_list_tr.html.twig";
@@ -32,8 +32,8 @@ class VouchersController extends DefaultController {
 
             if ($filter)
             {
-                $query->join("v.member", "m");
-                $query->join("m.currentVoucher", "cv");
+                $query->innerJoin("v.member", "m");
+                $query->leftJoin("m.currentVoucher", "cv");
                 $this->get("filter_provider")->applyFilterToQuery($filter, $query);
             }
 

@@ -10,6 +10,12 @@ class ListParameters {
 
     /**
      *
+     * @var \Closure 
+     */
+    private $sortingFunction;
+
+    /**
+     *
      * @var Request 
      */
     private $request;
@@ -21,12 +27,24 @@ class ListParameters {
     private $columns = array();
 
 // </editor-fold>
+    public function get($param) {
+        return $this->getRequest()->get($param);
+    }
 
     public function __construct(Request $request) {
         $this->setRequest($request);
     }
 
 // <editor-fold defaultstate="collapsed" desc="setters and getters">
+
+    public function getSortingFunction() {
+        return $this->sortingFunction;
+    }
+
+    public function setSortingFunction(\Closure $sortingFunction) {
+        $this->sortingFunction = $sortingFunction;
+    }
+
     public function setColumns($columns) {
         $this->columns = $columns;
     }
@@ -85,46 +103,33 @@ class ListParameters {
     }
 
     public function applySort(QueryBuilder $query) {
+        $closure = $this->getSortingFunction();
+        $closure($query);
         return;
-        $sortingColumnsCount = (int) $this->getRequest()->get("iSortingCols", 0);
+    }
 
-        if ($sortingColumnsCount == 0)
-        {
-            return;
+    public function getSortingColumnsCount() {
+        return (int) $this->getRequest()->get("iSortingCols");
+    }
+
+    public function getSortingColumns() {
+        $array = array();
+        $count = $this->getSortingColumnsCount();
+        for ($a = 0; $a < $count; $a++) {
+            $array[] = $this->getRequest()->get("iSortCol_" . $a);
         }
 
-        for ($a = 0; $a < $sortingColumnsCount; $a++) {
-            $column = (int) $this->getRequest()->get("iSortCol_" . $a, 0);
-            $order = strtoupper($this->getRequest()->get("sSortDir_" . $a, "asc"));
+        return $array;
+    }
 
-            if (!key_exists($column, $this->columns))
-            {
-                continue;
-            }
-
-            $columnName = $this->columns[$column];
-
-            if ($column === 0)
-            {
-                $select = "(case "
-                        . "when m.belt = 'blue' then 1 "
-                        . "when m.belt = 'purple' then 2 "
-                        . "when m.belt = 'brown' then 3 "
-                        . "when m.belt = 'black' then 4 "
-                        . "else 0 end) as HIDDEN beltN";
-
-                $query->addSelect($select);
-            }
-
-            if ($a == 0)
-            {
-                $query->orderBy($columnName, $order);
-            }
-            else
-            {
-                $query->addOrderBy($columnName, $order);
-            }
+    public function getSortingOrders() {
+        $array = array();
+        $count = $this->getSortingColumnsCount();
+        for ($a = 0; $a < $count; $a++) {
+            $array[] = $this->getRequest()->get("sSortDir_" . $a);
         }
+
+        return $array;
     }
 
 }

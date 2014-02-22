@@ -25,7 +25,7 @@
 {% block listTitle %}Lista osób{% endblock%}
 {% block listTableId %}membersList{% endblock %}
 {% block listTableClass %}table table-bordered{% endblock %}
-{% block listTableAttr %}data-ajax-source="{{ path("_list_members", {_format: "json"}) }}"{% endblock %}
+{% block listTableAttr %}data-ajax-source="{{ path("_list_members_datasource", {_format: "json"}) }}"{% endblock %}
 
 {% block listTabs %}{% include "FiltersBundle:Default:_tabs.html.twig" with {"filter": filter, "listname" :listname} %}{% endblock listTabs %}
 

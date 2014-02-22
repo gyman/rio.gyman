@@ -1,52 +1,54 @@
-<tr data-member="{{member.getId()}}" data-barcode="{{member.getBarcode()}}" data-details-url="{{ path("_list_members_details",{id:member.getId()}) }}" class="memberRow">
-    <td class="beltColor {% if member.getBelt() %}belt-{{ member.getBelt() }}{% endif %}">
+{% spaceless %}
+<tr data-member="{{entity.getId()}}" data-barcode="{{entity.getBarcode()}}" data-details-url="{{ path("_list_members_details",{id:entity.getId()}) }}" class="memberRow">
+    <td class="beltColor {% if entity.getBelt() %}belt-{{ entity.getBelt() }}{% endif %}">
     {# TODO: funny and ugly, gtfo with this :D #}
         <span class="hidden">
-        {% if member.getBelt() == 'blue' %}
+        {% if entity.getBelt() == 'blue' %}
             2
-        {% elseif member.getBelt() == 'purple' %}
+        {% elseif entity.getBelt() == 'purple' %}
             3
-        {% elseif member.getBelt() == 'brown' %}
+        {% elseif entity.getBelt() == 'brown' %}
             4
-        {% elseif member.getBelt() == 'black' %}
+        {% elseif entity.getBelt() == 'black' %}
             5
         {% else %}
             1
         {% endif %}
         </span>
-        <a href="{{ path("_member_starred",{id:member.getId()}) }}" class="starToggle{{ member.getStarred() ? " starred" : "" }}">
+        <a href="{{ path("_member_starred",{id:entity.getId()}) }}" class="starToggle{{ entity.getStarred() ? " starred" : "" }}">
             <span class="icon16 icomoon-icon-star"></span>
             <span class="icon16 icomoon-icon-star-3"></span>
         </a>
     </td>
     <td class="profileColumn">
-        {% include "MembersBundle:Default:_member_column.html.twig" with {"member" : member } %}
+        {% include "MembersBundle:Default:_member_column.html.twig" with {"member" : entity } %}
     </td>
     <td class="voucherColumn">
-        {# { render(controller('MembersBundle:Default:currentVoucher', { 'id': member.getId() })) } #}
-        {% if member.getCurrentVoucher() is not null %}
-            {% set voucher = member.getCurrentVoucher() %}
-        {% if voucher is not null and voucher.getId() %}
-            {% set endDate = voucher.getEndDate() %}
+        {# { render(controller('MembersBundle:Default:currentVoucher', { 'id': entity.getId() })) } #}
+        {% if entity.getCurrentVoucher() is not null %}
+            {% set voucher = entity.getCurrentVoucher() %}
+            {% if voucher is not null and voucher.getId() %}
+                {% set endDate = voucher.getEndDate() %}
 
-            {% if endDate is not null %}
+                {% if endDate is not null %}
         <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m") }} - {{  endDate|date("d.m") }}</div>
-            {%else %}
+                {%else %}
         <div class="badge badge-success">{{ voucher.getStartDate()|date("d.m.y") }}</div> - <div class="badge">open</div>
-            {%endif%}
+                {%endif%}
 
-            {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
+                {% if voucher.getAmount() is not null and voucher.getAmount() > 0 %}
         <div class="badge badge-important">{{ voucher.getAmountLeft() }}/{{ voucher.getAmount() }}</div>
-            {%else %}
+                {%else %}
         <div class="badge badge-important">open</div>
+                {% endif %}
             {% endif %}
-        {% endif %}
         {% endif %}
     </td>
     <td class="actionColumn">
         <div class="btn-group">
-            <a href="{{ path("_voucher_new", {"id" : member.id})}}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-clock"></span>+ Karnet</a>
-            <a href="{{ path("_entrance_add", {"id" : member.id}) }}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-signup "></span>+ Wejście</a>
+            <a href="{{ path("_voucher_new", {"id" : entity.id})}}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-clock"></span>+ Karnet</a>
+            <a href="{{ path("_entrance_add", {"id" : entity.id}) }}" class="btn btn-mini openUrlInModal"><span class="icomoon-icon-signup "></span>+ Wejście</a>
         </div>
     </td>
 </tr>
+{% endspaceless %}

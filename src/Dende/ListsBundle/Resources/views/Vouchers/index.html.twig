@@ -5,11 +5,13 @@
 {% block headingTitle %}Karnety{% endblock %}
 {% block buttonHeading %}{% endblock %}
 
-{#
-{% block buttonPath %}{% endblock %}
-{% block buttonClasses %}createNewVoucher{% endblock %}
-{% block buttonLabel %}Nowy karnet{% endblock %}
-#}
+
+{% block toolbarButtons %}
+<a href="#" class="btn toolbarButton pull-right" id="getVoucherReportButton">
+    <span class="icon16 icomoon-icon-equalizer-2"></span>
+    Pobierz raport (csv)
+</a>
+{% endblock toolbarButtons%}
 
 {% block listHeaderRightToolbox %}
 {% block filterButton %}

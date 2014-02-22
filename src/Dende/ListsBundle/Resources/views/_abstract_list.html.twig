@@ -4,12 +4,14 @@
 <div class="heading">
     <h3>{% block headingTitle %}{% endblock %}</h3>
 
+    {% block toolbarButtons %}
     {% block buttonHeading %}
     <a href="{% block buttonPath %}{% endblock %}" class="btn pull-right {% block buttonClasses %}{% endblock %}" id="{% block buttonId %}{% endblock %}">
         <span class="icon32 icomoon-icon-new green"></span>
         {% block buttonLabel %}{% endblock %}
     </a>
     {% endblock %}
+    {% endblock toolbarButtons%}
 
 </div><!-- End .heading-->
 
