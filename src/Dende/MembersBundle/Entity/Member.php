@@ -20,6 +20,10 @@ use DateTime;
  *     fields={"email"},
  *     message="Ten email jest już zarejestrowany"
  * )
+ * @UniqueEntity(
+ *     fields={"barcode"},
+ *     message="Inny użytkownik oznaczony jest tym kodem"
+ * )
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Member {

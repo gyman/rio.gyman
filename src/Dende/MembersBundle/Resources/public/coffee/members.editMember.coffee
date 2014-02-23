@@ -29,8 +29,10 @@ class @EditMember
     @deleteCheckbox.change @handleDeleteCheckboxChange
   
   initSelects: =>
-    $("#dende_membersbundle_member_belt").uniform()
-    $("#dende_membersbundle_member_gender").uniform()
+    $("#dende_membersbundle_member_belt, #dende_membersbundle_member_gender").select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px" 
   
   initActivities: =>
     activities = []
@@ -80,8 +82,9 @@ class @EditMember
       error: (xhr, textStatus, errorThrown) =>
         if xhr.status == 400
           @modal.setBody xhr.responseText
+          @openTabWithError()
         else if xhr.status == 500
-          alert xhr.responseText
+          alert "Wystąpił błąd serwera"
       complete: =>
         @modal.unblock()
       type: @form.attr "method"
@@ -90,3 +93,7 @@ class @EditMember
     $("#dende_membersbundle_member_birthdate",@$modalWindow).datepicker
       dateFormat: "dd.mm.yy"
   
+  openTabWithError: () =>
+    paneId = "#" + @$modalWindow.find("div.control-group.error").first().parents(".tab-pane").prop("id");
+    $tab = @$modalWindow.find("ul.nav-tabs a").filter("[href="+paneId+"]");
+    $tab.trigger "click"
