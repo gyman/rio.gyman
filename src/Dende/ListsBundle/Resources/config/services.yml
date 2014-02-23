@@ -28,7 +28,7 @@ services:
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]
-            - [setRepository,[@member_repository]]
+            - [setRepository,[@voucher_repository]]
             - [setTemplating, [@templating]]
         
     entries_list:
@@ -38,6 +38,6 @@ services:
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]
-            - [setRepository,[@member_repository]]
+            - [setRepository,[@entry_repository]]
             - [setTemplating, [@templating]]
     

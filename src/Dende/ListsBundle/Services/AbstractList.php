@@ -4,7 +4,7 @@ namespace Dende\ListsBundle\Services;
 
 use Dende\FiltersBundle\Services\FilterProvider;
 use Dende\ListsBundle\Services\ListParameters;
-use Dende\MembersBundle\Entity\MemberRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 abstract class AbstractList {
@@ -16,7 +16,7 @@ abstract class AbstractList {
 
     /**
      *
-     * @var MemberRepository 
+     * @var EntityRepository 
      */
     protected $repository;
 
@@ -66,7 +66,7 @@ abstract class AbstractList {
         $this->templating = $templating;
     }
 
-    public function setRepository(MemberRepository $repository) {
+    public function setRepository(EntityRepository $repository) {
         $this->repository = $repository;
     }
 

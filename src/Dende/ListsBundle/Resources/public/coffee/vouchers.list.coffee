@@ -10,10 +10,6 @@ $ ->
     sPaginationType:"bootstrap"
     bJQueryUI:false
     bAutoWidth:false
-    fnServerParams: ( aoData ) ->
-      aoData.push
-        name: "MyName"
-        value: "MyValue"
     bServerMethod: "POST"
     aoColumns: [
       bSortable: true
@@ -24,7 +20,7 @@ $ ->
     ,
       bSortable: true
     ,
-      bSortable: false
+      bSortable: true
     ,
       bSortable: false
     ]
