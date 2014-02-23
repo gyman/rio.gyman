@@ -99,6 +99,7 @@ class DefaultController extends Controller {
         );
 
         $filter = new Filter();
+        $filter->setListname($listname);
 
         $filters = $this->get("filter_provider")->getFiltersForList($listname);
 

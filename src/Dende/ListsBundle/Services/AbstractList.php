@@ -82,7 +82,11 @@ abstract class AbstractList {
         return $this->listname;
     }
 
-    public function getResults() {
+    /**
+     * 
+     * @return QueryBuilder
+     */
+    protected function getDataViewQuery() {
         $filter = $this->getFilterProvider()->getListFilter($this->getListname());
 
         $query = $this->getRepository()->getQuery();
@@ -93,8 +97,16 @@ abstract class AbstractList {
             $this->getFilterProvider()->applyFilterToQuery($filter, $query);
         }
 
-        $totalCount = $this->getRepository()->getTotalCount();
+        return $query;
+    }
 
+    public function getFullDataView() {
+        return $this->getDataViewQuery()->getQuery()->execute();
+    }
+
+    public function getResults() {
+        $query = $this->getDataViewQuery();
+        
         $sortingColumnsCount = $this->getListParameters()->getSortingColumnsCount();
         $sortingColumnArray = $this->getListParameters()->getSortingColumns();
         $sortingOrderArray = $this->getListParameters()->getSortingOrders();
@@ -104,6 +116,8 @@ abstract class AbstractList {
         $this->getListParameters()->setColumns($this->getSortingColumns());
         $this->getListParameters()->setSortingFunction($sortingFunction);
         $this->getListParameters()->applyRequest($query);
+
+        $totalCount = $this->getRepository()->getTotalCount();
 
         $paginator = $this->getRepository()->getPaginator($query);
 

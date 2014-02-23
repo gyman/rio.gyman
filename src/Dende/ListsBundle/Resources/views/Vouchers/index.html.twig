@@ -7,10 +7,26 @@
 
 
 {% block toolbarButtons %}
-<a href="#" class="btn toolbarButton pull-right" id="getVoucherReportButton">
-    <span class="icon16 icomoon-icon-equalizer-2"></span>
-    Pobierz raport (csv)
-</a>
+<div class="btn-group toolbarButton pull-right">
+    <a href="{{path("_report_download",{listname:"vouchers"})}}" class="btn">
+        <span class="icon16 icomoon-icon-equalizer-2"></span>
+        CSV
+    </a>
+    <a href="{{path("_report_download",{listname:"vouchers",_format: "html"})}}" class="btn">
+        <span class="icon16 icomoon-icon-equalizer-2"></span>
+        HTML
+    </a>
+    {#
+    <a href="{{path("_report_download",{listname:"vouchers",_format: "pdf"})}}" class="btn">
+        <span class="icon16 icon-pencil"></span>
+        PDF
+    </a>
+    <a href="{{path("_report_download",{listname:"vouchers",_format: "xml"})}}" class="btn">
+        <span class="icon16 icon-tags"></span>
+        XML
+    </a>
+    #}
+</div>
 {% endblock toolbarButtons%}
 
 {% block listHeaderRightToolbox %}

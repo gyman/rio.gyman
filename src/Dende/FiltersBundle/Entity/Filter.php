@@ -50,6 +50,22 @@ class Filter {
      */
     private $pinned;
 
+    /**
+     * @var string $entryType
+     *
+     * @ORM\Column(name="listname", type="string", columnDefinition="enum('members', 'vouchers', 'entries')", nullable=false)
+     * @Assert\NotBlank(message = "Pole nie może być puste!")
+     */
+    private $listname;
+
+    public function getListname() {
+        return $this->listname;
+    }
+
+    public function setListname($listname) {
+        $this->listname = $listname;
+    }
+
     public function __construct() {
         $this->subfilters = new ArrayCollection();
     }

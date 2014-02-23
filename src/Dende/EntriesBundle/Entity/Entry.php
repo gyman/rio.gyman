@@ -55,7 +55,7 @@ class Entry {
     /**
      * @var string $entryType
      *
-     * @ORM\Column(name="entry_type", type="string", columnDefinition="enum('free', 'voucher', 'paid', 'multisport')", nullable=true)
+     * @ORM\Column(name="entry_type", type="string", columnDefinition="enum('free', 'voucher', 'paid', 'multisport')", nullable=false)
      * @Assert\NotBlank(message = "Pole nie może być puste!")
      */
     private $entryType;

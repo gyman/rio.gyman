@@ -27,7 +27,7 @@ class VouchersController extends Controller implements ListControllerInterface {
      */
     public function indexAction(Request $request) {
         $filter = $this->get("filter_provider")->getListFilter($this->getListname());
-        $filters = $this->get("filter_repository")->getFilters();
+        $filters = $this->get("filter_repository")->getFiltersByListname($this->getListname());
 
         return array(
             "filter"   => $filter,

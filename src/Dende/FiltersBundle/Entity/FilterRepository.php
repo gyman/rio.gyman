@@ -22,5 +22,12 @@ class FilterRepository extends EntityRepository {
                 ->getQuery()
                 ->execute();
     }
+    public function getFiltersByListname($listname) {
+        return $this->createQueryBuilder("f")
+                ->andWhere("f.listname = :listname")
+                ->setParameter("listname", $listname)
+                ->getQuery()
+                ->execute();
+    }
 
 }

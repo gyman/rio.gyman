@@ -50,6 +50,7 @@ class FilterType extends AbstractType {
                     "label" => "Pokaż na dashboardzie",
                 ))
                 ->add('filter', "hidden")
+                ->add('listname', "hidden")
         ;
     }
 

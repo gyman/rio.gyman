@@ -1,7 +1,7 @@
 reports:
     resource: "@ReportsBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /report
 
 lists:
     resource: "@ListsBundle/Controller/"
