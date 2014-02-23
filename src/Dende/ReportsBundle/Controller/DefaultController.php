@@ -21,16 +21,33 @@ class DefaultController extends Controller {
         $data = $vouchersList->getFullDataView();
         $format = $request->getRequestFormat();
 
-        $filename = sprintf("report_%s_%s.%s",$listname,date("Y-m-d_H:i:s"),$format);
-        
-        $response = $this->render('ReportsBundle:Default:' . ucfirst($listname) . '/index.' . $format . '.twig', array('data' => $data));
+        $priceSum = $this->getPriceSum($data);
 
-//        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="'.$filename.'"');
+        $filename = sprintf("report_%s_%s.%s", $listname, date("Y-m-d_H:i:s"), $format);
+
+        $response = $this->render('ReportsBundle:Default:' . ucfirst($listname) . '/index.' . $format . '.twig', array('data'     => $data,
+            "priceSum" => $priceSum));
+
+        switch ($format) {
+            case "csv":
+                $response->headers->set('Content-Type', 'text/csv');
+                break;
+            case "html":
+                $response->headers->set('Content-Type', 'text/html');
+                break;
+        }
+
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $filename . '"');
 
         return $response;
     }
-    
-    
+
+    private function getPriceSum($data) {
+        $sum = 0;
+        foreach ($data as $item) {
+            $sum +=$item->getPrice();
+        }
+        return $sum;
+    }
 
 }
