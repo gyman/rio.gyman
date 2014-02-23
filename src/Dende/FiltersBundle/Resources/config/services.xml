@@ -17,6 +17,7 @@
         <parameter key="filter.entry_type.class">Dende\FiltersBundle\Filters\EntryType</parameter>
         <parameter key="filter.gender.class">Dende\FiltersBundle\Filters\Gender</parameter>
         <parameter key="filter.member.class">Dende\FiltersBundle\Filters\Member</parameter>
+        <parameter key="filter.price.class">Dende\FiltersBundle\Filters\Price</parameter>
         <parameter key="filter.starred.class">Dende\FiltersBundle\Filters\Starred</parameter>
         <parameter key="filter.registration_date.class">Dende\FiltersBundle\Filters\RegistrationDate</parameter>
         <parameter key="filter.search.class">Dende\FiltersBundle\Filters\Search</parameter>
@@ -45,6 +46,8 @@
         </service>
         <service id="filters.current_voucher" class="%filter.current_voucher.class%">
             <tag name="members" />
+            <tag name="vouchers" />
+            <tag name="entries" />
             <tag name="filter" />
         </service>
         <service id="filters.registration_date" class="%filter.registration_date.class%">
@@ -54,6 +57,7 @@
         <service id="filters.search" class="%filter.search.class%">
             <tag name="members" />
             <tag name="vouchers" />
+            <tag name="entries" />
             <tag name="filter" />
         </service>
         <service id="filters.voucher_start" class="%filter.voucher_start.class%">
@@ -67,11 +71,11 @@
             <tag name="filter" />
         </service>
         <service id="filters.entry_date" class="%filter.entry_date.class%">
-            <tag name="members" />
+            <tag name="entries" />
             <tag name="filter" />
         </service>
         <service id="filters.entry_type" class="%filter.entry_type.class%">
-            <tag name="members" />
+            <tag name="entries" />
             <tag name="filter" />
         </service>
         <service id="filters.gender" class="%filter.gender.class%">
@@ -80,15 +84,23 @@
         </service>
         <service id="filters.member" class="%filter.member.class%">
             <tag name="vouchers" />
+            <tag name="entries" />
+            <tag name="filter" />
+        </service>
+        <service id="filters.price" class="%filter.price.class%">
+            <tag name="vouchers" />
             <tag name="filter" />
         </service>
         <service id="filters.starred" class="%filter.starred.class%">
             <tag name="members" />
+            <tag name="vouchers" />
+            <tag name="entries" />
             <tag name="filter" />
         </service>
         <service id="filters.activities" class="%filter.activities.class%">
             <tag name="members" />
             <tag name="vouchers" />
+            <tag name="entries" />
             <tag name="filter" />
         </service>
         <service id="filters.age" class="%filter.age.class%">

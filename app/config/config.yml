@@ -83,6 +83,9 @@ doctrine:
 #            StofDoctrineExtensionsBundle: ~
         entity_managers:
             default:
+#                dql:
+#                    numeric_functions:
+#                        cast:   Dende\FiltersBundle\DQL\CastFunction
                 auto_mapping: true
                 filters:
                     softdeleteable:

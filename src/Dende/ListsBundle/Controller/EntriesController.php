@@ -3,81 +3,45 @@
 namespace Dende\ListsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/entries")
  */
-class EntriesController extends Controller {
+class EntriesController extends Controller implements ListControllerInterface {
 
     private $listname = "entries";
-    private $list_tr_partial = "ListsBundle:Entries:_list_tr.html.twig";
+
+    public function getListname() {
+        return $this->listname;
+    }
 
     /**
      * @Route("/", name="_list_entries")
      * @Template()
      */
     public function indexAction(Request $request) {
-        $filter = $this->get("filter_provider")->getListFilter($this->listname);
-
-        if ($request->getRequestFormat() == "json")
-        {
-            $repository = $this->get("entry_repository");
-            $query = $repository->getQuery();
-
-            $repository->setRequest($request);
-            $repository->setQuery($query);
-
-            if ($filter)
-            {
-//                $query->join("m.vouchers", "v");
-//                $query->join("m.entries", "e");
-//                $query->join("e.activity", "a");
-
-                $this->get("filter_provider")->applyFilterToQuery($filter, $query);
-            }
-
-            $totalCount = $repository->getTotalCount();
-
-            $repository->applyFilterFromRequest();
-
-            $paginator = $repository->getPaginator();
-
-            $displayedCount = count($paginator);
-
-            $datatable = array(
-                "sEcho"                => $request->get("sEcho"),
-                "iTotalRecords"        => $totalCount,
-                "iTotalDisplayRecords" => $displayedCount,
-                "aaData"               => array()
-            );
-
-            if ($displayedCount == 0)
-            {
-                return new JsonResponse($datatable);
-            }
-
-            foreach ($paginator as $entity) {
-                $datatable["aaData"][] = array(
-                    $this->renderView($this->list_tr_partial, array("entity" => $entity)),
-                    null,
-                    null,
-                    null,
-                );
-            }
-
-            return new JsonResponse($datatable);
-        }
-
+        $filter = $this->get("filter_provider")->getListFilter($this->getListname());
         $filters = $this->get("filter_repository")->getFilters();
 
         return array(
-            "filter"  => $filter,
-            "filters" => $filters
+            "filter"   => $filter,
+            "filters"  => $filters,
+            "listname" => $this->getListname()
         );
+    }
+
+    /**
+     * @Route("/datasource.{_format}", name="_list_entries_datasource", defaults={"_format" = "json"}, requirements={"_format" = "json"})
+     * @Template()
+     */
+    public function datasourceAction(Request $request) {
+        $membersList = $this->get("entries_list");
+        $data = $membersList->getResults();
+        return new JsonResponse($data);
     }
 
 }

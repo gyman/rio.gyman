@@ -16,7 +16,9 @@ $ ->
     ,
       bSortable: true
     ,
-      bSortable: false
+      bSortable: true
+    ,
+      bSortable: true
     ,
       bSortable: false
     ]
@@ -37,3 +39,13 @@ $ ->
   $(".dataTables_length select").select2()
     
 
+  # delete voucher
+  
+  $(document).off("click.entries.list.delete").on "click.entries.list.delete", "a.removeEntry", (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    return if !confirm("Czy na pewno chcesz usunąć wejście?")
+    $row = $(e.currentTarget).parents("tr")
+    href = $(e.currentTarget).attr("href")
+    $.get href, (response) =>
+      $row.remove()

@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityRepository;
 use Dende\MembersBundle\Entity\Member;
 use Doctrine\ORM\QueryBuilder;
 use DateTime;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dende\ListsBundle\Entity\RepositoryListCompatible;
 

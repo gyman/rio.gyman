@@ -19,7 +19,7 @@ class VouchersList extends AbstractList {
     );
 
     protected function addJoins(QueryBuilder $query) {
-        $query->leftJoin("v.member", "m");
+        $query->innerJoin("v.member", "m");
     }
 
     public function getSortingFunction($sortingColumnsCount, $sortingColumnArray, $sortingOrderArray) {

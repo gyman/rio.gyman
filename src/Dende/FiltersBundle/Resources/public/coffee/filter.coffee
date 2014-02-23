@@ -183,6 +183,32 @@ class @Filter
       step: 1
       start: 100
       numberFormat: "C"
+    
+  # price filter handler
+  
+  priceSubfilterHandler: () =>
+    typeSelector = "#filter_subfilters_price_type"
+    price1Selector = "#filter_subfilters_price_price1"
+    price2Selector = "#filter_subfilters_price_price2"
+    
+    @$modalWindow.off("change.filter.price.type").on "change.filter.price.type", typeSelector, (e) =>
+      if $(e.currentTarget).val() == "between"
+        $(price2Selector).show()
+      else
+        $(price2Selector).hide()
+        
+    $(price2Selector).hide()
+    
+    $(typeSelector).select2
+      dropdownAutoWidth : true
+      containerCss : 
+        width : "120px"
+    
+    $([price1Selector,price2Selector].join ",").spinner
+      min: 0
+      step: 1
+      start: 100
+      numberFormat: "C"
   
   # delete filter from list
   
