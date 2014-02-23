@@ -130,7 +130,7 @@ abstract class AbstractList {
         return $datatable;
     }
 
-    private function addJoins(QueryBuilder $query) {
+    protected function addJoins(QueryBuilder $query) {
         
     }
 

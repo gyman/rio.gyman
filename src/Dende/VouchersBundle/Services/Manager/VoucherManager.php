@@ -56,14 +56,6 @@ class VoucherManager extends BaseManager {
         $query->andWhere("v.deletedAt is null");
     }
 
-    public function findOverlappingWithRange(Member $member, \DateTime $startDate, \DateTime $endDate) {
-        $repository = $this->getRepository();
-        $query = $repository->getVouchersOverlappingQuery($member, $startDate, $endDate);
-        $result = $query->getQuery()->execute();
-
-        return $result;
-    }
-
     public function closeVoucher(Voucher $voucher) {
         $yesterday = date("Y-m-d 23:59:59",strtotime("yesterday"));
         $voucher->setEndDate(new \DateTime($yesterday));

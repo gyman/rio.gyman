@@ -1,6 +1,8 @@
 parameters:
     list_parameters.class: Dende\ListsBundle\Services\ListParameters
     members_list.class: Dende\ListsBundle\Services\MembersList
+    vouchers_list.class: Dende\ListsBundle\Services\VouchersList
+    entries_list.class: Dende\ListsBundle\Services\EntriesList
     
 services:
     list_parameters:
@@ -11,6 +13,26 @@ services:
         
     members_list:
         class:          "%members_list.class%"
+        strict:         false
+        scope:          request
+        calls:
+            - [setListParameters,[@list_parameters]]
+            - [setFilterProvider,[@filter_provider]]
+            - [setRepository,[@member_repository]]
+            - [setTemplating, [@templating]]
+        
+    vouchers_list:
+        class:          "%vouchers_list.class%"
+        strict:         false
+        scope:          request
+        calls:
+            - [setListParameters,[@list_parameters]]
+            - [setFilterProvider,[@filter_provider]]
+            - [setRepository,[@member_repository]]
+            - [setTemplating, [@templating]]
+        
+    entries_list:
+        class:          "%entries_list.class%"
         strict:         false
         scope:          request
         calls:

@@ -35,7 +35,7 @@
 
 {% block listTitle %}Lista karnetów{% endblock%}
 {% block listTableId %}vouchersList{% endblock %}
-{% block listTableAttr %}data-ajax-source="{{ path("_vouchers_list", {_format: "json"}) }}"{% endblock %}
+{% block listTableAttr %}data-ajax-source="{{ path("_list_vouchers_datasource", {_format: "json"}) }}"{% endblock %}
 {% block listThead %}
 <tr>
     <th>Właściciel</th>

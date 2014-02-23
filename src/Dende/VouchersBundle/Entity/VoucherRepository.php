@@ -12,14 +12,6 @@ use Dende\ListsBundle\Entity\RepositoryListCompatible;
 
 class VoucherRepository extends EntityRepository implements RepositoryListCompatible {
 
-    private $columns = array(
-        0 => "m.name",
-        1 => "v.startDate",
-        2 => "v.amount",
-        3 => "v.created",
-        4 => "v.price",
-    );
-
     public function getAllVouchers() {
         return $this->getQuery()
                         ->orderBy("v.created", "DESC")
@@ -31,7 +23,7 @@ class VoucherRepository extends EntityRepository implements RepositoryListCompat
      * @return Doctrine\ORM\QueryBuilder
      */
     public function getQuery() {
-        $query = $this->createQueryBuilder("v")->select();
+        $query = $this->createQueryBuilder("v");
         return $query;
     }
 
@@ -39,20 +31,6 @@ class VoucherRepository extends EntityRepository implements RepositoryListCompat
         $query = $this->getQuery();
         $query->select("count(v.id)");
         return $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function getVouchersOverlappingQuery(Member $member, \DateTime $startDate, \DateTime $endDate) {
-        $query = $this->getQuery();
-        $query->where("v.member = :member");
-        $query->andWhere("v.startDate BETWEEN :start AND :end OR v.endDate BETWEEN :start AND :end");
-        $query->setParameters(array(
-            "start"  => $startDate,
-            "end"    => $endDate,
-            "member" => $member
-        ));
-        $query->orderBy("v.endDate", "DESC");
-
-        return $query;
     }
 
     public function getPaginator(QueryBuilder $query) {

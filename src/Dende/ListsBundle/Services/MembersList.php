@@ -16,7 +16,7 @@ class MembersList extends AbstractList {
         2 => "cv.startDate"
     );
 
-    private function addJoins(QueryBuilder $query) {
+    protected function addJoins(QueryBuilder $query) {
         $query->leftJoin("m.vouchers", "v");
         $query->leftJoin("m.currentVoucher", "cv");
         $query->leftJoin("m.entries", "e");
