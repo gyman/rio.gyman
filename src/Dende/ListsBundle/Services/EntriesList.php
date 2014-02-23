@@ -18,8 +18,8 @@ class EntriesList extends AbstractList {
     );
 
     protected function addJoins(QueryBuilder $query) {
-        $query->join("e.member", "m");
-        $query->join("e.voucher", "v");
+        $query->leftJoin("e.member", "m");
+        $query->leftJoin("e.voucher", "v");
         $query->join("e.activity", "a");
     }
 

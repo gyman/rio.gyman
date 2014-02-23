@@ -124,12 +124,19 @@ class @Modal
           window.modal.setBody response
           window.modal.show()
           window.modal.getModal().off("hidden.imidiateShow")
+        .error () =>
+          @memberNotFound()
       @hide()
     else
       $.get url, (response) =>
         @setBody response
         @show()
-
+      .error () =>
+        @memberNotFound()
+        
+  memberNotFound: =>
+    alert "Nie znaleziono takiego uczestnika"
+        
   setupFromNode: (node) =>
     $dataDiv = $(node)
     $footer = $(".modal-footer", $dataDiv).html()

@@ -35,6 +35,7 @@ class DefaultController extends Controller {
         );
 
         $entry = $this->get('entry_manager')->createNewEntry();
+        $entry->setMember($member);
 
         $currentVoucher = $member->getCurrentVoucher();
 
@@ -57,7 +58,6 @@ class DefaultController extends Controller {
                     $entry->setVoucher(null);
                 }
 
-                $entry->setMember($member);
 
                 $this->get('entry_manager')->save($entry);
             }

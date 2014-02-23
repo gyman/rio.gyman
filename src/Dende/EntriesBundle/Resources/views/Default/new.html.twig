@@ -73,6 +73,8 @@
 {% block javascript %}
 {% javascripts
     '@EntriesBundle/Resources/public/coffee/entries.editEntry.coffee'
+        '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
+        '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
 %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
@@ -85,26 +87,6 @@
         window.editEntryModal = new EditEntry();
 
         return;
-        /*
-         $("#addEntrance").off("click.sendForm").on("click.sendForm", function() {
-         var $form = $("form#entranceForm");
-         var $modal = $("div#editEntranceModal");
-         
-         $.post($form.attr("action"), $form.serialize(), function(data) {
-         $modal.modal("hide");
-         $.pnotify({
-         title: 'Uwaga',
-         text: 'Dodano wejście na zajęcia',
-         icon: false,
-         opacity: 0.95,
-         sticker: false,
-         history: false
-         });
-         }).fail(function(xhr, textStatus, errorThrown) {
-         $(".modal-body", $modal).html(xhr.responseText);
-         });
-         });
-         */
     });
 </script>
 {% endblock javascript %}

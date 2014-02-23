@@ -219,7 +219,7 @@ class EntryType extends AbstractType {
                 )
                 ->add('entryType', 'choice', array(
                     'choices'  => $this->getChoices()->toArray(),
-                    'data'     => "free",
+                    'data'     => $this->getDefaultChoice(),
                     "expanded" => true
                 ))
                 ->add('entryPrice', 'text')
@@ -253,17 +253,17 @@ class EntryType extends AbstractType {
 //        }
 //        else
 //        {
-            $this->loadCurrentActivities();
-            $this->loadVoucherActivities();
-            $this->loadAllActivities();
-            $this->loadTodayActivities();
+        $this->loadCurrentActivities();
+        $this->loadVoucherActivities();
+        $this->loadAllActivities();
+        $this->loadTodayActivities();
 
-            return array(
-                "Trwające"   => $this->getCurrentActivities()->toArray(),
-                "Dzisiejsze" => $this->getTodayActivities()->toArray(),
-                "Karnet"     => $this->getVoucherActivities()->toArray(),
-                "Wszystkie"  => $this->getAllActivities()->toArray()
-            );
+        return array(
+            "Trwające"   => $this->getCurrentActivities()->toArray(),
+            "Dzisiejsze" => $this->getTodayActivities()->toArray(),
+            "Karnet"     => $this->getVoucherActivities()->toArray(),
+            "Wszystkie"  => $this->getAllActivities()->toArray()
+        );
 //        }
     }
 
@@ -330,13 +330,23 @@ class EntryType extends AbstractType {
 
         $voucher = $this->getEntry()->getVoucher();
 
-        if ($voucher && ($voucher->getAmountLeft() > 0 OR $voucher->getAmount() ==
-                null))
+        if ($voucher && ($voucher->getAmountLeft() > 0 OR $voucher->getAmount() == null))
         {
             $choices->offsetSet("voucher", "na karnet");
         }
 
         return $choices;
+    }
+
+    protected function getDefaultChoice() {
+        if ($this->getEntry()->getVoucher())
+        {
+            return "voucher";
+        }
+        else
+        {
+            return "paid";
+        }
     }
 
 }
