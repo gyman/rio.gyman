@@ -18,7 +18,7 @@ after "deploy:restart", "deploy:cleanup"
 set :keep_releases, 3
 set :shared_children, ["app/cache","app/logs","web/uploads"]
 set :writable_dirs, ["app/cache", "app/logs","web/uploads"]
-set :copy_exclude, [".git", "nbproject", "config/deploy"]
+set :copy_exclude, ["nbproject", "config/deploy"]
 
 set :ssh_options, {
     :forward_agent => true,
@@ -26,7 +26,7 @@ set :ssh_options, {
 }
 
 # before "deploy:restart", "deploy:install"
-#after "deploy:install", "app:deploy"
+after "deploy:install", "app:deploy"
 
 namespace :deploy do
     desc "run composer install and ensure all dependencies are installed"

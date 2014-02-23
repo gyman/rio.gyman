@@ -23,7 +23,7 @@
         <div class="title"><h4><span>Filtry uczestników</span></h4></div>
         <div class="content">
             <ul class="bigBtnIcon">
-                {% for filter in filters %}
+                {% for filter in filters if filter.listname == "members" %}
                 <li>
                     <a class="tipB" href="{{ path("_filter_set",{id: filter.getId(), listname : "members"}) }}">
                         <span class="icon icomoon-icon-stats-up"></span>
@@ -36,6 +36,7 @@
         </div>
     </div>
     {% endif %}
+    {% if events|length > 0 %}
     <div class="span6">
         <div class="reminder">
             <h4>Zajęcia dzisiaj ({{ "now"|date("l") }}):
@@ -52,6 +53,7 @@
             </ul>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock body %}
 
