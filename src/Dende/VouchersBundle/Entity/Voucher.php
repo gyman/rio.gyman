@@ -65,9 +65,9 @@ class Voucher {
     private $endDate;
 
     /**
-     * @var string
+     * @var float
      * 
-     * @ORM\Column(name="price", type="string", nullable = true)
+     * @ORM\Column(name="price", type="decimal", scale=2, nullable = true)
      * @Assert\Regex("/^\d+(\.\d\d){0,1}$/")
      */
     private $price;

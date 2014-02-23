@@ -8,14 +8,12 @@ class Price extends Subfilter {
 
     public $name = "price";
     public $label = "Cena";
-    protected $field = "castPrice";
+    protected $field = "v.price";
 
     public function applyToQuery(QueryBuilder $queryBuilder) {
-        $select = "CAST(v.price AS UNSIGNED) as HIDDEN castPrice";
-        $queryBuilder->addSelect($select);
         $method = $this->options["type"];
-        $this->price1 = $this->options["price1"];
-        $this->price2 = $this->options["price2"];
+        $this->price1 = floatval($this->options["price1"]);
+        $this->price2 = floatval($this->options["price2"]);
         $this->$method($queryBuilder);
     }
 

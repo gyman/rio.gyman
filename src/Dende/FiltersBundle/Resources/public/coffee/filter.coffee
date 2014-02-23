@@ -11,7 +11,7 @@ class @Filter
   addFilterSelector: "#filter_addFilter"
   saveFilterSelector: "#filter_save"
   filterNameSelector: "#filter_name"
-  pinToDashboardSalector: "#filter_pinned"
+  pinToDashboardSelector: "#filter_pinned"
   filterFormSelector: "form#filterForm"
   $form: $("form#filterForm")
   useFilterButtonSelector: "#useFilter"
@@ -228,7 +228,7 @@ class @Filter
   # save filter needs to show div with filter name and pin to dashboard checkbox
   
   setupSaveFilterCheckbox: =>
-    $groupsToHide = $(@filterNameSelector+", "+@pinToDashboardSalector).parents(".control-group");
+    $groupsToHide = $(@filterNameSelector+", "+@pinToDashboardSelector).parents(".control-group");
     
     $groupsToHide.hide()
     
@@ -244,6 +244,10 @@ class @Filter
     @$saveButton = $(@useFilterButtonSelector,@$modalWindow)
     @$saveButton.off("click.filter.saveButton").on "click.filter.saveButton", (e) =>
       e.preventDefault()
+      
+      if !@validateFilter()
+        return false
+        
       action = @$form.attr "action"
       data = @$form.serialize()
       @modal.block()
@@ -262,12 +266,22 @@ class @Filter
           if xhr.status == 400
             @modal.setBody xhr.responseText
             if $(@saveFilterSelector).is(":checked")
-              $(@filterNameSelector+", "+@pinToDashboardSalector).parents(".control-group").show()
+              $(@filterNameSelector+", "+@pinToDashboardSelector).parents(".control-group").show()
           else if xhr.status == 500
             alert xhr.responseText
         complete: =>
           @modal.unblock()
         type: @$form.attr "method"
+        
+  # validate filter
+  
+  validateFilter: () =>
+    if $(@saveFilterSelector).is(":checked") and $(@filterNameSelector).val().length == 0
+      controlGroup = $(@filterNameSelector).parents ".control-group"
+      controlGroup.addClass "error"
+      controlGroup.find(".help-block").text "Pole nie może być puste"
+      return false
+    return true
         
   # add filter tab when saved
         
