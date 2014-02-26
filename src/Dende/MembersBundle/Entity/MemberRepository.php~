@@ -54,7 +54,7 @@ class MemberRepository extends EntityRepository implements RepositoryListCompati
 
         ;
         
-        die(var_dump($query->getQuery()->execute()->count()));
+        die(var_dump($query->getQuery()->execute()));
 
         return $query->getQuery()->execute();
     }

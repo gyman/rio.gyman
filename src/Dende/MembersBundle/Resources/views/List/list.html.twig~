@@ -1,0 +1,89 @@
+{% extends "DefaultBundle:List:_abstract_list.html.twig" %}
+
+{% block body_class %}membersList{% endblock %}
+
+{% block headingTitle %}Członkowie klubu{% endblock %}
+{% block buttonPath %}{{path("_member_new")}}{% endblock %}
+{% block buttonClasses %}createNewMember  openUrlInModal{% endblock %}
+{% block buttonLabel %}Nowa osoba{% endblock %}
+
+{% block listHeaderRightToolbox %}
+<div class="pull-right" id="chooseMembersListForm">
+    <a class="icomoon-icon-list green"  href="{{ path("_members_list") }}"></a>
+    <a class="icomoon-icon-grid green" href="{{ path("_members_gallery") }}"></a>
+</div>
+
+{% block filterButton %}
+<div class="pull-left">
+    <a id="filterModalButton" href="{{ path("_members_filter") }}" class="btn btn-link openUrlInModal">
+        <span class="icon16 icomoon-icon-cog-2"></span><span class="icon16 caret"></span>
+    </a>
+</div>
+{% endblock filterButton %}
+{% endblock %}
+
+{% block listTitle %}Lista osób{% endblock%}
+{% block listTableId %}membersList{% endblock %}
+{% block listTableClass %}table table-bordered{% endblock %}
+{% block listTableAttr %}data-ajax-source="{{ path("_members_list", {_format: "json"}) }}"{% endblock %}
+
+{% block listTabs %}
+<ul class="nav nav-tabs pattern" id="filterTabs">
+    <li{% if filter is null %} class="active"{% endif %}><a href="{{ path("_members_list_filter_reset") }}"><span class="filterName">Wszystkie</span></a></li>
+
+    {% for filterItem in filters if filters|length > 0 %}
+    <li{% if filter is not null and filter.getId() == filterItem.getId() %} class="active"{% endif %}>
+        <a href="{{ path("_members_list_filter_set",{id: filterItem.getId()}) }}"><span class="filterName">{{ filterItem.getName() }}</span><span class="delete-filter" data-href="{{ path("_members_list_filter_delete",{id:filterItem.getId()}) }}">x</span></a>
+    </li>
+    {% endfor %}
+
+    <li class="hidden template">
+        <a href="{{ path("_members_list_filter_set",{id: "__FILTERID__"}) }}"><span class="filterName">__FILTERNAME__</span><span class="delete-filter" data-href="{{ path("_members_list_filter_delete",{id:"__FILTERID__"}) }}">x</span></a>
+    </li>
+</ul>
+{% endblock listTabs %}
+
+{% block listThead %}
+<tr>
+    <th class="beltColor"></th>
+    <th>Imię i nazwisko</th>
+    <th>Ost. wizyta</th>
+    <th>Karnet</th>
+    <th>Akcje</th>
+</tr>
+{% endblock %}
+
+{# javascripts #}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+        '@MembersBundle/Resources/public/coffee/members.list.coffee'
+        '@LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js'
+        '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
+        '@DefaultBundle/Resources/public/js/jquery.iframe-transport.js'
+        '@DefaultBundle/Resources/public/js/jquery.fileupload.js'
+        '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
+     %}
+
+<script src="{{ asset_url }}"></script>
+    {% endjavascripts %}   
+{% endblock javascripts %}
+
+{# CSS #}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets filter='cssrewrite'
+        'bundles/layout/plugins/forms/select2/select2.css'
+        'bundles/layout/plugins/forms/select2/select2-bootstrap.css'
+        '@MembersBundle/Resources/public/less/members-list.less'
+        filter="cssrewrite"
+    %}
+
+<link rel="stylesheet" href="{{ asset_url }}" />
+
+    {% endstylesheets %}
+{% endblock stylesheets %}
