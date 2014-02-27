@@ -13,7 +13,7 @@ class MembersList extends AbstractList {
     protected $sortingColumns = array(
         0 => "beltN",
         1 => "m.name",
-        2 => "cv.startDate"
+        2 => "cv.endDate"
     );
 
     protected function addJoins(QueryBuilder $query) {
