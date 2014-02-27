@@ -17,33 +17,9 @@ class UpdateVouchersCommand extends ContainerAwareCommand {
         ;
     }
 
-    protected function executeOld(InputInterface $input, OutputInterface $output) {
-        $membersWithOldVouchers = $this->getContainer()->get("member_repository")->findOldVouchers();
-
-        if (count($membersWithOldVouchers) == 0)
-        {
-            return;
-        }
-
-        $memberManager = $this->getContainer()->get("member_manager");
-
-        $ids = array();
-
-        foreach ($membersWithOldVouchers as $member) {
-            $ids["member#" . $member->getId()] = $member->getCurrentVoucher()->getId();
-            $member->setCurrentVoucher(null);
-            $memberManager->save($member);
-        }
-
-        $message = sprintf("Found and removed %d vouchers", count($membersWithOldVouchers));
-
-        $output->writeln($message);
-        $this->getContainer()->get("logger")->info($message, $ids);
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output) {
         $em = $this->getContainer()->get("doctrine")->getManager();
-        $now = new \DateTime("now");
+        $now = new \DateTime();
         $memberRepository = $this->getContainer()->get("member_repository");
         $members = $memberRepository->getQuery()
                         ->leftJoin("m.currentVoucher", "v")
