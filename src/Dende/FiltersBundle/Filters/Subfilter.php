@@ -47,7 +47,7 @@ abstract class Subfilter {
 
     protected function lt(QueryBuilder $qb) {
         $qb->andWhere($this->field . " < :date");
-        $qb->setParameters($this->prep("date"), $this->d1->format("Y-m-d 00:00:00"));
+        $qb->setParameter($this->prep("date"), $this->d1->format("Y-m-d 00:00:00"));
     }
 
     protected function gt(QueryBuilder $qb) {

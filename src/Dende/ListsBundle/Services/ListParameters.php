@@ -4,6 +4,7 @@ namespace Dende\ListsBundle\Services;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\Container;
 
 class ListParameters {
 // <editor-fold defaultstate="collapsed" desc="fields">
@@ -31,8 +32,11 @@ class ListParameters {
         return $this->getRequest()->get($param);
     }
 
-    public function __construct(Request $request) {
-        $this->setRequest($request);
+//    public function __construct(Request $request) {
+//        $this->setRequest($request);
+//    }
+    public function __construct(Container $container) {
+        $this->setRequest($container->get("request"));
     }
 
 // <editor-fold defaultstate="collapsed" desc="setters and getters">

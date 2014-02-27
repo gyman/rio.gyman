@@ -5,13 +5,17 @@ namespace Dende\FiltersBundle\Services;
 use Dende\FiltersBundle\Entity\Filter;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\QueryBuilder;
-use Dende\FiltersBundle\Filters\Subfilter;
+use Symfony\Component\DependencyInjection\Container;
 
 class FilterProvider {
 
     private $session;
     private $filters;
     private $filtersPerLists;
+
+    public function __construct(Container $container) {
+        $this->setSession($container->get("session"));
+    }
 
     public function getFilters() {
         return $this->filters;

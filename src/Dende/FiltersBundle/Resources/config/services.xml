@@ -32,6 +32,15 @@
     </parameters>
     
     <services>
+        <service id="filter_repository" class="%filter_repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>%filter_entity.class%</argument>
+        </service>
+        
+        <service id="filter_provider" class="%filter_provider.class%">
+            <argument type="service" id="service_container" />
+        </service>
+        
+        <!-- filters services -->
         <service id="filters.activities" class="%filter.activities.class%">
             <tag name="members" />
             <tag name="vouchers" />
@@ -43,16 +52,9 @@
             <tag name="vouchers" />
             <tag name="filter" />
         </service>
-        <service id="filter_repository" class="%filter_repository.class%" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument>%filter_entity.class%</argument>
-        </service>
-        <service id="filter_provider" class="%filter_provider.class%" scope="request">
-            <call method="setSession">
-                <argument type="service" id="session" />
-            </call>
-        </service>
         <service id="filters.belt" class="%filter.belt.class%">
             <tag name="members" />
+            <tag name="vouchers" />
             <tag name="filter" />
         </service>
         <service id="filters.current_voucher" class="%filter.current_voucher.class%">
@@ -109,6 +111,6 @@
             <tag name="entries" />
             <tag name="filter" />
         </service>
-
+        <!-- end services -->
     </services>
 </container>

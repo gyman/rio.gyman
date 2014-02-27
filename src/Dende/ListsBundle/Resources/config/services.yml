@@ -7,14 +7,11 @@ parameters:
 services:
     list_parameters:
         class:          "%list_parameters.class%"
-        scope:          request
         arguments:
-            - @request
-        
+            - @service_container
+
     members_list:
         class:          "%members_list.class%"
-        strict:         false
-        scope:          request
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]
@@ -23,8 +20,6 @@ services:
         
     vouchers_list:
         class:          "%vouchers_list.class%"
-        strict:         false
-        scope:          request
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]
@@ -33,8 +28,6 @@ services:
         
     entries_list:
         class:          "%entries_list.class%"
-        strict:         false
-        scope:          request
         calls:
             - [setListParameters,[@list_parameters]]
             - [setFilterProvider,[@filter_provider]]

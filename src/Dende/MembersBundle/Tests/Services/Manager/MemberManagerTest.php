@@ -53,18 +53,8 @@ class MemberManagerTest extends WebTestCase {
 
     public function testGetAllMembers() {
         $this->markTestIncomplete(); return;
-        $repo = $this->em->getRepository("MembersBundle:Member");
-        $query = $repo->getQuery();
-        $this->assertCount(10,$query->getQuery()->execute());
+//        $repo = $this->em->getRepository("MembersBundle:Member");
+//        $query = $repo->getQuery();
+//        $this->assertCount(10,$query->getQuery()->execute());
     }
-    
-    public function testGetCurrentVoucher() {
-        $this->markTestIncomplete(); return;
-        $repo = $this->em->getRepository("MembersBundle:Member");
-        $member = $repo->findOneByName("Jan Kowalski");
-        $currentVoucher = $this->memberManager->getCurrentVoucher($member);
-        
-        $this->assertEquals("1234567892",$currentVoucher->getBarcode());
-    }
-
 }
