@@ -45,7 +45,9 @@ class MemberType extends AbstractType {
                         "blue"   => "niebieski",
                         "purple" => "purpurowy",
                         "brown"  => "brązowy",
-                        "black"  => "czarny"
+                        "black"  => "czarny",
+                        "mma"    => "mma",
+                        "white-x"=> "biały x"
                     )
                 ))
                 ->add('phone')

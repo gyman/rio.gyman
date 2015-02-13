@@ -52,6 +52,20 @@ class Event
 
 
     /**
+     * @var integer
+     * @ORM\Column(name="hidden", type="integer")
+     */
+    private $hidden;
+
+    public function getHidden() {
+	return $this->hidden;
+    }
+
+    public function setHidden($hidden) {
+        $this->hidden = $hidden;
+    }
+
+    /**
      * Get id
      *
      * @return integer 

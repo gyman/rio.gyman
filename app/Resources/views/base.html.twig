@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Timesheet - Rio Grappling Club{% endblock %}</title>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Headings -->
+{#        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Headings -->
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' /> <!-- Text -->
         <!--[if lt IE 9]>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css" />
@@ -11,7 +11,7 @@
         <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
         <link href="http://fonts.googleapis.com/css?family=Droid+Sans:700" rel="stylesheet" type="text/css" />
         <![endif]-->
-
+#}
         {% spaceless %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         {# <link rel="stylesheet" href="{{ asset('css/supr.css') }}"> #}
@@ -55,9 +55,10 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body class="{% block body_class %}{% endblock %}">
+{#
         <div id="qLoverlay"></div>
         <div id="qLbar"></div>
-
+#}
         {{ include("_navigation.html.twig") }}
 
         <div id="header">

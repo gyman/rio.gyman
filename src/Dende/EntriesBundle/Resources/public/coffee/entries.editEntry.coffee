@@ -50,9 +50,9 @@ class @EditEntry
       e.preventDefault()
       e.stopPropagation()
       
-      if e.which == 13
-        @sendFormData()
-        $(document).off("keyup.addEntrance")
+      # if e.which == 13
+        # @sendFormData()
+        # $(document).off("keyup.addEntrance")
       
   sendFormData: =>
     $form = $("form#entranceForm",@$modalWindow)

@@ -20,6 +20,7 @@ class EventRepository extends EntityRepository {
                 ->where("e.dayOfWeek = :day")
                 ->andWhere("e.startHour <= :hour")
                 ->andWhere("e.endHour >= :hour")
+		->andWhere("e.hidden = 0")
                 ->setParameters(array(
             "day"  => $dayOfWeek,
             "hour" => $hour
@@ -32,6 +33,7 @@ class EventRepository extends EntityRepository {
 
     public function getAllEvents() {
         $queryBuilder = $this->createQueryBuilder("e");
+	$queryBuilder->andWhere("e.hidden = 0");
 
         $query = $queryBuilder->getQuery();
 
@@ -42,6 +44,7 @@ class EventRepository extends EntityRepository {
         $queryBuilder = $this->createQueryBuilder("e");
         
         $queryBuilder->where("e.dayOfWeek = :day");
+	$queryBuilder->andWhere("e.hidden = 0");
         $queryBuilder->setParameter("day", strtolower(date("l")));
         
         $query = $queryBuilder->getQuery();
