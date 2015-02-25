@@ -24,11 +24,13 @@ class BeltType extends SubfilterType {
                 ))
                 ->add('belt', "choice", array(
                     "choices" => array(
+			"mma" =>    "mma",
                         "white"  => "biały",
+			"white-x" => "białe x",
                         "blue"   => "niebieski",
                         "purple" => "purpurowy",
                         "brown"  => "brązowy",
-                        "black"  => "czarny"
+                        "black"  => "czarny",
                     )
         ));
     }

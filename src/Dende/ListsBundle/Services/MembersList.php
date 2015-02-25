@@ -50,11 +50,13 @@ class MembersList extends AbstractList {
                 if ($column === 0)
                 {
                     $select = "(case "
-                            . "when m.belt = 'blue' then 1 "
-                            . "when m.belt = 'purple' then 2 "
-                            . "when m.belt = 'brown' then 3 "
-                            . "when m.belt = 'black' then 4 "
-                            . "else 0 end) as HIDDEN beltN";
+                            . "when m.belt = 'blue' then 3 "
+                            . "when m.belt = 'purple' then 4 "
+                            . "when m.belt = 'brown' then 5 "
+                            . "when m.belt = 'black' then 6 "
+                            . "when m.belt = 'white-x' then 2 "
+			    . "when m.belt = 'mma' then 0 "
+                            . "else 1 end) as HIDDEN beltN";
 
                     $query->addSelect($select);
                 }

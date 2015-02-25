@@ -8,11 +8,13 @@ class Belt extends Subfilter {
 
     public $name = "belt";
     private $belts = array(
+	"mma",
         "white",
+	"white-x",
         "blue",
         "purple",
         "brown",
-        "black"
+        "black",
     );
     private $beltIndex;
     public $label = "Kolor pasa";
@@ -71,5 +73,4 @@ class Belt extends Subfilter {
             $queryBuilder->andWhere($this->field ." != :belt");
         }
     }
-
 }
