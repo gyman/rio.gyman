@@ -54,6 +54,8 @@ class MembersList extends AbstractList {
                             . "when m.belt = 'purple' then 2 "
                             . "when m.belt = 'brown' then 3 "
                             . "when m.belt = 'black' then 4 "
+                            . "when m.belt = 'white-x' then 5"
+			    . "when m.belt = 'mma' then 6"
                             . "else 0 end) as HIDDEN beltN";
 
                     $query->addSelect($select);

@@ -28,7 +28,9 @@ class BeltType extends SubfilterType {
                         "blue"   => "niebieski",
                         "purple" => "purpurowy",
                         "brown"  => "brązowy",
-                        "black"  => "czarny"
+                        "black"  => "czarny",
+			"white-x" => "white-x",
+			"mma" => "mma"
                     )
         ));
     }
