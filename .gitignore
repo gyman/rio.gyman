@@ -19,3 +19,5 @@ app/config/behat_local.yml
 nbproject/private/
 web/css/*
 !web/css/*
+node_modules
+.idea
