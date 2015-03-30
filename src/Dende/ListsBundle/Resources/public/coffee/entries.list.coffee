@@ -36,9 +36,6 @@ $ ->
       for td,i in tdCollection
         $("td:eq("+i+")",nRow).replaceWith $(td)
 
-  $(".dataTables_length select").select2()
-    
-
   # delete voucher
   
   $(document).off("click.entries.list.delete").on "click.entries.list.delete", "a.removeEntry", (e) ->

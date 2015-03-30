@@ -47,6 +47,9 @@
             </div><!-- End #content -->
         </div><!-- end wrapper -->
 
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
         <script src="{{ asset('js/vendors.js') }}"></script>
         <script src="{{ asset('js/project.js') }}"></script>
 
@@ -67,7 +70,7 @@
 
         <script>
             $(function() {
-                $("#qLoverlay,#qLbar").fadeOut(750);
+//                $("#qLoverlay,#qLbar").fadeOut(750);
 
                 $(document).on("click", "a.openNavigation", function(e) {
                     e.preventDefault();
@@ -82,7 +85,7 @@
 
         <span id="applicationData"
               data-quicksearch-member-url="{{ path("_entry_quickadd",{barcode : "__BARCODE__" }) }}"
-              data-member-list-apply-filter-url="{{ path("_filter_set",{id : "__FILTERID__", listname : "members"}) }}" />
+              data-member-list-apply-filter-url="{{ path("_filter_set",{id : "__FILTERID__", listname : "members"}) }}" ></span>
 
         {% include 'DefaultBundle::_modal.html.twig' %}
     </body>

@@ -38,8 +38,6 @@ $ ->
       for td,i in tdCollection
         $("td:eq("+i+")",nRow).replaceWith $(td)
 
-  $(".dataTables_length select").select2()
-  
   # delete voucher
   
   $(document).off("click.vouchers.list.delete").on "click.vouchers.list.delete", "a.removeVoucher", (e) ->

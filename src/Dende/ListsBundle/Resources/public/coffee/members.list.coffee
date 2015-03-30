@@ -57,6 +57,6 @@ $ ->
       for td,i in tdCollection
         $("td:eq("+i+")",nRow).replaceWith $(td)
 
-  $(".dataTables_length select").select2()
+#  $(".dataTables_length select").select2()
     
 

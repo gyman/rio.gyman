@@ -1,6 +1,7 @@
 class @EditEntry
   constructor: ()->
-    @modal = window.modal
+    root = exports ? this
+    @modal = root.gyman.modal
     @$modalWindow = @modal.getModal()
   
     @setupEntryTypeHidder()
@@ -15,10 +16,10 @@ class @EditEntry
   setupSelect: =>
     @updatePriceField $(@entryTypeInputSelector).filter ":selected,:checked"
   
-    $("#dende_entriesbundle_entry_activity").select2
-      dropdownAutoWidth: true
-      containerCss:
-        width: "200px"
+#    $("#dende_entriesbundle_entry_activity").select2
+#      dropdownAutoWidth: true
+#      containerCss:
+#        width: "200px"
         
   setupSpinner: =>
     $(@priceInputSelector).spinner
@@ -28,7 +29,7 @@ class @EditEntry
       numberFormat: "C"
         
   setupEntryTypeHidder: =>
-    $(@entryTypeInputSelector).uniform()
+#    $(@entryTypeInputSelector).uniform()
     @$modalWindow.off("change.entries.entryType").on "change.entries.entryType", @entryTypeInputSelector, (e) =>
       @updatePriceField($(e.currentTarget))
 

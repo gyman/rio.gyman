@@ -1,6 +1,6 @@
 class @EditMember 
   constructor: ()->
-    @modal = window.modal
+    @modal = document.gyman.modal
     @$modalWindow = @modal.getModal()
   
     @initDatepickers()
@@ -29,10 +29,10 @@ class @EditMember
     @deleteCheckbox.change @handleDeleteCheckboxChange
   
   initSelects: =>
-    $("#dende_membersbundle_member_belt, #dende_membersbundle_member_gender").select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px" 
+#    $("#dende_membersbundle_member_belt, #dende_membersbundle_member_gender").select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
   
   initActivities: =>
     activities = []

@@ -20,10 +20,10 @@ class @EditVoucher
       dateFormat: "dd.mm.yy"
     
   initSelect: () =>
-    $(@activitiesSelector,@$modalWindow).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "200px"
+#    $(@activitiesSelector,@$modalWindow).select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "200px"
         
   initSpinners: () =>
     $(@priceSelector,@$modalWindow).spinner

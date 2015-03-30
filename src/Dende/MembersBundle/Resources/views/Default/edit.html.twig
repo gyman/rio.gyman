@@ -93,9 +93,9 @@
 {% block javascript %}
 <script>
     $(function() {
-        modal.setupFromNode("div#ui-editMemberData");
-        modal.setModalWindowClass("editMemberModal");
-        window.editMemberModal = new EditMember();
+        document.gyman.modal.setupFromNode("div#ui-editMemberData");
+        document.gyman.modal.setModalWindowClass("editMemberModal");
+        document.gyman.editMemberModal = new EditMember();
     });
 </script>
 {% endblock javascript %}

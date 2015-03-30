@@ -47,10 +47,10 @@ class @Filter
   # current voucher filter handler
         
   currentVoucherSubfilterHandler: () =>
-    $("#filter_subfilters_currentVoucher_currentVoucher").select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px"  
+#    $("#filter_subfilters_currentVoucher_currentVoucher").select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
     
   # registrationDate filter handler
         
@@ -63,27 +63,27 @@ class @Filter
   activitiesSubfilterHandler: () =>
     activitySelector = "#filter_subfilters_activities_activity"
     
-    $(activitySelector).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "400px"
+#    $(activitySelector).select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "400px"
     
     
   # starred filter handler
   
   starredSubfilterHandler: () =>
-    $("#filter_subfilters_starred_starred").select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px"  
+#    $("#filter_subfilters_starred_starred").select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
     
   # gender filter handler
   
   genderSubfilterHandler: () =>
-    $("#filter_subfilters_gender_gender").select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px"  
+#    $("#filter_subfilters_gender_gender").select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
   
   entryDateSubfilterHandler: () =>
     @handleVoucherDates("entryDate")
@@ -92,10 +92,10 @@ class @Filter
     typeSelector = "#filter_subfilters_entryType_type"
     entryTypeSelector = "#filter_subfilters_entryType_entryType"
     
-    $([typeSelector,entryTypeSelector].join(",")).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px"  
+#    $([typeSelector,entryTypeSelector].join(",")).select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
     
   # vouchers filter handlers
   
@@ -110,10 +110,10 @@ class @Filter
     date1Selector = "#filter_subfilters_"+type+"_date1"
     date2Selector = "#filter_subfilters_"+type+"_date2"
     
-    $(typeSelector).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px"  
+#    $(typeSelector).select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
     
     $([date1Selector,date2Selector].join(",")).datepicker
       dateFormat: "dd.mm.yy"
@@ -145,10 +145,10 @@ class @Filter
     typeSelector = "#filter_subfilters_belt_type"
     colorSelector = "#filter_subfilters_belt_belt"
     
-    $([typeSelector,colorSelector].join(",")).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px"  
+#    $([typeSelector,colorSelector].join(",")).select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
     
   # age filter handler
   
@@ -165,10 +165,10 @@ class @Filter
         
     $(age2Selector).hide()
     
-    $(typeSelector).select2
-      dropdownAutoWidth : true
-      containerCss : 
-        width : "120px"
+#    $(typeSelector).select2
+#      dropdownAutoWidth : true
+#      containerCss :
+#        width : "120px"
     
     $([age1Selector,age2Selector].join ",").spinner
       min: 0
@@ -189,7 +189,7 @@ class @Filter
   
   
   setupUniform: =>
-    $(":checkbox",@$modalWindow).uniform()
+#    $(":checkbox",@$modalWindow).uniform()
   
   # save filter needs to show div with filter name and pin to dashboard checkbox
   

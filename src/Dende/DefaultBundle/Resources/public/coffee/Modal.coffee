@@ -1,4 +1,4 @@
-class Modal
+class @Modal
   constructor: (@params) ->
     if !@params
       @params = {}
@@ -24,19 +24,7 @@ class Modal
     
     if @params.footer?
       @setFooter @params.footer
-    
-    @$modal.modal
-      show: false
-    
-    @events = 
-      preSendFormEvent: () ->
 
-      postSendFormEvent: () ->
-
-      preShowEvent: () ->
-
-      postShowEvent: () ->
-    
     @setupModal()
   
   modalSelector: "div#modalWindow"
@@ -44,6 +32,11 @@ class Modal
   isOpened: false
   
   setupModal: () =>
+    console.log @$modal
+#    @$modal.modal
+#      keyboard: false
+#      show: false
+
     @$modal.off("hidden.addWindowClass").on "hidden.addWindowClass", (e) =>
       if @windowClass != null
         @getModal().removeClass @windowClass
@@ -63,43 +56,35 @@ class Modal
   setHeader: (header) ->
     @$headerElement.html(header)
     
-  setBody: (body) ->
-    @$bodyElement.html(body)  
+  setBody: (body) =>
+    @$bodyElement.html(body)
     
   setFooter: (footer) ->
     @$footerElement.html(footer)
   
   sendForm: () ->
-    
     $form = $("form",@$modal)
     action = $form.attr "action" || @url
     data = $form.serialize()
     method = $form.attr "method"
-    
-    @events.preSendFormEvent()
-    
+
     $.ajax
       url: action
       data: data
       type: @form.attr "method"
       success: (response) =>
-        @events.successSendFormEvent response
         @setBody response
-      error: (xhr, textStatus, errorThrown) ->
-        @events.errorSendFormEvent xhr, textStatus, errorThrown
-      complete:
-        @events.completeSendFormEvent xhr, textStatus, errorThrown
-        
-  show: =>     
-    @events.preShowEvent()
+
+  show: =>
+    console.log "showing"
     @$modal.modal "show"
-    @events.postShowEvent()
-    
+    console.log "showed"
+
   hide: =>
-    @events.preShowEvent()
+    console.log "hiding"
     @$modal.modal "hide"
-    @events.postShowEvent()
-    
+    console.log "hidden"
+
   block: (full) ->
     @unblock
     if full
@@ -116,8 +101,8 @@ class Modal
       @setBody response
   
   showFromUrl: (url) =>
-    console.log "opening modal"
     if @isOpened == true
+      console.log "is opened"
       @$modal.off("hidden.imidiateShow").on "hidden.imidiateShow", (e) =>
         $.get url, (response) =>
           window.modal.setBody response
@@ -127,10 +112,15 @@ class Modal
           @memberNotFound()
       @hide()
     else
+      console.log "is CLOSED"
       $.get url, (response) =>
+        console.log "1"
         @setBody response
+        console.log "2"
         @show()
+        console.log "3"
       .error () =>
+        console.log "error"
         @memberNotFound()
         
   memberNotFound: =>

@@ -22,7 +22,7 @@ $ ->
       searchUrlTemplate = $("span#applicationData").attr "data-quicksearch-member-url"
       searchUrl = searchUrlTemplate.replace "__BARCODE__", keyboardCache
 
-      window.modal.showFromUrl searchUrl
+      document.gyman.modal.showFromUrl searchUrl
         
       keyboardCache = null
       return

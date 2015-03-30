@@ -83,7 +83,7 @@ class @WebCamTab
       $("a[href='#filePane']").trigger "click"
           
   initFileUpload: () =>
-    $("#dende_membersbundle_member_fotoUploader").uniform()
+#    $("#dende_membersbundle_member_fotoUploader").uniform()
     
     $("#dende_membersbundle_member_fotoUploader",$(@modalWindow)).fileupload
       limitMultiFileUploads: 1
