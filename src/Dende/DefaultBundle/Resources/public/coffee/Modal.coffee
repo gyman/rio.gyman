@@ -1,12 +1,10 @@
-class @Modal
+class Modal
   constructor: (@params) ->
-    
     if !@params
       @params = {}
 
     @$modal =  $(@modalSelector)
 
-    
     if @params.node?
       @$modal = $(@params.node)
     
@@ -118,6 +116,7 @@ class @Modal
       @setBody response
   
   showFromUrl: (url) =>
+    console.log "opening modal"
     if @isOpened == true
       @$modal.off("hidden.imidiateShow").on "hidden.imidiateShow", (e) =>
         $.get url, (response) =>
