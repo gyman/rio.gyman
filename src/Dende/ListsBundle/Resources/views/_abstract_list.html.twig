@@ -56,35 +56,3 @@
 
 </div><!-- End .row-fluid -->
 {% endblock body %}
-
-{# javascripts #}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    {% javascripts
-        '@LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js'
-        '@ListsBundle/Resources/public/coffee/reloadAjax.coffee'
-        '@FiltersBundle/Resources/public/coffee/tabs.coffee'
-     %}
-
-<script src="{{ asset_url }}"></script>
-
-    {% endjavascripts %}
-{% endblock javascripts %}
-
-{# CSS #}
-
-{% block stylesheets %}
-    {{ parent() }}
-
-    {% stylesheets filter='cssrewrite'
-        'bundles/layout/plugins/tables/dataTables/jquery.dataTables.css'
-        '@FiltersBundle/Resources/public/less/filters.less'
-        filter="cssrewrite"
-    %}
-
-<link rel="stylesheet" href="{{ asset_url }}" />
-
-    {% endstylesheets %}
-{% endblock stylesheets %}

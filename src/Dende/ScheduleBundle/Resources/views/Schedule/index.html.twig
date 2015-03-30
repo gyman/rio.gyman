@@ -19,32 +19,7 @@
 {# javascripts #}
 
 {% block javascripts %}
-    {{ parent() }}
-
-    {% javascripts
-        '@ScheduleBundle/Resources/public/js/fullcalendar.js'
-        '@ScheduleBundle/Resources/public/coffee/schedule-calendar.coffee'
-     %}
-
-<script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
 <script>
     var scheduleEvents = {{ eventJson|raw }}
 </script>
 {% endblock javascripts %}
-
-{# CSS #}
-
-{% block stylesheets %}
-    {{ parent() }}
-
-    {% stylesheets filter='cssrewrite'
-        'bundles/schedule/css/fullcalendar.css'
-        filter="cssrewrite"
-    %}
-
-<link rel="stylesheet" href="{{ asset_url }}" />
-
-    {% endstylesheets %}
-{% endblock stylesheets %}

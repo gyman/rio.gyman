@@ -37,16 +37,10 @@
 {% endblock modal %}
 
 {% block javascript %}
-{% javascripts
-    '@FiltersBundle/Resources/public/coffee/filter.coffee'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
         modal.setupFromNode("div#ui-editFilterData");
         modal.setModalWindowClass("addFilterModal");
-
         window.filter = new Filter();
     });
 </script>

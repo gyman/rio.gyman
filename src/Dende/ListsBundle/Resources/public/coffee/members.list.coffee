@@ -1,5 +1,4 @@
 $ ->   
-      
   # unrolling the details
 
   $(document).on "click", "#membersList tbody tr", (e) ->

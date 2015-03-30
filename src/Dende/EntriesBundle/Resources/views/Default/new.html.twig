@@ -71,22 +71,11 @@
 
 
 {% block javascript %}
-{% javascripts
-    '@EntriesBundle/Resources/public/coffee/entries.editEntry.coffee'
-    '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
-    '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
-
         modal.setupFromNode("div#ui-editEntryData");
         modal.setModalWindowClass("editEntryModal");
-
         window.editEntryModal = new EditEntry();
-
-        return;
     });
 </script>
 {% endblock javascript %}

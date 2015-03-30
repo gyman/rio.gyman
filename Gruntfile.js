@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
     var cssVendors = [
-        'css/bootstrap.css',
+        'src/Dende/LayoutBundle/Resources/public/css/bootstrap.css',
         'src/Dende/LayoutBundle/Resources/public/plugins/misc/qtip/jquery.qtip.css',
         'src/Dende/LayoutBundle/Resources/public/plugins/misc/fullcalendar/fullcalendar.css',
         'src/Dende/LayoutBundle/Resources/public/plugins/misc/search/tipuesearch.css',
@@ -21,39 +21,77 @@ module.exports = function (grunt) {
         'src/Dende/LayoutBundle/Resources/public/css/main.css',
         'src/Dende/LayoutBundle/Resources/public/css/custom.css',
         'src/Dende/LayoutBundle/Resources/public/css/ie8.css',
-        'src/Dende/LayoutBundle/Resources/public/css/icons.css'
+        'src/Dende/LayoutBundle/Resources/public/css/icons.css',
+        'src/Dende/LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.css',
+        'src/Dende/LayoutBundle/Resources/public/plugins/forms/select2/select2.css',
+        'src/Dende/LayoutBundle/Resources/public/plugins/forms/select2/select2-bootstrap.css',
+        'src/Dende/ScheduleBundle/Resources/public/css/fullcalendar.css',
+
     ];
 
     var lessFiles = [
-        'src/Dende/DefaultBundle/Resources/public/less/main.less'
+        'src/Dende/DefaultBundle/Resources/public/less/main.less',
+        'src/Dende/FiltersBundle/Resources/public/less/filters.less',
+        'src/Dende/ListsBundle/Resources/public/less/members-list.less',
+        'src/Dende/ListsBundle/Resources/public/less/vouchers-list.less',
     ];
 
     var mainLibraries = [
-        'src/Dende/LayoutBundle/Resources/public/js/js/jquery.js',
-        'src/Dende/LayoutBundle/Resources/public/js/js/bootstrap.js',
+        'src/Dende/LayoutBundle/Resources/public/js/jquery.js',
+        'src/Dende/LayoutBundle/Resources/public/js/bootstrap.js',
         'src/Dende/LayoutBundle/Resources/public/js/jquery-migrate-1.2.1.min.js',
-        'src/Dende/LayoutBundle/Resources/public/plugins/forms/placeholder/jquery.placeholder.min.js',
-        'src/Dende/LayoutBundle/Resources/public/js/libs/excanvas.min.js',
-        'src/Dende/LayoutBundle/Resources/public/js/libs/jRespond.min.js',
-        'src/Dende/LayoutBundle/Resources/public/js/libs/respond.min.js',
-        'src/Dende/LayoutBundle/Resources/public/js/libs/modernizr.js',
+        //'src/Dende/LayoutBundle/Resources/public/plugins/forms/placeholder/jquery.placeholder.min.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/libs/excanvas.min.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/libs/jRespond.min.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/libs/respond.min.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/libs/modernizr.js',
         'src/Dende/LayoutBundle/Resources/public/js/jquery.blockUI.js',
-        'src/Dende/LayoutBundle/Resources/public/js/libs/jquery.knob.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/libs/jquery.knob.js',
         'src/Dende/LayoutBundle/Resources/public/plugins/misc/fullcalendar/fullcalendar.min.js',
-        'src/Dende/LayoutBundle/Resources/public/plugins/misc/qtip/jquery.qtip.min.js',
+        //'src/Dende/LayoutBundle/Resources/public/plugins/misc/qtip/jquery.qtip.min.js',
         'src/Dende/LayoutBundle/Resources/public/plugins/misc/totop/jquery.ui.totop.min.js',
         'src/Dende/LayoutBundle/Resources/public/plugins/forms/uniform/jquery.uniform.min.js',
-        'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-1.8.22.custom.min.js',
-        'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-sliderAccess.js',
-        'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-timepicker-addon.js',
-        'src/Dende/LayoutBundle/Resources/public/js/libs/jquery.pnotify.min.js'
+        //'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-1.8.22.custom.min.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-sliderAccess.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-timepicker-addon.js',
+        //'src/Dende/LayoutBundle/Resources/public/js/libs/jquery.pnotify.min.js',
+        'src/Dende/LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js',
+        'src/Dende/LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js',
+        'src/Dende/DefaultBundle/Resources/public/js/jquery.ui.widget.js',
+        'src/Dende/DefaultBundle/Resources/public/js/jquery.ui.spinner.js',
+        'src/Dende/DefaultBundle/Resources/public/js/jquery.iframe-transport.js',
+        'src/Dende/DefaultBundle/Resources/public/js/jquery.fileupload.js',
+        'src/Dende/ScheduleBundle/Resources/public/js/fullcalendar.js',
     ];
 
     var coffeeFiles = [
-        'src/Dende/DefaultBundle/Resources/public/coffee/configs.coffee',
-        'src/Dende/DefaultBundle/Resources/public/coffee/modal.coffee',
-        'src/Dende/DefaultBundle/Resources/public/coffee/main.coffee',
-        'src/Dende/DefaultBundle/Resources/public/coffee/keyboardTyping.coffee'
+        "./src/Dende/DefaultBundle/Resources/public/coffee/modal.coffee",
+        "./src/Dende/MembersBundle/Resources/public/coffee/members.editMember.coffee",
+        "./src/Dende/MembersBundle/Resources/public/coffee/members.webcam.coffee",
+        "./src/Dende/MembersBundle/Resources/public/coffee/members.filter.coffee",
+        //
+        "./src/Dende/EntriesBundle/Resources/public/coffee/entries.modal.class.coffee",
+        "./src/Dende/EntriesBundle/Resources/public/coffee/entries.editEntry.coffee",
+        //
+        "./src/Dende/DefaultBundle/Resources/public/coffee/keyboardTyping.coffee",
+        "./src/Dende/DefaultBundle/Resources/public/coffee/helpers.coffee",
+        "./src/Dende/DefaultBundle/Resources/public/coffee/configs.coffee",
+
+        "./src/Dende/VouchersBundle/Resources/public/coffee/vouchers.closeVoucher.coffee",
+        "./src/Dende/VouchersBundle/Resources/public/coffee/vouchers.editVoucher.coffee",
+
+        "./src/Dende/DashboardBundle/Resources/public/coffee/dashboard.coffee",
+
+        "./src/Dende/FiltersBundle/Resources/public/coffee/tabs.coffee",
+        "./src/Dende/FiltersBundle/Resources/public/coffee/filter.coffee",
+
+        "./src/Dende/ListsBundle/Resources/public/coffee/entries.list.coffee",
+        "./src/Dende/ListsBundle/Resources/public/coffee/reloadAjax.coffee",
+        "./src/Dende/ListsBundle/Resources/public/coffee/vouchers.list.coffee",
+        "./src/Dende/ListsBundle/Resources/public/coffee/members.list.coffee",
+
+        './src/Dende/ScheduleBundle/Resources/public/coffee/schedule-calendar.coffee',
+        "./src/Dende/DefaultBundle/Resources/public/coffee/main.coffee",
     ];
 
     grunt.initConfig({
@@ -81,21 +119,6 @@ module.exports = function (grunt) {
             }
         },
         less: {
-            "development-vendors": {
-                options: {
-                    paths: [ "bower_components" ],
-                    compress: false,
-                    yuicompress: false,
-                    optimization: 0
-                },
-                files : {
-                    "build/assets/css/bootstrap.css" : [
-                        "bower_components/bootstrap/less/bootstrap.less",
-                        "bower_components/bootstrap/less/responsive.less",
-                        "bower_components/bootstrap/less/bootstrap-datetimepicker.less",
-                    ]
-                }
-            },
             "development-project": {
                 options: {
                     paths: [ "src", 'app/Resources' ],
@@ -177,9 +200,9 @@ module.exports = function (grunt) {
                 flatten: true,
                 filter: 'isFile',
                 src: [
-                    './vendor/gyman/supr/css/fonts/*',
+                    './src/Dende/LayoutBundle/Resources/public/css/fonts/*',
                 ],
-                dest: "./web/fonts/"
+                dest: "./web/css/fonts/"
             },
             images: {
                 expand: true,
@@ -187,14 +210,39 @@ module.exports = function (grunt) {
                 cwd: '',
                 filter: 'isFile',
                 src: [
-                    './vendor/gyman/supr/images/**/*.{png,jpg,svg,gif}',
-                    './bower_components/bootstrap/images/*.{png,jpg,svg,gif}',
-                    './bower_components/DataTables/media/images/*.{png,jpg,svg,gif}',
-                    './bower_components/jquery-file-upload/img/*.{png,jpg,svg,gif}',
-                    './bower_components/jquery.uniform/themes/default/images/*.{png,jpg,svg,gif}',
-                    './bower_components/select2/*.{png,jpg,svg,gif}',
+                    './src/Dende/LayoutBundle/Resources/public/images/*',
                 ],
                 dest: "./web/images"
+            },
+            datatables: {
+                expand: true,
+                flatten: true,
+                cwd: '',
+                filter: 'isFile',
+                src: [
+                    './src/Dende/LayoutBundle/Resources/public/plugins/tables/dataTables/images/*',
+                ],
+                dest: "./web/css/images/"
+            },
+            select2: {
+                expand: true,
+                flatten: true,
+                cwd: '',
+                filter: 'isFile',
+                src: [
+                    './src/Dende/LayoutBundle/Resources/public/plugins/forms/select2/select2.png'
+                ],
+                dest: "./web/css/"
+            },
+            patterns: {
+                expand: true,
+                flatten: true,
+                cwd: '',
+                filter: 'isFile',
+                src: [
+                    './src/Dende/LayoutBundle/Resources/public/images/patterns/*',
+                ],
+                dest: "./web/images/patterns/"
             },
 
         },
@@ -202,7 +250,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('css:development', [
         "copy:datetimepicker",                  // datetimepicker to bootstrap dir
-        "less:development-vendors",             // compiles *.less from vendors
         "concat:vendors.css",                   // concatenates vendors into one web/css/vendors.css file
         "less:development-project",             // compiles *.less from project into one web/css/project.css file
     ]);
@@ -219,6 +266,9 @@ module.exports = function (grunt) {
         "js:development",
         "copy:webcam-swf",
         "copy:images",
+        "copy:patterns",
+        "copy:datatables",
+        "copy:select2",
         "copy:fonts",
     ]);
 

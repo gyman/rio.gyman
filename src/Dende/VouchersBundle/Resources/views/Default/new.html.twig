@@ -30,18 +30,10 @@
 {% endblock %}
 
 {% block javascript %}
-{% javascripts
-    '@VouchersBundle/Resources/public/coffee/vouchers.editVoucher.coffee'
-    '@DefaultBundle/Resources/public/js/jquery.ui.widget.js'
-    '@DefaultBundle/Resources/public/js/jquery.ui.spinner.js'
-%}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
 <script>
     $(function() {
         modal.setupFromNode("span#ui-sellVoucherData");
         modal.setModalWindowClass("newVoucherModal");
-        
         window.editVoucherModal = new EditVoucher();
     });
 </script>

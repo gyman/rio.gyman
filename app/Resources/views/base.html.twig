@@ -13,6 +13,9 @@
         <![endif]-->
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/vendors.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/project.css') }}" />
     </head>
     <body class="{% block body_class %}{% endblock %}">
 {#
@@ -43,6 +46,9 @@
                 </div><!-- End contentwrapper -->
             </div><!-- End #content -->
         </div><!-- end wrapper -->
+
+        <script src="{{ asset('js/vendors.js') }}"></script>
+        <script src="{{ asset('js/project.js') }}"></script>
 
         {% if app.session.flashbag.has('notice') %}
         <script>

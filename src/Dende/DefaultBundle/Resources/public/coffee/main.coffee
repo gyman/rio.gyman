@@ -328,70 +328,70 @@ $(document).ready ->
   #------------- Tooltips -------------//
   
   #top tooltip
-  $(".tip").qtip
-    content: false
-    position:
-      my: "bottom center"
-      at: "top center"
-      viewport: $(window)
-
-    style:
-      classes: "qtip-tipsy"
-
-  
-  #tooltip in right
-  $(".tipR").qtip
-    content: false
-    position:
-      my: "left center"
-      at: "right center"
-      viewport: $(window)
-
-    style:
-      classes: "qtip-tipsy"
-
-  
-  #tooltip in bottom
-  $(".tipB").qtip
-    content: false
-    position:
-      my: "top center"
-      at: "bottom center"
-      viewport: $(window)
-
-    style:
-      classes: "qtip-tipsy"
-
-  
-  #tooltip in left
-  $(".tipL").qtip
-    content: false
-    position:
-      my: "right center"
-      at: "left center"
-      viewport: $(window)
-
-    style:
-      classes: "qtip-tipsy"
+#  $(".tip").qtip
+#    content: false
+#    position:
+#      my: "bottom center"
+#      at: "top center"
+#      viewport: $(window)
+#
+#    style:
+#      classes: "qtip-tipsy"
+#
+#
+#  #tooltip in right
+#  $(".tipR").qtip
+#    content: false
+#    position:
+#      my: "left center"
+#      at: "right center"
+#      viewport: $(window)
+#
+#    style:
+#      classes: "qtip-tipsy"
+#
+#
+#  #tooltip in bottom
+#  $(".tipB").qtip
+#    content: false
+#    position:
+#      my: "top center"
+#      at: "bottom center"
+#      viewport: $(window)
+#
+#    style:
+#      classes: "qtip-tipsy"
+#
+#
+#  #tooltip in left
+#  $(".tipL").qtip
+#    content: false
+#    position:
+#      my: "right center"
+#      at: "left center"
+#      viewport: $(window)
+#
+#    style:
+#      classes: "qtip-tipsy"
 
   
   #------------- Jrespond -------------//
-  jRes = jRespond([
-    label: "small"
-    enter: 0
-    exit: 1000
-  ,
-    label: "desktop"
-    enter: 1001
-    exit: 10000
-  ])
-  jRes.addFunc
-    breakpoint: "small"
-    enter: ->
-      $("#sidebarbg,#sidebar,#content").removeClass "hided"
-
-    exit: ->
-      $(".collapseBtn.top.hide").removeClass "top hide"
+#  jRes = jRespond([
+#    label: "small"
+#    enter: 0
+#    exit: 1000
+#  ,
+#    label: "desktop"
+#    enter: 1001
+#    exit: 10000
+#  ])
+#  jRes.addFunc
+#    breakpoint: "small"
+#    enter: ->
+#      $("#sidebarbg,#sidebar,#content").removeClass "hided"
+#
+#    exit: ->
+#      $(".collapseBtn.top.hide").removeClass "top hide"
 
   
   #------------- Uniform  -------------//
@@ -399,8 +399,8 @@ $(document).ready ->
   $("input, textarea, select").not(".nostyle").uniform()
   
   #remove overlay and show page
-  $("#qLoverlay").fadeOut 250
-  $("#qLbar").fadeOut 250
+#  $("#qLoverlay").fadeOut 250
+#  $("#qLbar").fadeOut 250
 
   # modal setup
 

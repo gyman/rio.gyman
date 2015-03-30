@@ -56,12 +56,3 @@
     {% endif %}
 </div>
 {% endblock body %}
-
-{% block javascripts %}
-{{ parent() }}
-{% javascripts
-    "@DashboardBundle/Resources/public/coffee/dashboard.coffee"
- %}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{% endblock %}

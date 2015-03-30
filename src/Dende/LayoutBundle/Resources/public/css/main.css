@@ -1,6 +1,11 @@
 /* Main.css version 1.9
 ================================================== */
 
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
 html {height: 100%;}
 body {
     background: #fff;
