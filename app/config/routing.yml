@@ -15,6 +15,8 @@ filters:
     resource: "@FiltersBundle/Controller/"
     type:     annotation
     prefix:   /filter
+    options:
+      expose: true
 
 dashboard:
     resource: "@DashboardBundle/Controller/"
