@@ -21,3 +21,5 @@ web/css/*
 !web/css/*
 node_modules
 .idea
+bower_components/
+web/swf/

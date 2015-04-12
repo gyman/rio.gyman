@@ -10,7 +10,6 @@
     class="form form-horizontal"
     method="POST"
     id="filterForm"
-    data-get-filter-url="{{ path("_filter_get",{name: "__name__"}) }}"
     >
 {{ form_row(form.addFilter) }}
 
@@ -39,9 +38,9 @@
 {% block javascript %}
 <script>
     $(function() {
-        modal.setupFromNode("div#ui-editFilterData");
-        modal.setModalWindowClass("addFilterModal");
-        window.filter = new Filter();
+        document.gyman.modal.setupFromNode("div#ui-editFilterData");
+        document.gyman.modal.setModalWindowClass("addFilterModal");
+        document.gyman.modal.filter = new Filter(document.gyman.modal);
     });
 </script>
 {% endblock javascript %}

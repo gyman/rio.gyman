@@ -30,7 +30,7 @@ $ ->
     bLengthChange: true
     bServerSide:true
     bStateSave: true
-    sPaginationType:"bootstrap"
+    sPaginationType:"full_numbers"
     bJQueryUI:false
     bAutoWidth:false
     bServerMethod: "POST"

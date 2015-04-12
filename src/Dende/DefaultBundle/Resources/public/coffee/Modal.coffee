@@ -32,10 +32,9 @@ class @Modal
   isOpened: false
   
   setupModal: () =>
-    console.log @$modal
-#    @$modal.modal
-#      keyboard: false
-#      show: false
+    @$modal.modal
+      keyboard: false
+      show: false
 
     @$modal.off("hidden.addWindowClass").on "hidden.addWindowClass", (e) =>
       if @windowClass != null
@@ -76,14 +75,10 @@ class @Modal
         @setBody response
 
   show: =>
-    console.log "showing"
     @$modal.modal "show"
-    console.log "showed"
 
   hide: =>
-    console.log "hiding"
     @$modal.modal "hide"
-    console.log "hidden"
 
   block: (full) ->
     @unblock
@@ -102,7 +97,6 @@ class @Modal
   
   showFromUrl: (url) =>
     if @isOpened == true
-      console.log "is opened"
       @$modal.off("hidden.imidiateShow").on "hidden.imidiateShow", (e) =>
         $.get url, (response) =>
           window.modal.setBody response
@@ -112,15 +106,10 @@ class @Modal
           @memberNotFound()
       @hide()
     else
-      console.log "is CLOSED"
       $.get url, (response) =>
-        console.log "1"
         @setBody response
-        console.log "2"
         @show()
-        console.log "3"
       .error () =>
-        console.log "error"
         @memberNotFound()
         
   memberNotFound: =>

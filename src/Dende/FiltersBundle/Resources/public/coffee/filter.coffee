@@ -1,6 +1,5 @@
 class @Filter
-  constructor: ()->
-    @modal = window.modal
+  constructor: (@modal)->
     @$modalWindow = @modal.getModal()
     @setupAddFilterSelect()
     @setupUniform()
@@ -23,7 +22,7 @@ class @Filter
     @$modalWindow.off("change.filter.addFilter").on "change.filter.addFilter", @addFilterSelector, (e) =>
       @modal.block()
       filterName = $(e.currentTarget).val()
-      action = @$form.attr("data-get-filter-url").replace("__name__",filterName)
+      action = Routing.generate("_filter_get",{name: "__name__"}).replace("__name__",filterName)
       $.get action, (result) =>
         $(@saveFilterSelector).parents(".control-group").before result
         $("input, textarea, select",@$form).filter("[name*=FILTERNAME]").each (index,element) =>

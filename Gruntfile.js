@@ -37,32 +37,35 @@ module.exports = function (grunt) {
     ];
 
     var mainLibraries = [
-        //'src/Dende/LayoutBundle/Resources/public/js/jquery.js',
-        //'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-1.8.22.custom.min.js',
-        'src/Dende/DefaultBundle/Resources/public/js/vendor/jquery-ui-1.10.4.custom.min.js',
+        'bower_components/modernizr/modernizr.js',
+        'bower_components/jquery/dist/jquery.js',
+        'bower_components/jquery-ui/jquery-ui.js',
+        'bower_components/bootstrap/dist/js/bootstrap.js',
+        'bower_components/DataTables/media/js/jquery.dataTables.js',
+        'bower_components/webcam/jquery.webcam.js',
+        'bower_components/moment/min/moment-with-locales.min.js',
+        //'bower_components/moment/min/moment-with-locales.js',
+        'bower_components/blockui/jquery.blockUI.js',
+
         'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-sliderAccess.js',
-        'src/Dende/LayoutBundle/Resources/public/js/bootstrap.js',
-        //'src/Dende/LayoutBundle/Resources/public/js/jquery-migrate-1.2.1.min.js',
         //'src/Dende/LayoutBundle/Resources/public/plugins/forms/placeholder/jquery.placeholder.min.js',
         //'src/Dende/LayoutBundle/Resources/public/js/libs/excanvas.min.js',
         //'src/Dende/LayoutBundle/Resources/public/js/libs/jRespond.min.js',
         //'src/Dende/LayoutBundle/Resources/public/js/libs/respond.min.js',
         //'src/Dende/LayoutBundle/Resources/public/js/libs/modernizr.js',
-        'src/Dende/LayoutBundle/Resources/public/js/jquery.blockUI.js',
         'src/Dende/LayoutBundle/Resources/public/js/libs/jquery.knob.js',
-        'src/Dende/LayoutBundle/Resources/public/plugins/misc/fullcalendar/fullcalendar.min.js',
         //'src/Dende/LayoutBundle/Resources/public/plugins/misc/qtip/jquery.qtip.min.js',
         'src/Dende/LayoutBundle/Resources/public/plugins/misc/totop/jquery.ui.totop.min.js',
         //'src/Dende/LayoutBundle/Resources/public/plugins/forms/uniform/jquery.uniform.min.js',
         'src/Dende/LayoutBundle/Resources/public/js/supr-theme/jquery-ui-timepicker-addon.js',
         //'src/Dende/LayoutBundle/Resources/public/js/libs/jquery.pnotify.min.js',
-        'src/Dende/LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js',
+        //'src/Dende/LayoutBundle/Resources/public/plugins/tables/dataTables/jquery.dataTables.js',
         //'src/Dende/LayoutBundle/Resources/public/plugins/forms/select2/select2.min.js',
         //'src/Dende/DefaultBundle/Resources/public/js/jquery.ui.widget.js',
         //'src/Dende/DefaultBundle/Resources/public/js/jquery.ui.spinner.js',
         'src/Dende/DefaultBundle/Resources/public/js/jquery.iframe-transport.js',
         'src/Dende/DefaultBundle/Resources/public/js/jquery.fileupload.js',
-        'src/Dende/ScheduleBundle/Resources/public/js/fullcalendar.js',
+        'bower_components/fullcalendar/dist/fullcalendar.js',
     ];
 
     var coffeeFiles = [
@@ -184,7 +187,7 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: 'bower_components/webcam/',
                 src: 'jscam_canvas_only.swf',
-                dest: 'web/assets/swf/'
+                dest: 'web/swf/'
             },
             "select2-images": {
                 expand: true,

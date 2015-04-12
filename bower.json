@@ -1,0 +1,28 @@
+{
+  "name": "rio.gyman.pl",
+  "version": "0.2.1",
+  "homepage": "https://github.com/gyman/rio.gyman",
+  "authors": [
+    "Grzegorz Kaszuba <uirapuru@tlen.pl>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "DataTables": "~1.10.6",
+    "bootstrap": "~3.3.4",
+    "jquery-ui": "~1.11.4",
+    "webcam": "~1.0.0",
+    "fullcalendar": "~2.3.1",
+    "moment": "~2.10.2",
+    "blockui": "*",
+    "jquery": "*",
+    "modernizr": "~2.8.3"
+  }
+}

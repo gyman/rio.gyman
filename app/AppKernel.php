@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Dende\FiltersBundle\FiltersBundle(),
             new Dende\ListsBundle\ListsBundle(),
             new Dende\ReportsBundle\ReportsBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

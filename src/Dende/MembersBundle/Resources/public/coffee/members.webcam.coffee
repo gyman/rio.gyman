@@ -1,6 +1,5 @@
 class @WebCamTab
-  constructor: ()->
-    @modal = window.modal
+  constructor: (@modal)->
     @modalWindow = @modal.getModal()
   
     @initMakeFotoButton()
@@ -10,7 +9,7 @@ class @WebCamTab
    
   FOTO_UPLOAD_ERROR: "Błąd po stronie serwera! Spróbuj z innym plikiem graficznym"    
     
-  swffile : "/bundles/members/js/jQueryWebcam/jscam_canvas_only.swf"
+  swffile : "/swf/jscam_canvas_only.swf"
   cameraId : "#camera"
   buttonMakeFotoId : "a#makeFoto"
    

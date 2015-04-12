@@ -96,6 +96,8 @@
         document.gyman.modal.setupFromNode("div#ui-editMemberData");
         document.gyman.modal.setModalWindowClass("editMemberModal");
         document.gyman.editMemberModal = new EditMember();
+
+        $("table#sellsTable").dataTable();
     });
 </script>
 {% endblock javascript %}

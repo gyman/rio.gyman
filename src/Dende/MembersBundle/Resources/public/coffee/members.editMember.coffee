@@ -10,7 +10,7 @@ class @EditMember
     @initSaveButton()
     @initVoucherTab()
     
-    webcamTab = new WebCamTab()
+    webcamTab = new WebCamTab(@modal)
     
   BUTTON_SAVE_STATE: "Zapisz"
   BUTTON_SAVE_CLASS: "btn-primary"
