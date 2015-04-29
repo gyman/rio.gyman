@@ -2,7 +2,7 @@ class @Filter
   constructor: (@modal)->
     @$modalWindow = @modal.getModal()
     @setupAddFilterSelect()
-    @setupUniform()
+#    @setupUniform()
     @setupSaveFilterCheckbox()
     @setupSubmitButton()
     @setupRemoveFilter()

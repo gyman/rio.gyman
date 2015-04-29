@@ -5,23 +5,26 @@
 </div>
 {%endif %}
 
-<form
-    action="{{ path("_filter_new",{"listname": listname}) }}"
-    class="form form-horizontal"
-    method="POST"
-    id="filterForm"
-    >
-{{ form_row(form.addFilter) }}
+
+{{ form_start(form, {
+    action: path("_filter_new",{"listname": listname}),
+    method: "POST",
+    attr: {
+        class: "form form-horizontal",
+        id: "filterForm"
+    }
+}) }}
+    {{ form_row(form.addFilter) }}
 
     <span class="subfilters"></span>
 
-{{ form_row(form.save) }}
-{{ form_row(form.name) }}
-{{ form_row(form.pinned) }}
-{{ form_row(form.filter) }}
+    {{ form_row(form.save) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.pinned) }}
+    {{ form_row(form.filter) }}
 
-{{form_rest(form)}}
-</form>
+    {{form_rest(form)}}
+{{ form_end(form) }}
 
 {% block modal %}
 <div class="hidden" id="ui-editFilterData">

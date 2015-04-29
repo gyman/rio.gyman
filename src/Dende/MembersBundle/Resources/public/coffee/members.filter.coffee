@@ -1,5 +1,6 @@
 class @Filter
   constructor: (@modal)->
+    console.log "members bundle"
     @$modalWindow = @modal.getModal()
     @setupAddFilterSelect()
     @setupUniform()
